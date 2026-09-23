@@ -158,13 +158,15 @@ class CachedRelayedStream:
     1. Reads samples directly from small local disk cache shards (chunk_00000.pt, etc.).
        - Fast throughput, zero network latency, zero HF API calls.
     2. Once the local cache buffer is exhausted, relays to the network stream:
-       - Fetches small chunks (default: 500 samples) from Hugging Face with exponential backoff on rate limits (HTTP 429).
+       - Fetches small chunks (default: 10000 samples) from Hugging Face with exponential backoff on rate limits (HTTP 429).
        - Persists chunk to disk as a serialized torch tensor shard.
        - Cleanly pauses network connection and resumes serving from the local cache.
     3. Guarantees deterministic, finite training for X epochs:
        - No infinite loops.
        - Epoch boundaries cleanly signal StopIteration when the dataset pass completes.
        - Re-uses cached chunks on disk across epochs without re-downloading from network.
+    4. Crash-safe: If the network relay fails, the epoch continues with available cached data
+       rather than crashing the process.
     """
 
     def __init__(
@@ -280,64 +282,121 @@ class CachedRelayedStream:
             return None
 
         chunk_path = self._get_chunk_path(chunk_idx)
-        torch.save(chunk_items, chunk_path)
-        sz_mb = chunk_path.stat().st_size / (1024**2)
-        print(f"[Network Relay] Cached {len(chunk_items)} samples to {chunk_path.name} ({sz_mb:.1f} MB)", flush=True)
+        try:
+            torch.save(chunk_items, chunk_path)
+            sz_mb = chunk_path.stat().st_size / (1024**2)
+            print(f"[Network Relay] Cached {len(chunk_items)} samples to {chunk_path.name} ({sz_mb:.1f} MB)", flush=True)
+        except Exception as e:
+            print(f"[Network Relay Warning] Failed to save {chunk_path.name}: {e}", file=sys.stderr, flush=True)
+            # Still return items for this epoch even if save fails
 
         if self._network_exhausted:
             self._save_manifest(chunk_idx + 1)
 
-        self._enforce_cache_quota()
         return chunk_items
 
-    def _enforce_cache_quota(self):
-        """Maintains cache size within max_cached_chunks to avoid disk saturation."""
+    def _enforce_cache_quota(self, protect_below: Optional[int] = None):
+        """
+        Maintains cache size within max_cached_chunks to avoid disk saturation.
+        Never evicts chunks with index < protect_below (needed for re-reads in future epochs).
+        Called only AFTER an epoch completes, not during streaming.
+        """
         if self.max_cached_chunks is None or self.max_cached_chunks <= 0:
             return
         all_chunks = sorted(self.cache_dir.glob("chunk_*.pt"))
         if len(all_chunks) > self.max_cached_chunks:
             excess = len(all_chunks) - self.max_cached_chunks
+            evicted = 0
             for p in all_chunks[:excess]:
+                # Parse chunk index from filename to check protection
+                try:
+                    idx = int(p.stem.split("_")[1])
+                    if protect_below is not None and idx < protect_below:
+                        continue  # Don't evict chunks that will be needed
+                except (IndexError, ValueError):
+                    pass
                 try:
                     p.unlink(missing_ok=True)
+                    evicted += 1
                 except Exception:
                     pass
+            if evicted > 0:
+                print(f"[Cache Quota] Evicted {evicted} oldest cache shards to stay within {self.max_cached_chunks} limit.", flush=True)
 
     def iter_epoch(self, epoch: int) -> Iterator[Dict[str, Any]]:
         """
         Iterates through the dataset for a single epoch.
         Serves from cache when available, relays to network when cache is exhausted.
         Terminates cleanly at the end of the epoch.
+        
+        Crash-safe: If a cached chunk is missing/corrupted AND the network relay
+        fails, we skip that chunk and continue with the next available one instead
+        of crashing the entire training process.
         """
         chunk_idx = 0
         total_samples = 0
+        consecutive_empty_chunks = 0
+        max_consecutive_empty = 3  # Bail out if 3 consecutive chunks fail
+        
+        # Reset network stream state for this epoch
         self._network_stream = None
         self._network_exhausted = False
 
         while True:
+            # Known total: stop when we've iterated all chunks
             if self._total_chunks is not None and chunk_idx >= self._total_chunks:
                 break
 
             chunk_path = self._get_chunk_path(chunk_idx)
+            items = None
 
             if chunk_path.exists():
                 try:
                     items = torch.load(chunk_path, weights_only=False)
                 except Exception as e:
-                    print(f"[Cache Warning] Failed reading {chunk_path.name}: {e}. Relaying to network...", file=sys.stderr, flush=True)
-                    chunk_path.unlink(missing_ok=True)
-                    items = self._fetch_next_network_chunk(chunk_idx)
+                    print(f"[Cache Warning] Failed reading {chunk_path.name}: {e}. Attempting network relay...", file=sys.stderr, flush=True)
+                    try:
+                        chunk_path.unlink(missing_ok=True)
+                    except Exception:
+                        pass
+                    # Try network relay as fallback
+                    try:
+                        items = self._fetch_next_network_chunk(chunk_idx)
+                    except Exception as net_e:
+                        print(f"[Cache Warning] Network relay also failed for chunk {chunk_idx}: {net_e}. Skipping chunk.", file=sys.stderr, flush=True)
+                        items = None
             else:
-                items = self._fetch_next_network_chunk(chunk_idx)
+                # Cache miss — relay to network
+                try:
+                    items = self._fetch_next_network_chunk(chunk_idx)
+                except Exception as e:
+                    print(f"[Network Error] Failed fetching chunk {chunk_idx}: {e}. Skipping.", file=sys.stderr, flush=True)
+                    items = None
 
             if items is None or len(items) == 0:
-                break
+                consecutive_empty_chunks += 1
+                if self._total_chunks is not None:
+                    # We know the total — skip this chunk, try the next one
+                    print(f"[Cache] Chunk {chunk_idx} unavailable (attempt {consecutive_empty_chunks}/{max_consecutive_empty}). Trying next...", file=sys.stderr, flush=True)
+                    if consecutive_empty_chunks >= max_consecutive_empty:
+                        print(f"[Cache] {max_consecutive_empty} consecutive chunks failed. Ending epoch early.", file=sys.stderr, flush=True)
+                        break
+                    chunk_idx += 1
+                    continue
+                else:
+                    # Don't know total — this is likely the true end of stream
+                    break
+
+            consecutive_empty_chunks = 0  # Reset on successful read
 
             for item in items:
                 yield item
                 total_samples += 1
 
             chunk_idx += 1
+
+        # Run cache quota enforcement AFTER the epoch completes, not during
+        self._enforce_cache_quota(protect_below=0)
 
         print(f"[Dataset] Epoch {epoch} stream completed. Processed {total_samples:,} samples.", flush=True)
 
