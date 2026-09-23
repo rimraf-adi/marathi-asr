@@ -1,0 +1,13 @@
+.venv/
+.env
+__pycache__/
+*.pyc
+.cache/
+runs/
+*.pt
+*.pth
+*.ckpt
+moe/respin_split_cache.json
+run2/
+*.log
+data_cache/

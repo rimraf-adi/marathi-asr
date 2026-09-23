@@ -1,0 +1,38 @@
+{
+  "run_name": "no-splitformer-moe-only",
+  "start_stage": 1,
+  "end_stage": 3,
+  "pretraining": {
+    "epochs": 5,
+    "steps": 50000,
+    "batch_size": 96,
+    "lr": 3e-4,
+    "cache_dir": "data_cache/pretrain",
+    "cache_chunk_size": 10000,
+    "max_cached_chunks": 10,
+    "log_every": 25,
+    "plot_every": 100,
+    "save_every": 1000
+  },
+  "moe": {
+    "steps": 30000,
+    "batch_size": 64,
+    "grad_accum_steps": 2,
+    "lr": 1e-4,
+    "phase4a_steps": 7500,
+    "log_every": 25,
+    "save_every": 1000
+  },
+  "final_alignment": {
+    "steps": 10000,
+    "batch_size": 64,
+    "grad_accum_steps": 2,
+    "lr": 3e-5,
+    "min_lr": 5e-6,
+    "log_every": 25,
+    "save_every": 500
+  },
+  "evaluation": {
+    "beam_width": 16
+  }
+}
