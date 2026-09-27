@@ -407,7 +407,7 @@ if __name__ == "__main__":
     parser.add_argument("--cache_chunk_size", type=int, default=10000, help="Number of samples per local cache shard")
     parser.add_argument("--max_cached_chunks", type=int, default=10, help="Maximum number of cache shards on disk")
     # Early stopping arguments
-    parser.add_argument("--early_stop_patience", type=int, default=2, help="Checkpoints without improvement before stopping")
+    parser.add_argument("--early_stop_patience", type=int, default=5, help="Checkpoints without improvement before stopping")
     parser.add_argument("--early_stop_min_delta", type=float, default=1e-4, help="Minimum improvement delta")
     parser.add_argument("--early_stop_metric", type=str, default="masked_l1", help="Metric to monitor for early stopping")
 

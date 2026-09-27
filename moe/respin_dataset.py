@@ -179,8 +179,10 @@ def collate_moe_batch(
     return {
         "audio": padded_audio,
         "audio_lengths": audio_lengths,
+        "audio_lens": audio_lengths,
         "targets": flat_targets,
         "target_lengths": target_lengths,
+        "target_lens": target_lengths,
         "dialect_indices": dialect_tensor,
         "texts": list(texts),
     }

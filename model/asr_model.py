@@ -9,7 +9,7 @@ import torch.nn as nn
 import torchaudio.transforms as T
 
 from .conformer import ConformerEncoder
-from .heads import MaskedReconstructionHead, MultiExitCTCHeads, CTCHead
+from .heads import MaskedReconstructionHead, CTCHead
 from .masking import SpanMasker, SpecAugment
 
 
@@ -100,13 +100,11 @@ class StreamingASRModel(nn.Module):
         else:
             self.reconstruction_head = None
 
-        # 5. Multi-Exit CTC Heads (for Stages 3 & 4)
+        # 5. Single CTC Head on final encoder output (for Stages 2, 3 & 4)
         if vocab_size is not None:
-            self.ctc_heads = MultiExitCTCHeads(
-                d_model=d_model, vocab_size=vocab_size, exit_layers=exit_layers
-            )
+            self.ctc_head = CTCHead(d_model=d_model, vocab_size=vocab_size)
         else:
-            self.ctc_heads = None
+            self.ctc_head = None
 
     def forward_pretrain(
         self,
@@ -174,8 +172,7 @@ class StreamingASRModel(nn.Module):
             max_exit_layer: If specified, halt computation after reaching this exit layer
         Returns:
             dict containing:
-              - 'log_probs': (batch, T//4, vocab_size) at final layer
-              - 'exit_log_probs': Dict[int, Tensor] mapping layer -> (batch, T//4, vocab_size)
+              - 'log_probs': (batch, T//4, vocab_size) from final encoder layer
               - 'output_lengths': (batch,) subsampled sequence lengths
               - 'final_hidden': (batch, T//4, d_model)
         """
@@ -196,17 +193,12 @@ class StreamingASRModel(nn.Module):
         b, t, _ = final_hidden.size()
         output_lengths = torch.full((b,), t, dtype=torch.long, device=waveforms.device)
 
-        exit_log_probs = {}
-        final_log_probs = None
-
-        if self.ctc_heads is not None:
-            exit_log_probs = self.ctc_heads(enc_out["exit_hiddens"])
-            final_layer_idx = max(enc_out["exit_hiddens"].keys())
-            final_log_probs = exit_log_probs[final_layer_idx]
+        log_probs = None
+        if self.ctc_head is not None:
+            log_probs = self.ctc_head(final_hidden)
 
         return {
-            "log_probs": final_log_probs,
-            "exit_log_probs": exit_log_probs,
+            "log_probs": log_probs,
             "output_lengths": output_lengths,
             "final_hidden": final_hidden,
         }

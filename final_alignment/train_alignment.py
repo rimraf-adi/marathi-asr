@@ -82,8 +82,8 @@ def train_calibration_stage5(run_dir: str = "run3",
             param.requires_grad = True
             trainable_params.append(param)
 
-    # Unfreeze all CTC heads
-    for param in model.ctc_heads.parameters():
+    # Unfreeze CTC head
+    for param in model.ctc_head.parameters():
         param.requires_grad = True
         trainable_params.append(param)
 
@@ -133,9 +133,9 @@ def train_calibration_stage5(run_dir: str = "run3",
         while step < total_steps:
             batch = next(loader)
             audio = batch["audio"].to(device, non_blocking=True)
-            audio_lens = batch["audio_lens"].to(device, non_blocking=True)
+            audio_lens = (batch.get("audio_lens") if "audio_lens" in batch else batch["audio_lengths"]).to(device, non_blocking=True)
             targets = batch["targets"].to(device, non_blocking=True)
-            target_lens = batch["target_lens"].to(device, non_blocking=True)
+            target_lens = (batch.get("target_lens") if "target_lens" in batch else batch["target_lengths"]).to(device, non_blocking=True)
 
             step += 1
             step_start = time.time()
@@ -146,18 +146,13 @@ def train_calibration_stage5(run_dir: str = "run3",
             with torch.amp.autocast("cuda", enabled=torch.cuda.is_available()):
                 ctc_dict = model.forward_ctc(audio, chunk_size=None)
 
-                logits_l12 = ctc_dict["exit_log_probs"][12]
-                logits_l8 = ctc_dict["exit_log_probs"][8]
+                log_probs = ctc_dict["log_probs"]
+                log_probs_t = log_probs.transpose(0, 1)  # (T, B, V) for CTC
 
-                log_probs_l12 = logits_l12.transpose(0, 1)
-                log_probs_l8 = logits_l8.transpose(0, 1)
-
-                t_frames = logits_l12.size(1)
+                t_frames = log_probs.size(1)
                 input_lengths = torch.clamp((audio_lens // 160 // 4), max=t_frames)
 
-                loss_ctc_12 = ctc_criterion(log_probs_l12, targets, input_lengths, target_lens)
-                loss_ctc_8 = ctc_criterion(log_probs_l8, targets, input_lengths, target_lens)
-                loss = 0.7 * loss_ctc_12 + 0.3 * loss_ctc_8
+                loss = ctc_criterion(log_probs_t, targets, input_lengths, target_lens)
 
             loss_scaled = loss / grad_accum_steps
             scaler.scale(loss_scaled).backward()
@@ -183,13 +178,13 @@ def train_calibration_stage5(run_dir: str = "run3",
                     eval_samples = min(8, audio.size(0))
                     batch_cers = []
                     for s_i in range(eval_samples):
-                        p_toks = logits_l12[s_i].argmax(dim=-1).tolist()
+                        p_toks = log_probs[s_i].argmax(dim=-1).tolist()
                         p_txt = tokenizer.ctc_decode(p_toks)
                         r_txt = batch["texts"][s_i]
                         batch_cers.append(compute_cer(r_txt, p_txt))
                     cer = sum(batch_cers) / max(len(batch_cers), 1)
                     ref_text = batch["texts"][0]
-                    pred_text = tokenizer.ctc_decode(logits_l12[0].argmax(dim=-1).tolist())
+                    pred_text = tokenizer.ctc_decode(log_probs[0].argmax(dim=-1).tolist())
 
                 current_lr = scheduler.get_last_lr()[0]
 

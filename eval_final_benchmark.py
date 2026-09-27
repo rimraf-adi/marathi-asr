@@ -201,24 +201,22 @@ def run_benchmark(
         padded_audio = padded_audio.to(device)
 
         with torch.no_grad():
-            # Compute stats and measure true inference time for each exit independently
+            # Single CTC head evaluation (final layer only)
             for layer_idx, exit_name in [
-                (4, "Layer 4 (Fast)"),
-                (8, "Layer 8 (Balanced)"),
-                (12, "Layer 12 (Deep)"),
+                (12, "Layer 12 (Full)"),
             ]:
                 if torch.cuda.is_available():
                     torch.cuda.synchronize()
                 t0 = time.time()
-                ctc_dict = model.forward_ctc(padded_audio, chunk_size=None, max_exit_layer=layer_idx)
+                ctc_dict = model.forward_ctc(padded_audio, chunk_size=None)
                 if torch.cuda.is_available():
                     torch.cuda.synchronize()
                 exit_times[exit_name] += (time.time() - t0)
 
-                logits = ctc_dict["exit_log_probs"][layer_idx]
+                logits = ctc_dict["log_probs"]
 
                 for b in range(b_cur):
-                    if beam_decoder is not None and layer_idx == 12:
+                    if beam_decoder is not None:
                         pred_text = beam_decoder.decode(logits[b], beam_width=beam_width)
                     else:
                         pred_tokens = logits[b].argmax(dim=-1).cpu().tolist()

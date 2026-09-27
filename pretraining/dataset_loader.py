@@ -286,6 +286,7 @@ class CachedRelayedStream:
             torch.save(chunk_items, chunk_path)
             sz_mb = chunk_path.stat().st_size / (1024**2)
             print(f"[Network Relay] Cached {len(chunk_items)} samples to {chunk_path.name} ({sz_mb:.1f} MB)", flush=True)
+            self._enforce_cache_quota()
         except Exception as e:
             print(f"[Network Relay Warning] Failed to save {chunk_path.name}: {e}", file=sys.stderr, flush=True)
             # Still return items for this epoch even if save fails

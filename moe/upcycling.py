@@ -51,7 +51,7 @@ def upcycle_conformer_to_moe(
         conv_kernel_size=31,
         ffn_expansion=4,
         dropout=0.1,
-        exit_layers=[4, 8, 12],
+        exit_layers=[12],
         enable_reconstruction_head=False,
         vocab_size=105,
     ).to(device)
@@ -115,7 +115,7 @@ def load_moe_model(
         conv_kernel_size=31,
         ffn_expansion=4,
         dropout=0.1,
-        exit_layers=[4, 8, 12],
+        exit_layers=[12],
         enable_reconstruction_head=False,
         vocab_size=105,
     ).to(device)
