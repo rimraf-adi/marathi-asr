@@ -46,3 +46,19 @@ if (Test-Path "$run\pipeline_status.json") { Get-Content "$run\pipeline_status.j
 
 Write-Output "--- telegram update ---"
 python "$root\send_telegram_update.py" | Out-String | Write-Output
+
+Write-Output "--- git auto-push ---"
+try {
+    git -C "$root" add runs/
+    $st = git -C "$root" status --porcelain runs/
+    if ($st) {
+        $now = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+        git -C "$root" commit -m "chore(runs): sync training telemetry and logs [$now]"
+        git -C "$root" push origin main
+        Write-Output "Git pushed run updates to GitHub successfully."
+    } else {
+        Write-Output "No changes in runs/ to commit."
+    }
+} catch {
+    Write-Output "Git push error: $_"
+}
