@@ -8,8 +8,8 @@
   },
   "stage2_moe": {
     "status": "running",
-    "updated_at": "2026-09-27 08:00:32",
-    "timestamp": 1790476232.63127,
+    "updated_at": "2026-09-27 19:01:52",
+    "timestamp": 1790515912.0458677,
     "cmd": [
       "D:\\marathi-asr\\.venv\\Scripts\\python.exe",
       "-u",
@@ -39,7 +39,7 @@
       "--save_every",
       "1000",
       "--resume",
-      "runs\\no-splitformer-moe-only\\checkpoints\\stage2_moe\\stage2_moe_step_26000.pt"
+      "runs\\no-splitformer-moe-only\\checkpoints\\stage2_moe\\stage2_moe_step_41000.pt"
     ],
     "log_file": "runs\\no-splitformer-moe-only\\logs\\stage2_moe.log"
   }
