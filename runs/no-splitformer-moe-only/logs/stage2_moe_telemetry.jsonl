@@ -1870,3 +1870,11 @@
 {"step": 38175, "timestamp": 1790508065.8427792, "phase": "4B (Dynamic MoE)", "ctc_loss": 0.9405, "aux_loss": 8.0269, "cer": 0.2505, "grad_norm": 0.0, "throughput_aud_s_per_s": 528.8, "lr": 7.854952269639895e-06}
 {"step": 38200, "timestamp": 1790508128.039103, "phase": "4B (Dynamic MoE)", "ctc_loss": 0.8724, "aux_loss": 8.0157, "cer": 0.1661, "grad_norm": 1.193, "throughput_aud_s_per_s": 617.3, "lr": 7.852110191811232e-06}
 {"step": 38225, "timestamp": 1790508185.0183885, "phase": "4B (Dynamic MoE)", "ctc_loss": 0.8966, "aux_loss": 8.0475, "cer": 0.2741, "grad_norm": 0.0, "throughput_aud_s_per_s": 874.2, "lr": 7.849485522344052e-06}
+{"step": 38250, "timestamp": 1790508251.1309595, "phase": "4B (Dynamic MoE)", "ctc_loss": 0.96, "aux_loss": 8.0118, "cer": 0.2855, "grad_norm": 0.969, "throughput_aud_s_per_s": 73.8, "lr": 7.846640817603607e-06}
+{"step": 38275, "timestamp": 1790508298.9214878, "phase": "4B (Dynamic MoE)", "ctc_loss": 0.9881, "aux_loss": 8.0833, "cer": 0.2404, "grad_norm": 0.0, "throughput_aud_s_per_s": 576.2, "lr": 7.844013725620836e-06}
+{"step": 38300, "timestamp": 1790508355.2509367, "phase": "4B (Dynamic MoE)", "ctc_loss": 0.954, "aux_loss": 8.0363, "cer": 0.3066, "grad_norm": 0.941, "throughput_aud_s_per_s": 509.5, "lr": 7.841166399009568e-06}
+{"step": 38325, "timestamp": 1790508401.359912, "phase": "4B (Dynamic MoE)", "ctc_loss": 0.9468, "aux_loss": 8.0405, "cer": 0.2668, "grad_norm": 0.0, "throughput_aud_s_per_s": 249.3, "lr": 7.838536889166538e-06}
+{"step": 38350, "timestamp": 1790508456.197809, "phase": "4B (Dynamic MoE)", "ctc_loss": 0.9003, "aux_loss": 8.0678, "cer": 0.1348, "grad_norm": 0.906, "throughput_aud_s_per_s": 91.1, "lr": 7.835686945730045e-06}
+{"step": 38375, "timestamp": 1790508505.2924893, "phase": "4B (Dynamic MoE)", "ctc_loss": 0.8905, "aux_loss": 8.0339, "cer": 0.2132, "grad_norm": 0.0, "throughput_aud_s_per_s": 45.7, "lr": 7.833055022686376e-06}
+{"step": 38400, "timestamp": 1790508555.825761, "phase": "4B (Dynamic MoE)", "ctc_loss": 1.0341, "aux_loss": 8.0152, "cer": 0.2073, "grad_norm": 1.066, "throughput_aud_s_per_s": 68.5, "lr": 7.830202467474899e-06}
+{"step": 38425, "timestamp": 1790508605.245738, "phase": "4B (Dynamic MoE)", "ctc_loss": 0.9986, "aux_loss": 8.0438, "cer": 0.1768, "grad_norm": 0.0, "throughput_aud_s_per_s": 167.3, "lr": 7.827568135894488e-06}
