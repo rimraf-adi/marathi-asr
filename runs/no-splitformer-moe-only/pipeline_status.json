@@ -7,40 +7,43 @@
     "elapsed_min": 248.2
   },
   "stage2_moe": {
+    "status": "completed",
+    "updated_at": "2026-09-28 07:38:18",
+    "timestamp": 1790561298.603515,
+    "exit_code": 0,
+    "elapsed_min": 756.4
+  },
+  "stage3_final_alignment": {
     "status": "running",
-    "updated_at": "2026-09-27 19:01:52",
-    "timestamp": 1790515912.0458677,
+    "updated_at": "2026-09-28 07:38:18",
+    "timestamp": 1790561298.6148086,
     "cmd": [
       "D:\\marathi-asr\\.venv\\Scripts\\python.exe",
       "-u",
-      "moe/train_moe.py",
+      "final_alignment/train_alignment.py",
       "--run_dir",
       "runs\\no-splitformer-moe-only",
-      "--pretrained_ckpt",
-      "runs\\no-splitformer-moe-only\\checkpoints\\stage1_pretrain\\best_model.pt",
+      "--moe_ckpt",
+      "runs\\no-splitformer-moe-only\\checkpoints\\stage2_moe\\best_model.pt",
       "--steps",
-      "60000",
+      "10000",
       "--batch_size",
       "64",
       "--grad_accum_steps",
       "2",
       "--lr",
-      "0.0001",
-      "--phase4a_steps",
-      "7500",
-      "--ctc_warmup_steps",
-      "3000",
+      "3e-05",
+      "--min_lr",
+      "5e-06",
       "--checkpoint_dir",
-      "runs\\no-splitformer-moe-only\\checkpoints\\stage2_moe",
+      "runs\\no-splitformer-moe-only\\checkpoints\\stage3_final_alignment",
       "--stage_name",
-      "stage2_moe",
+      "stage3_final_alignment",
       "--log_every",
       "25",
       "--save_every",
-      "1000",
-      "--resume",
-      "runs\\no-splitformer-moe-only\\checkpoints\\stage2_moe\\stage2_moe_step_41000.pt"
+      "500"
     ],
-    "log_file": "runs\\no-splitformer-moe-only\\logs\\stage2_moe.log"
+    "log_file": "runs\\no-splitformer-moe-only\\logs\\stage3_final_alignment.log"
   }
 }
