@@ -1,0 +1,276 @@
+{
+  "model_tag": "no_splitformer_moe_only_best",
+  "checkpoint": "runs/no-splitformer-moe-only/checkpoints/stage3_final_alignment/best_model.pt",
+  "chunk_size": 16,
+  "total_utterances": 2170,
+  "total_audio_hours": 3.041,
+  "results": {
+    "D1": {
+      "Layer 4 (Fast)": {
+        "exit": "Layer 4 (Fast)",
+        "dialect_id": "D1",
+        "dialect_name": "Malvani / Konkan",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 8 (Balanced)": {
+        "exit": "Layer 8 (Balanced)",
+        "dialect_id": "D1",
+        "dialect_name": "Malvani / Konkan",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 12 (Deep)": {
+        "exit": "Layer 12 (Deep)",
+        "dialect_id": "D1",
+        "dialect_name": "Malvani / Konkan",
+        "cer_percent": 11.4,
+        "wer_percent": 43.04,
+        "utterances": 559,
+        "rtf": 0.0019
+      }
+    },
+    "D2": {
+      "Layer 4 (Fast)": {
+        "exit": "Layer 4 (Fast)",
+        "dialect_id": "D2",
+        "dialect_name": "Ahirani / Khandesh",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 8 (Balanced)": {
+        "exit": "Layer 8 (Balanced)",
+        "dialect_id": "D2",
+        "dialect_name": "Ahirani / Khandesh",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 12 (Deep)": {
+        "exit": "Layer 12 (Deep)",
+        "dialect_id": "D2",
+        "dialect_name": "Ahirani / Khandesh",
+        "cer_percent": 8.53,
+        "wer_percent": 33.84,
+        "utterances": 540,
+        "rtf": 0.0019
+      }
+    },
+    "D3": {
+      "Layer 4 (Fast)": {
+        "exit": "Layer 4 (Fast)",
+        "dialect_id": "D3",
+        "dialect_name": "Standard Marathi",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 8 (Balanced)": {
+        "exit": "Layer 8 (Balanced)",
+        "dialect_id": "D3",
+        "dialect_name": "Standard Marathi",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 12 (Deep)": {
+        "exit": "Layer 12 (Deep)",
+        "dialect_id": "D3",
+        "dialect_name": "Standard Marathi",
+        "cer_percent": 5.63,
+        "wer_percent": 20.89,
+        "utterances": 555,
+        "rtf": 0.0019
+      }
+    },
+    "D4": {
+      "Layer 4 (Fast)": {
+        "exit": "Layer 4 (Fast)",
+        "dialect_id": "D4",
+        "dialect_name": "Varhadi / Vidarbha",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 8 (Balanced)": {
+        "exit": "Layer 8 (Balanced)",
+        "dialect_id": "D4",
+        "dialect_name": "Varhadi / Vidarbha",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 12 (Deep)": {
+        "exit": "Layer 12 (Deep)",
+        "dialect_id": "D4",
+        "dialect_name": "Varhadi / Vidarbha",
+        "cer_percent": 7.93,
+        "wer_percent": 30.45,
+        "utterances": 516,
+        "rtf": 0.0019
+      }
+    },
+    "ALL": {
+      "Layer 4 (Fast)": {
+        "exit": "Layer 4 (Fast)",
+        "dialect_id": "ALL",
+        "dialect_name": "Aggregate",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 8 (Balanced)": {
+        "exit": "Layer 8 (Balanced)",
+        "dialect_id": "ALL",
+        "dialect_name": "Aggregate",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 12 (Deep)": {
+        "exit": "Layer 12 (Deep)",
+        "dialect_id": "ALL",
+        "dialect_name": "Aggregate",
+        "cer_percent": 8.43,
+        "wer_percent": 32.21,
+        "utterances": 2170,
+        "rtf": 0.0019
+      }
+    }
+  },
+  "qualitative_samples": [
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_AGRI_700256_70000268",
+      "dialect": "D3",
+      "reference": "बकरी किंवा मेंढीपासून खत मिळते का ?",
+      "prediction": "बकरी किंवा मेंढी पासून खत मिळते का ??",
+      "cer": 5.71,
+      "wer": 42.86
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_AGRI_700289_70000298",
+      "dialect": "D3",
+      "reference": "ठिबक सिंचनाची जोडणी कशी असावी ?",
+      "prediction": "ठिबक सिंचनाची जोडणी कशी असावी ??",
+      "cer": 3.23,
+      "wer": 16.67
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_BANK_700808_70000923",
+      "dialect": "D3",
+      "reference": "के.वाय.सी फॉर्म भरणे गरजेचे असते का ?",
+      "prediction": "के.वाय.सी फॉर्म भरणे गरजेचे असते का ??",
+      "cer": 2.7,
+      "wer": 14.29
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_BANK_700734_70000955",
+      "dialect": "D3",
+      "reference": "मुदत खाते ऑनलाइन उघडता येईल का ?",
+      "prediction": "मुदत खाते ऑनलाइन उघडता येईल का ??",
+      "cer": 3.12,
+      "wer": 14.29
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70064_NA_F_AGRI_700091_70000981",
+      "dialect": "D3",
+      "reference": "लवकर तयार होणाऱ्या तुरीच्या जाती कोणत्या ?",
+      "prediction": "लवकर तयार होणार्या तुरीच्या जाती कोणत्या ??",
+      "cer": 4.76,
+      "wer": 28.57
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70064_NA_F_BANK_701299_70001117",
+      "dialect": "D3",
+      "reference": "मला एका वर्षातच कर्ज परतफेड करण्याठी दर महिन्याला किमान किती हप्ता बसेल ?",
+      "prediction": "मला एका वर्षातच कर्ज परतफेड करण्यासाठी दर महिन्याला किमान किती हप्ता बसेल ?",
+      "cer": 2.74,
+      "wer": 7.69
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70064_NA_F_AGRI_700595_70001129",
+      "dialect": "D3",
+      "reference": "कोणत्या वातावरणात कोणते पीक घेऊ नये ?",
+      "prediction": "कोणत्या वातावरणात कोणते पीक घेऊ नये ??",
+      "cer": 2.7,
+      "wer": 14.29
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70064_NA_F_AGRI_700484_70001310",
+      "dialect": "D3",
+      "reference": "जमिनीचे व्यवस्थापन कसे करावे ?",
+      "prediction": "जमिनीचे व्यवस्थापन कसे करावे",
+      "cer": 6.67,
+      "wer": 20.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70064_NA_F_AGRI_700542_70001328",
+      "dialect": "D3",
+      "reference": "खरीप हंगामाचा कोणता कालावधी असतो ?",
+      "prediction": "खरीप हंगामाचा कोणता कालावधी असतो ??",
+      "cer": 2.94,
+      "wer": 16.67
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70064_NA_F_AGRI_700062_70001554",
+      "dialect": "D3",
+      "reference": "पिकांची औषधे सरकारी योजनेअंतर्गत मिळणार का ?",
+      "prediction": "पिकांची औषधे सरकारी योजनेअंतर्गत मिळणार का ??",
+      "cer": 2.27,
+      "wer": 14.29
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70005_411037_F_AGRI_700542_70001808",
+      "dialect": "D3",
+      "reference": "खरीप हंगामाचा कोणता कालावधी असतो ?",
+      "prediction": "खरीप हंगामाचा कोणता कालावधी असतो ??",
+      "cer": 2.94,
+      "wer": 16.67
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70064_NA_F_AGRI_700602_70002343",
+      "dialect": "D3",
+      "reference": "माझ्या कंपनीचे उत्पादन चांगले राहण्यासाठी मी काय उपाय केले पाहिजे ?",
+      "prediction": "माझ्या कंपनीचे उत्पादन चांगले राहण्यासाठी मी काय उपाय केले पाहिजे",
+      "cer": 2.99,
+      "wer": 9.09
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_AGRI_700393_70002566",
+      "dialect": "D3",
+      "reference": "भारतातील आधुनिक कृषी यंत्रे कोणती आहेत ?",
+      "prediction": "भारतातील आधुनिक कृषी यंत्रे कोणती आहेत ?",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_AGRI_700210_70002568",
+      "dialect": "D3",
+      "reference": "टोबॅको लीफ कर्ल व्हायरस म्हणजे काय ?",
+      "prediction": "तो बॅक डी कर्ल वायरस म्हणजे काय ?",
+      "cer": 19.44,
+      "wer": 57.14
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_AGRI_700183_70002594",
+      "dialect": "D3",
+      "reference": "तांदळाची कोणती जात पावसाळ्यात पिकवली जाते ?",
+      "prediction": "तांदळाची कोणती जात पावसाळ्यात पिकवली जाते ?",
+      "cer": 0.0,
+      "wer": 0.0
+    }
+  ]
+}

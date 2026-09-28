@@ -1,23 +1,33 @@
-{
-  "stage1_pretrain": {
-    "status": "completed",
-    "updated_at": "2026-09-24 16:07:10",
-    "timestamp": 1790246230.50322,
-    "exit_code": 0,
-    "elapsed_min": 248.2
-  },
-  "stage2_moe": {
-    "status": "completed",
-    "updated_at": "2026-09-28 07:38:18",
-    "timestamp": 1790561298.603515,
-    "exit_code": 0,
-    "elapsed_min": 756.4
-  },
-  "stage3_final_alignment": {
-    "status": "completed",
-    "updated_at": "2026-09-28 10:22:45",
-    "timestamp": 1790571165.1582897,
-    "exit_code": 0,
-    "elapsed_min": 164.4
-  }
+﻿{
+    "stage1_pretrain":  {
+                            "status":  "completed",
+                            "updated_at":  "2026-09-24 16:07:10",
+                            "timestamp":  1790246230.50322,
+                            "exit_code":  0,
+                            "elapsed_min":  248.2
+                        },
+    "stage2_moe":  {
+                       "status":  "completed",
+                       "updated_at":  "2026-09-28 07:38:18",
+                       "timestamp":  1790561298.603515,
+                       "exit_code":  0,
+                       "elapsed_min":  756.4
+                   },
+    "stage3_final_alignment":  {
+                                   "status":  "completed",
+                                   "updated_at":  "2026-09-28 10:22:45",
+                                   "timestamp":  1790571165.1582897,
+                                   "exit_code":  0,
+                                   "elapsed_min":  164.4
+                               },
+    "final_benchmark":  {
+                            "status":  "completed",
+                            "updated_at":  "2026-09-28 10:32:02",
+                            "timestamp":  1790571722,
+                            "report":  "runs/no-splitformer-moe-only/eval_results/no_splitformer_moe_only_best_report.md",
+                            "summary_csv":  "runs/no-splitformer-moe-only/eval_results/no_splitformer_moe_only_best_summary.csv",
+                            "overall_cer":  8.43,
+                            "overall_wer":  32.21,
+                            "rtf":  0.0019
+                        }
 }

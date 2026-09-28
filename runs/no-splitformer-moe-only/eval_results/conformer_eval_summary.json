@@ -1,0 +1,172 @@
+{
+  "model_tag": "conformer_eval",
+  "checkpoint": "runs/no-splitformer-moe-only/checkpoints/stage3_final_alignment/best_model.pt",
+  "chunk_size": 16,
+  "total_utterances": 2,
+  "total_audio_hours": 0.004,
+  "results": {
+    "D1": {
+      "Layer 4 (Fast)": {
+        "exit": "Layer 4 (Fast)",
+        "dialect_id": "D1",
+        "dialect_name": "Malvani / Konkan",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 8 (Balanced)": {
+        "exit": "Layer 8 (Balanced)",
+        "dialect_id": "D1",
+        "dialect_name": "Malvani / Konkan",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 12 (Deep)": {
+        "exit": "Layer 12 (Deep)",
+        "dialect_id": "D1",
+        "dialect_name": "Malvani / Konkan",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0796
+      }
+    },
+    "D2": {
+      "Layer 4 (Fast)": {
+        "exit": "Layer 4 (Fast)",
+        "dialect_id": "D2",
+        "dialect_name": "Ahirani / Khandesh",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 8 (Balanced)": {
+        "exit": "Layer 8 (Balanced)",
+        "dialect_id": "D2",
+        "dialect_name": "Ahirani / Khandesh",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 12 (Deep)": {
+        "exit": "Layer 12 (Deep)",
+        "dialect_id": "D2",
+        "dialect_name": "Ahirani / Khandesh",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0796
+      }
+    },
+    "D3": {
+      "Layer 4 (Fast)": {
+        "exit": "Layer 4 (Fast)",
+        "dialect_id": "D3",
+        "dialect_name": "Standard Marathi",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 8 (Balanced)": {
+        "exit": "Layer 8 (Balanced)",
+        "dialect_id": "D3",
+        "dialect_name": "Standard Marathi",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 12 (Deep)": {
+        "exit": "Layer 12 (Deep)",
+        "dialect_id": "D3",
+        "dialect_name": "Standard Marathi",
+        "cer_percent": 1.52,
+        "wer_percent": 15.38,
+        "utterances": 2,
+        "rtf": 0.0796
+      }
+    },
+    "D4": {
+      "Layer 4 (Fast)": {
+        "exit": "Layer 4 (Fast)",
+        "dialect_id": "D4",
+        "dialect_name": "Varhadi / Vidarbha",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 8 (Balanced)": {
+        "exit": "Layer 8 (Balanced)",
+        "dialect_id": "D4",
+        "dialect_name": "Varhadi / Vidarbha",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 12 (Deep)": {
+        "exit": "Layer 12 (Deep)",
+        "dialect_id": "D4",
+        "dialect_name": "Varhadi / Vidarbha",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0796
+      }
+    },
+    "ALL": {
+      "Layer 4 (Fast)": {
+        "exit": "Layer 4 (Fast)",
+        "dialect_id": "ALL",
+        "dialect_name": "Aggregate",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 8 (Balanced)": {
+        "exit": "Layer 8 (Balanced)",
+        "dialect_id": "ALL",
+        "dialect_name": "Aggregate",
+        "cer_percent": 0.0,
+        "wer_percent": 0.0,
+        "utterances": 0,
+        "rtf": 0.0
+      },
+      "Layer 12 (Deep)": {
+        "exit": "Layer 12 (Deep)",
+        "dialect_id": "ALL",
+        "dialect_name": "Aggregate",
+        "cer_percent": 1.52,
+        "wer_percent": 15.38,
+        "utterances": 2,
+        "rtf": 0.0796
+      }
+    }
+  },
+  "qualitative_samples": [
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_AGRI_700256_70000268",
+      "dialect": "D3",
+      "reference": "बकरी किंवा मेंढीपासून खत मिळते का ?",
+      "prediction": "बकरी किंवा मेंढी पासून खत मिळते का ?",
+      "cer": 2.86,
+      "wer": 28.57
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_AGRI_700289_70000298",
+      "dialect": "D3",
+      "reference": "ठिबक सिंचनाची जोडणी कशी असावी ?",
+      "prediction": "ठिबक सिंचनाची जोडणी कशी असावी ?",
+      "cer": 0.0,
+      "wer": 0.0
+    }
+  ]
+}
