@@ -345,7 +345,173 @@ Formally: $\mathcal{P}_\alpha^{(\infty)} \to \mathcal{P}^*$ and $\mathcal{P}_\la
 > [!TIP]
 > **For a journal paper**, the cleanest story is: (1) Propose the 5 tasks (§3). (2) Show raw correlations (§6, Experiment 3). (3) Show that TCSH finds the same top architectures as brute-force at 10× lower cost. (4) Show that TACO discovers a composite weighting that outperforms any single task. This gives you **task novelty + algorithm novelty + empirical validation** in one paper.
 
+---
 
+## 4C. Reinforcement Learning for Multi-Task Proxy NAS
+
+> [!NOTE]
+> Classical NAS uses either gradient-based relaxation (DARTS) or black-box search (evolutionary, BO). RL-based NAS (Zoph & Le, 2017) pioneered using REINFORCE to generate architectures — but it used a **single supervised reward** (validation accuracy). Our setting has **multiple cheap proxy tasks**, **no labels**, and a **variable evaluation budget per candidate**. This creates a richer decision problem that RL is uniquely suited for.
+
+### 4.11 Task-Routed Architecture MDP (TRA-MDP)
+
+**Core Idea:** Formulate the NAS process as a Markov Decision Process where the agent makes **two types of decisions at each step**: (1) how to *modify* the current architecture, and (2) which *proxy task* to evaluate it on. The agent learns to route its evaluation budget efficiently — querying cheap tasks for unpromising architectures and expensive tasks only for strong candidates.
+
+**MDP Definition:**
+
+| Component | Definition |
+|---|---|
+| **State** $s_t$ | Current architecture $\alpha_t$ + history of proxy scores $\{(\alpha_i, k_i, \mathcal{S}_i)\}_{i<t}$ + remaining budget $B_t$ |
+| **Action** $a_t = (a_t^{\text{arch}}, a_t^{\text{task}})$ | **Architecture action:** mutate one dimension (e.g., increase depth by 2, change kernel from 15→31). **Task action:** select which proxy task $k \in \{1, \dots, 5\}$ to evaluate. |
+| **Transition** $P(s_{t+1} \mid s_t, a_t)$ | Deterministic architecture mutation + stochastic proxy score evaluation. Budget decreases by $c_{a_t^{\text{task}}}$. |
+| **Reward** $r_t$ | Shaped reward combining proxy score improvement and cost efficiency (see below). |
+| **Terminal** | Budget exhausted: $B_t \leq 0$, or max steps reached. |
+| **Horizon** | Variable — depends on how the agent spends its budget. |
+
+**Reward Design:**
+
+The reward must encourage the agent to find *high-scoring architectures* while *spending budget wisely*:
+
+$$r_t = \underbrace{\max\big(0, \; \mathcal{S}_{\text{composite}}(\alpha_t) - \mathcal{S}_{\text{best-so-far}}\big)}_{\text{improvement reward}} - \underbrace{\gamma \cdot \frac{c_{k_t}}{B_0}}_{\text{cost penalty}} + \underbrace{\mu \cdot \mathbb{1}\big[\alpha_t \text{ is Pareto-improving}\big]}_{\text{Pareto bonus}}$$
+
+where:
+- The **improvement reward** is non-negative — the agent only gets reward for beating the current best.
+- The **cost penalty** $\gamma \cdot c_{k_t} / B_0$ discourages wasting budget on expensive tasks for mediocre architectures.
+- The **Pareto bonus** rewards finding architectures that improve the Pareto front (composite score vs. inference FLOPs).
+
+**Policy Architecture:**
+
+The policy $\pi_\theta(a_t | s_t)$ factorises into:
+$$\pi_\theta(a_t | s_t) = \pi_\theta^{\text{arch}}(a_t^{\text{arch}} | s_t) \cdot \pi_\theta^{\text{task}}(a_t^{\text{task}} | s_t, a_t^{\text{arch}})$$
+
+- $\pi^{\text{arch}}$: An MLP that takes the current architecture encoding (one-hot over search dimensions) + running statistics of proxy scores → outputs mutation probabilities.
+- $\pi^{\text{task}}$: A small network conditioned on the proposed architecture AND the current score history → outputs a categorical distribution over the 5 tasks.
+
+**Key Novelty:** The task-routing head $\pi^{\text{task}}$ learns a *non-trivial evaluation strategy*. For example, it might learn:
+- Always start with TID (cheapest) for any new architecture.
+- Only run CFI (expensive) if TID + TCO both scored in the top 20%.
+- Skip PSR entirely for very deep architectures (where perturbation sensitivity is always good).
+
+This is **learned adaptive evaluation**, not a hand-designed cascade like TCSH.
+
+---
+
+### 4.12 GRPO-NAS: Group Relative Policy Optimisation for Architecture Search
+
+**Core Idea:** Apply **GRPO** — the same algorithm from Direction 2 (Causal RL for ASR) — to architecture search. Instead of sampling text outputs and using CER as reward, sample a *group of architectures* and use their *relative proxy-task rankings* as reward. This eliminates the need for a critic/value network entirely.
+
+**Why GRPO fits NAS:**
+
+| GRPO for ASR (Direction 2) | GRPO for NAS (This Section) |
+|---|---|
+| Policy generates text token sequences | Policy generates architecture specifications |
+| Reward = $-\text{CER}$ (non-differentiable) | Reward = $-\mathcal{S}_\text{composite}(\alpha)$ (non-differentiable) |
+| Group = $G$ sampled transcriptions | Group = $G$ sampled architectures |
+| Advantage = relative CER within group | Advantage = relative proxy score within group |
+| No critic network | No critic network |
+
+**Algorithm:**
+
+At each iteration, the policy $\pi_\theta$ generates a group of $G$ architectures $\{\alpha_1, \dots, \alpha_G\}$. Each is evaluated on the composite proxy score. The GRPO objective is:
+
+$$\mathcal{J}_{\text{GRPO}}(\theta) = \mathbb{E}_{\alpha_1, \dots, \alpha_G \sim \pi_\theta}\left[\sum_{i=1}^G \hat{A}_i \cdot \log \pi_\theta(\alpha_i)\right]$$
+
+where the **group-relative advantage** is:
+
+$$\hat{A}_i = \frac{\mathcal{S}_{\text{composite}}(\alpha_i) - \text{mean}_{j}[\mathcal{S}_{\text{composite}}(\alpha_j)]}{\text{std}_{j}[\mathcal{S}_{\text{composite}}(\alpha_j)] + \epsilon}$$
+
+**Architecture as a sequence of tokens:**
+
+Represent each architecture as a sequence of discrete tokens (one per search dimension):
+
+$$\alpha = [\underbrace{d}_{\text{depth}}, \underbrace{w}_{\text{width}}, \underbrace{h}_{\text{heads}}, \underbrace{k}_{\text{kernel}}, \underbrace{s}_{\text{subsample}}, \underbrace{f}_{\text{FFN ratio}}, \underbrace{o}_{\text{ordering}}, \underbrace{b}_{\text{block type}}]$$
+
+The policy autoregressively generates each token:
+$$\pi_\theta(\alpha) = \prod_{j=1}^{8} P_\theta(\alpha_j | \alpha_{<j})$$
+
+**Advantages over classical RL-NAS (REINFORCE):**
+- **No baseline network / critic** needed — the group mean acts as the baseline.
+- **Low variance** — normalising by group std dramatically reduces gradient variance.
+- **Sample efficient** — with $G = 16$ architectures per group, each update uses relative information from all 16, not just one.
+- **Connects your two papers** — if you publish Direction 2 (GRPO for CER) and Direction 8 (GRPO for NAS), the algorithm is the same. This is a *unified RL framework across two papers*.
+
+**Pseudocode:**
+```
+for iteration = 1 to T:
+    # Sample group of architectures
+    alphas = [policy.sample() for _ in range(G)]  # G = 16
+    
+    # Evaluate each on composite proxy score (cheap!)
+    scores = [composite_score(alpha) for alpha in alphas]
+    
+    # Compute group-relative advantages
+    mean_s, std_s = mean(scores), std(scores)
+    advantages = [(s - mean_s) / (std_s + eps) for s in scores]
+    
+    # GRPO policy gradient update
+    loss = -sum(adv * log_prob(alpha) for adv, alpha in zip(advantages, alphas))
+    optimizer.step(loss)
+```
+
+---
+
+### 4.13 Curiosity-Driven NAS with Intrinsic Motivation (CD-NAS)
+
+**Core Idea:** In standard NAS, the agent exploits known good regions of the search space. But architecture search spaces have complex, multi-modal landscapes — exploitation alone misses diverse, non-obvious solutions. Add an **intrinsic curiosity reward** that encourages the agent to explore *architecturally novel* regions, even if their proxy scores are not immediately high.
+
+**Inspiration:** ICM (Intrinsic Curiosity Module, Pathak et al., 2017) gives RL agents reward for visiting states they can't predict. We adapt this: the agent gets bonus reward for generating architectures whose proxy scores it can't predict from its experience so far.
+
+**Formulation:**
+
+Train a **predictor network** $f_\phi$ that estimates the composite proxy score from the architecture encoding:
+$$\hat{s} = f_\phi(\alpha) \approx \mathcal{S}_{\text{composite}}(\alpha)$$
+
+The **intrinsic curiosity reward** is the prediction error:
+$$r_t^{\text{curiosity}} = \big|\mathcal{S}_{\text{composite}}(\alpha_t) - f_\phi(\alpha_t)\big|^2$$
+
+High curiosity reward means the architecture behaved *surprisingly* — its proxy score was far from what the predictor expected. This drives the agent toward under-explored regions.
+
+**Total reward:**
+$$r_t^{\text{total}} = \underbrace{r_t^{\text{extrinsic}}}_{\text{proxy score}} + \beta \cdot \underbrace{r_t^{\text{curiosity}}}_{\text{prediction error}}$$
+
+where $\beta$ decays over time (explore early, exploit late):
+$$\beta(t) = \beta_0 \cdot \left(1 - \frac{t}{T}\right)$$
+
+**Why this matters for NAS specifically:**
+
+Architecture search spaces are full of **deceptive local optima**. For example:
+- Increasing depth always improves proxy scores *locally*, but very deep architectures may actually be worse when fine-tuned (overfitting, gradient issues).
+- Curiosity forces the agent to try unusual combinations (e.g., shallow + very wide + large kernel) that a greedy agent would never explore.
+
+**Predictor update:** After each evaluation, update $f_\phi$ via gradient descent on the prediction error:
+$$\phi \leftarrow \phi - \eta_\phi \nabla_\phi \big|\mathcal{S}_{\text{composite}}(\alpha_t) - f_\phi(\alpha_t)\big|^2$$
+
+As the predictor improves, the curiosity reward naturally shifts to genuinely novel architectures (not just noisy ones).
+
+**Diversity guarantee:**
+
+The curiosity mechanism ensures that the set of evaluated architectures $\{\alpha_1, \dots, \alpha_T\}$ has high **coverage** of the search space. Formally, under a Lipschitz predictor:
+
+$$\min_{\alpha \in \mathcal{A}} \min_{t \leq T} d(\alpha, \alpha_t) \leq O\left(\frac{|\mathcal{A}|}{T}\right)^{1/D_{\text{arch}}}$$
+
+where $D_{\text{arch}}$ is the dimensionality of the architecture space. This is a space-filling guarantee.
+
+---
+
+### 4.14 Comparison: RL-Based vs. Non-RL Optimisers
+
+| Algorithm | Type | Learns Eval Strategy? | Needs Critic? | Explores Diverse Archs? | Theoretical Property |
+|---|---|---|---|---|---|
+| **TCSH** (§4.7) | Deterministic cascade | No (hand-designed order) | N/A | No (top-down pruning) | Safety bound |
+| **PB-NAS** (§4.8) | Bandit | Yes (UCB) | No | Partially (UCB exploration) | Regret bound |
+| **TACO** (§4.9) | Co-evolutionary | Yes (co-evolved weights) | No | Yes (population diversity) | Nash equilibrium |
+| **TRA-MDP** (§4.11) | RL (policy gradient) | Yes (learned task routing) | Optional | Depends on exploration | MDP optimality |
+| **GRPO-NAS** (§4.12) | RL (group relative) | No (evaluates all tasks) | **No (critic-free)** | Yes (group sampling) | Low-variance gradient |
+| **CD-NAS** (§4.13) | RL (curiosity) | No | Predictor only | **Yes (intrinsic motivation)** | Space-filling coverage |
+
+> [!TIP]
+> **Strongest combination for a paper:** Use **GRPO-NAS** as the primary search algorithm (critic-free, low variance, connects to your GRPO-for-ASR work in Direction 2), with **CD-NAS curiosity** as an exploration bonus. This gives you a unified story: *"GRPO is a general-purpose RL algorithm for speech — it optimises CER in ASR training AND optimises architecture quality in NAS."*
+
+---
 
 ## 5. Search Space
 
