@@ -215,6 +215,138 @@ A task that is not discriminative is useless for NAS — all architectures score
 
 ---
 
+## 4B. Novel Optimisation Algorithms for Multi-Task Proxy NAS
+
+> [!NOTE]
+> Standard NAS optimisers (DARTS, NSGA-II, random search) assume a **single, fixed** search objective. Our setting is fundamentally different: we have **multiple proxy tasks** of **varying cost and fidelity**, none of which is known *a priori* to be the best ranking signal. This calls for new algorithmic ideas.
+
+### 4.7 Task-Cascaded Successive Halving (TCSH)
+
+**Core Idea:** Order the 5 proxy tasks by evaluation cost (cheapest first). Use the cheapest task to aggressively prune the architecture pool early, then progressively refine survivors with more expensive (but more faithful) tasks. This is a multi-task generalisation of Successive Halving (Jamieson & Talwalkar, 2016) where *the fidelity dimension is the task identity*, not the training budget.
+
+**Algorithm:**
+
+Let $\mathcal{A}_0$ be the initial pool of $N$ candidate architectures. Let the tasks be ordered by cost: $\mathcal{T}_1$ (cheapest, e.g., TID) through $\mathcal{T}_K$ (most expensive, e.g., CFI).
+
+$$\text{For } k = 1, \dots, K:$$
+$$\quad \text{Evaluate } \mathcal{S}_{\mathcal{T}_k}(\alpha) \quad \forall \alpha \in \mathcal{A}_{k-1}$$
+$$\quad \mathcal{A}_k = \text{Top-}\lfloor |\mathcal{A}_{k-1}| / \eta \rfloor \text{ architectures by } \mathcal{S}_{\mathcal{T}_k}$$
+
+where $\eta \geq 2$ is the halving rate.
+
+**Total cost:**
+$$C_{\text{TCSH}} = \sum_{k=1}^{K} \frac{N}{\eta^{k-1}} \cdot c_k$$
+
+where $c_k$ is the per-architecture cost of task $\mathcal{T}_k$.
+
+**Compare to naive:** Evaluating all $N$ architectures on all $K$ tasks costs $N \sum_k c_k$. TCSH costs roughly $N \cdot c_1 + N/\eta \cdot c_2 + \cdots$, which is dominated by the first (cheapest) round.
+
+**Formal Safety Guarantee:**
+
+The cascade is *safe* (doesn't prune the true best architecture) if the cheap-task ranking is **top-$m$ consistent** with the expensive-task ranking:
+
+$$P\big(\alpha^* \in \mathcal{A}_k \;\forall k\big) \geq 1 - \sum_{k=1}^{K} P\big(\text{rank}_{\mathcal{T}_k}(\alpha^*) > \lfloor |\mathcal{A}_{k-1}| / \eta \rfloor\big)$$
+
+**Bound this** using the pairwise rank-consistency probability from §4.3:
+$$P\big(\alpha^* \text{ pruned at stage } k\big) \leq \frac{|\mathcal{A}_{k-1}|}{\eta} \cdot \frac{\text{Var}[\epsilon_k]}{(\Delta \mathcal{S}_k^{\min})^2}$$
+
+where $\Delta \mathcal{S}_k^{\min}$ is the minimum score gap between the true best and the pruning threshold on task $k$.
+
+**Suggested task ordering (cost low → high):**
+
+| Stage | Task | Per-Architecture Cost | Pool Size |
+|---|---|---|---|
+| 1 | TID (temporal inversion) | ~2 min (single forward + linear probe) | $N = 200$ |
+| 2 | TCO (temporal coherence) | ~5 min (triplet comparisons) | $N/3 \approx 67$ |
+| 3 | PSR (perturbation sensitivity) | ~8 min (2 forward passes + ratio) | $N/9 \approx 22$ |
+| 4 | PBC (bottleneck compression) | ~15 min (VQ + reconstruction) | $N/27 \approx 7$ |
+| 5 | CFI (cross-frequency imputation) | ~20 min (masked reconstruction) | $N/81 \approx 3$ |
+
+**Net effect:** You evaluate 200 architectures but only run the most expensive task on ~3 finalists. Total compute ≈ $200 \times 2 + 67 \times 5 + 22 \times 8 + 7 \times 15 + 3 \times 20 = 1,016$ architecture-minutes, vs. $200 \times 50 = 10,000$ for brute force. **~10× reduction.**
+
+---
+
+### 4.8 Pareto-Bandit NAS (PB-NAS)
+
+**Core Idea:** Treat the joint (architecture, task) selection as a **multi-armed bandit** problem. At each search step, you choose *which architecture* to evaluate and *on which task* — both are decisions. Use a UCB-style acquisition function that balances exploitation (architectures that look promising) with exploration (architectures/tasks with high uncertainty).
+
+**Why this is novel:** Standard NAS evaluates every candidate on the same objective. Bandit-NAS evaluates each candidate on *different subsets of tasks*, spending more evaluation budget on promising architectures and informative tasks.
+
+**Formulation:**
+
+Model each (architecture, task) score as a random variable with posterior mean $\mu_{\alpha,k}$ and posterior variance $\sigma^2_{\alpha,k}$ (from a multi-output Gaussian Process or Bayesian linear model).
+
+At step $t$, select $(\alpha_t, k_t)$ by maximising the acquisition function:
+
+$$(\alpha_t, k_t) = \arg\max_{\alpha \in \mathcal{A}, \; k \in [K]} \quad \underbrace{\hat{\mathcal{S}}_{\text{composite}}(\alpha)}_{\text{exploitation}} + \beta_t \cdot \underbrace{\sigma_{\alpha, k} \cdot w_k}_{\text{exploration}} - \underbrace{\lambda \cdot c_k}_{\text{cost penalty}}$$
+
+where:
+- $\hat{\mathcal{S}}_{\text{composite}}(\alpha) = \sum_k \lambda_k \mu_{\alpha,k}$ is the current best estimate of the composite score
+- $\sigma_{\alpha,k}$ is the posterior uncertainty of architecture $\alpha$ on task $k$
+- $w_k$ is the estimated informativeness of task $k$ (derivative of rank correlation w.r.t. number of evaluations on task $k$)
+- $c_k$ is the evaluation cost of task $k$
+- $\beta_t = \sqrt{2 \ln(t)}$ is the UCB exploration coefficient
+
+**Regret Bound:**
+
+Define the *Pareto regret* as the hypervolume gap between the discovered Pareto front and the true Pareto front after $T$ evaluations:
+
+$$R(T) = \text{HV}(\mathcal{P}^*) - \text{HV}(\hat{\mathcal{P}}_T)$$
+
+Under sub-Gaussian noise and a Lipschitz composite score:
+$$\mathbb{E}[R(T)] \leq O\left(\sqrt{\frac{|\mathcal{A}| \cdot K \cdot \ln T}{T}}\right)$$
+
+**Key advantage:** PB-NAS naturally discovers which tasks are worth evaluating. If TID alone is sufficient to rank the top architectures, the bandit will stop spending budget on CFI/PBC. This is **adaptive task selection**, not a fixed cascade.
+
+---
+
+### 4.9 Task-Architecture Co-Evolutionary Optimisation (TACO)
+
+**Core Idea:** Simultaneously evolve *two populations*: a population of **architectures** $\mathcal{P}_\alpha$ and a population of **task weight vectors** $\mathcal{P}_\lambda$. The architectures are evaluated under the current best task weighting, and the task weights are updated based on which weighting best predicts the true architecture ranking.
+
+**Why this is novel:** In standard NAS, the objective is fixed. In TACO, the objective itself evolves. This is a **co-evolutionary algorithm** — a concept from evolutionary computation (e.g., competitive co-evolution in game-playing) applied for the first time to NAS.
+
+**Algorithm:**
+
+$$\textbf{Initialise:} \quad \mathcal{P}_\alpha^{(0)} = \{\alpha_1, \dots, \alpha_M\}, \quad \mathcal{P}_\lambda^{(0)} = \{\lambda_1, \dots, \lambda_L\}$$
+
+$$\textbf{For } g = 1, \dots, G \text{ (generations):}$$
+
+$$\quad \text{1. Evaluate:} \quad \forall (\alpha, \lambda) \in \mathcal{P}_\alpha^{(g)} \times \mathcal{P}_\lambda^{(g)}: \quad \mathcal{S}_\lambda(\alpha) = \sum_k \lambda_k \hat{\mathcal{S}}_k(\alpha)$$
+
+$$\quad \text{2. Architecture fitness:} \quad F(\alpha) = \text{mean}_{\lambda \in \mathcal{P}_\lambda}[\mathcal{S}_\lambda(\alpha)]$$
+
+$$\quad \text{3. Task-weight fitness:} \quad G(\lambda) = \tau_{\text{Kendall}}\Big(\text{rank}_{\mathcal{S}_\lambda}, \; \text{rank}_{\text{WER}}^{\text{(oracle)}}\Big)$$
+
+$$\quad \text{4. Evolve both populations via tournament selection + mutation.}$$
+
+**The oracle problem:** Step 3 requires a WER oracle. Two solutions:
+- **Option A (Expensive but exact):** Fine-tune a small random subset of architectures (e.g., 10–20) with CTC to get ground-truth WER. Use these as the oracle validation set.
+- **Option B (Cheap, bootstrap):** Use the most expensive proxy task (CFI) as a pseudo-oracle for the cheaper tasks. The co-evolution then learns which cheap-task combination best predicts CFI scores.
+
+**Convergence property:**
+
+Under mild assumptions (finite populations, bounded scores), co-evolutionary algorithms converge to a **Nash equilibrium** where:
+- The architecture population concentrates on the Pareto front.
+- The task-weight population concentrates on the weight vector that maximises rank correlation.
+
+Formally: $\mathcal{P}_\alpha^{(\infty)} \to \mathcal{P}^*$ and $\mathcal{P}_\lambda^{(\infty)} \to \lambda^*$ where $\lambda^* = \arg\max_\lambda \tau(\text{rank}_{\mathcal{S}_\lambda}, \text{rank}_{\text{WER}})$.
+
+---
+
+### 4.10 Comparison of Novel Optimisers
+
+| Algorithm | Key Innovation | Compute Savings | Theoretical Guarantee | When to Use |
+|---|---|---|---|---|
+| **TCSH** (§4.7) | Cheap tasks prune early, expensive tasks refine | ~10× vs. brute force | Top-$m$ safety bound | Large search spaces ($N > 100$), tasks with clear cost ordering |
+| **PB-NAS** (§4.8) | Bandit adaptively selects (architecture, task) pairs | Adaptive — stops wasting budget on uninformative tasks | Pareto regret $O(\sqrt{AK \ln T / T})$ | Unknown task informativeness, continuous search |
+| **TACO** (§4.9) | Co-evolves architectures AND task weights | Discovers optimal task weighting automatically | Nash equilibrium convergence | When no single task is sufficient, need composite |
+
+> [!TIP]
+> **For a journal paper**, the cleanest story is: (1) Propose the 5 tasks (§3). (2) Show raw correlations (§6, Experiment 3). (3) Show that TCSH finds the same top architectures as brute-force at 10× lower cost. (4) Show that TACO discovers a composite weighting that outperforms any single task. This gives you **task novelty + algorithm novelty + empirical validation** in one paper.
+
+
+
 ## 5. Search Space
 
 **Conformer-family search space:**
