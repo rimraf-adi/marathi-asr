@@ -184,22 +184,56 @@ $$\mathbb{E}_{\alpha \sim \rho}\big[\text{WER}(\alpha)\big] \leq \mathbb{E}_{\al
 ## Novelty & Literature Context
 
 ### What has been done?
-- **UnNAS (Liu et al., 2020):** Showed label-free NAS matches supervised NAS in vision using rotation/jigsaw/colorization proxies. *Speech: Nothing equivalent.*
-- **AutoSpeech (Ding et al., 2020):** NAS for speech, but uses supervised CTC loss.
-- **EfficientTDNN (Ding et al., 2021):** NAS for speaker verification, supervised.
-- **BEST-RQ (Chiu et al., 2022):** Random-projection SSL for speech, but fixes the Conformer architecture.
-- **Chinchilla (Hoffmann et al., 2022):** Compute-optimal scaling for LLMs. *Speech: No equivalent study.*
+
+#### A. Label-Free NAS in Vision (Mature)
+- **UnNAS** (Liu, Dollár, He, Girshick, Yuille, Xie; ECCV 2020): Replaced supervised loss with rotation/colorization/jigsaw pretext tasks. Spearman $\rho > 0.80$ with supervised rankings on ImageNet. *Vision only.*
+- **CSNAS** (Nguyen & Chang; IEEE Access 2022): Replaced pretext tasks with SimCLR/InfoNCE contrastive loss + TPE search. Showed contrastive loss is a more faithful architecture proxy than rotation. *Vision only.*
+- **BossNAS** (Li et al.; ICCV 2021): Block-wise self-supervised search for hybrid CNN-Transformer spaces using ensemble bootstrapping. *Vision only.*
+- **MAE-NAS** (Hu, Chu, Zhang; ICLR 2024): Used Masked Autoencoding (pixel reconstruction) as the label-free NAS proxy. Resolved DARTS performance collapse via multi-scale hierarchical decoder. *Vision only.*
+
+#### B. Supervised Speech NAS (Extensive, but all labeled)
+- **AutoSpeech** (Shi, Jin et al.; Interspeech 2020): DARTS for speaker recognition with supervised softmax CE loss. *Speech, but supervised.*
+- **EfficientTDNN** (Lin et al.; IEEE TASLP 2022): TDNN supernet with AAM-Softmax for edge speaker verification. *Speech, but supervised.*
+- **NAS-Bench-ASR** (Mehrotra et al.; ICLR 2021): First tabular benchmark (8,242 architectures) for ASR NAS using supervised CTC loss on TIMIT. *Speech, but supervised.*
+- **DARTS-ASR** (Chen et al.; Interspeech 2020): Multilingual DARTS with supervised CTC on CommonVoice. *Speech, but supervised.*
+- **DARTS-Conformer** (Chen et al.; Interspeech 2021): DARTS mutator inside Conformer blocks with joint CTC/Attention loss on LibriSpeech. *Speech, but supervised.*
+
+#### C. SSL Compression (Not Architecture Search)
+- **LightHuBERT** (Wang et al.; Interspeech 2022): Once-For-All supernet to prune HuBERT via SSL distillation loss. *Speech, SSL-based, but pruning/compression of a fixed teacher — not architecture discovery.*
+
+#### D. Speech SSL Architecture Ablations (Manual, Not Search)
+- **BEST-RQ** (Chiu et al.; ICML 2022): Compared Conformer vs. Transformer under masked prediction. Found Conformer wins by 10–15% relative WER. *Manual ablation, not automated search.*
+- **WavLM** (Chen et al.; IEEE JSTSP 2022): Replaced sinusoidal position encodings with gated relative position bias. *One-off modification, not search.*
+- **SUPERB** (Yang et al.; IEEE JSTSP 2021): Layer-wise and architectural comparisons across 15+ SSL models. *Benchmark, not search.*
+
+#### E. Compute-Optimal Scaling Laws for Speech (Emerging)
+- **OWLS** (Meta; arXiv 2025): Scaling study from 250M–18B params across 360k hours. Fit $L(N, D) = E + A/N^\alpha + B/D^\beta$. *First Chinchilla-style speech scaling law.*
+- **Scaling Audio Models Efficiently** (arXiv 2025): 3D compute-optimal analysis ($N$, duration $T$, resolution $V$). *Novel but architecture is fixed.*
+- **Scaling Properties of Speech Language Models** (Meta/FAIR; arXiv 2024): Power laws for autoregressive speech LMs. Found linguistic comprehension scales 2–3 orders of magnitude slower than text LLMs.
+
+#### F. Multi-Objective NAS for Speech (Supervised only)
+- **NAS-Bench-ASR** also included hardware metrics (latency, MACs, memory) alongside WER.
+- **Multi-Objective Evolutionary Search for Hybrid ASR Encoders** (Various 2022–2024): NSGA-II with GCN surrogates for RTF vs. WER Pareto fronts. *All supervised.*
 
 ### What is NOVEL in our approach?
-- **First SSL-objective-driven architecture search for speech encoders.**
-- **Per-architecture scaling laws for speech SSL** (Chinchilla-style, but architecture is a variable).
-- **Formal rank-consistency theory** linking SSL loss to downstream WER.
-- **Multi-objective Pareto NAS** without any labels.
+
+> [!IMPORTANT]
+> **No published paper has performed from-scratch Neural Architecture Search where the search objective is a raw SSL pretraining loss (such as InfoNCE or BEST-RQ masked prediction) for speech encoders.**
+
+1. **First "UnNAS for Speech":** Transferring the label-free NAS paradigm from vision to speech SSL.
+2. **Per-architecture scaling laws for speech SSL** — Chinchilla-style, but architecture is a searchable variable, not fixed.
+3. **Formal rank-consistency theory** linking SSL loss rankings to downstream WER rankings.
+4. **Multi-objective Pareto NAS** (SSL loss vs. FLOPs/latency) without any labeled data.
+5. **Compute-optimal architecture theory** — asking which architecture family is optimal *at each compute budget*.
 
 ### Similar Studies & Closeness
-1. **"UnNAS: Label-Free NAS" (Liu et al., NeurIPS 2020)**
-   - *Closeness:* High (concept), Low (domain). Vision only. We bring this to speech.
-2. **"BEST-RQ: SSL Pretraining for ASR" (Chiu et al., 2022)**
-   - *Closeness:* Medium. Provides the SSL objective we use, but never searches architectures.
-3. **"AutoSpeech: NAS for Speech Recognition" (Ding et al., Interspeech 2020)**
-   - *Closeness:* High (domain), Low (method). Uses supervised CTC loss. We replace it with SSL.
+
+| # | Paper | Venue | Closeness | Gap We Fill |
+|---|---|---|---|---|
+| 1 | **UnNAS** (Liu et al.) | ECCV 2020 | High (concept), Low (domain) | Vision → Speech transfer |
+| 2 | **MAE-NAS** (Hu et al.) | ICLR 2024 | High (methodology) | Pixel MAE → Acoustic masked prediction |
+| 3 | **NAS-Bench-ASR** (Mehrotra et al.) | ICLR 2021 | High (domain), Low (method) | Supervised CTC → SSL objective |
+| 4 | **BEST-RQ** (Chiu et al.) | ICML 2022 | Medium | Provides SSL loss, never searches architectures |
+| 5 | **LightHuBERT** (Wang et al.) | Interspeech 2022 | Medium | Prunes fixed teacher, not architecture discovery |
+| 6 | **OWLS** (Meta) | arXiv 2025 | Medium | Scaling laws with fixed architecture; we add NAS |
+| 7 | **DARTS-Conformer** (Chen et al.) | Interspeech 2021 | High (domain) | Supervised joint CTC/Attn → SSL loss |

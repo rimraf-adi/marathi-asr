@@ -185,21 +185,55 @@ The architecture $\alpha$ enters through $\text{Lip}(f_\alpha)$, making it a **s
 ## Novelty & Literature Context
 
 ### What has been done?
-- **Adversarial NAS (Guo et al., 2020):** NAS with adversarial training for image classifiers. *Speech: Nothing equivalent.*
-- **RobNet (Guo et al., ECCV 2020):** Searched architectures for adversarial robustness in vision.
-- **DRO for ASR:** Minimal work. Some domain-adaptive ASR uses group DRO but not architecture search.
-- **Lipschitz-constrained networks:** Studied in vision (LipSDP, orthogonal layers) but not applied to speech architecture search.
+
+#### A. Robustness-Driven NAS in Vision (Mature)
+- **RobNet** (Guo, Yang, Xu, Liu, Lin; CVPR 2020): First systematic study of network topology in adversarial robustness ($L_\infty$ PGD). Bi-level NAS optimising adversarial accuracy. Found denser residual connections naturally resist gradient attacks. *Vision only.*
+- **AdvRush** (Mu et al.; ICCV 2021): Gradient norm penalties during one-shot NAS to find smooth-loss-landscape architectures without expensive inner-loop adversarial training. *Vision only.*
+- **"On Adversarial Robustness: A NAS Perspective"** (Moosavi-Dezfooli et al.; NeurIPS 2020): Evaluated Lipschitz properties and loss surface smoothness across DARTS cells. Proved certain topologies provide intrinsic robustness without adversarial training. *Vision only.*
+
+#### B. Robustness NAS in Speech (Very Limited)
+- **NAS-VAD** (Rho, Park, Ko; arXiv 2022): Searched for noise-robust Voice Activity Detection architectures across diverse SNR levels. *Speech, but VAD only — not ASR encoders.*
+- **RL-NAS for Audio-Visual Speech Enhancement** (Interspeech 2021): Multi-objective RL search optimising PESQ/STOI under non-stationary noise. *Speech enhancement, not ASR.*
+
+#### C. Distributionally Robust Optimisation for Speech (Emerging)
+- **CTC-DRO** (Bartelds, Nandi, Jurafsky, Hashimoto, Livescu; ICLR 2026): Group DRO adapted for CTC. Length-matched minibatch sampling + smoothed exponential weights. Reduced worst-case language WER by 23% on CommonVoice. *Speech, Group-DRO, but NOT Wasserstein DRO and NOT architecture search.*
+- **CertiAPT** (Nguyen et al.; arXiv 2025): Frequency-Aware DRO against microphone hardware domain shifts. *Acoustic sensing, not encoder architecture search.*
+- **Wasserstein DRO for Robust Adaptive Beamforming** (IEEE TSP 2023–2024): Wasserstein ball for steering vector uncertainties. *Acoustic arrays, not deep ASR encoders.*
+
+#### D. Lipschitz-Constrained Architectures for Speech (Nascent)
+- **FAST** (Naman, Zhang; arXiv 2025): First Lipschitz-continuous attention in audio transformers (CenterNorm, Scaled Cosine Sim Attention, Weighted Residual Shortcuts). 150× parameter reduction. *Audio classification only (AudioSet, profanity detection) — NOT ASR.*
+- **PALS** (arXiv 2025): Lipschitz pullback heuristic for adversarial robustness of RVQ speech encoders. **Explicitly noted that bounding the global Lipschitz constant of deep speech encoders (Conformer, wav2vec 2.0) remains an open, unsolved challenge.** *Speech-to-speech, not ASR architecture search.*
+- **LipsFormer** (Qi et al.; arXiv 2023): Proved standard Transformers have unbounded Lipschitz constants due to LayerNorm and unconstrained Softmax. Designed Scaled Cosine Sim Attention to bound Lip constant to 1. *Vision only.*
+- **Randomized Smoothing for ASR** (Olivier et al., Interspeech 2023): Circumvents Lipschitz bounding difficulty via isotropic Gaussian noise + Neyman-Pearson smoothing. *Speech, but avoids architecture-level Lipschitz analysis entirely.*
 
 ### What is NOVEL in our approach?
-- **First robustness-driven, label-free architecture search for speech.**
-- **Lipschitz robustness certificate parameterised by architectural choices** — a search-space-level theorem, not just weight-level.
-- **Minimax-bilevel formulation** that is more general than standard bilevel NAS.
-- **Formal connection** between invariance proxy and out-of-domain WER via the DRO bound.
+
+> [!IMPORTANT]
+> **Zero papers exist that bound the Lipschitz constant of Conformer ASR encoders for certified adversarial robustness or domain invariance. Zero papers perform robustness-driven NAS for ASR encoders.**
+
+1. **First robustness-driven, label-free architecture search for speech ASR encoders.**
+2. **Lipschitz robustness certificate parameterised by architectural choices** — a search-space-level theorem, not just weight-level.
+3. **Minimax-bilevel formulation** that is more general than standard bilevel NAS (adversary $\delta$ is co-optimised).
+4. **Formal DRO connection** between invariance proxy and out-of-domain WER via Wasserstein generalisation bound.
+5. **Wasserstein DRO applied to ASR encoder architecture search** — completely unexplored (CTC-DRO uses Group-DRO at training level only).
 
 ### Similar Studies & Closeness
-1. **"RobNet: Robust NAS under Adversarial Attacks" (Guo et al., ECCV 2020)**
-   - *Closeness:* High (concept), Low (domain). Vision only, $\ell_p$ adversarial perturbations. We use acoustic perturbations for speech.
-2. **"Understanding Robustness of Transformers for Image Classification" (Bhojanapalli et al., ICCV 2021)**
-   - *Closeness:* Medium. Analyses Lipschitz properties of vision transformers. We extend this theory to speech encoder search spaces.
-3. **"DRO for Domain Generalisation in ASR" (Various)**
-   - *Closeness:* Medium. Uses DRO at the training level. We use it at the **architecture search** level.
+
+| # | Paper | Venue | Closeness | Gap We Fill |
+|---|---|---|---|---|
+| 1 | **RobNet** (Guo et al.) | CVPR 2020 | High (concept), Low (domain) | Vision $L_\infty$ → Speech acoustic perturbations |
+| 2 | **AdvRush** (Mu et al.) | ICCV 2021 | High (methodology) | Gradient norm NAS → Speech encoder NAS |
+| 3 | **CTC-DRO** (Bartelds et al.) | ICLR 2026 | Medium (domain) | Group-DRO at training level → Wasserstein DRO at architecture search level |
+| 4 | **FAST** (Naman & Zhang) | arXiv 2025 | High (Lipschitz speech) | Audio classification → ASR encoder with certified bounds |
+| 5 | **PALS** (arXiv 2025) | arXiv 2025 | Medium | Acknowledged open problem we solve (Lipschitz bounds for speech encoders) |
+| 6 | **LipsFormer** (Qi et al.) | arXiv 2023 | High (theory) | Vision Transformer → Conformer ASR encoder |
+| 7 | **NAS-VAD** (Rho et al.) | arXiv 2022 | Medium (domain) | VAD noise robustness → Full ASR domain robustness |
+
+### Strategic Novelty Matrix
+
+| Research Axis | Vision | Speech | Our Contribution |
+|---|---|---|---|
+| Robustness-Driven NAS | Mature (RobNet, AdvRush) | Only VAD/Enhancement | **First for ASR encoders** |
+| Wasserstein DRO | Very Mature | Group-DRO only (CTC-DRO) | **Wasserstein DRO for architecture search** |
+| Lipschitz Guarantees | Mature (LipsFormer, 1-Lip CNNs) | FAST (classification only) | **Certified bounds for Conformer ASR** |
+| Label-Free Robustness Proxy | Partial (AdvRush) | None | **Invariance + rank constraint for speech** |
