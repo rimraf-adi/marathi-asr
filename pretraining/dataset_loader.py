@@ -14,6 +14,7 @@ import time
 from pathlib import Path
 from typing import Iterator, Dict, Any, List, Optional, Callable
 import torch
+import torchaudio
 import numpy as np
 from dotenv import load_dotenv
 
@@ -52,7 +53,30 @@ DIALECT_REGISTRY = {
         "Powari": {"split": "train", "dialect_tag": "mr_powari"},
         "Lambani": {"split": "train", "dialect_tag": "mr_lambani"},
     },
+    "indicvoices": {
+        "konkani": {
+            "data_files": {"train": "konkani/train-*.parquet"},
+            "split": "train",
+            "dialect_tag": "konkani",
+        },
+    },
+    "indicvoices_r": {
+        "konkani": {
+            "data_files": {"train": "Konkani/train-*.parquet"},
+            "split": "train",
+            "dialect_tag": "konkani",
+        },
+    },
 }
+
+
+def _resample_audio_if_needed(arr: np.ndarray, orig_sr: int, target_sr: int = 16000) -> np.ndarray:
+    """Fast resampling to 16 kHz using torchaudio."""
+    if orig_sr == target_sr:
+        return arr
+    tensor = torch.from_numpy(arr).float()
+    resampled = torchaudio.functional.resample(tensor, orig_freq=orig_sr, new_freq=target_sr)
+    return resampled.numpy()
 
 
 def stream_shrutilipi(configs: List[str] = None) -> Iterator[Dict[str, Any]]:
@@ -71,13 +95,18 @@ def stream_shrutilipi(configs: List[str] = None) -> Iterator[Dict[str, Any]]:
         )
         for item in ds:
             audio_data = item["audio_filepath"]
+            sr = audio_data.get("sampling_rate", 16000)
+            arr = audio_data["array"]
+            if sr != 16000:
+                arr = _resample_audio_if_needed(arr, sr, 16000)
+                sr = 16000
             yield {
                 "source": "shrutilipi",
                 "config": config,
                 "dialect": meta["dialect_tag"],
-                "audio": audio_data["array"],
-                "sampling_rate": audio_data["sampling_rate"],
-                "duration": item.get("duration", len(audio_data["array"]) / audio_data["sampling_rate"]),
+                "audio": arr,
+                "sampling_rate": sr,
+                "duration": item.get("duration", len(arr) / sr),
                 "text": sanitize_transcript(item.get("text", "")),
                 "speaker_id": None,
                 "district": None,
@@ -102,6 +131,9 @@ def stream_vaani(configs: List[str] = None) -> Iterator[Dict[str, Any]]:
             audio_data = item["audio"]
             sr = audio_data.get("sampling_rate", 16000)
             arr = audio_data["array"]
+            if sr != 16000:
+                arr = _resample_audio_if_needed(arr, sr, 16000)
+                sr = 16000
             dur = item.get("duration") or (len(arr) / sr if sr else 0.0)
 
             raw_txt = item.get("transcript", "") if item.get("isTranscriptionAvailable") == "Yes" else ""
@@ -118,11 +150,91 @@ def stream_vaani(configs: List[str] = None) -> Iterator[Dict[str, Any]]:
             }
 
 
+def stream_indicvoices(configs: List[str] = None) -> Iterator[Dict[str, Any]]:
+    """Stream audio examples from ai4bharat/IndicVoices (Konkani)."""
+    if configs is None:
+        configs = list(DIALECT_REGISTRY["indicvoices"].keys())
+
+    for config in configs:
+        meta = DIALECT_REGISTRY["indicvoices"][config]
+        ds = load_dataset(
+            "ai4bharat/IndicVoices",
+            data_files=meta["data_files"],
+            split=meta["split"],
+            streaming=True,
+            token=HF_TOKEN,
+        )
+        for item in ds:
+            audio_data = item.get("audio_filepath") or item.get("audio")
+            if not audio_data:
+                continue
+            sr = audio_data.get("sampling_rate", 16000)
+            arr = audio_data["array"]
+            if sr != 16000:
+                arr = _resample_audio_if_needed(arr, sr, 16000)
+                sr = 16000
+            dur = item.get("duration") or (len(arr) / sr if sr else 0.0)
+            raw_txt = item.get("normalized") or item.get("verbatim") or item.get("text", "")
+            yield {
+                "source": "indicvoices",
+                "config": config,
+                "dialect": meta["dialect_tag"],
+                "audio": arr,
+                "sampling_rate": sr,
+                "duration": float(dur),
+                "text": sanitize_transcript(raw_txt),
+                "speaker_id": item.get("speaker_id"),
+                "district": item.get("district"),
+            }
+
+
+def stream_indicvoices_r(configs: List[str] = None) -> Iterator[Dict[str, Any]]:
+    """Stream audio examples from ai4bharat/indicvoices_r (Konkani)."""
+    if configs is None:
+        configs = list(DIALECT_REGISTRY["indicvoices_r"].keys())
+
+    for config in configs:
+        meta = DIALECT_REGISTRY["indicvoices_r"][config]
+        ds = load_dataset(
+            "ai4bharat/indicvoices_r",
+            data_files=meta["data_files"],
+            split=meta["split"],
+            streaming=True,
+            token=HF_TOKEN,
+        )
+        for item in ds:
+            audio_data = item.get("audio") or item.get("audio_filepath")
+            if not audio_data:
+                continue
+            sr = audio_data.get("sampling_rate", 48000)
+            arr = audio_data["array"]
+            if sr != 16000:
+                arr = _resample_audio_if_needed(arr, sr, 16000)
+                sr = 16000
+            dur = item.get("duration") or (len(arr) / sr if sr else 0.0)
+            raw_txt = item.get("normalized") or item.get("verbatim") or item.get("text", "")
+            yield {
+                "source": "indicvoices_r",
+                "config": config,
+                "dialect": meta["dialect_tag"],
+                "audio": arr,
+                "sampling_rate": sr,
+                "duration": float(dur),
+                "text": sanitize_transcript(raw_txt),
+                "speaker_id": item.get("speaker_id"),
+                "district": item.get("district"),
+            }
+
+
 def get_combined_stream(
     include_shrutilipi: bool = True,
     include_vaani: bool = True,
+    include_indicvoices: bool = True,
+    include_indicvoices_r: bool = True,
     vaani_dialects: List[str] = None,
     shrutilipi_dialects: List[str] = None,
+    indicvoices_dialects: List[str] = None,
+    indicvoices_r_dialects: List[str] = None,
     interleave: bool = True,
 ) -> Iterator[Dict[str, Any]]:
     """Yield unified samples interleaved across sources to prevent distribution shift."""
@@ -131,6 +243,10 @@ def get_combined_stream(
         iterators.append(iter(stream_shrutilipi(shrutilipi_dialects)))
     if include_vaani:
         iterators.append(iter(stream_vaani(vaani_dialects)))
+    if include_indicvoices:
+        iterators.append(iter(stream_indicvoices(indicvoices_dialects)))
+    if include_indicvoices_r:
+        iterators.append(iter(stream_indicvoices_r(indicvoices_r_dialects)))
 
     if not iterators:
         return
@@ -304,7 +420,8 @@ class CachedRelayedStream:
         """
         if self.max_cached_chunks is None or self.max_cached_chunks <= 0:
             return
-        all_chunks = sorted(self.cache_dir.glob("chunk_*.pt"))
+        # Sort by last modification time (oldest first) for true LRU eviction across epochs
+        all_chunks = sorted(self.cache_dir.glob("chunk_*.pt"), key=lambda p: p.stat().st_mtime)
         if len(all_chunks) > self.max_cached_chunks:
             excess = len(all_chunks) - self.max_cached_chunks
             evicted = 0

@@ -25,8 +25,10 @@ if sys.platform == "win32":
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 os.environ["OMP_NUM_THREADS"] = "1"
 os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
 import torch
+
 import torch.nn as nn
 from torch.optim import AdamW
 
@@ -163,31 +165,38 @@ def train_moe_stage4(run_dir: str = "run3",
             is_phase_4a = not is_warmup and step <= (ctc_warmup_steps + phase4a_steps)
             optimizer.zero_grad(set_to_none=True) if (step - 1) % grad_accum_steps == 0 else None
 
-            with torch.amp.autocast("cuda", enabled=torch.cuda.is_available()):
-                ctc_dict = model.forward_ctc(
-                    audio,
-                    dialect_idx=dialect_indices if is_phase_4a else None,
-                    use_hard_routing=is_phase_4a,
-                )
+            try:
+                with torch.amp.autocast("cuda", enabled=torch.cuda.is_available()):
+                    ctc_dict = model.forward_ctc(
+                        audio,
+                        dialect_idx=dialect_indices if is_phase_4a else None,
+                        use_hard_routing=is_phase_4a,
+                    )
 
-                input_lengths = ctc_dict["output_lengths"]
-                log_probs = ctc_dict["log_probs"]
-                log_probs_t = log_probs.transpose(0, 1)  # (T, B, V) for CTC
+                    input_lengths = ctc_dict["output_lengths"]
+                    log_probs = ctc_dict["log_probs"]
+                    log_probs_t = log_probs.transpose(0, 1)  # (T, B, V) for CTC
 
-                ctc_loss = ctc_criterion(log_probs_t, targets, input_lengths, target_lens)
+                    ctc_loss = ctc_criterion(log_probs_t, targets, input_lengths, target_lens)
 
-                # No aux loss during CTC warmup — pure CTC alignment
-                total_aux_loss = torch.tensor(0.0, device=device)
-                if not is_warmup:
-                    for layer_idx in [4, 5, 6, 7, 8, 9, 10, 11]:
-                        block = model.encoder.layers[layer_idx]
-                        if isinstance(block.ffn2, SparseMoELayer) and hasattr(block.ffn2, "current_aux_loss"):
-                            total_aux_loss = total_aux_loss + block.ffn2.current_aux_loss
+                    # No aux loss during CTC warmup — pure CTC alignment
+                    total_aux_loss = torch.tensor(0.0, device=device)
+                    if not is_warmup:
+                        for layer_idx in [4, 5, 6, 7, 8, 9, 10, 11]:
+                            block = model.encoder.layers[layer_idx]
+                            if isinstance(block.ffn2, SparseMoELayer) and hasattr(block.ffn2, "current_aux_loss"):
+                                total_aux_loss = total_aux_loss + block.ffn2.current_aux_loss
 
-                total_loss = ctc_loss + 0.01 * total_aux_loss
+                    total_loss = ctc_loss + 0.01 * total_aux_loss
 
-            loss_scaled = total_loss / grad_accum_steps
-            scaler.scale(loss_scaled).backward()
+                loss_scaled = total_loss / grad_accum_steps
+                scaler.scale(loss_scaled).backward()
+            except torch.OutOfMemoryError:
+                print(f"[OOM Warning] Skipped step {step} due to CUDA Out of Memory on outlier audio length.")
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+                optimizer.zero_grad(set_to_none=True)
+                continue
 
             grad_norm_val = 0.0
             if step % grad_accum_steps == 0:
@@ -201,6 +210,7 @@ def train_moe_stage4(run_dir: str = "run3",
 
             step_time = time.time() - step_start
             batch_audio_sec = float(audio_lens.sum().item()) / 16000.0
+
             throughput = batch_audio_sec / max(step_time, 1e-5)
 
             rolling_ctc_loss = 0.9 * rolling_ctc_loss + 0.1 * ctc_loss.item() if rolling_ctc_loss > 0 else ctc_loss.item()
@@ -258,6 +268,9 @@ def train_moe_stage4(run_dir: str = "run3",
                     metadata={"ctc_loss": rolling_ctc_loss, "aux_loss": aux_val, "num_experts": 3},
                 )
                 print(f"  [Checkpoint] Step {step} saved to {logger.ckpt_dir}")
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+
 
     finally:
         loader.close()

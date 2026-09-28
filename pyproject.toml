@@ -3,14 +3,14 @@ name = "marathi-asr"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.11"
 dependencies = [
     "datasets[audio]<4",
     "editdistance>=0.8.1",
-    "huggingface-hub>=1.32.0",
+    "huggingface-hub>=0.20.0",
     "jiwer>=4.0.0",
-    "matplotlib>=3.11.2",
-    "python-dotenv>=1.2.3",
-    "scipy>=1.18.1",
-    "soundfile>=0.14.0",
+    "matplotlib>=3.8.0",
+    "python-dotenv>=1.0.0",
+    "scipy>=1.11.0",
+    "soundfile>=0.12.0",
 ]

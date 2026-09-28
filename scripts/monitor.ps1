@@ -45,7 +45,8 @@ Write-Output "--- pipeline status ---"
 if (Test-Path "$run\pipeline_status.json") { Get-Content "$run\pipeline_status.json" | Out-String | Write-Output } else { Write-Output "no status file" }
 
 Write-Output "--- telegram update ---"
-python "$root\send_telegram_update.py" | Out-String | Write-Output
+# Automated telegram updates are handled asynchronously by the agent cronjob using log analysis (no template msgs)
+# python "$root\send_telegram_update.py" | Out-String | Write-Output
 
 Write-Output "--- git auto-push ---"
 try {

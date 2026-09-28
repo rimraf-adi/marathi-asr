@@ -203,7 +203,7 @@ def run_benchmark(
         with torch.no_grad():
             # Single CTC head evaluation (final layer only)
             for layer_idx, exit_name in [
-                (12, "Layer 12 (Full)"),
+                (12, "Layer 12 (Deep)"),
             ]:
                 if torch.cuda.is_available():
                     torch.cuda.synchronize()

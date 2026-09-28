@@ -138,6 +138,8 @@ def train_pretrain(
     early_stop_metric: str = "masked_l1",
     # Stream factory override (used for unit/smoke tests)
     custom_stream_factory=None,
+    include_indicvoices: bool = True,
+    include_indicvoices_r: bool = True,
 ):
     """Main training loop with epoch bounds and small-chunk local caching + network relay."""
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -196,7 +198,14 @@ def train_pretrain(
 
     # Initialize Cached Relayed Dataset
     print(f"{get_timestamp()} [Data] Initializing CachedRelayedStream (Cache Dir: '{cache_dir}', Chunk: {cache_chunk_size} samples)...")
-    base_stream_factory = custom_stream_factory if custom_stream_factory is not None else (lambda: get_combined_stream(include_shrutilipi=True, include_vaani=True))
+    base_stream_factory = custom_stream_factory if custom_stream_factory is not None else (
+        lambda: get_combined_stream(
+            include_shrutilipi=True,
+            include_vaani=True,
+            include_indicvoices=include_indicvoices,
+            include_indicvoices_r=include_indicvoices_r,
+        )
+    )
     cached_dataset = CachedRelayedStream(
         stream_factory=base_stream_factory,
         cache_dir=cache_dir,
@@ -410,6 +419,8 @@ if __name__ == "__main__":
     parser.add_argument("--early_stop_patience", type=int, default=5, help="Checkpoints without improvement before stopping")
     parser.add_argument("--early_stop_min_delta", type=float, default=1e-4, help="Minimum improvement delta")
     parser.add_argument("--early_stop_metric", type=str, default="masked_l1", help="Metric to monitor for early stopping")
+    parser.add_argument("--no_indicvoices", action="store_true", help="Disable ai4bharat/IndicVoices Konkani stream")
+    parser.add_argument("--no_indicvoices_r", action="store_true", help="Disable ai4bharat/indicvoices_r Konkani stream")
 
     args = parser.parse_args()
 
@@ -433,4 +444,6 @@ if __name__ == "__main__":
         early_stop_patience=args.early_stop_patience,
         early_stop_min_delta=args.early_stop_min_delta,
         early_stop_metric=args.early_stop_metric,
+        include_indicvoices=not args.no_indicvoices,
+        include_indicvoices_r=not args.no_indicvoices_r,
     )

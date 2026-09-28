@@ -16,7 +16,10 @@ from typing import Optional, List, Dict, Any
 if sys.platform == "win32":
     sys.stdout.reconfigure(encoding="utf-8")
 
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+
 PYTHON_CMD = [sys.executable, "-u"]
+
 
 
 def update_status(status_file: Path, stage_name: str, status: str, details: dict = None):
@@ -98,6 +101,9 @@ def run_command_with_streaming_log(cmd: List[str], log_path: Path, stage_name: s
         f_log.write(f"\n--- Launching {stage_name} at {time.strftime('%Y-%m-%d %H:%M:%S')} ---\n")
         f_log.flush()
 
+        child_env = os.environ.copy()
+        child_env["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+
         process = subprocess.Popen(
             cmd,
             stdout=subprocess.PIPE,
@@ -106,7 +112,9 @@ def run_command_with_streaming_log(cmd: List[str], log_path: Path, stage_name: s
             encoding="utf-8",
             errors="replace",
             bufsize=1,
+            env=child_env,
         )
+
 
         for line in process.stdout:
             sys.stdout.write(line)

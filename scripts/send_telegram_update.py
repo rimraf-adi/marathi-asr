@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+import argparse
 import glob
 import time
 import shutil
@@ -53,14 +54,21 @@ def find_chat_id(token):
                 return chat["id"]
     return None
 
-def send_message(token, chat_id, text):
+def send_message(token, chat_id, text, parse_mode="Markdown"):
     data = {
         "chat_id": chat_id,
         "text": text,
-        "parse_mode": "Markdown",
         "disable_web_page_preview": "true"
     }
-    return telegram_api(token, "sendMessage", data)
+    if parse_mode:
+        data["parse_mode"] = parse_mode
+    res = telegram_api(token, "sendMessage", data)
+    # If Markdown parsing failed (e.g. unescaped underscores/asterisks), retry as plain text
+    if not res or not res.get("ok"):
+        if parse_mode:
+            data.pop("parse_mode", None)
+            res = telegram_api(token, "sendMessage", data)
+    return res
 
 def get_latest_telemetry():
     telemetry_files = sorted(RUN_DIR.glob("logs/*telemetry*.jsonl"), key=os.path.getmtime, reverse=True)
@@ -145,6 +153,11 @@ def build_status_message(telemetry, ckpt_name, gpu, disk_free):
     return msg
 
 def main():
+    parser = argparse.ArgumentParser(description="Send Telegram Training Update")
+    parser.add_argument("-m", "--message", type=str, default=None, help="Manual status message to send")
+    parser.add_argument("-f", "--file", type=str, default=None, help="Path to text file containing message")
+    args = parser.parse_args()
+
     cfg = load_config()
     if not cfg or not cfg.get("bot_token"):
         print("Config missing or no bot_token specified.")
@@ -161,18 +174,25 @@ def main():
             cfg["chat_id"] = chat_id
             save_config(cfg)
             print(f"Discovered chat_id: {chat_id}. Saved to config.")
-            send_message(token, chat_id, "✅ *Telegram notifications linked successfully!*\nYou will receive 30-minute training updates here.")
+            send_message(token, chat_id, "✅ *Telegram notifications linked successfully!*\nYou will receive training updates here.")
         else:
             print("No chat_id found yet. Please open Telegram and send /start or any message to your bot: @fypupdates_bot")
             sys.exit(0)
 
-    # Gather metrics
-    telemetry = get_latest_telemetry()
-    ckpt_name = get_latest_checkpoint()
-    gpu = get_gpu_info()
-    disk_free = get_disk_free()
-    
-    msg = build_status_message(telemetry, ckpt_name, gpu, disk_free)
+    # Determine message content
+    if args.message:
+        msg = args.message
+    elif args.file and os.path.exists(args.file):
+        with open(args.file, "r", encoding="utf-8") as f:
+            msg = f.read().strip()
+    else:
+        # Fallback to gathered metrics
+        telemetry = get_latest_telemetry()
+        ckpt_name = get_latest_checkpoint()
+        gpu = get_gpu_info()
+        disk_free = get_disk_free()
+        msg = build_status_message(telemetry, ckpt_name, gpu, disk_free)
+
     res = send_message(token, chat_id, msg)
     if res and res.get("ok"):
         print("Telegram update sent successfully.")
