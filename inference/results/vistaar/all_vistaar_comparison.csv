@@ -1,0 +1,16 @@
+model_name,benchmark,cer_percent,wer_percent,ser_percent,exact_match_acc,utterances,audio_hours,compute_time_sec,rtf,latency_ms_per_utt,substitutions,deletions,insertions,hits
+Our Model (Greedy CTC),indictts,12.62,53.0,98.0,2.0,100,0.201,12.91,0.0178,129.09,438,63,29,499
+Our Model (Lexicon Beam),indictts,12.25,51.6,98.0,2.0,100,0.201,12.91,0.0178,129.09,428,51,37,521
+Our Model (KenLM Default α=0.5),indictts,13.08,48.5,99.0,1.0,100,0.201,12.91,0.0178,129.09,376,51,58,573
+Our Model (KenLM Soft α=0.15),indictts,12.09,50.9,94.0,6.0,100,0.201,12.91,0.0178,129.09,374,10,125,616
+SraVaani 1.0 (ARTPARK-IISc),indictts,3.36,14.1,63.0,37.0,100,0.201,58.69,0.0809,586.88,114,14,13,872
+Indic Conformer 600M (AI4Bharat),indictts,2.84,13.4,58.0,42.0,100,0.201,49.95,0.0689,499.54,109,20,5,871
+Our Model (MoE Conformer),kathbath,20.48,64.02,99.88,0.12,1631,3.054,28.48,0.0026,17.46,9754,1204,757,7342
+SraVaani 1.0 (ARTPARK-IISc),kathbath,5.59,17.26,74.68,25.32,1631,3.054,308.59,0.0281,189.2,2539,234,386,15527
+Indic Conformer 600M (AI4Bharat),kathbath,5.63,17.61,76.15,23.85,1631,3.054,717.44,0.0652,439.88,2599,269,354,15432
+Our Model (Greedy CTC),kathbath_noisy,25.62,69.95,99.94,0.06,1631,3.054,247.06,0.0225,151.48,10635,1467,699,6198
+Our Model (Lexicon Beam),kathbath_noisy,25.29,69.68,99.94,0.06,1631,3.054,247.06,0.0225,151.48,10731,1160,861,6409
+Our Model (KenLM Default α=0.5),kathbath_noisy,25.84,61.71,99.51,0.49,1631,3.054,247.06,0.0225,151.48,8468,1753,1072,8079
+Our Model (KenLM Soft α=0.15),kathbath_noisy,24.87,69.56,99.45,0.55,1631,3.054,247.06,0.0225,151.48,9506,263,2961,8531
+SraVaani 1.0 (ARTPARK-IISc),kathbath_noisy,6.29,18.98,78.6,21.4,1631,3.054,1.0,0.0001,0.61,2806,281,387,15213
+Indic Conformer 600M (AI4Bharat),kathbath_noisy,6.15,18.86,78.11,21.89,1631,3.054,693.7,0.0631,425.32,2792,302,358,15206

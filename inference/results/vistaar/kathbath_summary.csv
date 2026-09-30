@@ -1,0 +1,4 @@
+model_name,benchmark,cer_percent,wer_percent,ser_percent,exact_match_acc,utterances,audio_hours,compute_time_sec,rtf,latency_ms_per_utt,substitutions,deletions,insertions,hits
+Our Model (MoE Conformer),kathbath,20.48,64.02,99.88,0.12,1631,3.054,28.48,0.0026,17.46,9754,1204,757,7342
+SraVaani 1.0 (ARTPARK-IISc),kathbath,5.59,17.26,74.68,25.32,1631,3.054,308.59,0.0281,189.2,2539,234,386,15527
+Indic Conformer 600M (AI4Bharat),kathbath,5.63,17.61,76.15,23.85,1631,3.054,717.44,0.0652,439.88,2599,269,354,15432

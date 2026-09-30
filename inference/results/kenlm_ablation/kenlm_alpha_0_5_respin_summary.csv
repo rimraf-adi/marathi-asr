@@ -1,0 +1,6 @@
+model_key,model_name,dialect_id,dialect_name,cer_percent,wer_percent,ser_percent,exact_match_acc,utterances,duration_hours,substitutions,deletions,insertions,hits,rtf,latency_ms_per_utt
+kenlm_alpha_0_5,"KenLM 5-gram (alpha=0.5, default)",D1,Malvani / Konkan,10.23,39.38,94.63,5.37,559,0.851,1462,174,158,2920,0.0161,81.03
+kenlm_alpha_0_5,"KenLM 5-gram (alpha=0.5, default)",D2,Ahirani / Khandesh,7.51,30.9,78.33,21.67,540,0.704,1044,171,198,3358,0.0161,81.03
+kenlm_alpha_0_5,"KenLM 5-gram (alpha=0.5, default)",D3,Standard Marathi,4.02,15.17,55.32,44.68,555,0.762,508,73,72,3723,0.0161,81.03
+kenlm_alpha_0_5,"KenLM 5-gram (alpha=0.5, default)",D4,Varhadi / Vidarbha,6.92,26.95,84.5,15.5,516,0.725,914,128,145,3363,0.0161,81.03
+kenlm_alpha_0_5,"KenLM 5-gram (alpha=0.5, default)",ALL,Aggregate,7.23,28.29,78.11,21.89,2170,3.041,3928,546,573,13364,0.0161,81.03

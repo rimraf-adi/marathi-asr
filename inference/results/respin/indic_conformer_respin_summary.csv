@@ -1,0 +1,6 @@
+model_key,model_name,dialect_id,dialect_name,cer_percent,wer_percent,ser_percent,exact_match_acc,utterances,duration_hours,substitutions,deletions,insertions,hits,rtf,latency_ms_per_utt
+indic_conformer,Indic Conformer 600M (AI4Bharat),D1,Malvani / Konkan,7.39,34.59,93.38,6.62,559,0.851,1410,94,72,3052,0.0693,349.69
+indic_conformer,Indic Conformer 600M (AI4Bharat),D2,Ahirani / Khandesh,4.96,24.64,69.63,30.37,540,0.704,826,245,56,3502,0.0693,349.69
+indic_conformer,Indic Conformer 600M (AI4Bharat),D3,Standard Marathi,2.27,11.57,43.42,56.58,555,0.762,349,138,11,3817,0.0693,349.69
+indic_conformer,Indic Conformer 600M (AI4Bharat),D4,Varhadi / Vidarbha,4.96,24.29,73.64,26.36,516,0.725,848,188,34,3369,0.0693,349.69
+indic_conformer,Indic Conformer 600M (AI4Bharat),ALL,Aggregate,4.95,23.94,70.0,30.0,2170,3.041,3433,665,173,13740,0.0693,349.69

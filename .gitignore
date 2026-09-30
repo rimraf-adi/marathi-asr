@@ -5,6 +5,9 @@ __pycache__/
 *.pyc
 .cache/
 runs/**/checkpoints/
+runs/**/plots/
+runs/smoke_test*
+runs/test_smoke*
 *.pt
 *.pth
 *.ckpt
@@ -13,3 +16,4 @@ run2/
 data_cache/
 telegram_config.json
 lm/
+data/

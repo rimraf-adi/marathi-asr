@@ -1,0 +1,7 @@
+model_name,benchmark,cer_percent,wer_percent,ser_percent,exact_match_acc,utterances,audio_hours,compute_time_sec,rtf,latency_ms_per_utt,substitutions,deletions,insertions,hits
+Our Model (Greedy CTC),kathbath_noisy,25.62,69.95,99.94,0.06,1631,3.054,247.06,0.0225,151.48,10635,1467,699,6198
+Our Model (Lexicon Beam),kathbath_noisy,25.29,69.68,99.94,0.06,1631,3.054,247.06,0.0225,151.48,10731,1160,861,6409
+Our Model (KenLM Default α=0.5),kathbath_noisy,25.84,61.71,99.51,0.49,1631,3.054,247.06,0.0225,151.48,8468,1753,1072,8079
+Our Model (KenLM Soft α=0.15),kathbath_noisy,24.87,69.56,99.45,0.55,1631,3.054,247.06,0.0225,151.48,9506,263,2961,8531
+SraVaani 1.0 (ARTPARK-IISc),kathbath_noisy,6.29,18.98,78.6,21.4,1631,3.054,1.0,0.0001,0.61,2806,281,387,15213
+Indic Conformer 600M (AI4Bharat),kathbath_noisy,6.15,18.86,78.11,21.89,1631,3.054,693.7,0.0631,425.32,2792,302,358,15206

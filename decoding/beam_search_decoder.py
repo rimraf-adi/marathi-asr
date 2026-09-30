@@ -115,6 +115,17 @@ def load_marathi_wordlist(cache_path: str = "moe/respin_split_cache.json", max_w
     import json
     import re
 
+    # Fast path: pre-extracted JSON wordlist
+    fast_cache = Path("data_utils/respin_wordlist.json")
+    if fast_cache.exists():
+        try:
+            with open(fast_cache, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            if isinstance(data, list):
+                return data[:max_words]
+        except Exception:
+            pass
+
     cache_file = Path(cache_path)
     if not cache_file.exists():
         return []

@@ -1,0 +1,7 @@
+model_name,benchmark,cer_percent,wer_percent,ser_percent,exact_match_acc,utterances,audio_hours,compute_time_sec,rtf,latency_ms_per_utt,substitutions,deletions,insertions,hits
+Our Model (Greedy CTC),indictts,12.62,53.0,98.0,2.0,100,0.201,12.91,0.0178,129.09,438,63,29,499
+Our Model (Lexicon Beam),indictts,12.25,51.6,98.0,2.0,100,0.201,12.91,0.0178,129.09,428,51,37,521
+Our Model (KenLM Default α=0.5),indictts,13.08,48.5,99.0,1.0,100,0.201,12.91,0.0178,129.09,376,51,58,573
+Our Model (KenLM Soft α=0.15),indictts,12.09,50.9,94.0,6.0,100,0.201,12.91,0.0178,129.09,374,10,125,616
+SraVaani 1.0 (ARTPARK-IISc),indictts,3.36,14.1,63.0,37.0,100,0.201,58.69,0.0809,586.88,114,14,13,872
+Indic Conformer 600M (AI4Bharat),indictts,2.84,13.4,58.0,42.0,100,0.201,49.95,0.0689,499.54,109,20,5,871

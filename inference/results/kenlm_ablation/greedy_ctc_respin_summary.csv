@@ -1,0 +1,6 @@
+model_key,model_name,dialect_id,dialect_name,cer_percent,wer_percent,ser_percent,exact_match_acc,utterances,duration_hours,substitutions,deletions,insertions,hits,rtf,latency_ms_per_utt
+greedy_ctc,Greedy CTC Baseline (alpha=0.0),D1,Malvani / Konkan,9.7,39.38,91.59,8.41,559,0.851,1506,192,96,2858,0.0137,69.03
+greedy_ctc,Greedy CTC Baseline (alpha=0.0),D2,Ahirani / Khandesh,7.98,34.11,84.26,15.74,540,0.704,1274,199,87,3100,0.0137,69.03
+greedy_ctc,Greedy CTC Baseline (alpha=0.0),D3,Standard Marathi,5.58,22.89,69.91,30.09,555,0.762,835,96,54,3373,0.0137,69.03
+greedy_ctc,Greedy CTC Baseline (alpha=0.0),D4,Varhadi / Vidarbha,8.45,33.71,89.92,10.08,516,0.725,1233,164,88,3008,0.0137,69.03
+greedy_ctc,Greedy CTC Baseline (alpha=0.0),ALL,Aggregate,7.97,32.65,83.82,16.18,2170,3.041,4848,651,325,12339,0.0137,69.03

@@ -1,0 +1,21 @@
+model_key,model_name,dialect_id,dialect_name,cer_percent,wer_percent,ser_percent,exact_match_acc,utterances,duration_hours,substitutions,deletions,insertions,hits,rtf,latency_ms_per_utt
+greedy_ctc,Greedy CTC Baseline (alpha=0.0),D1,Malvani / Konkan,9.7,39.38,91.59,8.41,559,0.851,1506,192,96,2858,0.0137,69.03
+greedy_ctc,Greedy CTC Baseline (alpha=0.0),D2,Ahirani / Khandesh,7.98,34.11,84.26,15.74,540,0.704,1274,199,87,3100,0.0137,69.03
+greedy_ctc,Greedy CTC Baseline (alpha=0.0),D3,Standard Marathi,5.58,22.89,69.91,30.09,555,0.762,835,96,54,3373,0.0137,69.03
+greedy_ctc,Greedy CTC Baseline (alpha=0.0),D4,Varhadi / Vidarbha,8.45,33.71,89.92,10.08,516,0.725,1233,164,88,3008,0.0137,69.03
+greedy_ctc,Greedy CTC Baseline (alpha=0.0),ALL,Aggregate,7.97,32.65,83.82,16.18,2170,3.041,4848,651,325,12339,0.0137,69.03
+lexicon_beam,Lexicon-Only Beam Search (No LM),D1,Malvani / Konkan,9.51,38.45,92.13,7.87,559,0.851,1488,159,105,2909,0.017,85.8
+lexicon_beam,Lexicon-Only Beam Search (No LM),D2,Ahirani / Khandesh,7.87,33.46,83.52,16.48,540,0.704,1258,183,89,3132,0.017,85.8
+lexicon_beam,Lexicon-Only Beam Search (No LM),D3,Standard Marathi,5.48,22.24,69.55,30.45,555,0.762,812,85,60,3407,0.017,85.8
+lexicon_beam,Lexicon-Only Beam Search (No LM),D4,Varhadi / Vidarbha,8.24,32.74,89.34,10.66,516,0.725,1198,145,99,3062,0.017,85.8
+lexicon_beam,Lexicon-Only Beam Search (No LM),ALL,Aggregate,7.81,31.85,83.55,16.45,2170,3.041,4756,572,353,12510,0.017,85.8
+kenlm_alpha_0_5,"KenLM 5-gram (alpha=0.5, default)",D1,Malvani / Konkan,10.23,39.38,94.63,5.37,559,0.851,1462,174,158,2920,0.0161,81.03
+kenlm_alpha_0_5,"KenLM 5-gram (alpha=0.5, default)",D2,Ahirani / Khandesh,7.51,30.9,78.33,21.67,540,0.704,1044,171,198,3358,0.0161,81.03
+kenlm_alpha_0_5,"KenLM 5-gram (alpha=0.5, default)",D3,Standard Marathi,4.02,15.17,55.32,44.68,555,0.762,508,73,72,3723,0.0161,81.03
+kenlm_alpha_0_5,"KenLM 5-gram (alpha=0.5, default)",D4,Varhadi / Vidarbha,6.92,26.95,84.5,15.5,516,0.725,914,128,145,3363,0.0161,81.03
+kenlm_alpha_0_5,"KenLM 5-gram (alpha=0.5, default)",ALL,Aggregate,7.23,28.29,78.11,21.89,2170,3.041,3928,546,573,13364,0.0161,81.03
+kenlm_alpha_0_15,KenLM 5-gram Soft (alpha=0.15),D1,Malvani / Konkan,9.28,37.75,93.2,6.8,559,0.851,1395,42,283,3119,0.0164,82.87
+kenlm_alpha_0_15,KenLM 5-gram Soft (alpha=0.15),D2,Ahirani / Khandesh,7.02,31.05,77.78,22.22,540,0.704,1046,58,316,3469,0.0164,82.87
+kenlm_alpha_0_15,KenLM 5-gram Soft (alpha=0.15),D3,Standard Marathi,4.04,16.15,56.22,43.78,555,0.762,533,30,132,3741,0.0164,82.87
+kenlm_alpha_0_15,KenLM 5-gram Soft (alpha=0.15),D4,Varhadi / Vidarbha,6.55,26.56,82.17,17.83,516,0.725,898,55,217,3452,0.0164,82.87
+kenlm_alpha_0_15,KenLM 5-gram Soft (alpha=0.15),ALL,Aggregate,6.78,28.06,77.28,22.72,2170,3.041,3872,185,948,13781,0.0164,82.87

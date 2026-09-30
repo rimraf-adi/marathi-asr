@@ -1,0 +1,6 @@
+model_key,model_name,dialect_id,dialect_name,cer_percent,wer_percent,ser_percent,exact_match_acc,utterances,duration_hours,substitutions,deletions,insertions,hits,rtf,latency_ms_per_utt
+lexicon_beam,Lexicon-Only Beam Search (No LM),D1,Malvani / Konkan,9.51,38.45,92.13,7.87,559,0.851,1488,159,105,2909,0.017,85.8
+lexicon_beam,Lexicon-Only Beam Search (No LM),D2,Ahirani / Khandesh,7.87,33.46,83.52,16.48,540,0.704,1258,183,89,3132,0.017,85.8
+lexicon_beam,Lexicon-Only Beam Search (No LM),D3,Standard Marathi,5.48,22.24,69.55,30.45,555,0.762,812,85,60,3407,0.017,85.8
+lexicon_beam,Lexicon-Only Beam Search (No LM),D4,Varhadi / Vidarbha,8.24,32.74,89.34,10.66,516,0.725,1198,145,99,3062,0.017,85.8
+lexicon_beam,Lexicon-Only Beam Search (No LM),ALL,Aggregate,7.81,31.85,83.55,16.45,2170,3.041,4756,572,353,12510,0.017,85.8
