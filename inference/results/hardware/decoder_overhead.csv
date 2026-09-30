@@ -1,0 +1,5 @@
+decoder_name,mean_latency_ms,p50_latency_ms,p90_latency_ms
+Pure Greedy CTC (argmax),0.02,0.02,0.03
+Prefix Beam Search (Lexicon only),108.48,107.46,109.66
+Prefix Beam + KenLM 5-gram Default (α=0.5),78.52,77.99,79.77
+Prefix Beam + KenLM 5-gram Soft (α=0.15),78.78,78.43,79.6

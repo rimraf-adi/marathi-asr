@@ -1,0 +1,9 @@
+model_name,cpu_threads,latency_ms,rtf
+Our Model (MoE Conformer),1,441.19,0.0882
+Our Model (MoE Conformer),4,242.4,0.0485
+Our Model (MoE Conformer),8,215.61,0.0431
+Our Model (MoE Conformer),16,261.7,0.0523
+Indic Conformer 600M (AI4Bharat),1,700.67,0.1359
+Indic Conformer 600M (AI4Bharat),4,706.87,0.1371
+Indic Conformer 600M (AI4Bharat),8,714.38,0.1386
+Indic Conformer 600M (AI4Bharat),16,755.34,0.1465

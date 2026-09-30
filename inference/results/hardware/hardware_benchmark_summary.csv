@@ -1,0 +1,4 @@
+model_name,architecture,total_parameters_m,active_parameters_m,sparsity_ratio,checkpoint_disk_mb,static_vram_mb
+Our Model (MoE Conformer),Conformer + Sparse MoE (Top-2 / 4 Experts),32.84,26.53,80.8%,320.3,160.5
+SraVaani 1.0 (ARTPARK-IISc),Zipformer2 + CTC,0.0,0.0,100.0% (Dense),158.0,0.0
+Indic Conformer 600M (AI4Bharat),Conformer Dense (600M Multilingual),0.0,0.0,100.0% (Dense),2400.0,0.0

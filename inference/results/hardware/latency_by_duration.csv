@@ -1,0 +1,6 @@
+model_name,duration_sec,mean_latency_ms,p50_latency_ms,p90_latency_ms,p99_latency_ms,rtf,peak_vram_mb
+Our Model (MoE Conformer),3.0,78.85,77.39,85.59,89.5,0.0263,185.95
+Our Model (MoE Conformer),8.0,89.32,88.51,95.39,114.78,0.0112,206.9
+Our Model (MoE Conformer),15.0,79.4,81.52,89.23,91.46,0.0053,239.38
+SraVaani 1.0 (ARTPARK-IISc),5.15,1711.33,122.66,1716.2,14580.29,0.332,1796.4
+Indic Conformer 600M (AI4Bharat),5.15,968.35,787.77,1379.17,1705.8,0.1879,0.0
