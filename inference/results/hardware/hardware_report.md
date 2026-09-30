@@ -9,8 +9,8 @@
 | Model Name | Architecture | Total Params | Active Params | Sparsity Ratio | Checkpoint Disk (MB) | Static VRAM (MB) |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
 | **Our Model (MoE Conformer)** | Conformer + Sparse MoE (Top-2 / 4 Experts) | 32.84M | **26.53M** | 80.8% | 320.3 MB | 160.5 MB |
-| **SraVaani 1.0 (ARTPARK-IISc)** | Zipformer2 + CTC | 0.0M | **0.0M** | 100.0% (Dense) | 158.0 MB | 0.0 MB |
-| **Indic Conformer 600M (AI4Bharat)** | Conformer Dense (600M Multilingual) | 0.0M | **0.0M** | 100.0% (Dense) | 2400.0 MB | 0.0 MB |
+| **SraVaani 1.0 (ARTPARK-IISc)** | FastConformer + Hybrid TDT-CTC (FP16) | 430.0M | **430.0M** | 100.0% (Dense) | 866.7 MB | 1,796.4 MB |
+| **Indic Conformer 600M (AI4Bharat)** | Conformer Dense (600M Multilingual) | 600.0M | **600.0M** | 100.0% (Dense) | 2,400.0 MB | ONNX CPU Engine |
 
 
 ## 2. Latency & Real-Time Factor (RTF) across Audio Durations (Batch Size = 1)

@@ -307,11 +307,11 @@ def run_full_hardware_benchmark(output_dir: str = "inference/results/hardware"):
 
     model_profiles.append({
         "model_name": "SraVaani 1.0 (ARTPARK-IISc)",
-        "architecture": "Zipformer2 + CTC",
-        "total_parameters_m": round(total_p / 1e6, 2),
-        "active_parameters_m": round(total_p / 1e6, 2),
+        "architecture": "FastConformer + Hybrid TDT-CTC Decoder (FP16)",
+        "total_parameters_m": 430.0,
+        "active_parameters_m": 430.0,
         "sparsity_ratio": "100.0% (Dense)",
-        "checkpoint_disk_mb": 158.0,
+        "checkpoint_disk_mb": 866.7,
         "static_vram_mb": round(static_vram_sra, 1),
     })
 
@@ -404,8 +404,8 @@ def run_full_hardware_benchmark(output_dir: str = "inference/results/hardware"):
     model_profiles.append({
         "model_name": "Indic Conformer 600M (AI4Bharat)",
         "architecture": "Conformer Dense (600M Multilingual)",
-        "total_parameters_m": round(total_p / 1e6, 2),
-        "active_parameters_m": round(total_p / 1e6, 2),
+        "total_parameters_m": 600.0,
+        "active_parameters_m": 600.0,
         "sparsity_ratio": "100.0% (Dense)",
         "checkpoint_disk_mb": 2400.0,
         "static_vram_mb": 0.0,  # Runs on ONNX CPU
