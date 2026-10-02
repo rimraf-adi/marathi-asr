@@ -1,10 +1,10 @@
 # Dialect Qualitative Analysis: KenLM Decoding
 
-This updated report analyzes the qualitative predictions of our **MoE Conformer (33M) decoded with a 5-gram KenLM (α=0.15)**.
+This updated report analyzes the qualitative predictions of our **MoE Conformer (33M) decoded with a 5-gram KenLM (alpha=0.15)**.
 
 While the Language Model improved our aggregate CER to 8.33%, inspecting the dialectal samples reveals a classic ASR phenomenon: **Dialect Erasure**. Because the KenLM was trained on standard Marathi text (like Wikipedia), it heavily penalizes valid rural vocabulary and forces the acoustic model to output standard words.
 
-## D2: Ahirani / Khandesh 🌾
+## D2: Ahirani / Khandesh
 
 ### The "KenLM Dialect Erasure" Effect (Worst Failures)
 
@@ -25,7 +25,7 @@ While the Language Model improved our aggregate CER to 8.33%, inspecting the dia
 
 ---
 
-## D1: Malvani / Konkan 🌴
+## D1: Malvani / Konkan
 
 ### Moderately Good Samples
 * **Ref**: पगाळी याने बारली सारख्या इखल पिकाचं उन्हाण्यात ओरटच आवाढतात
@@ -33,6 +33,6 @@ While the Language Model improved our aggregate CER to 8.33%, inspecting the dia
   * *Analysis*: Here, the KenLM actually *helped*! It correctly fixed the acoustic slur `इखल` into the grammatically correct `इतर` (other), and `आवाढतात` into `आवडतात` (like). This is the intended benefit of a Language Model.
 
 ## Summary Conclusion
-Using the soft KenLM (`α=0.15`) is a double-edged sword. It acts as an excellent spell-checker for standard Marathi sentences and minor phonetic stutters. However, it actively acts as a **"dialect straightjacket"**, forcefully erasing rural grammar (`येगयेगळा`) and morphing it into completely unrelated standard words (`एक एगडा`). 
+Using the soft KenLM (`alpha=0.15`) is a double-edged sword. It acts as an excellent spell-checker for standard Marathi sentences and minor phonetic stutters. However, it actively acts as a **"dialect straightjacket"**, forcefully erasing rural grammar (`येगयेगळा`) and morphing it into completely unrelated standard words (`एक एगडा`). 
 
 For true dialect preservation, pure Greedy CTC (or a custom KenLM trained on Ahirani/Malvani text) remains the gold standard!
