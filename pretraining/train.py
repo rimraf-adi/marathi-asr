@@ -133,7 +133,7 @@ def train_pretrain(
     cache_chunk_size: int = 10000,
     max_cached_chunks: int = 10,
     # Early stopping
-    early_stop_patience: int = 5,
+    early_stop_patience: int = 30,
     early_stop_min_delta: float = 1e-4,
     early_stop_metric: str = "masked_l1",
     # Stream factory override (used for unit/smoke tests)
@@ -416,7 +416,7 @@ if __name__ == "__main__":
     parser.add_argument("--cache_chunk_size", type=int, default=10000, help="Number of samples per local cache shard")
     parser.add_argument("--max_cached_chunks", type=int, default=10, help="Maximum number of cache shards on disk")
     # Early stopping arguments
-    parser.add_argument("--early_stop_patience", type=int, default=5, help="Checkpoints without improvement before stopping")
+    parser.add_argument("--early_stop_patience", type=int, default=30, help="Checkpoints without improvement before stopping")
     parser.add_argument("--early_stop_min_delta", type=float, default=1e-4, help="Minimum improvement delta")
     parser.add_argument("--early_stop_metric", type=str, default="masked_l1", help="Metric to monitor for early stopping")
     parser.add_argument("--no_indicvoices", action="store_true", help="Disable ai4bharat/IndicVoices Konkani stream")

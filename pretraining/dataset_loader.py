@@ -313,12 +313,17 @@ class CachedRelayedStream:
                 import json
                 with open(self._manifest_file, "r", encoding="utf-8") as f:
                     data = json.load(f)
-                    return data.get("total_chunks")
+                    tc = data.get("total_chunks")
+                    if tc is not None and tc > 2:
+                        return tc
+                    return None
             except Exception:
                 return None
         return None
 
     def _save_manifest(self, total_chunks: int):
+        if total_chunks <= 2:
+            return  # Never save a degenerate 1 or 2 chunk count from a transient stream break
         self._total_chunks = total_chunks
         try:
             import json
@@ -347,6 +352,20 @@ class CachedRelayedStream:
         print(f"[Network Relay] Local cache exhausted. Relaying to network for next {self.chunk_size} samples...", flush=True)
 
         while len(chunk_items) < self.chunk_size:
+            if self._network_stream is None:
+                if self.stream_factory is None:
+                    break
+                try:
+                    self._network_stream = iter(self.stream_factory())
+                except Exception as stream_err:
+                    consecutive_failures += 1
+                    time.sleep(backoff_sec)
+                    backoff_sec = min(backoff_sec * 2.0, 60.0)
+                    if consecutive_failures >= max_retries:
+                        print(f"[Network Relay Error] Failed to open remote stream after {max_retries} attempts: {stream_err}", file=sys.stderr, flush=True)
+                        break
+                    continue
+
             try:
                 item = next(self._network_stream)
                 dur = float(item.get("duration", 0.0))
@@ -382,6 +401,7 @@ class CachedRelayedStream:
                 break
             except Exception as e:
                 consecutive_failures += 1
+                self._network_stream = None  # Reopen fresh stream after transient network error
                 err_str = str(e).lower()
                 is_rate_limit = "429" in err_str or "rate limit" in err_str or "too many requests" in err_str
                 prefix = "[HF Rate Limit 429]" if is_rate_limit else "[Network Error]"

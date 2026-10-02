@@ -11,17 +11,24 @@ import urllib.parse
 from pathlib import Path
 from datetime import datetime
 
-CONFIG_PATH = Path(r"D:\marathi-asr\telegram_config.json")
+CONFIG_CANDIDATES = [
+    Path(__file__).parent / "telegram_config.json",
+    Path(__file__).parent.parent / "telegram_config.json",
+    Path(r"D:\marathi-asr\telegram_config.json"),
+    Path(r"D:\marathi-asr\scripts\telegram_config.json"),
+]
 RUN_DIR = Path(r"D:\marathi-asr\runs\no-splitformer-moe-only")
 
 def load_config():
-    if not CONFIG_PATH.exists():
-        return None
-    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+    for p in CONFIG_CANDIDATES:
+        if p.exists():
+            with open(p, "r", encoding="utf-8") as f:
+                return json.load(f)
+    return None
 
 def save_config(cfg):
-    with open(CONFIG_PATH, "w", encoding="utf-8") as f:
+    target = CONFIG_CANDIDATES[0]
+    with open(target, "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2)
 
 def telegram_api(token, method, data=None):

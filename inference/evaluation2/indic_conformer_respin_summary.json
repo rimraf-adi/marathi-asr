@@ -1,0 +1,263 @@
+{
+  "model_key": "indic_conformer",
+  "model_name": "Indic Conformer 600M (AI4Bharat)",
+  "total_utterances": 2170,
+  "total_duration_hours": 3.041,
+  "total_compute_time_sec": 703.81,
+  "rtf": 0.0643,
+  "latency_ms_per_utt": 324.34,
+  "summary_table": [
+    {
+      "model_key": "indic_conformer",
+      "model_name": "Indic Conformer 600M (AI4Bharat)",
+      "dialect_id": "D1",
+      "dialect_name": "Malvani / Konkan",
+      "cer_percent": 7.39,
+      "wer_percent": 34.59,
+      "ser_percent": 93.38,
+      "exact_match_acc": 6.62,
+      "utterances": 559,
+      "duration_hours": 0.851,
+      "substitutions": 1410,
+      "deletions": 94,
+      "insertions": 72,
+      "hits": 3052,
+      "rtf": 0.0643,
+      "latency_ms_per_utt": 324.34
+    },
+    {
+      "model_key": "indic_conformer",
+      "model_name": "Indic Conformer 600M (AI4Bharat)",
+      "dialect_id": "D2",
+      "dialect_name": "Ahirani / Khandesh",
+      "cer_percent": 4.96,
+      "wer_percent": 24.64,
+      "ser_percent": 69.63,
+      "exact_match_acc": 30.37,
+      "utterances": 540,
+      "duration_hours": 0.704,
+      "substitutions": 826,
+      "deletions": 245,
+      "insertions": 56,
+      "hits": 3502,
+      "rtf": 0.0643,
+      "latency_ms_per_utt": 324.34
+    },
+    {
+      "model_key": "indic_conformer",
+      "model_name": "Indic Conformer 600M (AI4Bharat)",
+      "dialect_id": "D3",
+      "dialect_name": "Standard Marathi",
+      "cer_percent": 2.27,
+      "wer_percent": 11.57,
+      "ser_percent": 43.42,
+      "exact_match_acc": 56.58,
+      "utterances": 555,
+      "duration_hours": 0.762,
+      "substitutions": 349,
+      "deletions": 138,
+      "insertions": 11,
+      "hits": 3817,
+      "rtf": 0.0643,
+      "latency_ms_per_utt": 324.34
+    },
+    {
+      "model_key": "indic_conformer",
+      "model_name": "Indic Conformer 600M (AI4Bharat)",
+      "dialect_id": "D4",
+      "dialect_name": "Varhadi / Vidarbha",
+      "cer_percent": 4.96,
+      "wer_percent": 24.29,
+      "ser_percent": 73.64,
+      "exact_match_acc": 26.36,
+      "utterances": 516,
+      "duration_hours": 0.725,
+      "substitutions": 848,
+      "deletions": 188,
+      "insertions": 34,
+      "hits": 3369,
+      "rtf": 0.0643,
+      "latency_ms_per_utt": 324.34
+    },
+    {
+      "model_key": "indic_conformer",
+      "model_name": "Indic Conformer 600M (AI4Bharat)",
+      "dialect_id": "ALL",
+      "dialect_name": "Aggregate",
+      "cer_percent": 4.95,
+      "wer_percent": 23.94,
+      "ser_percent": 70.0,
+      "exact_match_acc": 30.0,
+      "utterances": 2170,
+      "duration_hours": 3.041,
+      "substitutions": 3433,
+      "deletions": 665,
+      "insertions": 173,
+      "hits": 13740,
+      "rtf": 0.0643,
+      "latency_ms_per_utt": 324.34
+    }
+  ],
+  "qualitative_samples": [
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_AGRI_700256_70000268",
+      "dialect": "D3",
+      "reference": "बकरी किंवा मेंढीपासून खत मिळते का ?",
+      "prediction": "बकरी किंवा मेंढीपासून खत मिळते का",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_AGRI_700289_70000298",
+      "dialect": "D3",
+      "reference": "ठिबक सिंचनाची जोडणी कशी असावी ?",
+      "prediction": "ठिबक सिंचनाची जोडणी कशी असावी",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_BANK_700808_70000923",
+      "dialect": "D3",
+      "reference": "के.वाय.सी फॉर्म भरणे गरजेचे असते का ?",
+      "prediction": "के वाय सी फॉर्म भरणे गरजेचे असते का",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_BANK_700734_70000955",
+      "dialect": "D3",
+      "reference": "मुदत खाते ऑनलाइन उघडता येईल का ?",
+      "prediction": "मुदत खाते ऑनलाइन उघडता येईल का",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70064_NA_F_AGRI_700091_70000981",
+      "dialect": "D3",
+      "reference": "लवकर तयार होणाऱ्या तुरीच्या जाती कोणत्या ?",
+      "prediction": "लवकर तयार होणाऱ्या तुरीच्या जाती कोणत्या",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70064_NA_F_BANK_701299_70001117",
+      "dialect": "D3",
+      "reference": "मला एका वर्षातच कर्ज परतफेड करण्याठी दर महिन्याला किमान किती हप्ता बसेल ?",
+      "prediction": "मला एका वर्षातच कर्ज परतफेड करण्यासाठी दर महिन्याला किमान किती हप्ता बसेल",
+      "cer": 2.82,
+      "wer": 8.33
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70064_NA_F_AGRI_700595_70001129",
+      "dialect": "D3",
+      "reference": "कोणत्या वातावरणात कोणते पीक घेऊ नये ?",
+      "prediction": "कोणत्या वातावरणात कोणते पीक घेऊ नये",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70064_NA_F_AGRI_700484_70001310",
+      "dialect": "D3",
+      "reference": "जमिनीचे व्यवस्थापन कसे करावे ?",
+      "prediction": "जमिनीचे व्यवस्थापन कसे करावे",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70064_NA_F_AGRI_700542_70001328",
+      "dialect": "D3",
+      "reference": "खरीप हंगामाचा कोणता कालावधी असतो ?",
+      "prediction": "खरीप हंगामाचा कोणता कालावधी असतो",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70064_NA_F_AGRI_700062_70001554",
+      "dialect": "D3",
+      "reference": "पिकांची औषधे सरकारी योजनेअंतर्गत मिळणार का ?",
+      "prediction": "पिकांची औषधे सरकारी योजनेअंतर्गत मिळणार का",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70005_411037_F_AGRI_700542_70001808",
+      "dialect": "D3",
+      "reference": "खरीप हंगामाचा कोणता कालावधी असतो ?",
+      "prediction": "खरीप हंगामाचा कोणता कालावधी असतो",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70064_NA_F_AGRI_700602_70002343",
+      "dialect": "D3",
+      "reference": "माझ्या कंपनीचे उत्पादन चांगले राहण्यासाठी मी काय उपाय केले पाहिजे ?",
+      "prediction": "माझ्या कंपनीचे उत्पादन चांगले राहण्यासाठी मी काय उपाय केले पाहिजे",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_AGRI_700393_70002566",
+      "dialect": "D3",
+      "reference": "भारतातील आधुनिक कृषी यंत्रे कोणती आहेत ?",
+      "prediction": "भारतातील आधुनिक कृषी यंत्रे कोणती आहेत",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_AGRI_700210_70002568",
+      "dialect": "D3",
+      "reference": "टोबॅको लीफ कर्ल व्हायरस म्हणजे काय ?",
+      "prediction": "टोबॅको लिफ कल व्हायरस म्हणजे काय",
+      "cer": 8.82,
+      "wer": 33.33
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_AGRI_700183_70002594",
+      "dialect": "D3",
+      "reference": "तांदळाची कोणती जात पावसाळ्यात पिकवली जाते ?",
+      "prediction": "तांदळाची कोणती जात पावसाळ्यात पिकवली जाते",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70005_411037_F_BANK_701186_70002992",
+      "dialect": "D3",
+      "reference": "यु.पी.आय वापरण्यासाठी कोणते ऍप वापरावे ?",
+      "prediction": "यू पी आय वापरण्यासाठी कोणते ॅप वापरावे",
+      "cer": 5.26,
+      "wer": 28.57
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_BANK_700765_70003003",
+      "dialect": "D3",
+      "reference": "यु.पी.आय मार्फत आपण एकाच बँकेतून अनेक बँकांमध्ये पैसे पाठवू शकतो का ?",
+      "prediction": "यू पीआयमार्फत आपण एकाच बँकेतून अनेक बँकांमध्ये पैसे पाठवू शकतो का",
+      "cer": 4.48,
+      "wer": 30.77
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70093_411011_F_BANK_700750_70003051",
+      "dialect": "D3",
+      "reference": "ऑनलाइन युटिलिटी बिले भरता येतात का ?",
+      "prediction": "ऑनलाइन युटिलिटी बिले भरता येतात का",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70005_411037_F_BANK_701275_70003059",
+      "dialect": "D3",
+      "reference": "खाते चालू ठेवण्यासाठी किमान किती रक्कम हवी ?",
+      "prediction": "खाते चालू ठेवण्यासाठी किमान किती रक्कम हवी",
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "uid": "IISc_RESPIN_mr_D3_70005_411037_F_BANK_701205_70003091",
+      "dialect": "D3",
+      "reference": "निधी हस्तांतरण करण्याच्या किती पद्धती आहेत ?",
+      "prediction": "निधी हस्तांतरण करण्याच्या किती पद्धती आहेत",
+      "cer": 0.0,
+      "wer": 0.0
+    }
+  ]
+}

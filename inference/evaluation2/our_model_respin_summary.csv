@@ -1,0 +1,6 @@
+model_key,model_name,dialect_id,dialect_name,cer_percent,wer_percent,ser_percent,exact_match_acc,utterances,duration_hours,substitutions,deletions,insertions,hits,rtf,latency_ms_per_utt
+our_model,Our Model (MoE Conformer),D1,Malvani / Konkan,12.71,48.55,95.71,4.29,559,0.851,1911,170,131,2475,0.0047,23.8
+our_model,Our Model (MoE Conformer),D2,Ahirani / Khandesh,10.74,43.28,92.41,7.59,540,0.704,1650,231,98,2692,0.0047,23.8
+our_model,Our Model (MoE Conformer),D3,Standard Marathi,8.04,32.11,83.96,16.04,555,0.762,1177,119,86,3008,0.0047,23.8
+our_model,Our Model (MoE Conformer),D4,Varhadi / Vidarbha,11.46,42.43,94.96,5.04,516,0.725,1592,169,108,2644,0.0047,23.8
+our_model,Our Model (MoE Conformer),ALL,Aggregate,10.78,41.72,91.71,8.29,2170,3.041,6330,689,423,10819,0.0047,23.8

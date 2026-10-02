@@ -1,0 +1,6 @@
+model_key,model_name,dialect_id,dialect_name,cer_percent,wer_percent,ser_percent,exact_match_acc,utterances,duration_hours,substitutions,deletions,insertions,hits,rtf,latency_ms_per_utt
+sravaani,SraVaani 1.0 (ARTPARK-IISc),D1,Malvani / Konkan,4.53,21.71,79.79,20.21,559,0.851,875,66,48,3615,0.0159,80.4
+sravaani,SraVaani 1.0 (ARTPARK-IISc),D2,Ahirani / Khandesh,2.95,17.76,63.89,36.11,540,0.704,577,190,45,3806,0.0159,80.4
+sravaani,SraVaani 1.0 (ARTPARK-IISc),D3,Standard Marathi,1.69,8.97,33.15,66.85,555,0.762,265,115,6,3924,0.0159,80.4
+sravaani,SraVaani 1.0 (ARTPARK-IISc),D4,Varhadi / Vidarbha,2.58,14.14,58.33,41.67,516,0.725,467,118,38,3820,0.0159,80.4
+sravaani,SraVaani 1.0 (ARTPARK-IISc),ALL,Aggregate,2.97,15.75,58.8,41.2,2170,3.041,2184,489,137,15165,0.0159,80.4

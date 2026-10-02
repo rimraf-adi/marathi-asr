@@ -1,0 +1,22 @@
+🌊 Marathi & Konkani Pretraining Update (Iteration 34 | 10:00 AM IST)
+
+🎯 Step & Horizon Progress:
+• Step: 116,027 / 150,000 (77.4% complete)
+• Pace: +2,188 steps in last 2h (~1,094 steps/hr)
+• Active Epoch: 32
+
+🎧 Acoustic Loss & Representation Quality:
+• Masked L1 Loss: 0.4795 - 0.7719 across diverse dialect batches (e.g. 0.4795 @ Step 116,022, 0.5510 @ Step 116,021)
+• Acoustic SNR: 15.45 - 19.20 dB (strong reconstruction on challenging real-world speech)
+• Effective Rank: 140.4 - 151.4 (up to 59.1% rank utilization, preserving multi-dialect phoneme separation)
+• Learning Rate: 3.69e-05 (cosine decay towards 150k target)
+
+🛡️ Gate Checks & Checkpoints:
+• Saved Checkpoints: stage1_pretrain_step_114000.pt, step_115000.pt, and step_116000.pt
+• Phase 3 Gate Checks: Step 115,750 (Ratio: 1.621) & Step 116,000 (Ratio: 1.553) both PASSED cleanly
+• Early Stop Counter: 21 / 30 (9 checkpoints safety margin remaining under tolerance = 30)
+
+💾 Streaming & Storage:
+• Cache Relays: chunk_00015.pt (5.4 GB) and chunk_00016.pt (5.5 GB) cached & rotated under 10-shard limit
+• Disk Headroom: 39.02 GB free on D:
+• GPU RTX A5000: 18.22 GB / 24.56 GB VRAM | 46°C | healthy operation
