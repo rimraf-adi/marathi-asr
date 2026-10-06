@@ -140,6 +140,9 @@ def train_pretrain(
     custom_stream_factory=None,
     include_indicvoices: bool = True,
     include_indicvoices_r: bool = True,
+    d_model: int = 512,
+    n_heads: int = 8,
+    ffn_expansion: int = 4,
 ):
     """Main training loop with epoch bounds and small-chunk local caching + network relay."""
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -156,18 +159,18 @@ def train_pretrain(
     # Initialize Streaming Conformer Model
     model = StreamingASRModel(
         feat_dim=80,
-        d_model=256,
+        d_model=d_model,
         num_layers=12,
-        n_heads=4,
+        n_heads=n_heads,
         conv_kernel_size=31,
-        ffn_expansion=4,
+        ffn_expansion=ffn_expansion,
         dropout=0.1,
-        exit_layers=[4, 8, 12],
+        exit_layers=[12],
         enable_reconstruction_head=True,
     ).to(device)
 
     total_params = sum(p.numel() for p in model.parameters())
-    print(f"{get_timestamp()} [Model] Conformer Backbone parameters: {total_params:,} ({total_params / 1e6:.2f} M)")
+    print(f"{get_timestamp()} [Model] Conformer Backbone parameters (d_model={d_model}, n_heads={n_heads}): {total_params:,} ({total_params / 1e6:.2f} M)")
 
     optimizer = AdamW(model.parameters(), lr=lr, weight_decay=1e-4, betas=(0.9, 0.98))
     scheduler = get_lr_scheduler(optimizer, warmup_steps=warmup_steps, total_steps=effective_total_steps)
@@ -346,6 +349,13 @@ def train_pretrain(
                             "total_epochs": epochs,
                             "snr_db": recon_metrics["reconstruction_snr_db"],
                             "total_audio_hours": total_audio_sec_processed / 3600.0,
+                            "model_config": {
+                                "d_model": d_model,
+                                "n_heads": n_heads,
+                                "ffn_expansion": ffn_expansion,
+                                "num_layers": 12,
+                                "vocab_size": 105,
+                            },
                         },
                     )
                     print(f"{get_timestamp()}  [Semantic Checkpoint] Saved to {logger.ckpt_dir}\n")
@@ -386,6 +396,13 @@ def train_pretrain(
                 "total_epochs": epochs,
                 "snr_db": recon_metrics["reconstruction_snr_db"],
                 "total_audio_hours": total_audio_sec_processed / 3600.0,
+                "model_config": {
+                    "d_model": d_model,
+                    "n_heads": n_heads,
+                    "ffn_expansion": ffn_expansion,
+                    "num_layers": 12,
+                    "vocab_size": 105,
+                },
             },
         )
 
@@ -411,6 +428,9 @@ if __name__ == "__main__":
     parser.add_argument("--stage", type=str, default="pretrain", help="Semantic training stage")
     parser.add_argument("--checkpoint_dir", type=str, default=None, help="Directory to save checkpoints")
     parser.add_argument("--resume", type=str, default=None, help="Path to checkpoint .pt file to resume from")
+    parser.add_argument("--d_model", type=int, default=512, help="Conformer hidden dimension")
+    parser.add_argument("--n_heads", type=int, default=8, help="Number of attention heads")
+    parser.add_argument("--ffn_expansion", type=int, default=4, help="FFN expansion factor")
     # Caching arguments
     parser.add_argument("--cache_dir", type=str, default="data_cache/pretrain", help="Directory for local disk cache shards")
     parser.add_argument("--cache_chunk_size", type=int, default=10000, help="Number of samples per local cache shard")
@@ -446,4 +466,7 @@ if __name__ == "__main__":
         early_stop_metric=args.early_stop_metric,
         include_indicvoices=not args.no_indicvoices,
         include_indicvoices_r=not args.no_indicvoices_r,
+        d_model=args.d_model,
+        n_heads=args.n_heads,
+        ffn_expansion=args.ffn_expansion,
     )

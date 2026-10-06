@@ -64,16 +64,20 @@ def load_model_for_eval(checkpoint_path: str, device: torch.device) -> Streaming
         print(f"[Model Loader] Detected MoE Architecture. Loading 3-Dialect MoE Conformer...")
         model = load_moe_model(checkpoint_path, device=device)
     else:
-        print(f"[Model Loader] Detected Dense Multi-Exit Architecture. Loading standard Conformer...")
+        print(f"[Model Loader] Detected Dense Architecture. Loading standard Conformer...")
+        model_cfg = ckpt.get("model_config", {}) if isinstance(ckpt, dict) else {}
+        d_model = model_cfg.get("d_model", 256)
+        n_heads = model_cfg.get("n_heads", 8 if d_model == 512 else (6 if d_model == 384 else 4))
+        ffn_expansion = model_cfg.get("ffn_expansion", 4)
         model = StreamingASRModel(
             feat_dim=80,
-            d_model=256,
+            d_model=d_model,
             num_layers=12,
-            n_heads=4,
+            n_heads=n_heads,
             conv_kernel_size=31,
-            ffn_expansion=4,
+            ffn_expansion=ffn_expansion,
             dropout=0.0,
-            exit_layers=[4, 8, 12],
+            exit_layers=[12],
             enable_reconstruction_head=False,
             vocab_size=105,
         ).to(device)

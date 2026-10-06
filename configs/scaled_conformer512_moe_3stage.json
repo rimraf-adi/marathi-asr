@@ -1,0 +1,51 @@
+{
+  "run_name": "scaled-conformer512-moe-3stage",
+  "description": "3-Stage Scaled Conformer-Medium (d_model=512, 130.8M parameters) with Hierarchical 3-Dialect MoE and Multi-Source Final Alignment",
+  "start_stage": 1,
+  "end_stage": 4,
+  "model": {
+    "d_model": 512,
+    "n_heads": 8,
+    "ffn_expansion": 4,
+    "num_layers": 12,
+    "conv_kernel_size": 31,
+    "dropout": 0.1,
+    "vocab_size": 105,
+    "exit_layers": [12]
+  },
+  "pretraining": {
+    "epochs": 30,
+    "steps": 200000,
+    "batch_size": 16,
+    "lr": 3e-4,
+    "cache_dir": "data_cache/pretrain_scaled",
+    "cache_chunk_size": 10000,
+    "max_cached_chunks": 10,
+    "log_every": 25,
+    "plot_every": 100,
+    "save_every": 1000
+  },
+  "moe": {
+    "steps": 80000,
+    "batch_size": 24,
+    "grad_accum_steps": 2,
+    "lr": 1e-4,
+    "phase4a_steps": 15000,
+    "ctc_warmup_steps": 3000,
+    "log_every": 25,
+    "save_every": 1000
+  },
+  "final_alignment": {
+    "steps": 40000,
+    "batch_size": 24,
+    "grad_accum_steps": 2,
+    "lr": 3e-5,
+    "min_lr": 5e-6,
+    "log_every": 25,
+    "save_every": 500
+  },
+  "evaluation": {
+    "beam_width": 16,
+    "chunk_size": -1
+  }
+}

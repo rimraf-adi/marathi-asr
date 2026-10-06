@@ -6,7 +6,7 @@ Guarantees mathematically identical outputs at Step 0 of MoE Training.
 """
 
 import os
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 import torch
 import torch.nn as nn
 
@@ -19,6 +19,9 @@ def upcycle_conformer_to_moe(
     num_experts: int = 3,
     moe_layers: List[int] = [4, 5, 6, 7, 8, 9, 10, 11],  # Conformer blocks 5 to 12 (0-indexed)
     device: torch.device = torch.device("cpu"),
+    d_model: Optional[int] = None,
+    n_heads: Optional[int] = None,
+    ffn_expansion: Optional[int] = None,
 ) -> StreamingASRModel:
     """
     Upcycles a dense Conformer into a 3-Dialect MoE Conformer.
@@ -27,6 +30,9 @@ def upcycle_conformer_to_moe(
         num_experts: Number of dialect experts (3: Malvani, Ahirani, Varhadi)
         moe_layers: Conformer block indices to convert to MoE (default: layers 5-12)
         device: Target device
+        d_model: Hidden dimension (auto-detected if None)
+        n_heads: Number of attention heads (auto-detected if None)
+        ffn_expansion: FFN expansion factor (default: 4)
     Returns:
         model: StreamingASRModel with Conformer blocks 5-12 upcycled to SparseMoELayer
     """
@@ -42,14 +48,35 @@ def upcycle_conformer_to_moe(
         else:
             backbone_state[k] = v
 
+    # Auto-detect architecture dimensions if not explicitly passed
+    model_cfg = checkpoint.get("model_config", {}) if isinstance(checkpoint, dict) else {}
+    if d_model is None:
+        if "d_model" in model_cfg:
+            d_model = model_cfg["d_model"]
+        elif "encoder.layers.0.self_attn.q_proj.weight" in backbone_state:
+            d_model = backbone_state["encoder.layers.0.self_attn.q_proj.weight"].shape[0]
+        else:
+            d_model = 256
+
+    if n_heads is None:
+        if "n_heads" in model_cfg:
+            n_heads = model_cfg["n_heads"]
+        else:
+            n_heads = 8 if d_model == 512 else (6 if d_model == 384 else 4)
+
+    if ffn_expansion is None:
+        ffn_expansion = model_cfg.get("ffn_expansion", 4)
+
+    print(f"[Upcycling] Architecture dimensions detected: d_model={d_model}, n_heads={n_heads}, ffn_expansion={ffn_expansion}")
+
     # Instantiate base model
     model = StreamingASRModel(
         feat_dim=80,
-        d_model=256,
+        d_model=d_model,
         num_layers=12,
-        n_heads=4,
+        n_heads=n_heads,
         conv_kernel_size=31,
-        ffn_expansion=4,
+        ffn_expansion=ffn_expansion,
         dropout=0.1,
         exit_layers=[12],
         enable_reconstruction_head=False,
@@ -59,7 +86,7 @@ def upcycle_conformer_to_moe(
     # Load initial dense weights into the entire model
     model.load_state_dict(backbone_state, strict=False)
 
-    print(f"[Upcycling] Converting Conformer blocks {moe_layers} to 3-Dialect MoE...")
+    print(f"[Upcycling] Converting Conformer blocks {moe_layers} to 3-Dialect MoE (d_model={d_model})...")
 
     for layer_idx in moe_layers:
         block = model.encoder.layers[layer_idx]
@@ -67,8 +94,8 @@ def upcycle_conformer_to_moe(
 
         # Create SparseMoELayer
         moe_module = SparseMoELayer(
-            d_model=256,
-            expansion_factor=4,
+            d_model=d_model,
+            expansion_factor=ffn_expansion,
             num_experts=num_experts,
             dropout=0.1,
         ).to(device)
@@ -103,17 +130,42 @@ def load_moe_model(
     device: torch.device = torch.device("cpu"),
     num_experts: int = 3,
     moe_layers: List[int] = [4, 5, 6, 7, 8, 9, 10, 11],
+    d_model: Optional[int] = None,
+    n_heads: Optional[int] = None,
+    ffn_expansion: Optional[int] = None,
 ) -> StreamingASRModel:
     """
     Directly instantiates a 3-Dialect MoE Conformer and loads trained weights.
+    Auto-detects d_model and n_heads if not provided.
     """
+    ckpt = torch.load(checkpoint_path, map_location=device, weights_only=False)
+    state_dict = ckpt["model_state_dict"] if "model_state_dict" in ckpt else ckpt
+
+    model_cfg = ckpt.get("model_config", {}) if isinstance(ckpt, dict) else {}
+    if d_model is None:
+        if "d_model" in model_cfg:
+            d_model = model_cfg["d_model"]
+        elif "encoder.layers.0.self_attn.q_proj.weight" in state_dict:
+            d_model = state_dict["encoder.layers.0.self_attn.q_proj.weight"].shape[0]
+        else:
+            d_model = 256
+
+    if n_heads is None:
+        if "n_heads" in model_cfg:
+            n_heads = model_cfg["n_heads"]
+        else:
+            n_heads = 8 if d_model == 512 else (6 if d_model == 384 else 4)
+
+    if ffn_expansion is None:
+        ffn_expansion = model_cfg.get("ffn_expansion", 4)
+
     model = StreamingASRModel(
         feat_dim=80,
-        d_model=256,
+        d_model=d_model,
         num_layers=12,
-        n_heads=4,
+        n_heads=n_heads,
         conv_kernel_size=31,
-        ffn_expansion=4,
+        ffn_expansion=ffn_expansion,
         dropout=0.1,
         exit_layers=[12],
         enable_reconstruction_head=False,
@@ -122,14 +174,12 @@ def load_moe_model(
 
     for layer_idx in moe_layers:
         model.encoder.layers[layer_idx].ffn2 = SparseMoELayer(
-            d_model=256,
-            expansion_factor=4,
+            d_model=d_model,
+            expansion_factor=ffn_expansion,
             num_experts=num_experts,
             dropout=0.1,
         ).to(device)
 
-    ckpt = torch.load(checkpoint_path, map_location=device, weights_only=False)
-    state_dict = ckpt["model_state_dict"] if "model_state_dict" in ckpt else ckpt
     model.load_state_dict(state_dict)
     return model
 

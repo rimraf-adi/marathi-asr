@@ -169,6 +169,11 @@ def main():
     start_stage = config.get("start_stage", 1)
     end_stage = config.get("end_stage", 4)
 
+    model_cfg = config.get("model", {})
+    d_model = model_cfg.get("d_model", 512)
+    n_heads = model_cfg.get("n_heads", 8 if d_model == 512 else (6 if d_model == 384 else 4))
+    ffn_expansion = model_cfg.get("ffn_expansion", 4)
+
     # -------------------------------------------------------------
     # Stage 1: Pretraining
     # -------------------------------------------------------------
@@ -187,6 +192,9 @@ def main():
                 "--exp_name", "stage1_pretrain",
                 "--stage", "pretrain",
                 "--checkpoint_dir", str(ckpt_dir / "stage1_pretrain"),
+                "--d_model", str(d_model),
+                "--n_heads", str(n_heads),
+                "--ffn_expansion", str(ffn_expansion),
                 "--log_every", str(cfg.get("log_every", 25)),
                 "--plot_every", str(cfg.get("plot_every", 100)),
                 "--save_every", str(cfg.get("save_every", 1000)),

@@ -263,9 +263,18 @@ def train_moe_stage4(run_dir: str = "run3",
                     optimizer=optimizer,
                     scheduler=scheduler,
                     metric_val=cer,
-                    metric_name="cer",
-                    lower_is_better=True,
-                    metadata={"ctc_loss": rolling_ctc_loss, "aux_loss": aux_val, "num_experts": 3},
+                    metadata={
+                        "ctc_loss": rolling_ctc_loss,
+                        "aux_loss": aux_val,
+                        "num_experts": 3,
+                        "model_config": {
+                            "d_model": model.d_model,
+                            "n_heads": model.encoder.layers[0].self_attn.n_heads,
+                            "ffn_expansion": model.encoder.layers[0].ffn1.linear1.out_features // model.d_model,
+                            "num_layers": 12,
+                            "vocab_size": 105,
+                        },
+                    },
                 )
                 print(f"  [Checkpoint] Step {step} saved to {logger.ckpt_dir}")
                 if torch.cuda.is_available():

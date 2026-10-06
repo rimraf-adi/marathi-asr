@@ -34,7 +34,7 @@ from data_utils.tokenizer import MarathiTokenizer
 
 from data_utils.utils import compute_cer, get_lr_scheduler
 from moe.upcycling import load_moe_model
-from moe.respin_dataset import build_or_load_speaker_split, LocalRESPINPrefetchLoader
+from data_utils.multi_source_calib_loader import MultiSourceCalibrationLoader
 from telemetry.metrics_logger import RunMetricsLogger
 
 
@@ -91,13 +91,16 @@ def train_calibration_stage5(run_dir: str = "run3",
     num_total = sum(p.numel() for p in model.parameters())
     print(f"[Parameters] Calibrating {num_trainable:,} / {num_total:,} parameters ({100 * num_trainable / num_total:.1f}%)")
 
-    # 3. Load RESPIN Calibration Split (Held-Out 133 Speakers)
-    print("[Data] Loading strictly held-out calibration split (133 unseen speakers)...")
-    _, calib_utts = build_or_load_speaker_split()
-    total_calib_hours = sum(u["duration"] for u in calib_utts) / 3600.0
-    print(f"[Data] Partition verified: {len(calib_utts):,} utterances ({total_calib_hours:.1f} hours) across 133 disjoint speakers")
-
-    loader = LocalRESPINPrefetchLoader(calib_utts, tokenizer, batch_size=batch_size, queue_size=4)
+    # 3. Load Multi-Source Calibration Data (RESPIN 5%, OpenSLR64, Kathbath, Pretrain stream)
+    print("[Data] Initializing Multi-Source Calibration & Final Alignment Loader...")
+    loader = MultiSourceCalibrationLoader(
+        tokenizer=tokenizer,
+        batch_size=batch_size,
+        weights=[0.35, 0.15, 0.35, 0.15],
+        queue_size=4,
+        augment=True,
+        pretrain_stream_enabled=True,
+    )
 
     optimizer = AdamW(trainable_params, lr=lr, weight_decay=1e-4, betas=(0.9, 0.98))
     scheduler = get_lr_scheduler(optimizer, warmup_steps=warmup_steps, total_steps=total_steps, min_lr_ratio=0.1)
@@ -213,8 +216,18 @@ def train_calibration_stage5(run_dir: str = "run3",
                     scheduler=scheduler,
                     metric_val=cer,
                     metric_name="cer",
-                    lower_is_better=True,
-                    metadata={"ctc_loss": rolling_loss, "calib_speakers": 133, "num_experts": 3},
+                    metadata={
+                        "ctc_loss": rolling_loss,
+                        "calib_speakers": 133,
+                        "num_experts": 3,
+                        "model_config": {
+                            "d_model": model.d_model,
+                            "n_heads": model.encoder.layers[0].self_attn.n_heads,
+                            "ffn_expansion": model.encoder.layers[0].ffn1.linear1.out_features // model.d_model,
+                            "num_layers": 12,
+                            "vocab_size": 105,
+                        },
+                    },
                 )
                 print(f"  [Checkpoint] Step {step} saved to {logger.ckpt_dir}")
 
