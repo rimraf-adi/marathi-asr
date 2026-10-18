@@ -91,12 +91,12 @@ def train_calibration_stage5(run_dir: str = "run3",
     num_total = sum(p.numel() for p in model.parameters())
     print(f"[Parameters] Calibrating {num_trainable:,} / {num_total:,} parameters ({100 * num_trainable / num_total:.1f}%)")
 
-    # 3. Load Multi-Source Calibration Data (RESPIN 5%, OpenSLR64, Kathbath, Pretrain stream)
+    # 3. Load Multi-Source Calibration Data (RESPIN 100%, OpenSLR64, Kathbath, Common Voice, Pretrain stream)
     print("[Data] Initializing Multi-Source Calibration & Final Alignment Loader...")
     loader = MultiSourceCalibrationLoader(
         tokenizer=tokenizer,
         batch_size=batch_size,
-        weights=[0.35, 0.15, 0.35, 0.15],
+        weights=[0.35, 0.10, 0.30, 0.10, 0.15],
         queue_size=4,
         augment=True,
         pretrain_stream_enabled=True,

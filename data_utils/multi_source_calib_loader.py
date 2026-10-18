@@ -126,11 +126,11 @@ class MultiSourceCalibrationLoader:
         self.stopped = False
         self.augment = augment
 
-        # 1. Source 0: RESPIN 5% Held-Out Split
-        print("[MultiSourceLoader] Loading Source 1/4: RESPIN 5% Held-out Split...")
-        _, calib_utts = build_or_load_speaker_split()
-        self.respin_pool = calib_utts
-        print(f"  -> RESPIN 5%: {len(self.respin_pool):,} utterances")
+        # 1. Source 0: RESPIN 100% Combined Split (5% Held-Out + 95% Train Split)
+        print("[MultiSourceLoader] Loading Source 1/4: RESPIN 100% Combined Split (5% Held-out + 95% Train)...")
+        train_utts, calib_utts = build_or_load_speaker_split()
+        self.respin_pool = train_utts + calib_utts
+        print(f"  -> RESPIN 100% Total: {len(self.respin_pool):,} utterances (Train: {len(train_utts):,}, Held-Out: {len(calib_utts):,})")
 
         # 2. Source 1: OpenSLR64
         print("[MultiSourceLoader] Loading Source 2/4: OpenSLR64 Marathi...")
@@ -144,22 +144,39 @@ class MultiSourceCalibrationLoader:
             self.openslr_pool = []
         print(f"  -> OpenSLR64: {len(self.openslr_pool):,} utterances")
 
-        # 3. Source 2: Kathbath Marathi
-        print("[MultiSourceLoader] Loading Source 3/4: AI4Bharat Kathbath...")
-        kb_manifest = "data/vistaar_benchmarks/kathbath_train/marathi/manifest.json"
-        kb_dir = "data/vistaar_benchmarks/kathbath_train/marathi"
-        if os.path.exists(kb_manifest):
-            self.kathbath_pool = load_kathbath_manifest(kb_manifest, kb_dir)
-            for item in self.kathbath_pool:
+        # 3. Source 2: Kathbath Marathi (Clean Train + Noisy Splits)
+        print("[MultiSourceLoader] Loading Source 3/5: AI4Bharat Kathbath (Clean Train + Noisy Splits)...")
+        kb_train_manifest = "data/vistaar_benchmarks/kathbath_train/marathi/manifest.json"
+        kb_train_dir = "data/vistaar_benchmarks/kathbath_train/marathi"
+        kb_noisy_manifest = "data/vistaar_benchmarks/kathbath_noisy/marathi/manifest.json"
+        kb_noisy_dir = "data/vistaar_benchmarks/kathbath_noisy/marathi"
+
+        self.kathbath_pool = []
+        if os.path.exists(kb_train_manifest):
+            self.kathbath_pool.extend(load_kathbath_manifest(kb_train_manifest, kb_train_dir))
+        if os.path.exists(kb_noisy_manifest):
+            self.kathbath_pool.extend(load_kathbath_manifest(kb_noisy_manifest, kb_noisy_dir))
+
+        for item in self.kathbath_pool:
+            item["dialect_idx"] = 3
+        print(f"  -> Kathbath (Clean + Noisy Total): {len(self.kathbath_pool):,} utterances")
+
+        # 4. Source 3: Common Voice Marathi
+        print("[MultiSourceLoader] Loading Source 4/5: Common Voice Marathi...")
+        cv_manifest = "data/vistaar_benchmarks/commonvoice/marathi/manifest.json"
+        cv_dir = "data/vistaar_benchmarks/commonvoice/marathi"
+        if os.path.exists(cv_manifest):
+            self.commonvoice_pool = load_kathbath_manifest(cv_manifest, cv_dir)
+            for item in self.commonvoice_pool:
                 item["dialect_idx"] = 3
         else:
-            self.kathbath_pool = []
-        print(f"  -> Kathbath: {len(self.kathbath_pool):,} utterances")
+            self.commonvoice_pool = []
+        print(f"  -> Common Voice: {len(self.commonvoice_pool):,} utterances")
 
-        # 4. Source 3: Pretraining Streaming Corpus
+        # 5. Source 4: Pretraining Streaming Corpus
         self.pretrain_iter: Optional[Iterator[Dict[str, Any]]] = None
         if pretrain_stream_enabled:
-            print("[MultiSourceLoader] Initializing Source 4/4: Pretraining Corpus Stream (Shrutilipi & Vaani)...")
+            print("[MultiSourceLoader] Initializing Source 5/5: Pretraining Corpus Stream (Shrutilipi & Vaani)...")
             try:
                 from pretraining.dataset_loader import get_combined_stream
                 self.pretrain_iter = iter(get_combined_stream(
@@ -177,15 +194,20 @@ class MultiSourceCalibrationLoader:
             self.respin_pool,
             self.openslr_pool,
             self.kathbath_pool,
+            self.commonvoice_pool,
             self.pretrain_iter,
         ]
+
+        if len(self.weights) != len(self.sources):
+            # Adapt weights to 5 sources [RESPIN, OpenSLR64, Kathbath, CommonVoice, Pretrain]
+            self.weights = [0.35, 0.10, 0.30, 0.10, 0.15]
 
         self.worker = Thread(target=self._worker_loop, daemon=True)
         self.worker.start()
 
     def _sample_item(self, source_id: int) -> Optional[Dict[str, Any]]:
         source = self.sources[source_id]
-        if source_id == 3:
+        if source_id == len(self.sources) - 1:
             # Stream from pretraining corpus
             if self.pretrain_iter is not None:
                 try:
@@ -210,7 +232,7 @@ class MultiSourceCalibrationLoader:
         return None
 
     def _worker_loop(self):
-        source_indices = [0, 1, 2, 3]
+        source_indices = list(range(len(self.sources)))
         while not self.stopped:
             batch_samples = []
             while len(batch_samples) < self.batch_size and not self.stopped:
@@ -234,3 +256,6 @@ class MultiSourceCalibrationLoader:
 
     def close(self):
         self.stopped = True
+
+    def stop(self):
+        self.close()

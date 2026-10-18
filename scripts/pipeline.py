@@ -198,6 +198,8 @@ def main():
                 "--log_every", str(cfg.get("log_every", 25)),
                 "--plot_every", str(cfg.get("plot_every", 100)),
                 "--save_every", str(cfg.get("save_every", 1000)),
+                "--no_indicvoices",
+                "--no_indicvoices_r",
             ]
             if cfg.get("steps") is not None:
                 s1_cmd.extend(["--steps", str(cfg.get("steps"))])
@@ -212,36 +214,51 @@ def main():
             run_command_with_streaming_log(s1_cmd, logs_dir / "stage1_pretrain.log", "stage1_pretrain", status_file)
 
     # -------------------------------------------------------------
-    # Stage 2: 3-Dialect MoE Adaptation
+    # Stage 2: Dialect Adaptation (MoE or Dense Baseline)
     # -------------------------------------------------------------
+    enable_moe = config.get("model", {}).get("enable_moe", True) and "moe" in config
+    stage2_name = "stage2_moe" if enable_moe else "stage2_dense"
+
     if start_stage <= 2 <= end_stage:
-        if is_stage_completed(status_file, "stage2_moe"):
-            print("[Pipeline] Stage 2 ('stage2_moe') already completed. Skipping to next stage.")
+        if is_stage_completed(status_file, stage2_name):
+            print(f"[Pipeline] Stage 2 ('{stage2_name}') already completed. Skipping to next stage.")
         else:
-            cfg = config.get("moe", {})
+            cfg = config.get("moe" if enable_moe else "dense", config.get("moe", {}))
             s1_ckpt = find_stage_checkpoint(ckpt_dir, "stage1_pretrain")
             if not s1_ckpt:
                 raise FileNotFoundError("Could not find Stage 1 checkpoint.")
 
-            s2_resume = find_latest_checkpoint(ckpt_dir, "stage2_moe")
+            s2_resume = find_latest_checkpoint(ckpt_dir, stage2_name)
+            script_path = "moe/train_moe.py" if enable_moe else "dense/train_dense.py"
             s2_cmd = [
-                *PYTHON_CMD, "moe/train_moe.py",
+                *PYTHON_CMD, script_path,
                 "--run_dir", str(run_dir),
                 "--pretrained_ckpt", str(s1_ckpt),
-                "--steps", str(cfg.get("steps", 25000)),
-                "--batch_size", str(cfg.get("batch_size", 24)),
-                "--grad_accum_steps", str(cfg.get("grad_accum_steps", 2)),
-                "--lr", str(cfg.get("lr", 1e-4)),
-                "--phase4a_steps", str(cfg.get("phase4a_steps", 7500)),
-                "--ctc_warmup_steps", str(cfg.get("ctc_warmup_steps", 2000)),
-                "--checkpoint_dir", str(ckpt_dir / "stage2_moe"),
-                "--stage_name", "stage2_moe",
+                "--steps", str(cfg.get("steps", 80000)),
+                "--batch_size", str(cfg.get("batch_size", 32)),
+                "--grad_accum_steps", str(cfg.get("grad_accum_steps", 4)),
+                "--lr", str(cfg.get("lr", 1.5e-4)),
+                "--checkpoint_dir", str(ckpt_dir / stage2_name),
+                "--stage_name", stage2_name,
                 "--log_every", str(cfg.get("log_every", 25)),
                 "--save_every", str(cfg.get("save_every", 1000)),
             ]
+            if enable_moe:
+                s2_cmd.extend([
+                    "--phase4a_steps", str(cfg.get("phase4a_steps", 15000)),
+                    "--ctc_warmup_steps", str(cfg.get("ctc_warmup_steps", 3000)),
+                ])
+            else:
+                s2_cmd.extend([
+                    "--ctc_warmup_steps", str(cfg.get("ctc_warmup_steps", 3000)),
+                    "--d_model", str(d_model),
+                    "--n_heads", str(n_heads),
+                    "--ffn_expansion", str(ffn_expansion),
+                    "--num_layers", str(num_layers),
+                ])
             if s2_resume:
                 s2_cmd.extend(["--resume", str(s2_resume)])
-            run_command_with_streaming_log(s2_cmd, logs_dir / "stage2_moe.log", "stage2_moe", status_file)
+            run_command_with_streaming_log(s2_cmd, logs_dir / f"{stage2_name}.log", stage2_name, status_file)
 
     # -------------------------------------------------------------
     # Stage 3: Final Alignment
@@ -251,7 +268,7 @@ def main():
             print("[Pipeline] Stage 3 ('stage3_final_alignment') already completed. Skipping to next stage.")
         else:
             cfg = config.get("final_alignment", {})
-            s2_ckpt = find_stage_checkpoint(ckpt_dir, "stage2_moe")
+            s2_ckpt = find_stage_checkpoint(ckpt_dir, stage2_name) or find_stage_checkpoint(ckpt_dir, "stage2_moe") or find_stage_checkpoint(ckpt_dir, "stage2_dense")
             if not s2_ckpt:
                 raise FileNotFoundError("Could not find Stage 2 checkpoint.")
 
@@ -287,7 +304,7 @@ def main():
                 raise FileNotFoundError("Could not find Stage 3 checkpoint.")
 
             eval_cmd = [
-                *PYTHON_CMD, "eval_final_benchmark.py",
+                *PYTHON_CMD, "scripts/eval_final_benchmark.py",
                 "--checkpoint", str(final_ckpt),
                 "--output_dir", str(run_dir / "eval_results"),
                 "--tag", f"{run_name}_eval",

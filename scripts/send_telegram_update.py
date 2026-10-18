@@ -95,12 +95,12 @@ def get_latest_telemetry():
     return None
 
 def get_latest_checkpoint():
-    ckpt_dir = RUN_DIR / "checkpoints" / "stage2_moe"
-    if not ckpt_dir.exists():
-        return "None"
-    ckpts = sorted(ckpt_dir.glob("stage2_moe_step_*.pt"), key=os.path.getmtime, reverse=True)
-    if ckpts:
-        return ckpts[0].name
+    for sub in ["stage3_vanilla_sft", "stage3_final_alignment", "stage2_moe"]:
+        ckpt_dir = RUN_DIR / "checkpoints" / sub
+        if ckpt_dir.exists():
+            ckpts = sorted(ckpt_dir.glob("*.pt"), key=os.path.getmtime, reverse=True)
+            if ckpts:
+                return f"{sub}/{ckpts[0].name}"
     return "None"
 
 def get_gpu_info():

@@ -84,10 +84,10 @@ class OurASRModel:
         self.tokenizer = MarathiTokenizer(vocab_path)
         self.beam_decoder = None
 
-    def enable_beam_search(self, beam_width: int = 16, kenlm_path: Optional[str] = None):
-        print(f"[OurModel] Initializing Marathi Beam Search Decoder (width={beam_width})...")
+    def enable_beam_search(self, beam_width: int = 16, kenlm_path: Optional[str] = None, alpha: float = 0.15, beta: float = 1.0):
+        print(f"[OurModel] Initializing Marathi Beam Search Decoder (width={beam_width}, alpha={alpha})...")
         wordlist = load_marathi_wordlist(max_words=30000)
-        self.beam_decoder = MarathiBeamSearchDecoder(self.tokenizer, unigram_words=wordlist, kenlm_path=kenlm_path)
+        self.beam_decoder = MarathiBeamSearchDecoder(self.tokenizer, unigram_words=wordlist, kenlm_path=kenlm_path, alpha=alpha, beta=beta)
 
     @torch.no_grad()
     def transcribe_batch(self, audio_list: List[torch.Tensor], use_beam: bool = False, beam_width: int = 16) -> List[str]:
@@ -331,18 +331,19 @@ class UnifiedASRPipeline:
         return summary_data, detailed_rows
 
     def evaluate_our_model(self, limit: Optional[int] = None, batch_size: int = 16) -> Dict[str, Any]:
-        """Runs evaluation for Our Multi-Dialect MoE Conformer using CTC decoding."""
+        """Runs evaluation for Our Multi-Dialect MoE Conformer using CTC decoding with KenLM."""
         print(f"\n{'='*80}")
-        print(f"[1/3] Running Frozen RESPIN Evaluation: Our Model (MoE Conformer CTC)")
+        print(f"[1/3] Running Frozen RESPIN Evaluation: Our Model (MoE Conformer CTC + KenLM)")
         print(f"{'='*80}")
 
         samples = self.samples[:limit] if limit else self.samples
         model = OurASRModel(checkpoint_path=self.checkpoint_path, vocab_path=self.vocab_path, device=self.device)
+        model.enable_beam_search(beam_width=16, kenlm_path="lm/marathi_5gram.binary", alpha=0.15, beta=1.0)
 
         predictions = []
         t0 = time.time()
 
-        for i in tqdm(range(0, len(samples), batch_size), desc="Our Model (CTC)"):
+        for i in tqdm(range(0, len(samples), batch_size), desc="Our Model (Beam+KenLM)"):
             batch_items = samples[i:i + batch_size]
             audio_tensors = []
             for item in batch_items:
@@ -351,7 +352,7 @@ class UnifiedASRPipeline:
                     audio = audio.mean(axis=1)
                 audio_tensors.append(torch.from_numpy(audio))
 
-            batch_preds = model.transcribe_batch(audio_tensors, use_beam=False)
+            batch_preds = model.transcribe_batch(audio_tensors, use_beam=True, beam_width=16)
             predictions.extend(batch_preds)
 
         compute_time = time.time() - t0

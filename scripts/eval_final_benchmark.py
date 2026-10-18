@@ -21,7 +21,7 @@ from collections import defaultdict
 from typing import Dict, Any, List, Optional
 
 # Ensure root directory is in sys.path
-root_dir = str(Path(__file__).resolve().parent)
+root_dir = str(Path(__file__).resolve().parent.parent)
 if root_dir not in sys.path:
     sys.path.insert(0, root_dir)
 
@@ -109,8 +109,8 @@ def run_benchmark(
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"\n================================================================================")
     print(f"[Benchmark] Evaluating '{model_tag}' on IISc RESPIN Held-Out Test Set")
-    print(f"  Device: {device} ({torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'})")
-    print(f"  Streaming Chunk Size: {chunk_size} frames ({chunk_size * 40} ms) [None = offline]")
+    chunk_str = f"{chunk_size} frames ({chunk_size * 40} ms)" if chunk_size else "Offline / Bidirectional (Full Context)"
+    print(f"  Streaming Chunk Size: {chunk_str}")
     print(f"  Decoding Strategy: {'Beam Search (width=' + str(beam_width) + ')' if use_beam_search else 'Greedy CTC'}")
     print(f"================================================================================")
 

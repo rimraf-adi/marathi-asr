@@ -159,26 +159,31 @@ def load_moe_model(
     if ffn_expansion is None:
         ffn_expansion = model_cfg.get("ffn_expansion", 4)
 
+    num_layers = model_cfg.get("num_layers", 12)
     model = StreamingASRModel(
         feat_dim=80,
         d_model=d_model,
-        num_layers=12,
+        num_layers=num_layers,
         n_heads=n_heads,
         conv_kernel_size=31,
         ffn_expansion=ffn_expansion,
         dropout=0.1,
-        exit_layers=[12],
+        exit_layers=[num_layers],
         enable_reconstruction_head=False,
         vocab_size=105,
     ).to(device)
 
-    for layer_idx in moe_layers:
-        model.encoder.layers[layer_idx].ffn2 = SparseMoELayer(
-            d_model=d_model,
-            expansion_factor=ffn_expansion,
-            num_experts=num_experts,
-            dropout=0.1,
-        ).to(device)
+    has_moe = any("ffn2.experts" in k for k in state_dict.keys())
+    if has_moe:
+        for layer_idx in moe_layers:
+            model.encoder.layers[layer_idx].ffn2 = SparseMoELayer(
+                d_model=d_model,
+                expansion_factor=ffn_expansion,
+                num_experts=num_experts,
+                dropout=0.1,
+            ).to(device)
+    else:
+        print("[Model Loader] Detected dense checkpoint (no MoE layers). Keeping standard dense Conformer backbone.")
 
     model.load_state_dict(state_dict)
     return model

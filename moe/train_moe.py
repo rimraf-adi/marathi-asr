@@ -263,6 +263,7 @@ def train_moe_stage4(run_dir: str = "run3",
                     optimizer=optimizer,
                     scheduler=scheduler,
                     metric_val=cer,
+                    metric_name="cer",
                     metadata={
                         "ctc_loss": rolling_ctc_loss,
                         "aux_loss": aux_val,

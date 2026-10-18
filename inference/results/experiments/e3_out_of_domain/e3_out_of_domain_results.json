@@ -1,0 +1,18 @@
+{
+  "Common Voice Marathi": {
+    "num_evaluated": 400,
+    "strict_wer": 71.17912573537573,
+    "strict_cer": 22.514102891223704,
+    "lenient_wer": 71.1582924020424,
+    "lenient_cer": 22.467782625415488,
+    "delta_wer_normalization": 0.020833333333328596
+  },
+  "Kathbath Hard (Noisy)": {
+    "num_evaluated": 400,
+    "strict_wer": 68.01818875568875,
+    "strict_cer": 22.748128507614943,
+    "lenient_wer": 67.97812465312465,
+    "lenient_cer": 22.70102729606945,
+    "delta_wer_normalization": 0.0400641025641022
+  }
+}

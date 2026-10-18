@@ -102,6 +102,8 @@ def load_kathbath_manifest(manifest_path: str, data_dir: str) -> List[Dict[str, 
                 rel_path = rel_path[len("kathbath_train/marathi/"):]
             elif rel_path.startswith("kathbath_noisy/marathi/"):
                 rel_path = rel_path[len("kathbath_noisy/marathi/"):]
+            elif rel_path.startswith("commonvoice/marathi/"):
+                rel_path = rel_path[len("commonvoice/marathi/"):]
             wav_path = os.path.join(data_dir, rel_path)
             samples.append({
                 "wav_path": wav_path,

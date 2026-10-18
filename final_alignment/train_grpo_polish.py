@@ -63,6 +63,7 @@ from data_utils.utils import compute_cer, get_lr_scheduler
 from moe.upcycling import load_moe_model
 from moe.respin_dataset import build_or_load_speaker_split, LocalRESPINPrefetchLoader
 from data_utils.kathbath_loader import load_kathbath_manifest, LocalKathbathPrefetchLoader
+from data_utils.multi_source_calib_loader import MultiSourceCalibrationLoader
 from telemetry.metrics_logger import RunMetricsLogger
 
 
@@ -303,15 +304,16 @@ def train_grpo_stage5(
     num_total = sum(p.numel() for p in model.parameters())
     print(f"[Parameters] Optimizing {num_trainable:,} / {num_total:,} parameters ({100 * num_trainable / num_total:.2f}%)")
 
-    # 4. Load OpenSLR64 Dataset (For Final Alignment / Sequence Polish)
-    print("[Data] Ingesting OpenSLR64 manifest...")
-    slr_manifest = "data/openslr64_marathi/manifest.json"
-    slr_dir = "data/openslr64_marathi"
-    calib_utts = load_kathbath_manifest(slr_manifest, slr_dir)
-    total_calib_hours = sum(u["duration"] for u in calib_utts) / 3600.0
-    print(f"[Data] OpenSLR64 dataset verified: {len(calib_utts):,} utterances ({total_calib_hours:.1f} hours)")
-
-    loader = LocalKathbathPrefetchLoader(calib_utts, tokenizer, batch_size=batch_size, queue_size=4)
+    # 4. Load Multi-Source Calibration Dataset (100% RESPIN + OpenSLR64 + Kathbath Clean/Noisy + Pretrain Stream)
+    print("[Data] Initializing Multi-Source Calibration Loader for GRPO Polish...")
+    loader = MultiSourceCalibrationLoader(
+        tokenizer=tokenizer,
+        batch_size=batch_size,
+        weights=[0.35, 0.15, 0.35, 0.15],
+        queue_size=4,
+        augment=True,
+        pretrain_stream_enabled=True,
+    )
 
     # 5. Optimization & Telemetry Setup
     optimizer = AdamW(trainable_params, lr=lr, weight_decay=1e-4, betas=(0.9, 0.98))

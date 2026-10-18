@@ -146,8 +146,11 @@ def collate_moe_batch(
             audio, sr = sf.read(s["wav_path"], dtype="float32")
             if len(audio.shape) > 1:
                 audio = audio.mean(axis=1)
-            # Must be 16kHz
+            # Must be 16kHz and between 1.0s and 16.0s
             if sr != 16000:
+                continue
+            dur = len(audio) / float(sr)
+            if dur < 1.0 or dur > 16.0:
                 continue
             token_ids = tokenizer.encode(s["text"])
             if len(token_ids) == 0:

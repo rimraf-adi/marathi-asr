@@ -1,7 +1,7 @@
 {
   "run_name": "scaled-conformer512-moe-3stage",
   "description": "3-Stage Scaled Conformer-Medium (d_model=512, 130.8M parameters) with Hierarchical 3-Dialect MoE, Optimized Batch Size (64), and Multi-Source Final Alignment",
-  "start_stage": 1,
+  "start_stage": 2,
   "end_stage": 4,
   "model": {
     "d_model": 512,
@@ -27,8 +27,8 @@
   },
   "moe": {
     "steps": 80000,
-    "batch_size": 64,
-    "grad_accum_steps": 2,
+    "batch_size": 32,
+    "grad_accum_steps": 4,
     "lr": 1.5e-4,
     "phase4a_steps": 15000,
     "ctc_warmup_steps": 3000,
@@ -37,8 +37,8 @@
   },
   "final_alignment": {
     "steps": 40000,
-    "batch_size": 64,
-    "grad_accum_steps": 2,
+    "batch_size": 32,
+    "grad_accum_steps": 4,
     "lr": 3e-5,
     "min_lr": 5e-6,
     "log_every": 25,

@@ -73,12 +73,15 @@ class RunMetricsLogger:
         optimizer: torch.optim.Optimizer,
         scheduler: torch.optim.lr_scheduler.LRScheduler,
         metric_val: float,
-        metric_name: str,
+        metric_name: str = "cer",
         lower_is_better: bool = True,
         metadata: Optional[Dict[str, Any]] = None,
+        keep_last_k: int = 3,
+        milestone_step: int = 0,
     ):
         """
-        Saves model checkpoints, keeping track of the best performing model.
+        Saves model checkpoints, keeping track of the best performing model,
+        and strictly rotating rolling checkpoints to keep the last 3 only.
         """
         ckpt_path = self.ckpt_dir / f"{self.stage_name}_step_{step}.pt"
 
@@ -115,3 +118,30 @@ class RunMetricsLogger:
             best_path = self.ckpt_dir / "best_model.pt"
             torch.save(state_dict, best_path)
             print(f"  🌟 New Best Model! {metric_name} = {metric_val:.4f} (Saved to best_model.pt)")
+
+        # Checkpoint rotation to prevent disk exhaustion:
+        # Keep best_model.pt, milestones (step % milestone_step == 0), and latest keep_last_k checkpoints
+        if keep_last_k is not None and keep_last_k > 0:
+            existing_ckpts = []
+            for p in self.ckpt_dir.glob(f"{self.stage_name}_step_*.pt"):
+                stem_suffix = p.stem.split("_step_")[-1]
+                if stem_suffix.isdigit():
+                    existing_ckpts.append((int(stem_suffix), p))
+
+            existing_ckpts.sort(key=lambda x: x[0])
+
+            # Non-milestones can be rotated
+            non_milestones = [
+                (s, p) for s, p in existing_ckpts
+                if milestone_step <= 0 or (s % milestone_step != 0)
+            ]
+
+            if len(non_milestones) > keep_last_k:
+                to_prune = non_milestones[:-keep_last_k]
+                for s, p in to_prune:
+                    try:
+                        p.unlink()
+                        print(f"  [Checkpoint Rotation] Pruned older intermediate checkpoint: {p.name}")
+                    except Exception as e:
+                        print(f"  [Checkpoint Rotation] Warning: could not delete {p.name}: {e}")
+
