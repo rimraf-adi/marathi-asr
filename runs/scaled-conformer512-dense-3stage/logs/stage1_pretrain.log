@@ -1,0 +1,62 @@
+
+--- Launching stage1_pretrain at 2026-10-09 04:03:44 ---
+2026-10-09T04:03:50.089 [Engine] Initializing on device: cuda (NVIDIA RTX A5000)
+2026-10-09T04:03:50.095 [Engine] Semantic Checkpoint Directory: runs\scaled-conformer512-dense-3stage\checkpoints\stage1_pretrain (Stage: 'pretrain')
+[stage1_pretrain] Telemetry initialized.
+  - Checkpoints: D:\marathi-asr\runs\scaled-conformer512-dense-3stage\checkpoints\stage1_pretrain
+  - CSV Logging: D:\marathi-asr\runs\scaled-conformer512-dense-3stage\csvs\stage1_pretrain_metrics.csv
+  - JSONL Trace: D:\marathi-asr\runs\scaled-conformer512-dense-3stage\logs\stage1_pretrain_telemetry.jsonl
+D:\marathi-asr\.venv311\Lib\site-packages\torch\nn\modules\module.py:1326: UserWarning: expandable_segments not supported on this platform (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\c10/cuda/CUDAAllocatorConfig.h:28.)
+  return t.to(
+2026-10-09T04:03:51.937 [Model] Conformer Backbone parameters (d_model=512, n_heads=8): 131,143,488 (131.14 M)
+2026-10-09T04:03:53.798 [Data] Initializing CachedRelayedStream (Cache Dir: 'data_cache/pretrain_scaled', Chunk: 10000 samples)...
+2026-10-09T04:03:53.798 [Training] Beginning pretraining run 'stage1_pretrain' for 10 epochs (Max Steps Cap: 30000)...
+
+
+===========================================================================
+2026-10-09T04:03:53.798 [Epoch 1/10] Commencing Training Pass
+===========================================================================
+
+[Network Relay] Opening remote dataset stream for shard 00000...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+[Network Relay] Cached 10000 samples to chunk_00000.pt (4677.7 MB)
+2026-10-09T04:09:52.330 [E1 Step     1] | Masked L1: 8.2875 | SNR: -0.01 dB | Eff. Rank: 467.4 | GradNorm: 33.45 | Throughput:  19.2 aud-s/s | LR: 4.00e-07
+2026-10-09T04:09:56.266  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_000001.png
+2026-10-09T04:14:20.721 [E1 Step    25] | Masked L1: 8.6766 | SNR:  0.40 dB | Eff. Rank: 487.3 | GradNorm: 14.26 | Throughput:  42.2 aud-s/s | LR: 1.00e-05
+2026-10-09T04:17:58.057 [E1 Step    50] | Masked L1: 7.3054 | SNR:  0.68 dB | Eff. Rank: 491.5 | GradNorm: 9.71 | Throughput:  33.0 aud-s/s | LR: 2.00e-05
+2026-10-09T04:22:27.678 [E1 Step    75] | Masked L1: 7.0717 | SNR:  1.00 dB | Eff. Rank: 455.7 | GradNorm: 9.40 | Throughput:  54.0 aud-s/s | LR: 3.00e-05
+2026-10-09T04:27:11.555 [E1 Step   100] | Masked L1: 6.5679 | SNR:  1.31 dB | Eff. Rank: 366.2 | GradNorm: 7.91 | Throughput:  27.3 aud-s/s | LR: 4.00e-05
+2026-10-09T04:27:14.292  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_000100.png
+2026-10-09T04:31:53.580 [E1 Step   125] | Masked L1: 7.3296 | SNR:  1.88 dB | Eff. Rank: 367.7 | GradNorm: 9.86 | Throughput:  29.5 aud-s/s | LR: 5.00e-05
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+2026-10-09T04:36:19.120 [E1 Step   150] | Masked L1: 6.0601 | SNR:  2.51 dB | Eff. Rank: 321.7 | GradNorm: 7.57 | Throughput:  38.1 aud-s/s | LR: 6.00e-05
+'The read operation timed out' thrown while requesting GET https://huggingface.co/datasets/ARTPARK-IISc/Vaani/resolve/9e6ed4f94f7060e633cbc500480623ae7521522c/audio/Marathi/train-00003-of-00232.parquet
+Retrying in 1s [Retry 1/5].
+'The read operation timed out' thrown while requesting GET https://huggingface.co/datasets/ARTPARK-IISc/Vaani/resolve/9e6ed4f94f7060e633cbc500480623ae7521522c/audio/Marathi/train-00003-of-00232.parquet
+Retrying in 1s [Retry 1/5].
+[Network Relay Warning] Failed to save chunk_00001.pt: 
+'The read operation timed out' thrown while requesting GET https://huggingface.co/datasets/ARTPARK-IISc/Vaani/resolve/9e6ed4f94f7060e633cbc500480623ae7521522c/audio/Marathi/train-00003-of-00232.parquet
+Retrying in 1s [Retry 1/5].
+'The read operation timed out' thrown while requesting GET https://huggingface.co/datasets/ARTPARK-IISc/Vaani/resolve/9e6ed4f94f7060e633cbc500480623ae7521522c/audio/Marathi/train-00003-of-00232.parquet
+Retrying in 1s [Retry 1/5].
+2026-10-09T04:45:29.782 [E1 Step   175] | Masked L1: 6.1024 | SNR:  3.28 dB | Eff. Rank: 315.1 | GradNorm: 7.80 | Throughput:  39.6 aud-s/s | LR: 7.00e-05
+2026-10-09T04:50:09.040 [E1 Step   200] | Masked L1: 4.8618 | SNR:  4.41 dB | Eff. Rank: 283.2 | GradNorm: 6.24 | Throughput:  30.8 aud-s/s | LR: 8.00e-05
+2026-10-09T04:50:11.828  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_000200.png
+2026-10-09T04:54:32.712 [E1 Step   225] | Masked L1: 4.6825 | SNR:  5.36 dB | Eff. Rank: 256.0 | GradNorm: 8.06 | Throughput:  26.8 aud-s/s | LR: 9.00e-05
+2026-10-09T04:59:09.808 [E1 Step   250] | Masked L1: 3.7683 | SNR:  6.32 dB | Eff. Rank: 240.1 | GradNorm: 5.15 | Throughput:  42.3 aud-s/s | LR: 1.00e-04
+2026-10-09T04:59:11.332 >>> [Phase 3 Gate Check @ Step 250] Short Loss: 3.7927 | Long Loss: 3.9578 | Degradation Ratio: 1.044 | Gate Passed: NO
+
+2026-10-09T05:04:05.332 [E1 Step   275] | Masked L1: 3.5107 | SNR:  7.34 dB | Eff. Rank: 253.5 | GradNorm: 5.88 | Throughput:  44.8 aud-s/s | LR: 1.10e-04
+2026-10-09T05:08:45.937 [E1 Step   300] | Masked L1: 2.5136 | SNR:  9.77 dB | Eff. Rank: 226.8 | GradNorm: 7.78 | Throughput:  34.3 aud-s/s | LR: 1.20e-04
+2026-10-09T05:08:48.590  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_000300.png
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'The read operation timed out' thrown while requesting GET https://huggingface.co/datasets/ARTPARK-IISc/Vaani/resolve/9e6ed4f94f7060e633cbc500480623ae7521522c/audio/Marathi/train-00004-of-00232.parquet
+Retrying in 1s [Retry 1/5].
+'The read operation timed out' thrown while requesting GET https://huggingface.co/datasets/ARTPARK-IISc/Vaani/resolve/9e6ed4f94f7060e633cbc500480623ae7521522c/audio/Marathi/train-00004-of-00232.parquet
+Retrying in 1s [Retry 1/5].
+'The read operation timed out' thrown while requesting GET https://huggingface.co/datasets/ARTPARK-IISc/Vaani/resolve/9e6ed4f94f7060e633cbc500480623ae7521522c/audio/Marathi/train-00004-of-00232.parquet
+Retrying in 1s [Retry 1/5].
+[Network Relay Warning] Failed to save chunk_00002.pt: 
+2026-10-09T05:17:07.619 [E1 Step   325] | Masked L1: 2.2000 | SNR: 11.22 dB | Eff. Rank: 236.5 | GradNorm: 4.21 | Throughput:  33.1 aud-s/s | LR: 1.30e-04
+2026-10-09T05:21:43.733 [E1 Step   350] | Masked L1: 1.8600 | SNR: 10.38 dB | Eff. Rank: 245.9 | GradNorm: 6.74 | Throughput:  46.3 aud-s/s | LR: 1.40e-04
+2026-10-09T05:26:18.044 [E1 Step   375] | Masked L1: 1.4984 | SNR: 11.98 dB | Eff. Rank: 232.9 | GradNorm: 2.93 | Throughput:  38.3 aud-s/s | LR: 1.50e-04

@@ -1,0 +1,16 @@
+exit,dialect_id,dialect_name,cer_percent,wer_percent,utterances,rtf
+Layer 4 (Fast),D1,Malvani / Konkan,0.0,0.0,0,0.0
+Layer 4 (Fast),D2,Ahirani / Khandesh,0.0,0.0,0,0.0
+Layer 4 (Fast),D3,Standard Marathi,0.0,0.0,0,0.0
+Layer 4 (Fast),D4,Varhadi / Vidarbha,0.0,0.0,0,0.0
+Layer 4 (Fast),ALL,Aggregate,0.0,0.0,0,0.0
+Layer 8 (Balanced),D1,Malvani / Konkan,0.0,0.0,0,0.0
+Layer 8 (Balanced),D2,Ahirani / Khandesh,0.0,0.0,0,0.0
+Layer 8 (Balanced),D3,Standard Marathi,0.0,0.0,0,0.0
+Layer 8 (Balanced),D4,Varhadi / Vidarbha,0.0,0.0,0,0.0
+Layer 8 (Balanced),ALL,Aggregate,0.0,0.0,0,0.0
+Layer 12 (Deep),D1,Malvani / Konkan,5.91,24.65,559,0.0026
+Layer 12 (Deep),D2,Ahirani / Khandesh,4.46,20.74,540,0.0026
+Layer 12 (Deep),D3,Standard Marathi,3.07,11.6,555,0.0026
+Layer 12 (Deep),D4,Varhadi / Vidarbha,4.59,18.85,516,0.0026
+Layer 12 (Deep),ALL,Aggregate,4.53,19.04,2170,0.0026

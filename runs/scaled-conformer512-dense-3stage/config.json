@@ -1,0 +1,51 @@
+{
+  "run_name": "scaled-conformer512-dense-3stage",
+  "description": "Dense Conformer-Medium MoE-Free Baseline (d_model=512, 12 layers, ffn_expansion=8, 130.8M params), 30k pretraining steps, pooled RESPIN adaptation, and multi-source calibration (Total parameter-matched to 130.8M MoE)",
+  "start_stage": 1,
+  "end_stage": 4,
+  "model": {
+    "d_model": 512,
+    "n_heads": 8,
+    "ffn_expansion": 8,
+    "num_layers": 12,
+    "conv_kernel_size": 31,
+    "dropout": 0.1,
+    "vocab_size": 105,
+    "exit_layers": [12],
+    "enable_moe": false
+  },
+  "pretraining": {
+    "epochs": 10,
+    "steps": 30000,
+    "batch_size": 64,
+    "lr": 4e-4,
+    "cache_dir": "data_cache/pretrain_scaled",
+    "cache_chunk_size": 10000,
+    "max_cached_chunks": 10,
+    "log_every": 25,
+    "plot_every": 100,
+    "save_every": 1000
+  },
+  "dense": {
+    "steps": 80000,
+    "batch_size": 32,
+    "grad_accum_steps": 4,
+    "lr": 1.5e-4,
+    "ctc_warmup_steps": 3000,
+    "log_every": 25,
+    "save_every": 1000
+  },
+  "final_alignment": {
+    "steps": 40000,
+    "batch_size": 32,
+    "grad_accum_steps": 4,
+    "lr": 3e-5,
+    "min_lr": 5e-6,
+    "log_every": 25,
+    "save_every": 500
+  },
+  "evaluation": {
+    "beam_width": 16,
+    "chunk_size": -1
+  }
+}

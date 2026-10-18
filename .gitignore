@@ -4,7 +4,10 @@
 __pycache__/
 *.pyc
 .cache/
-runs/
+runs/**/checkpoints/
+runs/**/plots/
+runs/smoke_test*
+runs/test_smoke*
 *.pt
 *.pth
 *.ckpt
