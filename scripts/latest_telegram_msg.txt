@@ -1,17 +1,17 @@
 🤖 <b>Marathi ASR Training Telemetry Update</b>
-🕒 <b>Timestamp:</b> <code>2026-10-19 11:30:35</code>
+🕒 <b>Timestamp:</b> <code>2026-10-19 12:00:06</code>
 📁 <b>Active Run:</b> <code>no-splitformer-moe-only</code>
 
-📊 <b>Progress:</b> <b>308,450 / 350,000 steps</b> (<b>88.1%</b>)
-⏳ <b>ETA:</b> <code>~17h 17m (41,550 steps left)</code> (<code>40.0 steps/min</code>)
+📊 <b>Progress:</b> <b>309,750 / 350,000 steps</b> (<b>88.5%</b>)
+⏳ <b>ETA:</b> <code>~14h 31m (40,250 steps left)</code> (<code>46.2 steps/min</code>)
 🎯 <b>Phase:</b> <code>Stage 3 Vanilla SFT (Calibration)</code>
-📉 <b>CTC Loss:</b> <code>0.5525</code>
-🎯 <b>Batch CER:</b> <code>14.57%</code>
-⚡ <b>Throughput:</b> <code>592.3 aud-s/s</code>
-📈 <b>Learning Rate:</b> <code>1.93e-05</code>
+📉 <b>CTC Loss:</b> <code>0.6457</code>
+🎯 <b>Batch CER:</b> <code>14.75%</code>
+⚡ <b>Throughput:</b> <code>919.0 aud-s/s</code>
+📈 <b>Learning Rate:</b> <code>1.92e-05</code>
 💾 <b>Checkpoint:</b> <code>stage3_vanilla_sft/stage3_vanilla_sft_step_308000.pt (320.4 MB)</code>
 
-🖥️ <b>GPU:</b> RTX A5000 | <code>18.1 / 24.0 GB</code> | <code>73°C</code> | <code>37% util</code> (110.58W)
+🖥️ <b>GPU:</b> RTX A5000 | <code>18.1 / 24.0 GB</code> | <code>76°C</code> | <code>42% util</code> (140.66W)
 💿 <b>Disk Free:</b> <code>83.2 GB</code> on D:
 
 ✅ <b>Active Sequential Watcher:</b> <code>schedule_e1_dense_after_33m.py</code> is standing by to launch E1 Dense Baseline upon 350k completion.
