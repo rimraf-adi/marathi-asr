@@ -39,7 +39,7 @@ def run_telegram_update():
 
 def main():
     parser = argparse.ArgumentParser(description="Standing Telegram Update Daemon")
-    parser.add_argument("--interval_minutes", type=int, default=60, help="Interval between updates in minutes (default: 60)")
+    parser.add_argument("--interval_minutes", type=int, default=120, help="Interval between updates in minutes (default: 120)")
     parser.add_argument("--immediate", action="store_true", help="Send an update immediately upon starting")
     args = parser.parse_args()
 
