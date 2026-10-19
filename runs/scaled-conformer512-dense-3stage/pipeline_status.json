@@ -1,8 +1,8 @@
 {
   "stage1_pretrain": {
     "status": "running",
-    "updated_at": "2026-10-09 04:03:44",
-    "timestamp": 1791498824.1891198,
+    "updated_at": "2026-10-20 04:04:39",
+    "timestamp": 1792449279.317585,
     "cmd": [
       "D:\\marathi-asr\\.venv311\\Scripts\\python.exe",
       "-u",

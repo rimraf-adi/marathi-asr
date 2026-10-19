@@ -60,3 +60,5 @@ Retrying in 1s [Retry 1/5].
 2026-10-09T05:17:07.619 [E1 Step   325] | Masked L1: 2.2000 | SNR: 11.22 dB | Eff. Rank: 236.5 | GradNorm: 4.21 | Throughput:  33.1 aud-s/s | LR: 1.30e-04
 2026-10-09T05:21:43.733 [E1 Step   350] | Masked L1: 1.8600 | SNR: 10.38 dB | Eff. Rank: 245.9 | GradNorm: 6.74 | Throughput:  46.3 aud-s/s | LR: 1.40e-04
 2026-10-09T05:26:18.044 [E1 Step   375] | Masked L1: 1.4984 | SNR: 11.98 dB | Eff. Rank: 232.9 | GradNorm: 2.93 | Throughput:  38.3 aud-s/s | LR: 1.50e-04
+
+--- Launching stage1_pretrain at 2026-10-20 04:04:39 ---
