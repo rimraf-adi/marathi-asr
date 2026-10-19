@@ -9,7 +9,7 @@ import subprocess
 import urllib.request
 import urllib.parse
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 
 CONFIG_CANDIDATES = [
     Path(__file__).parent / "telegram_config.json",
@@ -17,7 +17,12 @@ CONFIG_CANDIDATES = [
     Path(r"D:\marathi-asr\telegram_config.json"),
     Path(r"D:\marathi-asr\scripts\telegram_config.json"),
 ]
-RUN_DIR = Path(r"D:\marathi-asr\runs\no-splitformer-moe-only")
+
+CANDIDATE_RUN_DIRS = [
+    Path(r"D:\marathi-asr\runs\no-splitformer-moe-only"),
+    Path(r"D:\marathi-asr\runs\scaled-conformer512-dense-3stage"),
+    Path(r"D:\marathi-asr\runs\scaled-conformer512-moe-3stage"),
+]
 
 def load_config():
     for p in CONFIG_CANDIDATES:
@@ -52,7 +57,6 @@ def find_chat_id(token):
     updates = res.get("result", [])
     if not updates:
         return None
-    # Pick latest message
     for upd in reversed(updates):
         msg = upd.get("message") or upd.get("channel_post") or upd.get("my_chat_member")
         if msg:
@@ -61,7 +65,7 @@ def find_chat_id(token):
                 return chat["id"]
     return None
 
-def send_message(token, chat_id, text, parse_mode="Markdown"):
+def send_message(token, chat_id, text, parse_mode="HTML"):
     data = {
         "chat_id": chat_id,
         "text": text,
@@ -70,43 +74,71 @@ def send_message(token, chat_id, text, parse_mode="Markdown"):
     if parse_mode:
         data["parse_mode"] = parse_mode
     res = telegram_api(token, "sendMessage", data)
-    # If Markdown parsing failed (e.g. unescaped underscores/asterisks), retry as plain text
+    # If parse error, fallback to plain text
     if not res or not res.get("ok"):
         if parse_mode:
             data.pop("parse_mode", None)
             res = telegram_api(token, "sendMessage", data)
     return res
 
-def get_latest_telemetry():
-    telemetry_files = sorted(RUN_DIR.glob("logs/*telemetry*.jsonl"), key=os.path.getmtime, reverse=True)
+def get_active_run_dir():
+    best_dir = CANDIDATE_RUN_DIRS[0]
+    best_time = 0.0
+    for rdir in CANDIDATE_RUN_DIRS:
+        if not rdir.exists():
+            continue
+        # Check logs and checkpoints
+        for f in rdir.glob("logs/*telemetry*.jsonl"):
+            try:
+                mtime = f.stat().st_mtime
+                if mtime > best_time:
+                    best_time = mtime
+                    best_dir = rdir
+            except Exception:
+                pass
+        for f in rdir.glob("checkpoints/*/*.pt"):
+            try:
+                mtime = f.stat().st_mtime
+                if mtime > best_time:
+                    best_time = mtime
+                    best_dir = rdir
+            except Exception:
+                pass
+    return best_dir
+
+def get_latest_telemetry_and_history(run_dir: Path):
+    telemetry_files = sorted(run_dir.glob("logs/*telemetry*.jsonl"), key=os.path.getmtime, reverse=True)
     if not telemetry_files:
-        return None
+        return None, []
     latest_file = telemetry_files[0]
-    last_line = None
+    lines = []
     with open(latest_file, "r", encoding="utf-8") as f:
         for line in f:
             if line.strip():
-                last_line = line.strip()
-    if last_line:
-        try:
-            return json.loads(last_line)
-        except Exception:
-            return None
-    return None
+                try:
+                    lines.append(json.loads(line.strip()))
+                except Exception:
+                    pass
+    if not lines:
+        return None, []
+    return lines[-1], lines
 
-def get_latest_checkpoint():
-    for sub in ["stage3_vanilla_sft", "stage3_final_alignment", "stage2_moe"]:
-        ckpt_dir = RUN_DIR / "checkpoints" / sub
+def get_latest_checkpoint(run_dir: Path):
+    for sub in ["stage3_vanilla_sft", "stage3_final_alignment", "stage2_moe", "stage1_pretrain", "checkpoints"]:
+        ckpt_dir = run_dir / "checkpoints" / sub
+        if not ckpt_dir.exists():
+            ckpt_dir = run_dir / sub
         if ckpt_dir.exists():
             ckpts = sorted(ckpt_dir.glob("*.pt"), key=os.path.getmtime, reverse=True)
             if ckpts:
-                return f"{sub}/{ckpts[0].name}"
+                size_mb = ckpts[0].stat().st_size / (1024 * 1024)
+                return f"{sub}/{ckpts[0].name} ({size_mb:.1f} MB)"
     return "None"
 
 def get_gpu_info():
     try:
         out = subprocess.check_output(
-            ["nvidia-smi", "--query-gpu=memory.used,memory.total,utilization.gpu,temperature.gpu", "--format=csv,noheader,nounits"],
+            ["nvidia-smi", "--query-gpu=memory.used,memory.total,utilization.gpu,temperature.gpu,power.draw", "--format=csv,noheader,nounits"],
             text=True
         ).strip()
         parts = [p.strip() for p in out.split(",")]
@@ -114,7 +146,8 @@ def get_gpu_info():
             "vram_used_gb": float(parts[0]) / 1024.0,
             "vram_total_gb": float(parts[1]) / 1024.0,
             "util": parts[2],
-            "temp": parts[3]
+            "temp": parts[3],
+            "power": parts[4] if len(parts) > 4 else "N/A"
         }
     except Exception:
         return None
@@ -126,36 +159,89 @@ def get_disk_free():
     except Exception:
         return 0.0
 
-def build_status_message(telemetry, ckpt_name, gpu, disk_free):
+def is_process_running(keyword: str):
+    try:
+        out = subprocess.check_output(
+            ["powershell", "-NoProfile", "-Command", f"Get-Process | Where-Object {{ $_.CommandLine -like '*{keyword}*' }} | Measure-Object | Select-Object -ExpandProperty Count"],
+            text=True
+        ).strip()
+        return int(out) > 0
+    except Exception:
+        # Fallback check
+        return False
+
+def build_status_message(telemetry, history, ckpt_name, gpu, disk_free, run_dir):
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    run_name = run_dir.name
     
-    total_steps = 60000
+    # Determine total steps
+    total_steps = 350000 if "no-splitformer-moe-only" in run_name or "dense" in run_name else 60000
     step = telemetry.get("step", 0) if telemetry else 0
+    if step > total_steps:
+        total_steps = step
     pct = (step / total_steps) * 100 if total_steps else 0.0
-    phase = telemetry.get("phase", "Unknown") if telemetry else "Unknown"
+    
+    phase = "Stage 3 Vanilla SFT (Calibration)" if "stage3_vanilla_sft" in ckpt_name or "no-splitformer" in run_name else "Supervised Training"
     ctc_loss = telemetry.get("ctc_loss", 0.0) if telemetry else 0.0
-    aux_loss = telemetry.get("aux_loss", 0.0) if telemetry else 0.0
+    aux_loss = telemetry.get("aux_loss")
     cer = telemetry.get("cer", 0.0) if telemetry else 0.0
     throughput = telemetry.get("throughput_aud_s_per_s", 0.0) if telemetry else 0.0
     lr = telemetry.get("lr", 0.0) if telemetry else 0.0
 
+    # Calculate step speed & ETA
+    eta_str = "Calculating..."
+    steps_per_min = 0.0
+    if len(history) >= 10:
+        recent = history[-10:]
+        dt = recent[-1].get("timestamp", 0) - recent[0].get("timestamp", 0)
+        dstep = recent[-1].get("step", 0) - recent[0].get("step", 0)
+        if dt > 0 and dstep > 0:
+            rate = dstep / dt  # steps per sec
+            steps_per_min = rate * 60.0
+            remaining_steps = max(0, total_steps - step)
+            rem_sec = remaining_steps / rate if rate > 0 else 0
+            if rem_sec > 0:
+                hours = int(rem_sec // 3600)
+                minutes = int((rem_sec % 3600) // 60)
+                eta_str = f"~{hours}h {minutes}m ({remaining_steps:,} steps left)"
+            else:
+                eta_str = "Target reached!"
+
     gpu_str = "N/A"
     if gpu:
-        gpu_str = f"RTX A5000 | `{gpu['vram_used_gb']:.1f} / {gpu['vram_total_gb']:.1f} GB` | `{gpu['temp']}°C` ({gpu['util']}% util)"
+        gpu_str = f"RTX A5000 | <code>{gpu['vram_used_gb']:.1f} / {gpu['vram_total_gb']:.1f} GB</code> | <code>{gpu['temp']}°C</code> | <code>{gpu['util']}% util</code> ({gpu['power']}W)"
+
+    # Check queue state
+    queue_msg = "⏳ <i>No queue watcher detected</i>"
+    try:
+        # Check if schedule_e1_dense_after_33m is running in python
+        py_tasks = subprocess.check_output(
+            ["powershell", "-NoProfile", "-Command", "Get-WmiObject Win32_Process -Filter \"Name = 'python.exe'\" | Select-Object -ExpandProperty CommandLine"],
+            text=True, errors="ignore"
+        )
+        if "schedule_e1_dense_after_33m.py" in py_tasks:
+            queue_msg = "✅ <b>Active Sequential Watcher:</b> <code>schedule_e1_dense_after_33m.py</code> is standing by to launch E1 Dense Baseline upon 350k completion."
+    except Exception:
+        pass
+
+    router_line = f"• <b>Router Aux Loss:</b> <code>{aux_loss:.4f}</code>\n" if aux_loss is not None else ""
 
     msg = (
-        f"🤖 *Marathi ASR Training Update*\n"
-        f"🕒 *Time*: `{now_str}`\n\n"
-        f"📊 *Progress*: Step *{step:,} / {total_steps:,}* ({pct:.1f}%)\n"
-        f"🎯 *Phase*: `{phase}`\n"
-        f"📉 *CTC Loss*: `{ctc_loss:.4f}`\n"
-        f"⚖️ *Router Loss*: `{aux_loss:.4f}`\n"
-        f"🎯 *Batch CER*: `{cer*100:.2f}%`\n"
-        f"⚡ *Throughput*: `{throughput:.1f} aud-s/s`\n"
-        f"📈 *LR*: `{lr:.2e}`\n"
-        f"💾 *Latest Checkpoint*: `{ckpt_name}`\n\n"
-        f"🖥️ *GPU*: {gpu_str}\n"
-        f"💿 *Disk Free*: `{disk_free:.1f} GB free` on D:"
+        f"🤖 <b>Marathi ASR Training Telemetry Update</b>\n"
+        f"🕒 <b>Timestamp:</b> <code>{now_str}</code>\n"
+        f"📁 <b>Active Run:</b> <code>{run_name}</code>\n\n"
+        f"📊 <b>Progress:</b> <b>{step:,} / {total_steps:,} steps</b> (<b>{pct:.1f}%</b>)\n"
+        f"⏳ <b>ETA:</b> <code>{eta_str}</code>" + (f" (<code>{steps_per_min:.1f} steps/min</code>)\n" if steps_per_min > 0 else "\n") +
+        f"🎯 <b>Phase:</b> <code>{phase}</code>\n"
+        f"📉 <b>CTC Loss:</b> <code>{ctc_loss:.4f}</code>\n" +
+        router_line +
+        f"🎯 <b>Batch CER:</b> <code>{cer*100:.2f}%</code>\n"
+        f"⚡ <b>Throughput:</b> <code>{throughput:.1f} aud-s/s</code>\n"
+        f"📈 <b>Learning Rate:</b> <code>{lr:.2e}</code>\n"
+        f"💾 <b>Checkpoint:</b> <code>{ckpt_name}</code>\n\n"
+        f"🖥️ <b>GPU:</b> {gpu_str}\n"
+        f"💿 <b>Disk Free:</b> <code>{disk_free:.1f} GB</code> on D:\n\n"
+        f"{queue_msg}"
     )
     return msg
 
@@ -181,7 +267,7 @@ def main():
             cfg["chat_id"] = chat_id
             save_config(cfg)
             print(f"Discovered chat_id: {chat_id}. Saved to config.")
-            send_message(token, chat_id, "✅ *Telegram notifications linked successfully!*\nYou will receive training updates here.")
+            send_message(token, chat_id, "✅ <b>Telegram notifications linked successfully!</b>\nYou will receive training updates here.")
         else:
             print("No chat_id found yet. Please open Telegram and send /start or any message to your bot: @fypupdates_bot")
             sys.exit(0)
@@ -194,13 +280,22 @@ def main():
             msg = f.read().strip()
     else:
         # Fallback to gathered metrics
-        telemetry = get_latest_telemetry()
-        ckpt_name = get_latest_checkpoint()
+        run_dir = get_active_run_dir()
+        telemetry, history = get_latest_telemetry_and_history(run_dir)
+        ckpt_name = get_latest_checkpoint(run_dir)
         gpu = get_gpu_info()
         disk_free = get_disk_free()
-        msg = build_status_message(telemetry, ckpt_name, gpu, disk_free)
+        msg = build_status_message(telemetry, history, ckpt_name, gpu, disk_free, run_dir)
 
-    res = send_message(token, chat_id, msg)
+    # Persist latest text message
+    txt_path = Path(__file__).parent / "latest_telegram_msg.txt"
+    try:
+        with open(txt_path, "w", encoding="utf-8") as f:
+            f.write(msg)
+    except Exception:
+        pass
+
+    res = send_message(token, chat_id, msg, parse_mode="HTML")
     if res and res.get("ok"):
         print("Telegram update sent successfully.")
     else:

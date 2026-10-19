@@ -1,38 +1,17 @@
-🎙️ Marathi Conformer-512 MoE — 400k Calibration Update (08:00 PM IST)
+🤖 <b>Marathi ASR Training Telemetry Update</b>
+🕒 <b>Timestamp:</b> <code>2026-10-19 11:30:35</code>
+📁 <b>Active Run:</b> <code>no-splitformer-moe-only</code>
 
-🎉 Milestone: 330,000 STEPS SAVED TO DISK (82.5% Complete)
-• Step: 330,000 / 400,000 (82.5% completed)
-• Remaining to Finish: Exactly 70,000 steps (~14.5 hours)!
-• Pace: +9,475 steps over last 2 hours (~4,737 steps/hr)
-• Velocity: Sustained ~428 – 509 audio-sec/sec (~30–36× real-time)
-• Full 5 Corpora Active (100% RESPIN, Kathbath Clean+Noisy, Mozilla CV, OpenSLR64, Pretraining Anchor)
+📊 <b>Progress:</b> <b>308,450 / 350,000 steps</b> (<b>88.1%</b>)
+⏳ <b>ETA:</b> <code>~17h 17m (41,550 steps left)</code> (<code>40.0 steps/min</code>)
+🎯 <b>Phase:</b> <code>Stage 3 Vanilla SFT (Calibration)</code>
+📉 <b>CTC Loss:</b> <code>0.5525</code>
+🎯 <b>Batch CER:</b> <code>14.57%</code>
+⚡ <b>Throughput:</b> <code>592.3 aud-s/s</code>
+📈 <b>Learning Rate:</b> <code>1.93e-05</code>
+💾 <b>Checkpoint:</b> <code>stage3_vanilla_sft/stage3_vanilla_sft_step_308000.pt (320.4 MB)</code>
 
-📉 Loss & Phonetic Trajectory:
-• CTC Loss: Crushed to 0.3596 (Step 329,975) & 0.3944 (Step 327,550)!
-• Greedy CER: Reached 2.7% – 5.3% on top-performing regional batches
-• Learning Rate: 2.70e-05 (smooth cosine decay towards 5.0e-06 target)
+🖥️ <b>GPU:</b> RTX A5000 | <code>18.1 / 24.0 GB</code> | <code>73°C</code> | <code>37% util</code> (110.58W)
+💿 <b>Disk Free:</b> <code>83.2 GB</code> on D:
 
-🌟 Transcription Highlights:
-• Ref : सामाजिक घटक टिकाऊ शेती पद्धतींचा उद्देश पिक आणि खाद्य उत्पादनात वाढ कर...
-• Pred: सामाजिक घटक टिकाऊ शेती पद्धतींचा उद्देश पिक आणि खाद्य उत्पादनात वाढ कर...
-(100% Exact Match on agricultural development terminology!)
-• Ref : तुमच्या खात्याचो नंबर तुमच्या चेकबुकवर पण लिव्हलो जातलो...
-• Pred: तुमच्या खात्याचो नंबर तुमच्या चेकबुक वर्जन लिहलो जातलो...
-(2.7% CER on authentic coastal Konkani dialect!)
-
-💾 Checkpoints & Storage:
-• Latest Intermediate Saved: stage3_vanilla_sft_step_330000.pt
-• Active Rolling Window: step_326000.pt, step_328000.pt, step_330000.pt
-• Best Checkpoint: best_model.pt preserved
-• Disk Safety: 88.09 GB free space maintained on D:
-
-🖥️ Hardware Profile (NVIDIA RTX A5000):
-• VRAM Allocation: 20.36 GB / 24.56 GB (82.9%)
-• GPU Temperature: 79°C | Power Draw: ~134 W | GPU Load: 58% (Steady compute)
-
-🔮 Final Lap (82.5% → 100%):
-1. Navigating the final 70k steps towards 400,000.
-2. At 400,000 steps, orchestrator triggers GRPO Sequence Polish (5,000 steps, G=4 rollouts).
-3. Executes final IISc RESPIN benchmark across 2,170 test utterances (D1–D4 dialects).
-
-Next 2-hour report scheduled at 10:00 PM IST.
+✅ <b>Active Sequential Watcher:</b> <code>schedule_e1_dense_after_33m.py</code> is standing by to launch E1 Dense Baseline upon 350k completion.
