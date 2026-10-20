@@ -62,3 +62,68 @@ Retrying in 1s [Retry 1/5].
 2026-10-09T05:26:18.044 [E1 Step   375] | Masked L1: 1.4984 | SNR: 11.98 dB | Eff. Rank: 232.9 | GradNorm: 2.93 | Throughput:  38.3 aud-s/s | LR: 1.50e-04
 
 --- Launching stage1_pretrain at 2026-10-20 04:04:39 ---
+2026-10-20T04:05:17.797 [Engine] Initializing on device: cuda (NVIDIA RTX A5000)
+2026-10-20T04:05:17.800 [Engine] Semantic Checkpoint Directory: runs\scaled-conformer512-dense-3stage\checkpoints\stage1_pretrain (Stage: 'pretrain')
+[stage1_pretrain] Telemetry initialized.
+  - Checkpoints: D:\marathi-asr\runs\scaled-conformer512-dense-3stage\checkpoints\stage1_pretrain
+  - CSV Logging: D:\marathi-asr\runs\scaled-conformer512-dense-3stage\csvs\stage1_pretrain_metrics.csv
+  - JSONL Trace: D:\marathi-asr\runs\scaled-conformer512-dense-3stage\logs\stage1_pretrain_telemetry.jsonl
+D:\marathi-asr\.venv311\Lib\site-packages\torch\nn\modules\module.py:1326: UserWarning: expandable_segments not supported on this platform (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\c10/cuda/CUDAAllocatorConfig.h:28.)
+  return t.to(
+2026-10-20T04:05:19.617 [Model] Conformer Backbone parameters (d_model=512, n_heads=8): 131,143,488 (131.14 M)
+2026-10-20T04:05:32.431 [Data] Initializing CachedRelayedStream (Cache Dir: 'data_cache/pretrain_scaled', Chunk: 10000 samples)...
+2026-10-20T04:05:32.432 [Training] Beginning pretraining run 'stage1_pretrain' for 10 epochs (Max Steps Cap: 30000)...
+
+
+===========================================================================
+2026-10-20T04:05:32.432 [Epoch 1/10] Commencing Training Pass
+===========================================================================
+
+2026-10-20T04:06:58.788 [E1 Step     1] | Masked L1: 8.2643 | SNR: -0.02 dB | Eff. Rank: 464.8 | GradNorm: 34.24 | Throughput:  39.0 aud-s/s | LR: 4.00e-07
+2026-10-20T04:07:01.926  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_000001.png
+2026-10-20T04:10:43.117 [E1 Step    25] | Masked L1: 8.6459 | SNR:  0.40 dB | Eff. Rank: 486.8 | GradNorm: 14.14 | Throughput:  32.0 aud-s/s | LR: 1.00e-05
+2026-10-20T04:14:29.267 [E1 Step    50] | Masked L1: 7.2668 | SNR:  0.66 dB | Eff. Rank: 491.8 | GradNorm: 9.66 | Throughput:  51.0 aud-s/s | LR: 2.00e-05
+2026-10-20T04:18:28.025 [E1 Step    75] | Masked L1: 7.0054 | SNR:  0.97 dB | Eff. Rank: 454.6 | GradNorm: 9.35 | Throughput:  54.9 aud-s/s | LR: 3.00e-05
+2026-10-20T04:22:15.767 [E1 Step   100] | Masked L1: 6.6041 | SNR:  1.29 dB | Eff. Rank: 375.5 | GradNorm: 7.97 | Throughput:  40.0 aud-s/s | LR: 4.00e-05
+2026-10-20T04:22:18.304  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_000100.png
+2026-10-20T04:26:05.238 [E1 Step   125] | Masked L1: 7.3574 | SNR:  1.86 dB | Eff. Rank: 367.9 | GradNorm: 9.84 | Throughput:  25.3 aud-s/s | LR: 5.00e-05
+[Cache Warning] Failed reading chunk_00001.pt: PytorchStreamReader failed locating file data.pkl: file not found. Attempting network relay...
+[Network Relay] Opening remote dataset stream for shard 00001...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+2026-10-20T04:30:10.245 [E1 Step   150] | Masked L1: 6.1370 | SNR:  2.48 dB | Eff. Rank: 309.2 | GradNorm: 8.17 | Throughput:  31.6 aud-s/s | LR: 6.00e-05
+[Network Relay] Cached 10000 samples to chunk_00001.pt (4677.7 MB)
+2026-10-20T04:39:17.962 [E1 Step   175] | Masked L1: 5.6468 | SNR:  3.41 dB | Eff. Rank: 311.4 | GradNorm: 7.21 | Throughput:  33.7 aud-s/s | LR: 7.00e-05
+2026-10-20T04:43:06.707 [E1 Step   200] | Masked L1: 5.4997 | SNR:  4.31 dB | Eff. Rank: 307.2 | GradNorm: 7.04 | Throughput:  57.7 aud-s/s | LR: 8.00e-05
+2026-10-20T04:43:09.862  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_000200.png
+2026-10-20T04:47:03.611 [E1 Step   225] | Masked L1: 4.4941 | SNR:  5.11 dB | Eff. Rank: 274.8 | GradNorm: 6.24 | Throughput:  63.6 aud-s/s | LR: 9.00e-05
+2026-10-20T04:50:54.590 [E1 Step   250] | Masked L1: 3.9974 | SNR:  6.65 dB | Eff. Rank: 256.7 | GradNorm: 4.89 | Throughput:  46.4 aud-s/s | LR: 1.00e-04
+2026-10-20T04:50:56.043 >>> [Phase 3 Gate Check @ Step 250] Short Loss: 3.6964 | Long Loss: 3.8418 | Degradation Ratio: 1.039 | Gate Passed: NO
+
+2026-10-20T04:54:31.523 [E1 Step   275] | Masked L1: 3.2370 | SNR:  7.97 dB | Eff. Rank: 247.6 | GradNorm: 5.31 | Throughput:  51.1 aud-s/s | LR: 1.10e-04
+2026-10-20T04:58:29.866 [E1 Step   300] | Masked L1: 2.4954 | SNR:  9.85 dB | Eff. Rank: 233.8 | GradNorm: 8.58 | Throughput:  33.6 aud-s/s | LR: 1.20e-04
+2026-10-20T04:58:32.433  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_000300.png
+[Cache Warning] Failed reading chunk_00002.pt: PytorchStreamReader failed locating file data.pkl: file not found. Attempting network relay...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+[Network Relay] Cached 10000 samples to chunk_00002.pt (4952.3 MB)
+2026-10-20T05:07:11.547 [E1 Step   325] | Masked L1: 2.3941 | SNR:  8.99 dB | Eff. Rank: 243.7 | GradNorm: 20.14 | Throughput:  66.4 aud-s/s | LR: 1.30e-04
+2026-10-20T05:11:07.437 [E1 Step   350] | Masked L1: 1.2844 | SNR: 13.44 dB | Eff. Rank: 227.3 | GradNorm: 7.71 | Throughput:  34.5 aud-s/s | LR: 1.40e-04
+2026-10-20T05:15:09.911 [E1 Step   375] | Masked L1: 1.5345 | SNR: 11.61 dB | Eff. Rank: 241.0 | GradNorm: 6.91 | Throughput:  51.1 aud-s/s | LR: 1.50e-04
+2026-10-20T05:18:53.470 [E1 Step   400] | Masked L1: 1.1537 | SNR: 12.84 dB | Eff. Rank: 228.2 | GradNorm: 4.75 | Throughput:  36.1 aud-s/s | LR: 1.60e-04
+2026-10-20T05:18:56.593  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_000400.png
+2026-10-20T05:22:41.243 [E1 Step   425] | Masked L1: 1.2577 | SNR: 12.48 dB | Eff. Rank: 233.6 | GradNorm: 4.48 | Throughput:  37.5 aud-s/s | LR: 1.70e-04
+2026-10-20T05:26:30.119 [E1 Step   450] | Masked L1: 1.3899 | SNR: 11.77 dB | Eff. Rank: 231.9 | GradNorm: 8.28 | Throughput:  36.6 aud-s/s | LR: 1.80e-04
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+[Network Relay] Cached 10000 samples to chunk_00003.pt (4678.5 MB)
+2026-10-20T05:33:24.548 [E1 Step   475] | Masked L1: 1.4600 | SNR: 11.73 dB | Eff. Rank: 229.7 | GradNorm: 2.81 | Throughput:  54.2 aud-s/s | LR: 1.90e-04
+2026-10-20T05:37:32.100 [E1 Step   500] | Masked L1: 1.3098 | SNR: 12.67 dB | Eff. Rank: 222.7 | GradNorm: 3.80 | Throughput:  34.3 aud-s/s | LR: 2.00e-04
+2026-10-20T05:37:35.087  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_000500.png
+2026-10-20T05:37:35.940 >>> [Phase 3 Gate Check @ Step 500] Short Loss: 1.6033 | Long Loss: 1.7789 | Degradation Ratio: 1.110 | Gate Passed: NO
+
+2026-10-20T05:41:30.015 [E1 Step   525] | Masked L1: 1.5113 | SNR: 11.03 dB | Eff. Rank: 226.0 | GradNorm: 8.86 | Throughput: 126.1 aud-s/s | LR: 2.10e-04
+2026-10-20T05:45:11.264 [E1 Step   550] | Masked L1: 1.4481 | SNR: 11.56 dB | Eff. Rank: 223.7 | GradNorm: 10.54 | Throughput:  52.8 aud-s/s | LR: 2.20e-04
+2026-10-20T05:48:52.695 [E1 Step   575] | Masked L1: 0.9905 | SNR: 14.62 dB | Eff. Rank: 238.6 | GradNorm: 2.95 | Throughput:  46.0 aud-s/s | LR: 2.30e-04
+2026-10-20T05:52:31.513 [E1 Step   600] | Masked L1: 1.3506 | SNR: 12.14 dB | Eff. Rank: 228.4 | GradNorm: 5.22 | Throughput:  36.5 aud-s/s | LR: 2.40e-04
+2026-10-20T05:52:35.930  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_000600.png
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+2026-10-20T05:56:12.893 [E1 Step   625] | Masked L1: 1.3964 | SNR: 11.77 dB | Eff. Rank: 231.1 | GradNorm: 3.72 | Throughput:  36.7 aud-s/s | LR: 2.50e-04
+[Network Relay] Cached 10000 samples to chunk_00004.pt (4602.1 MB)

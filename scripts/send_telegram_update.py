@@ -174,17 +174,31 @@ def build_status_message(telemetry, history, ckpt_name, gpu, disk_free, run_dir)
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     run_name = run_dir.name
     
-    # Determine total steps
-    total_steps = 350000 if "no-splitformer-moe-only" in run_name or "dense" in run_name else 60000
+    # Check if pretraining or supervised
+    is_pretrain = "masked_l1" in (telemetry or {}) or "stage1_pretrain" in ckpt_name
+    
+    # Determine total steps & stage phase
+    if is_pretrain:
+        total_steps = 30000
+        phase = "Stage 1: Pretraining (Dense Conformer-512 Backbone)"
+    elif "stage2_dense" in ckpt_name or "stage2" in str(run_dir):
+        total_steps = 80000
+        phase = "Stage 2: Supervised CTC Adaptation (Dense Baseline)"
+    elif "stage3_final_alignment" in ckpt_name:
+        total_steps = 40000
+        phase = "Stage 3: Multi-Source Calibration (Dense Baseline)"
+    elif "stage3_vanilla_sft" in ckpt_name or "no-splitformer" in run_name:
+        total_steps = 350000
+        phase = "Stage 3 Vanilla SFT (Calibration)"
+    else:
+        total_steps = 60000
+        phase = "Active Training Phase"
+
     step = telemetry.get("step", 0) if telemetry else 0
-    if step > total_steps:
+    if step > total_steps and not is_pretrain:
         total_steps = step
     pct = (step / total_steps) * 100 if total_steps else 0.0
-    
-    phase = "Stage 3 Vanilla SFT (Calibration)" if "stage3_vanilla_sft" in ckpt_name or "no-splitformer" in run_name else "Supervised Training"
-    ctc_loss = telemetry.get("ctc_loss", 0.0) if telemetry else 0.0
-    aux_loss = telemetry.get("aux_loss")
-    cer = telemetry.get("cer", 0.0) if telemetry else 0.0
+
     throughput = telemetry.get("throughput_aud_s_per_s", 0.0) if telemetry else 0.0
     lr = telemetry.get("lr", 0.0) if telemetry else 0.0
 
@@ -205,43 +219,52 @@ def build_status_message(telemetry, history, ckpt_name, gpu, disk_free, run_dir)
                 minutes = int((rem_sec % 3600) // 60)
                 eta_str = f"~{hours}h {minutes}m ({remaining_steps:,} steps left)"
             else:
-                eta_str = "Target reached!"
+                eta_str = "Stage target reached!"
 
     gpu_str = "N/A"
     if gpu:
         gpu_str = f"RTX A5000 | <code>{gpu['vram_used_gb']:.1f} / {gpu['vram_total_gb']:.1f} GB</code> | <code>{gpu['temp']}°C</code> | <code>{gpu['util']}% util</code> ({gpu['power']}W)"
 
-    # Check queue state
-    queue_msg = "⏳ <i>No queue watcher detected</i>"
-    try:
-        # Check if schedule_e1_dense_after_33m is running in python
-        py_tasks = subprocess.check_output(
-            ["powershell", "-NoProfile", "-Command", "Get-WmiObject Win32_Process -Filter \"Name = 'python.exe'\" | Select-Object -ExpandProperty CommandLine"],
-            text=True, errors="ignore"
+    # Format metric block depending on pretrain vs supervised
+    if is_pretrain:
+        masked_l1 = telemetry.get("masked_l1", 0.0) if telemetry else 0.0
+        snr_db = telemetry.get("snr_db", 0.0) if telemetry else 0.0
+        eff_rank = telemetry.get("effective_rank", 0.0) if telemetry else 0.0
+        epoch = telemetry.get("epoch", 1) if telemetry else 1
+        metrics_block = (
+            f"🔄 <b>Epoch:</b> <code>{epoch} / 10</code>\n"
+            f"📉 <b>Masked L1 Loss:</b> <code>{masked_l1:.4f}</code>\n"
+            f"🔊 <b>Spectral SNR:</b> <code>{snr_db:.2f} dB</code>\n"
+            f"🧬 <b>Effective Rank:</b> <code>{eff_rank:.1f}</code>\n"
         )
-        if "schedule_e1_dense_after_33m.py" in py_tasks:
-            queue_msg = "✅ <b>Active Sequential Watcher:</b> <code>schedule_e1_dense_after_33m.py</code> is standing by to launch E1 Dense Baseline upon 350k completion."
-    except Exception:
-        pass
+    else:
+        ctc_loss = telemetry.get("ctc_loss", 0.0) if telemetry else 0.0
+        aux_loss = telemetry.get("aux_loss")
+        cer = telemetry.get("cer", 0.0) if telemetry else 0.0
+        router_line = f"• <b>Router Aux Loss:</b> <code>{aux_loss:.4f}</code>\n" if aux_loss is not None else ""
+        metrics_block = (
+            f"📉 <b>CTC Loss:</b> <code>{ctc_loss:.4f}</code>\n" +
+            router_line +
+            f"🎯 <b>Batch CER:</b> <code>{cer*100:.2f}%</code>\n"
+        )
 
-    router_line = f"• <b>Router Aux Loss:</b> <code>{aux_loss:.4f}</code>\n" if aux_loss is not None else ""
+    # Status of experiment
+    exp_status = "🎯 <b>Active Experiment:</b> <code>Experiment E1 (Dense Conformer-512 Baseline, 130.8M Total Param Matched)</code>" if "dense" in run_name else "🎯 <b>Active Experiment:</b> <code>33M Sparse MoE Production Calibrated Model</code>"
 
     msg = (
         f"🤖 <b>Marathi ASR Training Telemetry Update</b>\n"
         f"🕒 <b>Timestamp:</b> <code>{now_str}</code>\n"
         f"📁 <b>Active Run:</b> <code>{run_name}</code>\n\n"
+        f"{exp_status}\n"
+        f"🎯 <b>Phase:</b> <code>{phase}</code>\n"
         f"📊 <b>Progress:</b> <b>{step:,} / {total_steps:,} steps</b> (<b>{pct:.1f}%</b>)\n"
         f"⏳ <b>ETA:</b> <code>{eta_str}</code>" + (f" (<code>{steps_per_min:.1f} steps/min</code>)\n" if steps_per_min > 0 else "\n") +
-        f"🎯 <b>Phase:</b> <code>{phase}</code>\n"
-        f"📉 <b>CTC Loss:</b> <code>{ctc_loss:.4f}</code>\n" +
-        router_line +
-        f"🎯 <b>Batch CER:</b> <code>{cer*100:.2f}%</code>\n"
+        metrics_block +
         f"⚡ <b>Throughput:</b> <code>{throughput:.1f} aud-s/s</code>\n"
         f"📈 <b>Learning Rate:</b> <code>{lr:.2e}</code>\n"
         f"💾 <b>Checkpoint:</b> <code>{ckpt_name}</code>\n\n"
         f"🖥️ <b>GPU:</b> {gpu_str}\n"
-        f"💿 <b>Disk Free:</b> <code>{disk_free:.1f} GB</code> on D:\n\n"
-        f"{queue_msg}"
+        f"💿 <b>Disk Free:</b> <code>{disk_free:.1f} GB</code> on D:"
     )
     return msg
 
