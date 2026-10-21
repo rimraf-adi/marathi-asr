@@ -1,18 +1,18 @@
 🤖 <b>Marathi ASR Training Telemetry Update</b>
-🕒 <b>Timestamp:</b> <code>2026-10-22 02:00:13</code>
+🕒 <b>Timestamp:</b> <code>2026-10-22 04:00:13</code>
 📁 <b>Active Run:</b> <code>scaled-conformer512-dense-3stage</code>
 
 🎯 <b>Active Experiment:</b> <code>Experiment E1 (Dense Conformer-512 Baseline, 130.8M Total Param Matched)</code>
 🎯 <b>Phase:</b> <code>Stage 1: Pretraining (Dense Conformer-512 Backbone)</code>
-📊 <b>Progress:</b> <b>17,296 / 30,000 steps</b> (<b>57.7%</b>)
-⏳ <b>ETA:</b> <code>~28h 19m (12,704 steps left)</code> (<code>7.5 steps/min</code>)
+📊 <b>Progress:</b> <b>17,994 / 30,000 steps</b> (<b>60.0%</b>)
+⏳ <b>ETA:</b> <code>~35h 3m (12,006 steps left)</code> (<code>5.7 steps/min</code>)
 🔄 <b>Epoch:</b> <code>2 / 10</code>
-📉 <b>Masked L1 Loss:</b> <code>0.7929</code>
-🔊 <b>Spectral SNR:</b> <code>15.78 dB</code>
-🧬 <b>Effective Rank:</b> <code>242.6</code>
-⚡ <b>Throughput:</b> <code>44.7 aud-s/s</code>
-📈 <b>Learning Rate:</b> <code>1.61e-04</code>
+📉 <b>Masked L1 Loss:</b> <code>0.6934</code>
+🔊 <b>Spectral SNR:</b> <code>16.72 dB</code>
+🧬 <b>Effective Rank:</b> <code>235.1</code>
+⚡ <b>Throughput:</b> <code>46.2 aud-s/s</code>
+📈 <b>Learning Rate:</b> <code>1.47e-04</code>
 💾 <b>Checkpoint:</b> <code>stage1_pretrain/stage1_pretrain_step_17000.pt (1511.2 MB)</code>
 
-🖥️ <b>GPU:</b> RTX A5000 | <code>23.6 / 24.0 GB</code> | <code>46°C</code> | <code>2% util</code> (13.25W)
-💿 <b>Disk Free:</b> <code>52.7 GB</code> on D:
+🖥️ <b>GPU:</b> RTX A5000 | <code>23.6 / 24.0 GB</code> | <code>75°C</code> | <code>100% util</code> (124.03W)
+💿 <b>Disk Free:</b> <code>55.5 GB</code> on D:
