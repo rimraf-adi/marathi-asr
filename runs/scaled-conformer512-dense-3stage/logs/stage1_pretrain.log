@@ -1548,3 +1548,58 @@ Retrying in 1s [Retry 1/5].
 2026-10-22T03:49:23.683 [E2 Step 17925] | Masked L1: 0.5809 | SNR: 17.61 dB | Eff. Rank: 226.2 | GradNorm: 0.72 | Throughput:  25.7 aud-s/s | LR: 1.48e-04
 2026-10-22T03:52:55.126 [E2 Step 17950] | Masked L1: 0.5069 | SNR: 18.74 dB | Eff. Rank: 240.2 | GradNorm: 1.24 | Throughput:  31.8 aud-s/s | LR: 1.48e-04
 2026-10-22T03:56:56.677 [E2 Step 17975] | Masked L1: 0.8312 | SNR: 15.34 dB | Eff. Rank: 239.0 | GradNorm: 0.77 | Throughput:  35.5 aud-s/s | LR: 1.47e-04
+2026-10-22T04:01:06.174 [E2 Step 18000] | Masked L1: 0.7472 | SNR: 16.34 dB | Eff. Rank: 240.2 | GradNorm: 0.64 | Throughput:  36.3 aud-s/s | LR: 1.46e-04
+2026-10-22T04:01:08.836  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_018000.png
+2026-10-22T04:01:09.759 >>> [Phase 3 Gate Check @ Step 18000] Short Loss: 0.7182 | Long Loss: 1.0752 | Degradation Ratio: 1.497 | Gate Passed: YES
+
+  [Checkpoint Rotation] Pruned older intermediate checkpoint: stage1_pretrain_step_16000.pt
+2026-10-22T04:01:13.748  [Semantic Checkpoint] Saved to runs\scaled-conformer512-dense-3stage\checkpoints\stage1_pretrain
+
+2026-10-22T04:01:13.748  [Early Stop] No improvement (6/30)
+2026-10-22T04:04:44.320 [E2 Step 18025] | Masked L1: 0.5886 | SNR: 17.77 dB | Eff. Rank: 234.6 | GradNorm: 0.93 | Throughput:  29.1 aud-s/s | LR: 1.46e-04
+2026-10-22T04:08:31.151 [E2 Step 18050] | Masked L1: 0.5596 | SNR: 18.27 dB | Eff. Rank: 238.3 | GradNorm: 0.65 | Throughput:  44.1 aud-s/s | LR: 1.45e-04
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+2026-10-22T04:12:17.557 [E2 Step 18075] | Masked L1: 0.6304 | SNR: 17.31 dB | Eff. Rank: 232.5 | GradNorm: 0.83 | Throughput:  30.0 aud-s/s | LR: 1.45e-04
+[Network Relay] Cached 10000 samples to chunk_00009.pt (5054.4 MB)
+[Cache Quota] Evicted 1 oldest cache shards to stay within 10 limit.
+2026-10-22T04:20:37.073 [E2 Step 18100] | Masked L1: 0.7200 | SNR: 16.42 dB | Eff. Rank: 233.8 | GradNorm: 0.73 | Throughput:  57.8 aud-s/s | LR: 1.44e-04
+2026-10-22T04:20:42.513  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_018100.png
+2026-10-22T04:24:21.135 [E2 Step 18125] | Masked L1: 0.8373 | SNR: 15.08 dB | Eff. Rank: 239.4 | GradNorm: 0.70 | Throughput:  73.4 aud-s/s | LR: 1.44e-04
+2026-10-22T04:27:55.592 [E2 Step 18150] | Masked L1: 0.7858 | SNR: 15.76 dB | Eff. Rank: 239.1 | GradNorm: 0.57 | Throughput:  41.8 aud-s/s | LR: 1.43e-04
+2026-10-22T04:32:05.836 [E2 Step 18175] | Masked L1: 0.6657 | SNR: 16.85 dB | Eff. Rank: 232.6 | GradNorm: 0.83 | Throughput:  29.7 aud-s/s | LR: 1.43e-04
+2026-10-22T04:36:30.794 [E2 Step 18200] | Masked L1: 0.7610 | SNR: 16.13 dB | Eff. Rank: 236.0 | GradNorm: 0.63 | Throughput:  35.8 aud-s/s | LR: 1.42e-04
+2026-10-22T04:36:33.444  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_018200.png
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+2026-10-22T04:40:47.169 [E2 Step 18225] | Masked L1: 0.7290 | SNR: 16.20 dB | Eff. Rank: 238.8 | GradNorm: 0.72 | Throughput:  55.6 aud-s/s | LR: 1.42e-04
+[Network Relay] Cached 10000 samples to chunk_00010.pt (5558.6 MB)
+[Cache Quota] Evicted 1 oldest cache shards to stay within 10 limit.
+2026-10-22T04:49:19.721 [E2 Step 18250] | Masked L1: 0.7696 | SNR: 15.92 dB | Eff. Rank: 240.6 | GradNorm: 0.81 | Throughput:  52.7 aud-s/s | LR: 1.41e-04
+2026-10-22T04:49:23.289 >>> [Phase 3 Gate Check @ Step 18250] Short Loss: 0.7553 | Long Loss: 1.1059 | Degradation Ratio: 1.464 | Gate Passed: YES
+
+2026-10-22T04:53:38.617 [E2 Step 18275] | Masked L1: 0.8855 | SNR: 14.78 dB | Eff. Rank: 239.9 | GradNorm: 0.57 | Throughput:  53.7 aud-s/s | LR: 1.41e-04
+2026-10-22T04:57:54.595 [E2 Step 18300] | Masked L1: 0.6955 | SNR: 16.49 dB | Eff. Rank: 231.4 | GradNorm: 0.86 | Throughput:  34.5 aud-s/s | LR: 1.40e-04
+2026-10-22T04:57:57.881  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_018300.png
+2026-10-22T05:02:06.028 [E2 Step 18325] | Masked L1: 0.6953 | SNR: 16.81 dB | Eff. Rank: 237.3 | GradNorm: 0.65 | Throughput:  57.5 aud-s/s | LR: 1.40e-04
+2026-10-22T05:06:22.764 [E2 Step 18350] | Masked L1: 0.7576 | SNR: 16.14 dB | Eff. Rank: 242.3 | GradNorm: 0.78 | Throughput:  61.6 aud-s/s | LR: 1.39e-04
+2026-10-22T05:10:35.649 [E2 Step 18375] | Masked L1: 0.8625 | SNR: 14.80 dB | Eff. Rank: 236.7 | GradNorm: 0.71 | Throughput:  41.2 aud-s/s | LR: 1.39e-04
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+[Network Relay] Cached 10000 samples to chunk_00011.pt (5347.2 MB)
+[Cache Quota] Evicted 1 oldest cache shards to stay within 10 limit.
+2026-10-22T05:19:56.658 [E2 Step 18400] | Masked L1: 0.8736 | SNR: 15.05 dB | Eff. Rank: 243.0 | GradNorm: 0.88 | Throughput:  68.0 aud-s/s | LR: 1.38e-04
+2026-10-22T05:19:59.858  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_018400.png
+2026-10-22T05:24:01.086 [E2 Step 18425] | Masked L1: 0.7887 | SNR: 15.82 dB | Eff. Rank: 241.0 | GradNorm: 0.74 | Throughput:  41.2 aud-s/s | LR: 1.38e-04
+2026-10-22T05:28:03.211 [E2 Step 18450] | Masked L1: 0.8500 | SNR: 15.32 dB | Eff. Rank: 240.6 | GradNorm: 0.85 | Throughput:  53.1 aud-s/s | LR: 1.37e-04
+2026-10-22T05:32:10.986 [E2 Step 18475] | Masked L1: 0.6395 | SNR: 17.05 dB | Eff. Rank: 232.1 | GradNorm: 0.63 | Throughput:  33.7 aud-s/s | LR: 1.37e-04
+2026-10-22T05:36:08.063 [E2 Step 18500] | Masked L1: 0.6627 | SNR: 17.32 dB | Eff. Rank: 239.1 | GradNorm: 0.79 | Throughput:  30.4 aud-s/s | LR: 1.36e-04
+2026-10-22T05:36:10.510  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_018500.png
+2026-10-22T05:36:11.603 >>> [Phase 3 Gate Check @ Step 18500] Short Loss: 0.7214 | Long Loss: 1.0829 | Degradation Ratio: 1.501 | Gate Passed: YES
+
+2026-10-22T05:40:11.556 [E2 Step 18525] | Masked L1: 0.6752 | SNR: 16.79 dB | Eff. Rank: 229.3 | GradNorm: 0.72 | Throughput:  33.5 aud-s/s | LR: 1.36e-04
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+[Network Relay] Cached 10000 samples to chunk_00012.pt (4497.2 MB)
+[Cache Quota] Evicted 1 oldest cache shards to stay within 10 limit.
+2026-10-22T05:47:31.454 [E2 Step 18550] | Masked L1: 0.6902 | SNR: 16.47 dB | Eff. Rank: 234.6 | GradNorm: 0.73 | Throughput:  37.6 aud-s/s | LR: 1.35e-04
+2026-10-22T05:50:50.245 [E2 Step 18575] | Masked L1: 0.5957 | SNR: 17.47 dB | Eff. Rank: 230.0 | GradNorm: 0.76 | Throughput:  27.5 aud-s/s | LR: 1.35e-04
+2026-10-22T05:54:44.754 [E2 Step 18600] | Masked L1: 0.7165 | SNR: 16.64 dB | Eff. Rank: 238.9 | GradNorm: 0.66 | Throughput:  34.0 aud-s/s | LR: 1.34e-04
+2026-10-22T05:54:50.262  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_018600.png
+2026-10-22T05:58:35.514 [E2 Step 18625] | Masked L1: 0.6812 | SNR: 16.84 dB | Eff. Rank: 241.1 | GradNorm: 0.71 | Throughput:  34.7 aud-s/s | LR: 1.34e-04
