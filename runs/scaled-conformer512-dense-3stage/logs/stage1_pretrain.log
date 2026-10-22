@@ -1663,3 +1663,1782 @@ Retrying in 1s [Retry 1/5].
 2026-10-22T07:53:55.081 [E2 Step 19325] | Masked L1: 0.6435 | SNR: 17.40 dB | Eff. Rank: 240.4 | GradNorm: 0.94 | Throughput:  50.6 aud-s/s | LR: 1.19e-04
 [Network Relay] Cached 10000 samples to chunk_00017.pt (4360.3 MB)
 [Cache Quota] Evicted 1 oldest cache shards to stay within 10 limit.
+2026-10-22T08:01:05.492 [E2 Step 19350] | Masked L1: 0.4893 | SNR: 18.81 dB | Eff. Rank: 230.7 | GradNorm: 0.85 | Throughput:  44.0 aud-s/s | LR: 1.19e-04
+2026-10-22T08:04:35.921 [E2 Step 19375] | Masked L1: 0.5253 | SNR: 18.78 dB | Eff. Rank: 226.5 | GradNorm: 0.70 | Throughput:  23.9 aud-s/s | LR: 1.18e-04
+2026-10-22T08:07:58.987 [E2 Step 19400] | Masked L1: 0.8517 | SNR: 14.91 dB | Eff. Rank: 236.2 | GradNorm: 0.93 | Throughput:  36.8 aud-s/s | LR: 1.18e-04
+2026-10-22T08:08:02.072  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_019400.png
+2026-10-22T08:11:22.533 [E2 Step 19425] | Masked L1: 0.6600 | SNR: 16.97 dB | Eff. Rank: 235.2 | GradNorm: 0.74 | Throughput:  44.4 aud-s/s | LR: 1.17e-04
+2026-10-22T08:14:39.385 [E2 Step 19450] | Masked L1: 0.6278 | SNR: 17.53 dB | Eff. Rank: 243.0 | GradNorm: 0.77 | Throughput:  52.6 aud-s/s | LR: 1.17e-04
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+2026-10-22T08:18:31.630 [E2 Step 19475] | Masked L1: 0.7878 | SNR: 15.66 dB | Eff. Rank: 235.7 | GradNorm: 0.72 | Throughput:  48.1 aud-s/s | LR: 1.17e-04
+[Network Relay] Cached 10000 samples to chunk_00018.pt (5254.0 MB)
+[Cache Quota] Evicted 1 oldest cache shards to stay within 10 limit.
+2026-10-22T08:27:10.721 [E2 Step 19500] | Masked L1: 0.8431 | SNR: 15.26 dB | Eff. Rank: 240.4 | GradNorm: 0.62 | Throughput:  39.9 aud-s/s | LR: 1.16e-04
+2026-10-22T08:27:16.307  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_019500.png
+2026-10-22T08:27:17.017 >>> [Phase 3 Gate Check @ Step 19500] Short Loss: 0.7279 | Long Loss: 1.0747 | Degradation Ratio: 1.476 | Gate Passed: YES
+
+2026-10-22T08:30:51.352 [E2 Step 19525] | Masked L1: 0.7451 | SNR: 15.79 dB | Eff. Rank: 231.9 | GradNorm: 0.63 | Throughput:  56.5 aud-s/s | LR: 1.16e-04
+2026-10-22T08:35:06.082 [E2 Step 19550] | Masked L1: 0.7448 | SNR: 15.91 dB | Eff. Rank: 233.2 | GradNorm: 0.69 | Throughput:  37.2 aud-s/s | LR: 1.15e-04
+2026-10-22T08:39:24.068 [E2 Step 19575] | Masked L1: 0.7876 | SNR: 15.43 dB | Eff. Rank: 237.4 | GradNorm: 0.56 | Throughput:  40.7 aud-s/s | LR: 1.15e-04
+2026-10-22T08:43:36.723 [E2 Step 19600] | Masked L1: 0.9877 | SNR: 13.61 dB | Eff. Rank: 242.3 | GradNorm: 0.62 | Throughput:  44.2 aud-s/s | LR: 1.14e-04
+2026-10-22T08:43:39.425  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_019600.png
+2026-10-22T08:47:37.459 [E2 Step 19625] | Masked L1: 0.8612 | SNR: 14.71 dB | Eff. Rank: 237.1 | GradNorm: 0.98 | Throughput:  42.0 aud-s/s | LR: 1.14e-04
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting GET https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/marathi/train-00027-of-00085.parquet
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting GET https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/marathi/train-00027-of-00085.parquet
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting GET https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/marathi/train-00027-of-00085.parquet
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting GET https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/marathi/train-00027-of-00085.parquet
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting GET https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/marathi/train-00027-of-00085.parquet
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting GET https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/marathi/train-00027-of-00085.parquet
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Network Relay] Cached 47 samples to chunk_00019.pt (26.8 MB)
+[Cache Quota] Evicted 1 oldest cache shards to stay within 10 limit.
+[Network Relay] Opening remote dataset stream for shard 00020...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 20 unavailable (attempt 1/3). Trying next...
+[Network Relay] Opening remote dataset stream for shard 00021...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 21 unavailable (attempt 2/3). Trying next...
+[Network Relay] Opening remote dataset stream for shard 00022...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/.huggingface.yaml
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 22 unavailable (attempt 3/3). Trying next...
+[Cache] 3 consecutive chunks failed. Ending epoch early.
+[Dataset] Epoch 2 stream completed. Processed 190,047 samples.
+[Prefetcher] Stream pass completed.
+
+2026-10-22T09:20:55.150 [Epoch 2/10 Complete] Steps: 2,970 | Cumulative steps: 19,641 | Processed: 1898.48 hrs
+  [Checkpoint Rotation] Pruned older intermediate checkpoint: stage1_pretrain_step_17000.pt
+
+===========================================================================
+2026-10-22T09:20:59.364 [Epoch 3/10] Commencing Training Pass
+===========================================================================
+
+[Network Relay] Opening remote dataset stream for shard 00000...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 0 unavailable (attempt 1/3). Trying next...
+[Network Relay] Opening remote dataset stream for shard 00001...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 1 unavailable (attempt 2/3). Trying next...
+[Network Relay] Opening remote dataset stream for shard 00002...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 2 unavailable (attempt 3/3). Trying next...
+[Cache] 3 consecutive chunks failed. Ending epoch early.
+[Dataset] Epoch 3 stream completed. Processed 0 samples.
+[Prefetcher] Stream pass completed.
+
+2026-10-22T09:34:27.225 [Epoch 3/10 Complete] Steps: 0 | Cumulative steps: 19,641 | Processed: 1898.48 hrs
+
+===========================================================================
+2026-10-22T09:34:31.857 [Epoch 4/10] Commencing Training Pass
+===========================================================================
+
+[Network Relay] Opening remote dataset stream for shard 00000...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 0 unavailable (attempt 1/3). Trying next...
+[Network Relay] Opening remote dataset stream for shard 00001...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 1 unavailable (attempt 2/3). Trying next...
+[Network Relay] Opening remote dataset stream for shard 00002...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 2 unavailable (attempt 3/3). Trying next...
+[Cache] 3 consecutive chunks failed. Ending epoch early.
+[Dataset] Epoch 4 stream completed. Processed 0 samples.
+[Prefetcher] Stream pass completed.
+
+2026-10-22T09:50:29.841 [Epoch 4/10 Complete] Steps: 0 | Cumulative steps: 19,641 | Processed: 1898.48 hrs
+
+===========================================================================
+2026-10-22T09:50:34.056 [Epoch 5/10] Commencing Training Pass
+===========================================================================
+
+[Network Relay] Opening remote dataset stream for shard 00000...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 0 unavailable (attempt 1/3). Trying next...
+[Network Relay] Opening remote dataset stream for shard 00001...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 1 unavailable (attempt 2/3). Trying next...
+[Network Relay] Opening remote dataset stream for shard 00002...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 2 unavailable (attempt 3/3). Trying next...
+[Cache] 3 consecutive chunks failed. Ending epoch early.
+[Dataset] Epoch 5 stream completed. Processed 0 samples.
+[Prefetcher] Stream pass completed.
+
+2026-10-22T10:05:50.807 [Epoch 5/10 Complete] Steps: 0 | Cumulative steps: 19,641 | Processed: 1898.48 hrs
+
+===========================================================================
+2026-10-22T10:05:55.774 [Epoch 6/10] Commencing Training Pass
+===========================================================================
+
+[Network Relay] Opening remote dataset stream for shard 00000...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 0 unavailable (attempt 1/3). Trying next...
+[Network Relay] Opening remote dataset stream for shard 00001...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 1 unavailable (attempt 2/3). Trying next...
+[Network Relay] Opening remote dataset stream for shard 00002...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 2 unavailable (attempt 3/3). Trying next...
+[Cache] 3 consecutive chunks failed. Ending epoch early.
+[Dataset] Epoch 6 stream completed. Processed 0 samples.
+[Prefetcher] Stream pass completed.
+
+2026-10-22T10:19:40.659 [Epoch 6/10 Complete] Steps: 0 | Cumulative steps: 19,641 | Processed: 1898.48 hrs
+
+===========================================================================
+2026-10-22T10:19:44.436 [Epoch 7/10] Commencing Training Pass
+===========================================================================
+
+[Network Relay] Opening remote dataset stream for shard 00000...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 0 unavailable (attempt 1/3). Trying next...
+[Network Relay] Opening remote dataset stream for shard 00001...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 16.0s (retry 4/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 32.0s (retry 5/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 60.0s (retry 6/6)...
+[Network Relay Error] Exceeded max retries (6). Halting chunk fetch.
+[Cache] Chunk 1 unavailable (attempt 2/3). Trying next...
+[Network Relay] Opening remote dataset stream for shard 00002...
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 2.0s (retry 1/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 4.0s (retry 2/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 5/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+[Network Error] [Errno 11001] getaddrinfo failed. Backing off for 8.0s (retry 3/6)...
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 1s [Retry 1/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 2s [Retry 2/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 4s [Retry 3/5].
+'[Errno 11001] getaddrinfo failed' thrown while requesting HEAD https://huggingface.co/datasets/ai4bharat/Shrutilipi/resolve/f4beb2f2cfaeae5a8fc28808f85165fec1cb19b3/Shrutilipi.py
+Retrying in 8s [Retry 4/5].
+[Network Relay] Cached 10000 samples to chunk_00002.pt (4677.7 MB)
+[Cache Quota] Evicted 1 oldest cache shards to stay within 10 limit.
+2026-10-22T10:40:48.705 [E7 Step 19650] | Masked L1: 0.9285 | SNR: 14.35 dB | Eff. Rank: 239.7 | GradNorm: 0.77 | Throughput:  39.1 aud-s/s | LR: 1.13e-04
+2026-10-22T10:44:43.181 [E7 Step 19675] | Masked L1: 0.5597 | SNR: 17.73 dB | Eff. Rank: 229.4 | GradNorm: 0.79 | Throughput:  26.3 aud-s/s | LR: 1.13e-04
+2026-10-22T10:48:38.793 [E7 Step 19700] | Masked L1: 0.7096 | SNR: 16.55 dB | Eff. Rank: 233.4 | GradNorm: 0.64 | Throughput:  51.2 aud-s/s | LR: 1.12e-04
+2026-10-22T10:48:41.619  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_019700.png
+2026-10-22T10:52:34.019 [E7 Step 19725] | Masked L1: 0.8841 | SNR: 14.87 dB | Eff. Rank: 239.8 | GradNorm: 0.78 | Throughput:  37.6 aud-s/s | LR: 1.12e-04
+2026-10-22T10:56:22.750 [E7 Step 19750] | Masked L1: 0.7689 | SNR: 15.89 dB | Eff. Rank: 236.6 | GradNorm: 0.81 | Throughput:  68.3 aud-s/s | LR: 1.11e-04
+2026-10-22T10:56:23.200 >>> [Phase 3 Gate Check @ Step 19750] Short Loss: 0.7424 | Long Loss: 1.0516 | Degradation Ratio: 1.417 | Gate Passed: YES
+
+2026-10-22T11:00:07.495 [E7 Step 19775] | Masked L1: 0.7929 | SNR: 15.62 dB | Eff. Rank: 239.1 | GradNorm: 0.71 | Throughput:  56.6 aud-s/s | LR: 1.11e-04
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+[Network Relay] Cached 10000 samples to chunk_00003.pt (4952.3 MB)
+[Cache Quota] Evicted 1 oldest cache shards to stay within 10 limit.
+2026-10-22T11:08:49.663 [E7 Step 19800] | Masked L1: 0.8282 | SNR: 15.26 dB | Eff. Rank: 234.5 | GradNorm: 0.61 | Throughput:  56.1 aud-s/s | LR: 1.10e-04
+2026-10-22T11:08:53.171  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_019800.png
+2026-10-22T11:12:43.341 [E7 Step 19825] | Masked L1: 0.6497 | SNR: 17.07 dB | Eff. Rank: 230.7 | GradNorm: 0.82 | Throughput:  34.9 aud-s/s | LR: 1.10e-04
+2026-10-22T11:16:36.464 [E7 Step 19850] | Masked L1: 0.8381 | SNR: 15.15 dB | Eff. Rank: 236.8 | GradNorm: 0.75 | Throughput:  37.3 aud-s/s | LR: 1.09e-04
+2026-10-22T11:20:24.071 [E7 Step 19875] | Masked L1: 0.7448 | SNR: 16.01 dB | Eff. Rank: 240.8 | GradNorm: 0.77 | Throughput:  36.9 aud-s/s | LR: 1.09e-04
+2026-10-22T11:24:26.023 [E7 Step 19900] | Masked L1: 0.5808 | SNR: 17.62 dB | Eff. Rank: 232.0 | GradNorm: 0.78 | Throughput:  27.7 aud-s/s | LR: 1.08e-04
+2026-10-22T11:24:28.424  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_019900.png
+2026-10-22T11:28:05.702 [E7 Step 19925] | Masked L1: 0.7404 | SNR: 16.25 dB | Eff. Rank: 239.7 | GradNorm: 0.65 | Throughput:  36.7 aud-s/s | LR: 1.08e-04
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
+2026-10-22T11:31:51.368 [E7 Step 19950] | Masked L1: 0.8659 | SNR: 14.99 dB | Eff. Rank: 240.3 | GradNorm: 0.73 | Throughput:  38.5 aud-s/s | LR: 1.07e-04
+[Network Relay] Cached 10000 samples to chunk_00004.pt (4678.5 MB)
+[Cache Quota] Evicted 1 oldest cache shards to stay within 10 limit.
+2026-10-22T11:39:41.050 [E7 Step 19975] | Masked L1: 0.6410 | SNR: 16.92 dB | Eff. Rank: 232.2 | GradNorm: 0.78 | Throughput:  29.9 aud-s/s | LR: 1.07e-04
+2026-10-22T11:43:46.256 [E7 Step 20000] | Masked L1: 0.6565 | SNR: 17.09 dB | Eff. Rank: 243.1 | GradNorm: 0.81 | Throughput:  36.0 aud-s/s | LR: 1.06e-04
+2026-10-22T11:43:49.265  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_020000.png
+2026-10-22T11:43:49.886 >>> [Phase 3 Gate Check @ Step 20000] Short Loss: 0.7556 | Long Loss: 1.0918 | Degradation Ratio: 1.445 | Gate Passed: YES
+
+  [Checkpoint Rotation] Pruned older intermediate checkpoint: stage1_pretrain_step_18000.pt
+2026-10-22T11:43:54.805  [Semantic Checkpoint] Saved to runs\scaled-conformer512-dense-3stage\checkpoints\stage1_pretrain
+
+2026-10-22T11:43:54.805  [Early Stop] No improvement (8/30)
+2026-10-22T11:47:37.736 [E7 Step 20025] | Masked L1: 0.6477 | SNR: 16.92 dB | Eff. Rank: 238.3 | GradNorm: 0.74 | Throughput:  34.2 aud-s/s | LR: 1.06e-04
+2026-10-22T11:51:10.862 [E7 Step 20050] | Masked L1: 0.6358 | SNR: 17.20 dB | Eff. Rank: 236.3 | GradNorm: 0.63 | Throughput:  41.2 aud-s/s | LR: 1.05e-04
+2026-10-22T11:54:45.178 [E7 Step 20075] | Masked L1: 0.6857 | SNR: 16.64 dB | Eff. Rank: 238.9 | GradNorm: 0.80 | Throughput:  56.6 aud-s/s | LR: 1.05e-04
+2026-10-22T11:58:25.454 [E7 Step 20100] | Masked L1: 0.5707 | SNR: 17.36 dB | Eff. Rank: 226.1 | GradNorm: 0.85 | Throughput:  20.7 aud-s/s | LR: 1.04e-04
+2026-10-22T11:58:27.867  [Artifact] Saved spectrogram plot -> runs\scaled-conformer512-dense-3stage\plots\recon_step_020100.png
+[Network Relay] Local cache exhausted. Relaying to network for next 10000 samples...
