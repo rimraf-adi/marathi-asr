@@ -173,6 +173,7 @@ def main():
     d_model = model_cfg.get("d_model", 512)
     n_heads = model_cfg.get("n_heads", 8 if d_model == 512 else (6 if d_model == 384 else 4))
     ffn_expansion = model_cfg.get("ffn_expansion", 4)
+    num_layers = model_cfg.get("num_layers", 12)
 
     # -------------------------------------------------------------
     # Stage 1: Pretraining
