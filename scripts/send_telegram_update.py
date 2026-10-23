@@ -124,7 +124,7 @@ def get_latest_telemetry_and_history(run_dir: Path):
     return lines[-1], lines
 
 def get_latest_checkpoint(run_dir: Path):
-    for sub in ["stage3_vanilla_sft", "stage3_final_alignment", "stage2_moe", "stage1_pretrain", "checkpoints"]:
+    for sub in ["stage3_vanilla_sft", "stage3_final_alignment", "stage2_dense", "stage2_moe", "stage1_pretrain", "checkpoints"]:
         ckpt_dir = run_dir / "checkpoints" / sub
         if not ckpt_dir.exists():
             ckpt_dir = run_dir / sub
@@ -175,13 +175,13 @@ def build_status_message(telemetry, history, ckpt_name, gpu, disk_free, run_dir)
     run_name = run_dir.name
     
     # Check if pretraining or supervised
-    is_pretrain = "masked_l1" in (telemetry or {}) or "stage1_pretrain" in ckpt_name
+    is_pretrain = "masked_l1" in (telemetry or {})
     
     # Determine total steps & stage phase
     if is_pretrain:
         total_steps = 30000
         phase = "Stage 1: Pretraining (Dense Conformer-512 Backbone)"
-    elif "stage2_dense" in ckpt_name or "stage2" in str(run_dir):
+    elif "stage2_dense" in ckpt_name or (run_dir / "logs" / "stage2_dense.log").exists():
         total_steps = 80000
         phase = "Stage 2: Supervised CTC Adaptation (Dense Baseline)"
     elif "stage3_final_alignment" in ckpt_name:
