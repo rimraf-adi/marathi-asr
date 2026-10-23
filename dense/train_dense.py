@@ -277,17 +277,17 @@ def train_dense_stage2(
             # Periodic Checkpoint Saving
             if step % save_every == 0 or step == total_steps:
                 logger.save_checkpoint(
-                    model,
                     step=step,
+                    model=model,
+                    optimizer=optimizer,
+                    scheduler=scheduler,
                     metric_val=avg_ctc,
                     metric_name="ctc_loss",
+                    lower_is_better=True,
                     keep_last_k=3,
                     milestone_step=10000,
-                    extra_data={
-                        "optimizer_state_dict": optimizer.state_dict(),
-                        "scheduler_state_dict": scheduler.state_dict(),
+                    metadata={
                         "epoch": step,
-                        "ctc_loss": avg_ctc,
                         "cer": sample_cer,
                         "model_config": {
                             "d_model": d_model,
