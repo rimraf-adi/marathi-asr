@@ -215,3 +215,59 @@ Step    900/80000 | Dense Baseline | CTC Loss: 4.2827 | CER: 1.000 | Throughput:
   [Ref ]: फिशिंग टॅकल , मरीना आणि कॅम्पसाइट्सच्या विक्रेत्यांकडून तुम्हाला टिप्स...
   [Pred]: ...
 
+Step    925/80000 | Dense Baseline | CTC Loss: 4.1690 | CER: 1.000 | Throughput: 14.9 aud-s/s | LR: 1.15e-06
+  [Ref ]: उसाचे पीक कोणत्या हंगामात घेतात ?...
+  [Pred]: ...
+
+Step    950/80000 | Dense Baseline | CTC Loss: 4.0904 | CER: 1.000 | Throughput: 75.9 aud-s/s | LR: 1.18e-06
+  [Ref ]: परस्पर बचत बँक सरकार चालवते...
+  [Pred]: ...
+
+Step    975/80000 | Dense Baseline | CTC Loss: 3.9944 | CER: 1.000 | Throughput: 91.1 aud-s/s | LR: 1.22e-06
+  [Ref ]: आमची तरलता आता संपण्याच्या मार्गावर आहे...
+  [Pred]: ...
+
+Step   1000/80000 | Dense Baseline | CTC Loss: 3.9421 | CER: 1.000 | Throughput: 143.0 aud-s/s | LR: 1.25e-06
+  [Ref ]: एकावेळी माझ्या खात्यातून कितीवेळा रक्कम काढता येईल ?...
+  [Pred]: ...
+
+
+[stage2_dense] Finished after 30.8 minutes.
+Traceback (most recent call last):
+  File "D:\marathi-asr\dense\train_dense.py", line 358, in <module>
+    main()
+  File "D:\marathi-asr\dense\train_dense.py", line 336, in main
+    train_dense_stage2(
+  File "D:\marathi-asr\dense\train_dense.py", line 279, in train_dense_stage2
+    logger.save_checkpoint(
+TypeError: RunMetricsLogger.save_checkpoint() got multiple values for argument 'step'
+
+--- Launching stage2_dense at 2026-10-23 18:04:47 ---
+
+[stage2_dense: Dense Baseline] Initializing on device: cuda (NVIDIA RTX A5000)
+[Tokenizer] Loaded vocabulary with 105 tokens
+
+[Dense Model] Initializing Dense Conformer (d_model=512, n_heads=8, layers=12, ffn_exp=8)...
+D:\marathi-asr\.venv311\Lib\site-packages\torch\nn\modules\module.py:1326: UserWarning: expandable_segments not supported on this platform (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\c10/cuda/CUDAAllocatorConfig.h:28.)
+  return t.to(
+[Dense Model] Loading pre-trained weights from: runs\scaled-conformer512-dense-3stage\checkpoints\stage1_pretrain\best_model.pt
+[Dense Model] Loaded weights successfully! Missing keys: 4 (e.g. CTC head), Unexpected keys: 0
+[Dense Training] Setting up differential LR — backbone (Layers 1-4) at 1/10 LR, Layers 5-12 + CTC at full LR...
+[Parameters] Total: 130,770,537 | Trainable: 130,770,537 (100.0%)
+  Backbone (1/10 LR): 48,644,096 params
+  Top Layers + CTC (full LR): 82,126,441 params
+[Dataset] Loading cached speaker split from: moe\respin_split_cache.json
+[stage2_dense] Telemetry initialized.
+  - Checkpoints: D:\marathi-asr\runs\scaled-conformer512-dense-3stage\checkpoints\stage2_dense
+  - CSV Logging: D:\marathi-asr\runs\scaled-conformer512-dense-3stage\csvs\stage2_dense_metrics.csv
+  - JSONL Trace: D:\marathi-asr\runs\scaled-conformer512-dense-3stage\logs\stage2_dense_telemetry.jsonl
+
+[stage2_dense] Starting Dense Conformer Adaptation (Target Steps: 80000, Batch: 32, GradAccum: 4)
+  Saving semantically to: 'D:\marathi-asr\runs\scaled-conformer512-dense-3stage\checkpoints\stage2_dense'
+
+Step      1/80000 | Dense Baseline | CTC Loss: 10.0092 | CER: 1.630 | Throughput: 60.7 aud-s/s | LR: 0.00e+00
+  [Ref ]: पशुपालनाचे चार प्रकार कोणते ?...
+  [Pred]: ोए7ोइऑोऑोऑोऑ7!ए७7क्ष7ो7म7७7७7ो7७7७म7७म7ो7...
+
+D:\marathi-asr\.venv311\Lib\site-packages\torch\optim\lr_scheduler.py:224: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(

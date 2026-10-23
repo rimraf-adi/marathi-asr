@@ -8,8 +8,8 @@
   },
   "stage2_dense": {
     "status": "running",
-    "updated_at": "2026-10-23 17:32:35",
-    "timestamp": 1792756955.2556236,
+    "updated_at": "2026-10-23 18:04:47",
+    "timestamp": 1792758887.2179425,
     "cmd": [
       "D:\\marathi-asr\\.venv311\\Scripts\\python.exe",
       "-u",
