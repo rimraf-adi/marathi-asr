@@ -190,6 +190,9 @@ def train_dense_stage2(
     start_time = time.time()
     rolling_ctc_loss = 0.0
 
+    sample_cer = 1.0
+    avg_ctc = 10.0
+
     try:
         while step < total_steps:
             step += 1
@@ -245,10 +248,16 @@ def train_dense_stage2(
                 throughput = total_audio_sec / elapsed
 
                 with torch.no_grad():
-                    pred_tokens = log_probs[0].argmax(dim=-1).cpu().tolist()
-                    pred_text = tokenizer.ctc_decode(pred_tokens)
-                    ref_text = tokenizer.decode(targets[0][:target_lens[0]].cpu().tolist())
-                    sample_cer = compute_cer(ref_text, pred_text)
+                    eval_samples = min(8, audio.size(0))
+                    batch_cers = []
+                    for s_i in range(eval_samples):
+                        p_toks = log_probs[s_i].argmax(dim=-1).tolist()
+                        p_txt = tokenizer.ctc_decode(p_toks)
+                        r_txt = batch["texts"][s_i]
+                        batch_cers.append(compute_cer(r_txt, p_txt))
+                    sample_cer = sum(batch_cers) / max(len(batch_cers), 1)
+                    ref_text = batch["texts"][0]
+                    pred_text = tokenizer.ctc_decode(log_probs[0].argmax(dim=-1).tolist())
 
                 cur_lr = scheduler.get_last_lr()[0] if hasattr(scheduler, "get_last_lr") else lr
                 print(f"Step {step:6d}/{total_steps} | Dense Baseline | CTC Loss: {avg_ctc:.4f} | CER: {sample_cer:.3f} | Throughput: {throughput:.1f} aud-s/s | LR: {cur_lr:.2e}")
@@ -267,29 +276,40 @@ def train_dense_stage2(
 
             # Periodic Checkpoint Saving
             if step % save_every == 0 or step == total_steps:
-                ckpt_path = actual_ckpt_dir / f"{stage_name}_step_{step}.pt"
-                torch.save({
-                    "step": step,
-                    "model_state_dict": model.state_dict(),
-                    "optimizer_state_dict": optimizer.state_dict(),
-                    "scheduler_state_dict": scheduler.state_dict(),
-                    "model_config": {
-                        "d_model": d_model,
-                        "n_heads": n_heads,
-                        "ffn_expansion": ffn_expansion,
-                        "num_layers": num_layers,
-                        "enable_moe": False,
+                logger.save_checkpoint(
+                    model,
+                    step=step,
+                    metric_val=avg_ctc,
+                    metric_name="ctc_loss",
+                    keep_last_k=3,
+                    milestone_step=10000,
+                    extra_data={
+                        "optimizer_state_dict": optimizer.state_dict(),
+                        "scheduler_state_dict": scheduler.state_dict(),
+                        "epoch": step,
+                        "ctc_loss": avg_ctc,
+                        "cer": sample_cer,
+                        "model_config": {
+                            "d_model": d_model,
+                            "n_heads": n_heads,
+                            "ffn_expansion": ffn_expansion,
+                            "num_layers": num_layers,
+                            "enable_moe": False,
+                            "vocab_size": 105,
+                        },
                     },
-                }, ckpt_path)
-                print(f"[{stage_name}] Checkpoint saved: {ckpt_path.name}")
-                logger.save_checkpoint(model, step=step, keep_last_k=3)
+                )
+                print(f"  [Checkpoint] Step {step} saved to {logger.ckpt_dir}")
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
 
     except KeyboardInterrupt:
         print("\n[Dense Training] Interrupted by user.")
     finally:
+        loader.close()
         total_time_min = (time.time() - start_time) / 60.0
         print(f"\n[{stage_name}] Finished after {total_time_min:.1f} minutes.")
-        logger.close()
+
 
 
 def main():
