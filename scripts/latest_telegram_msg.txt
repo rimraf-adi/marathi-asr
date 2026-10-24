@@ -1,16 +1,16 @@
 🤖 <b>Marathi ASR Training Telemetry Update</b>
-🕒 <b>Timestamp:</b> <code>2026-10-24 22:00:44</code>
+🕒 <b>Timestamp:</b> <code>2026-10-24 22:11:53</code>
 📁 <b>Active Run:</b> <code>scaled-conformer512-dense-3stage</code>
 
 🎯 <b>Active Experiment:</b> <code>Experiment E1 (Dense Conformer-512 Baseline, 130.8M Total Param Matched)</code>
 🎯 <b>Phase:</b> <code>Stage 3: Multi-Source Calibration (Dense Baseline)</code>
-📊 <b>Progress:</b> <b>6,000 / 40,000 steps</b> (<b>15.0%</b>)
-⏳ <b>ETA:</b> <code>~8h 32m (34,000 steps left)</code> (<code>66.3 steps/min</code>)
-📉 <b>CTC Loss:</b> <code>1.2260</code>
-🎯 <b>Batch CER:</b> <code>27.81%</code>
-⚡ <b>Throughput:</b> <code>748.1 aud-s/s</code>
-📈 <b>Learning Rate:</b> <code>2.99e-05</code>
+📊 <b>Progress:</b> <b>6,050 / 300,000 steps</b> (<b>2.0%</b>)
+⏳ <b>ETA:</b> <code>Calculating...</code>
+📉 <b>CTC Loss:</b> <code>1.2039</code>
+🎯 <b>Batch CER:</b> <code>35.75%</code>
+⚡ <b>Throughput:</b> <code>994.7 aud-s/s</code>
+📈 <b>Learning Rate:</b> <code>3.00e-05</code>
 💾 <b>Checkpoint:</b> <code>stage3_final_alignment/stage3_final_alignment_step_6000.pt (1135.7 MB)</code>
 
-🖥️ <b>GPU:</b> RTX A5000 | <code>20.5 / 24.0 GB</code> | <code>73°C</code> | <code>72% util</code> (143.48W)
-💿 <b>Disk Free:</b> <code>31.8 GB</code> on D:
+🖥️ <b>GPU:</b> RTX A5000 | <code>14.7 / 24.0 GB</code> | <code>62°C</code> | <code>0% util</code> (152.32W)
+💿 <b>Disk Free:</b> <code>51.7 GB</code> on D:

@@ -15,8 +15,8 @@
   },
   "stage3_final_alignment": {
     "status": "running",
-    "updated_at": "2026-10-24 20:09:10",
-    "timestamp": 1792852750.6690412,
+    "updated_at": "2026-10-24 22:07:43",
+    "timestamp": 1792859863.1544688,
     "cmd": [
       "D:\\marathi-asr\\.venv311\\Scripts\\python.exe",
       "-u",
@@ -26,7 +26,7 @@
       "--moe_ckpt",
       "runs\\scaled-conformer512-dense-3stage\\checkpoints\\stage2_dense\\best_model.pt",
       "--steps",
-      "40000",
+      "300000",
       "--batch_size",
       "32",
       "--grad_accum_steps",
@@ -42,7 +42,9 @@
       "--log_every",
       "25",
       "--save_every",
-      "500"
+      "500",
+      "--resume",
+      "runs\\scaled-conformer512-dense-3stage\\checkpoints\\stage3_final_alignment\\stage3_final_alignment_step_6000.pt"
     ],
     "log_file": "runs\\scaled-conformer512-dense-3stage\\logs\\stage3_final_alignment.log"
   }
