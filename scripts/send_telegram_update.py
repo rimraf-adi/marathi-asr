@@ -192,7 +192,7 @@ def build_status_message(telemetry, history, ckpt_name, gpu, disk_free, run_dir)
 
     # Determine total steps & stage phase
     if active_stage_key == "stage3_final_alignment" or "stage3_final_alignment" in ckpt_name:
-        total_steps = 40000
+        total_steps = 300000
         phase = "Stage 3: Multi-Source Calibration (Dense Baseline)"
     elif active_stage_key == "stage2_dense" or ("stage2_dense" in ckpt_name and not active_stage_key):
         total_steps = 80000
@@ -204,7 +204,7 @@ def build_status_message(telemetry, history, ckpt_name, gpu, disk_free, run_dir)
         total_steps = 350000
         phase = "Stage 3 Vanilla SFT (Calibration)"
     elif (run_dir / "logs" / "stage3_final_alignment.log").exists():
-        total_steps = 40000
+        total_steps = 300000
         phase = "Stage 3: Multi-Source Calibration (Dense Baseline)"
     elif (run_dir / "logs" / "stage2_dense.log").exists():
         total_steps = 80000

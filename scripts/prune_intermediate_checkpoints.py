@@ -27,7 +27,7 @@ def prune_checkpoints(dry_run: bool = False):
     files_to_delete = []
 
     for run_dir in RUNS_DIR.iterdir():
-        if not run_dir.is_dir() or run_dir.name == ACTIVE_RUN_NAME:
+        if not run_dir.is_dir():
             continue
 
         for ckpt_dir in run_dir.glob("checkpoints/*"):
@@ -47,13 +47,13 @@ def prune_checkpoints(dry_run: bool = False):
                 if step is not None:
                     step_files.append((step, p))
 
-            # If multiple step files exist, keep only the highest step (final milestone)
+            # Keep ONLY the single latest step checkpoint (rolling cache) alongside best_model.pt
             if len(step_files) > 1:
                 step_files.sort(key=lambda x: x[0], reverse=True)
-                final_step_file = step_files[0][1]
-                intermediate_files = [x[1] for x in step_files[1:]]
+                latest_step_file = step_files[0][1]
+                older_step_files = [x[1] for x in step_files[1:]]
 
-                for p in intermediate_files:
+                for p in older_step_files:
                     size = p.stat().st_size
                     files_to_delete.append((p, size))
                     total_reclaimed_bytes += size

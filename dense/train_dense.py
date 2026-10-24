@@ -284,8 +284,8 @@ def train_dense_stage2(
                     metric_val=avg_ctc,
                     metric_name="ctc_loss",
                     lower_is_better=True,
-                    keep_last_k=3,
-                    milestone_step=10000,
+                    keep_last_k=1,
+                    milestone_step=0,
                     metadata={
                         "epoch": step,
                         "cer": sample_cer,

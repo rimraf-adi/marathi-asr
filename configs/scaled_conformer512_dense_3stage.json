@@ -36,7 +36,7 @@
     "save_every": 1000
   },
   "final_alignment": {
-    "steps": 40000,
+    "steps": 300000,
     "batch_size": 32,
     "grad_accum_steps": 4,
     "lr": 3e-5,

@@ -76,12 +76,12 @@ class RunMetricsLogger:
         metric_name: str = "cer",
         lower_is_better: bool = True,
         metadata: Optional[Dict[str, Any]] = None,
-        keep_last_k: int = 3,
+        keep_last_k: int = 1,
         milestone_step: int = 0,
     ):
         """
         Saves model checkpoints, keeping track of the best performing model,
-        and strictly rotating rolling checkpoints to keep the last 3 only.
+        and strictly rotating rolling checkpoints to keep only the last checkpoint alongside best_model.pt.
         """
         ckpt_path = self.ckpt_dir / f"{self.stage_name}_step_{step}.pt"
 

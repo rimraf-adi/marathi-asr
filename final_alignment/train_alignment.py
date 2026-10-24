@@ -216,6 +216,8 @@ def train_calibration_stage5(run_dir: str = "run3",
                     scheduler=scheduler,
                     metric_val=cer,
                     metric_name="cer",
+                    keep_last_k=1,
+                    milestone_step=0,
                     metadata={
                         "ctc_loss": rolling_loss,
                         "calib_speakers": 133,
