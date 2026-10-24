@@ -177,19 +177,38 @@ def build_status_message(telemetry, history, ckpt_name, gpu, disk_free, run_dir)
     # Check if pretraining or supervised
     is_pretrain = "masked_l1" in (telemetry or {})
     
+    status_file = run_dir / "pipeline_status.json"
+    active_stage_key = None
+    if status_file.exists():
+        try:
+            with open(status_file, "r", encoding="utf-8") as f:
+                pstatus = json.load(f)
+            for sname, sdata in pstatus.items():
+                if isinstance(sdata, dict) and sdata.get("status") == "running":
+                    active_stage_key = sname
+                    break
+        except Exception:
+            pass
+
     # Determine total steps & stage phase
-    if is_pretrain:
-        total_steps = 30000
-        phase = "Stage 1: Pretraining (Dense Conformer-512 Backbone)"
-    elif "stage2_dense" in ckpt_name or (run_dir / "logs" / "stage2_dense.log").exists():
-        total_steps = 80000
-        phase = "Stage 2: Supervised CTC Adaptation (Dense Baseline)"
-    elif "stage3_final_alignment" in ckpt_name:
+    if active_stage_key == "stage3_final_alignment" or "stage3_final_alignment" in ckpt_name:
         total_steps = 40000
         phase = "Stage 3: Multi-Source Calibration (Dense Baseline)"
+    elif active_stage_key == "stage2_dense" or ("stage2_dense" in ckpt_name and not active_stage_key):
+        total_steps = 80000
+        phase = "Stage 2: Supervised CTC Adaptation (Dense Baseline)"
+    elif is_pretrain:
+        total_steps = 30000
+        phase = "Stage 1: Pretraining (Dense Conformer-512 Backbone)"
     elif "stage3_vanilla_sft" in ckpt_name or "no-splitformer" in run_name:
         total_steps = 350000
         phase = "Stage 3 Vanilla SFT (Calibration)"
+    elif (run_dir / "logs" / "stage3_final_alignment.log").exists():
+        total_steps = 40000
+        phase = "Stage 3: Multi-Source Calibration (Dense Baseline)"
+    elif (run_dir / "logs" / "stage2_dense.log").exists():
+        total_steps = 80000
+        phase = "Stage 2: Supervised CTC Adaptation (Dense Baseline)"
     else:
         total_steps = 60000
         phase = "Active Training Phase"
