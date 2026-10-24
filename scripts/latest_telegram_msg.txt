@@ -1,16 +1,16 @@
 🤖 <b>Marathi ASR Training Telemetry Update</b>
-🕒 <b>Timestamp:</b> <code>2026-10-24 08:00:09</code>
+🕒 <b>Timestamp:</b> <code>2026-10-24 10:00:08</code>
 📁 <b>Active Run:</b> <code>scaled-conformer512-dense-3stage</code>
 
 🎯 <b>Active Experiment:</b> <code>Experiment E1 (Dense Conformer-512 Baseline, 130.8M Total Param Matched)</code>
 🎯 <b>Phase:</b> <code>Stage 2: Supervised CTC Adaptation (Dense Baseline)</code>
-📊 <b>Progress:</b> <b>41,450 / 80,000 steps</b> (<b>51.8%</b>)
-⏳ <b>ETA:</b> <code>~11h 30m (38,550 steps left)</code> (<code>55.9 steps/min</code>)
-📉 <b>CTC Loss:</b> <code>1.5583</code>
-🎯 <b>Batch CER:</b> <code>39.29%</code>
-⚡ <b>Throughput:</b> <code>164.8 aud-s/s</code>
-📈 <b>Learning Rate:</b> <code>1.47e-05</code>
-💾 <b>Checkpoint:</b> <code>stage2_dense/best_model.pt (1506.9 MB)</code>
+📊 <b>Progress:</b> <b>47,875 / 80,000 steps</b> (<b>59.8%</b>)
+⏳ <b>ETA:</b> <code>~9h 51m (32,125 steps left)</code> (<code>54.3 steps/min</code>)
+📉 <b>CTC Loss:</b> <code>1.4556</code>
+🎯 <b>Batch CER:</b> <code>29.71%</code>
+⚡ <b>Throughput:</b> <code>198.9 aud-s/s</code>
+📈 <b>Learning Rate:</b> <code>1.45e-05</code>
+💾 <b>Checkpoint:</b> <code>stage2_dense/stage2_dense_step_47000.pt (1506.9 MB)</code>
 
-🖥️ <b>GPU:</b> RTX A5000 | <code>23.4 / 24.0 GB</code> | <code>66°C</code> | <code>29% util</code> (38.40W)
+🖥️ <b>GPU:</b> RTX A5000 | <code>22.0 / 24.0 GB</code> | <code>70°C</code> | <code>0% util</code> (93.33W)
 💿 <b>Disk Free:</b> <code>42.1 GB</code> on D:
