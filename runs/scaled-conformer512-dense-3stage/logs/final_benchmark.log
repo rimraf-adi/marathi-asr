@@ -1,0 +1,54 @@
+
+--- Launching final_benchmark at 2026-10-27 10:23:53 ---
+
+================================================================================
+[Benchmark] Evaluating 'scaled-conformer512-dense-3stage_eval' on IISc RESPIN Held-Out Test Set
+  Streaming Chunk Size: Offline / Bidirectional (Full Context)
+  Decoding Strategy: Beam Search (width=16)
+================================================================================
+D:\marathi-asr\.venv311\Lib\site-packages\torch\_utils.py:88: UserWarning: expandable_segments not supported on this platform (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\c10/cuda/CUDAAllocatorConfig.h:28.)
+  untyped_storage = torch.UntypedStorage(self.size(), device=device)
+[Model Loader] Detected Dense Architecture. Loading standard Conformer...
+[Decoder] Initializing Marathi Beam Search Decoder...
+Found entries of length > 1 in alphabet. This is unusual unless style is BPE, but the alphabet was not recognized as BPE type. Is this correct?
+[BeamSearchDecoder] Initialized pyctcdecode BeamSearchDecoderCTC (vocab size: 105, unigrams: 30000)
+[Data] Loading frozen test metadata: D:\dialect-norm\IISc_RESPIN_test_mr\IISc_RESPIN_test_mr\meta_test_mr.json
+[Data] Benchmark set: 2,170 utterances (3.04 hours)
+
+  [Evaluating] Processed 400/2,170 utterances (18.4%)...
+  [Evaluating] Processed 800/2,170 utterances (36.9%)...
+  [Evaluating] Processed 1,200/2,170 utterances (55.3%)...
+  [Evaluating] Processed 1,600/2,170 utterances (73.7%)...
+  [Evaluating] Processed 2,000/2,170 utterances (92.2%)...
+  [Evaluating] Processed 2,170/2,170 utterances (100.0%)...
+[Evaluating] Completed in 108.6 seconds.
+
+===================================================================================================
+                            FINAL BENCHMARK EVALUATION RESULTS: scaled-conformer512-dense-3stage_eval
+===================================================================================================
+Exit Level           | Dialect                | CER (%)   | WER (%)   | Samples  | RTF     
+---------------------+------------------------+-----------+-----------+----------+---------
+Layer 4 (Fast)       | D1 (Malvani / Konkan)  |    0.00% |    0.00% | 0        | 0.0000x
+Layer 4 (Fast)       | D2 (Ahirani / Khandesh) |    0.00% |    0.00% | 0        | 0.0000x
+Layer 4 (Fast)       | D3 (Standard Marathi)  |    0.00% |    0.00% | 0        | 0.0000x
+Layer 4 (Fast)       | D4 (Varhadi / Vidarbha) |    0.00% |    0.00% | 0        | 0.0000x
+Layer 4 (Fast)       | ALL (Aggregate)        |    0.00% |    0.00% | 0        | 0.0000x
+---------------------+------------------------+-----------+-----------+----------+---------
+Layer 8 (Balanced)   | D1 (Malvani / Konkan)  |    0.00% |    0.00% | 0        | 0.0000x
+Layer 8 (Balanced)   | D2 (Ahirani / Khandesh) |    0.00% |    0.00% | 0        | 0.0000x
+Layer 8 (Balanced)   | D3 (Standard Marathi)  |    0.00% |    0.00% | 0        | 0.0000x
+Layer 8 (Balanced)   | D4 (Varhadi / Vidarbha) |    0.00% |    0.00% | 0        | 0.0000x
+Layer 8 (Balanced)   | ALL (Aggregate)        |    0.00% |    0.00% | 0        | 0.0000x
+---------------------+------------------------+-----------+-----------+----------+---------
+Layer 12 (Deep)      | D1 (Malvani / Konkan)  |   12.45% |   45.29% | 559      | 0.0018x
+Layer 12 (Deep)      | D2 (Ahirani / Khandesh) |   12.18% |   42.41% | 540      | 0.0018x
+Layer 12 (Deep)      | D3 (Standard Marathi)  |    9.35% |   31.33% | 555      | 0.0018x
+Layer 12 (Deep)      | D4 (Varhadi / Vidarbha) |   11.51% |   39.90% | 516      | 0.0018x
+Layer 12 (Deep)      | ALL (Aggregate)        |   11.40% |   39.82% | 2170     | 0.0018x
+---------------------+------------------------+-----------+-----------+----------+---------
+
+[Artifact] Saved structured CSV: runs\scaled-conformer512-dense-3stage\eval_results\scaled-conformer512-dense-3stage_eval_summary.csv
+[Artifact] Mirrored CSV to centralized directory: run2\csvs\scaled-conformer512-dense-3stage_eval_summary.csv
+[Artifact] Saved detailed JSON: runs\scaled-conformer512-dense-3stage\eval_results\scaled-conformer512-dense-3stage_eval_summary.json
+[Artifact] Saved Markdown Report: runs\scaled-conformer512-dense-3stage\eval_results\scaled-conformer512-dense-3stage_eval_report.md
+

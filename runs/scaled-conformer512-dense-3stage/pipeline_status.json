@@ -14,38 +14,17 @@
     "elapsed_min": 1564.4
   },
   "stage3_final_alignment": {
-    "status": "running",
-    "updated_at": "2026-10-24 22:07:43",
-    "timestamp": 1792859863.1544688,
-    "cmd": [
-      "D:\\marathi-asr\\.venv311\\Scripts\\python.exe",
-      "-u",
-      "final_alignment/train_alignment.py",
-      "--run_dir",
-      "runs\\scaled-conformer512-dense-3stage",
-      "--moe_ckpt",
-      "runs\\scaled-conformer512-dense-3stage\\checkpoints\\stage2_dense\\best_model.pt",
-      "--steps",
-      "300000",
-      "--batch_size",
-      "32",
-      "--grad_accum_steps",
-      "4",
-      "--lr",
-      "3e-05",
-      "--min_lr",
-      "5e-06",
-      "--checkpoint_dir",
-      "runs\\scaled-conformer512-dense-3stage\\checkpoints\\stage3_final_alignment",
-      "--stage_name",
-      "stage3_final_alignment",
-      "--log_every",
-      "25",
-      "--save_every",
-      "500",
-      "--resume",
-      "runs\\scaled-conformer512-dense-3stage\\checkpoints\\stage3_final_alignment\\stage3_final_alignment_step_6000.pt"
-    ],
-    "log_file": "runs\\scaled-conformer512-dense-3stage\\logs\\stage3_final_alignment.log"
+    "status": "completed",
+    "updated_at": "2026-10-27 10:23:53",
+    "timestamp": 1793076833.1492624,
+    "exit_code": 0,
+    "elapsed_min": 3616.2
+  },
+  "final_benchmark": {
+    "status": "completed",
+    "updated_at": "2026-10-27 10:26:20",
+    "timestamp": 1793076980.803209,
+    "exit_code": 0,
+    "elapsed_min": 2.5
   }
 }
