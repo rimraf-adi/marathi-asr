@@ -1,5 +1,5 @@
 🤖 <b>Marathi ASR Training Telemetry Update</b>
-🕒 <b>Timestamp:</b> <code>2026-10-27 10:26:29</code>
+🕒 <b>Timestamp:</b> <code>2026-10-27 11:18:36</code>
 📁 <b>Active Run:</b> <code>scaled-conformer512-dense-3stage</code>
 
 🎯 <b>Active Experiment:</b> <code>Experiment E1 (Dense Conformer-512 Baseline, 130.8M Total Param Matched)</code>
@@ -12,5 +12,5 @@
 📈 <b>Learning Rate:</b> <code>2.56e-05</code>
 💾 <b>Checkpoint:</b> <code>stage3_final_alignment/stage3_final_alignment_step_300000.pt (1135.7 MB)</code>
 
-🖥️ <b>GPU:</b> RTX A5000 | <code>0.6 / 24.0 GB</code> | <code>63°C</code> | <code>2% util</code> (16.66W)
-💿 <b>Disk Free:</b> <code>51.7 GB</code> on D:
+🖥️ <b>GPU:</b> RTX A5000 | <code>0.6 / 24.0 GB</code> | <code>38°C</code> | <code>2% util</code> (12.07W)
+💿 <b>Disk Free:</b> <code>51.6 GB</code> on D:
