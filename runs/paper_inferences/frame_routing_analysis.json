@@ -1,0 +1,40 @@
+{
+  "D3": {
+    "expert_0_malvani_pct": 35.34,
+    "expert_1_ahirani_pct": 32.6,
+    "expert_2_varhadi_pct": 32.06,
+    "total_frames": 551376
+  },
+  "D1": {
+    "expert_0_malvani_pct": 47.72,
+    "expert_1_ahirani_pct": 26.39,
+    "expert_2_varhadi_pct": 25.89,
+    "total_frames": 615448
+  },
+  "D4": {
+    "expert_0_malvani_pct": 33.93,
+    "expert_1_ahirani_pct": 29.22,
+    "expert_2_varhadi_pct": 36.84,
+    "total_frames": 524664
+  },
+  "D2": {
+    "expert_0_malvani_pct": 35.08,
+    "expert_1_ahirani_pct": 34.0,
+    "expert_2_varhadi_pct": 30.92,
+    "total_frames": 509296
+  },
+  "word_class_routing": {
+    "standard_words": {
+      "expert_0_pct": 35.37,
+      "expert_1_pct": 31.49,
+      "expert_2_pct": 33.15,
+      "total_frames": 883864
+    },
+    "dialect_words": {
+      "expert_0_pct": 44.36,
+      "expert_1_pct": 29.05,
+      "expert_2_pct": 26.58,
+      "total_frames": 195032
+    }
+  }
+}

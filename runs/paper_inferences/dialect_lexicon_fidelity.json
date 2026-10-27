@@ -1,0 +1,30 @@
+{
+  "D1": {
+    "total_dialect_tokens_evaluated": 141,
+    "verbatim_preserved_tokens": 118,
+    "dialect_fidelity_pct": 83.69,
+    "standardization_substitution_pct": 0.0,
+    "missed_or_corrupted_pct": 16.31
+  },
+  "D2": {
+    "total_dialect_tokens_evaluated": 28,
+    "verbatim_preserved_tokens": 27,
+    "dialect_fidelity_pct": 96.43,
+    "standardization_substitution_pct": 0.0,
+    "missed_or_corrupted_pct": 3.57
+  },
+  "D4": {
+    "total_dialect_tokens_evaluated": 4,
+    "verbatim_preserved_tokens": 1,
+    "dialect_fidelity_pct": 25.0,
+    "standardization_substitution_pct": 0.0,
+    "missed_or_corrupted_pct": 75.0
+  },
+  "ALL": {
+    "total_dialect_tokens_evaluated": 173,
+    "verbatim_preserved_tokens": 146,
+    "dialect_fidelity_pct": 84.39,
+    "standardization_substitution_pct": 0.0,
+    "missed_or_corrupted_pct": 15.61
+  }
+}

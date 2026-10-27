@@ -1,0 +1,41 @@
+{
+  "D1": {
+    "matched_expert": "expert_0",
+    "eval_wers": {
+      "expert_0": 28.3,
+      "expert_1": 37.13,
+      "expert_2": 37.93
+    },
+    "degradations_vs_matched": {
+      "expert_0": "0.0%",
+      "expert_1": "+8.83%",
+      "expert_2": "+9.63%"
+    }
+  },
+  "D2": {
+    "matched_expert": "expert_1",
+    "eval_wers": {
+      "expert_0": 28.18,
+      "expert_1": 23.35,
+      "expert_2": 28.09
+    },
+    "degradations_vs_matched": {
+      "expert_0": "+4.83%",
+      "expert_1": "0.0%",
+      "expert_2": "+4.74%"
+    }
+  },
+  "D4": {
+    "matched_expert": "expert_2",
+    "eval_wers": {
+      "expert_0": 29.52,
+      "expert_1": 28.24,
+      "expert_2": 23.28
+    },
+    "degradations_vs_matched": {
+      "expert_0": "+6.24%",
+      "expert_1": "+4.96%",
+      "expert_2": "0.0%"
+    }
+  }
+}

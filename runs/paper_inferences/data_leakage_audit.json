@@ -1,0 +1,11 @@
+{
+  "test_speakers_count": 160,
+  "test_utterances_count": 2170,
+  "train_speakers_found": 2644,
+  "train_unique_transcripts_found": 23069,
+  "speaker_overlap_count": 0,
+  "speaker_overlap_pct": 0.0,
+  "verbatim_text_overlap_count": 0,
+  "verbatim_text_overlap_pct": 0.0,
+  "zero_leakage_verified": true
+}

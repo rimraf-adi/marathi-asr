@@ -84,6 +84,7 @@ class SparseMoELayer(nn.Module):
         router_probs = F.softmax(router_logits, dim=-1)  # (b, t, num_experts)
 
         top1_weights, top1_idx = torch.topk(router_probs, k=1, dim=-1)  # (b, t, 1)
+        self.last_top1_idx = top1_idx.detach().cpu()
         density = router_probs.mean(dim=(0, 1))  # (num_experts,)
 
         # Standard Switch Transformer load balancing loss: num_experts * sum(f_i * P_i)
@@ -91,6 +92,10 @@ class SparseMoELayer(nn.Module):
         fractions = torch.bincount(flat_top1_idx, minlength=self.num_experts).float()
         fractions = fractions / max(1, fractions.sum().item())
         aux_loss = self.num_experts * torch.sum(fractions.detach() * density)
+        forced = getattr(self, "_forced_expert", None)
+        if forced is not None:
+            use_hard_routing = True
+            dialect_idx = torch.tensor([forced] * b, device=x.device, dtype=torch.long)
 
         if use_hard_routing and dialect_idx is not None:
             # Phase 4A: Metadata-guided routing

@@ -1,0 +1,102 @@
+{
+  "D1": {
+    "mean_wer": 24.84,
+    "std_wer": 0.952,
+    "ci_95_wer": [
+      22.98,
+      26.74
+    ],
+    "mean_cer": 5.83,
+    "std_cer": 0.325,
+    "ci_95_cer": [
+      5.21,
+      6.49
+    ],
+    "paired_delta_wer": 18.55,
+    "delta_ci_95": [
+      16.87,
+      20.37
+    ],
+    "empirical_p_value": 0.0
+  },
+  "D2": {
+    "mean_wer": 20.98,
+    "std_wer": 1.097,
+    "ci_95_wer": [
+      18.83,
+      23.15
+    ],
+    "mean_cer": 4.48,
+    "std_cer": 0.284,
+    "ci_95_cer": [
+      3.93,
+      5.05
+    ],
+    "paired_delta_wer": 17.43,
+    "delta_ci_95": [
+      15.46,
+      19.49
+    ],
+    "empirical_p_value": 0.0
+  },
+  "D3": {
+    "mean_wer": 11.51,
+    "std_wer": 0.901,
+    "ci_95_wer": [
+      9.87,
+      13.42
+    ],
+    "mean_cer": 3.06,
+    "std_cer": 0.318,
+    "ci_95_cer": [
+      2.51,
+      3.74
+    ],
+    "paired_delta_wer": 15.58,
+    "delta_ci_95": [
+      13.99,
+      17.23
+    ],
+    "empirical_p_value": 0.0
+  },
+  "D4": {
+    "mean_wer": 18.89,
+    "std_wer": 0.803,
+    "ci_95_wer": [
+      17.33,
+      20.45
+    ],
+    "mean_cer": 4.57,
+    "std_cer": 0.254,
+    "ci_95_cer": [
+      4.08,
+      5.08
+    ],
+    "paired_delta_wer": 17.56,
+    "delta_ci_95": [
+      16.14,
+      18.99
+    ],
+    "empirical_p_value": 0.0
+  },
+  "ALL": {
+    "mean_wer": 19.13,
+    "std_wer": 0.616,
+    "ci_95_wer": [
+      17.94,
+      20.35
+    ],
+    "mean_cer": 4.51,
+    "std_cer": 0.169,
+    "ci_95_cer": [
+      4.18,
+      4.85
+    ],
+    "paired_delta_wer": 17.29,
+    "delta_ci_95": [
+      16.44,
+      18.18
+    ],
+    "empirical_p_value": 0.0
+  }
+}

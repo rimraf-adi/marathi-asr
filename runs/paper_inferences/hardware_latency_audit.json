@@ -1,0 +1,28 @@
+{
+  "device": "NVIDIA RTX A5000",
+  "static_vram_mb": 1102.0,
+  "peak_vram_mb": 1846.6,
+  "dynamic_activation_vram_mb": 744.6,
+  "durations_benchmark": {
+    "1.0s_audio": {
+      "mean_forward_latency_ms": 70.17,
+      "real_time_factor": 0.07017,
+      "real_time_speedup_factor": "14.3x"
+    },
+    "3.0s_audio": {
+      "mean_forward_latency_ms": 71.87,
+      "real_time_factor": 0.02396,
+      "real_time_speedup_factor": "41.7x"
+    },
+    "5.0s_audio": {
+      "mean_forward_latency_ms": 69.34,
+      "real_time_factor": 0.01387,
+      "real_time_speedup_factor": "72.1x"
+    },
+    "10.0s_audio": {
+      "mean_forward_latency_ms": 65.59,
+      "real_time_factor": 0.00656,
+      "real_time_speedup_factor": "152.5x"
+    }
+  }
+}
