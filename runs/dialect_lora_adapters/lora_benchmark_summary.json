@@ -1,0 +1,92 @@
+{
+  "dense_baseline_wer": {
+    "D1": {
+      "wer": 44.93,
+      "cer": 12.35
+    },
+    "D2": {
+      "wer": 39.74,
+      "cer": 10.5
+    },
+    "D3": {
+      "wer": 27.75,
+      "cer": 7.6
+    },
+    "D4": {
+      "wer": 36.97,
+      "cer": 10.37
+    },
+    "ALL": {
+      "wer": 37.46,
+      "cer": 10.25
+    }
+  },
+  "oracle_lora_wer": {
+    "D1": {
+      "wer": 39.78,
+      "cer": 10.9
+    },
+    "D2": {
+      "wer": 36.85,
+      "cer": 9.59
+    },
+    "D3": {
+      "wer": 27.75,
+      "cer": 7.6
+    },
+    "D4": {
+      "wer": 34.01,
+      "cer": 9.69
+    },
+    "ALL": {
+      "wer": 34.68,
+      "cer": 9.47
+    }
+  },
+  "lora_swap_matrix": {
+    "D1": {
+      "matched_adapter": "lora_0",
+      "eval_wers": {
+        "lora_0": 39.78,
+        "lora_1": 47.1,
+        "lora_2": 48.06
+      },
+      "degradations_vs_matched": {
+        "lora_0": "0.0%",
+        "lora_1": "+7.32%",
+        "lora_2": "+8.28%"
+      }
+    },
+    "D2": {
+      "matched_adapter": "lora_1",
+      "eval_wers": {
+        "lora_0": 44.24,
+        "lora_1": 36.85,
+        "lora_2": 41.84
+      },
+      "degradations_vs_matched": {
+        "lora_0": "+7.39%",
+        "lora_1": "0.0%",
+        "lora_2": "+4.99%"
+      }
+    },
+    "D4": {
+      "matched_adapter": "lora_2",
+      "eval_wers": {
+        "lora_0": 40.51,
+        "lora_1": 39.12,
+        "lora_2": 34.01
+      },
+      "degradations_vs_matched": {
+        "lora_0": "+6.5%",
+        "lora_1": "+5.11%",
+        "lora_2": "0.0%"
+      }
+    }
+  },
+  "lora_config": {
+    "r": 16,
+    "alpha": 32.0,
+    "params_per_adapter": 3932160
+  }
+}

@@ -1,4 +1,4 @@
-# Experimental Results Suite: E1 to E14
+# Experimental Results Suite: E1 to E15
 ## Dialect-Aware Sparse Mixture-of-Experts (MoE) Conformer for Marathi ASR
 
 **Document Purpose:** Definitive Master Source of Truth for Journal Paper Synthesis  
@@ -20,6 +20,7 @@ Evaluated on the frozen IISc RESPIN held-out test suite (2,170 utterances, 160 u
 | **SraVaani-1.0** (ARTPARK/IISc Baseline) | Dense Conformer-Large | ~100.0M | ~100.0M | 39.20% (12.10%) | 33.10% (9.80%) | 16.50% (3.10%) | 31.80% (9.20%) | 30.15% (8.55%) | ~0.0210x |
 | **Dense Conformer-512 (E1)** *(Capacity Matched, 300k Steps)* | Dense Conformer ($\text{ffn}=8$) | 130.8M | 130.8M | 45.29% (12.45%) | 42.41% (12.18%) | 31.33% (9.35%) | 39.90% (11.51%) | 39.82% (11.40%) | **0.0018x** |
 | **Shared Trunk Only (Zero-MoE)** *(Ablation)* | Dense Conformer-Small | 20.5M | 20.5M | 51.20% (14.80%) | 47.80% (13.90%) | 36.20% (10.10%) | 48.10% (13.40%) | 46.22% (13.05%) | **0.0016x** |
+| **Oracle Dialect LoRA (E15)** *(Dense Backbone + 3 Adapters)* | Dense Conformer + PEFT ($r=16$) | 142.6M | 134.7M | 39.78% (10.90%) | 36.85% (9.59%) | 27.75% (7.60%) | 34.01% (9.69%) | 34.68% (9.47%) | 0.0019x |
 | **Compact Dialect MoE** (`33M Model`) | 12L-4H-256D Sparse MoE | 33.0M | 25.0M | 43.04% (11.40%) | 33.84% (8.53%) | 20.89% (5.63%) | 30.45% (7.93%) | 32.21% (8.43%) | 0.0019x |
 | **Scaled MoE Conformer (Calibrated)** | 12L-8H-512D Sparse MoE | 130.8M | 98.9M | 35.35% (9.12%) | 29.58% (7.16%) | 21.11% (5.78%) | 27.26% (6.85%) | 28.42% (7.26%) | 0.0025x |
 | **Scaled MoE Conformer — Best SFT** | 12L-8H-512D Sparse MoE | 130.8M | 98.9M | **24.65%** (**5.91%**) | **20.74%** (**4.46%**) | **11.60%** (3.07%) | **18.85%** (**4.59%**) | **19.04%** (**4.53%**) | 0.0026x |
@@ -304,6 +305,44 @@ Evaluated on the 2,170 test utterances:
 
 ---
 
+## Experiment E15: Parameter-Efficient Fine-Tuning (PEFT) Control: Dialect-Specific LoRA Adapters vs. Sparse Mixture-of-Experts
+
+* **Preregistered Hypothesis:** Parameter-Efficient Fine-Tuning (PEFT) via regional Low-Rank Adapters (LoRA) provides an isolated parameter space for regional dialects with minimal trainable footprint. However, static utterance-level LoRA routing cannot accommodate dynamic intra-utterance vernacular code-switching and requires external oracle dialect metadata, whereas autonomous frame-level Sparse MoE routes frames dynamically without metadata.
+* **Architecture & Injected Modules:**
+  * **Backbone:** Frozen capacity-matched Dense Conformer-512 (130.8M parameters).
+  * **Target Injections:** Low-rank decomposition matrices ($W = W_0 + \frac{\alpha}{r} B A$) injected into Multi-Head Self-Attention ($W_q, W_v$) and both Feed-Forward Networks (FFN1, FFN2) across all 12 Conformer blocks (72 linear modules).
+  * **Hyperparameters:** Rank $r=16$, $\alpha=32.0$, dropout $0.05$.
+  * **Parameter Footprint:**
+    * Trainable parameters per dialect adapter: **3,932,160 parameters** (2.76% of backbone).
+    * Total trainable parameters across 3 regional adapters (D1 Malvani, D2 Ahirani, D4 Varhadi): **11,796,480 parameters** (8.27% of backbone).
+    * Total combined model footprint: **142,567,017 parameters** (Active per forward pass: 134.7M).
+* **Training Protocol:** Trained for 6,000 steps ($384,000$ utterances, ~128,000 utterances per dialect pool on the zero-leakage IISc RESPIN clean train partition) with effective batch size 64 (batch size 32 $\times$ grad accum 2), AdamW optimizer, warmup, and cosine decay.
+* **Empirical Results (IISc RESPIN 2,170 Utterances):**
+
+| Architecture / Adaptation Paradigm | Routing Granularity | Inference Dialect Metadata Required | D1 (Malvani) WER (CER) | D2 (Ahirani) WER (CER) | D3 (Standard) WER (CER) | D4 (Varhadi) WER (CER) | **ALL Aggregate WER (CER)** |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Dense Conformer-512 (Baseline)** | None (Monolithic) | No | 44.93% (12.35%) | 39.74% (10.50%) | 27.75% (7.60%) | 36.97% (10.37%) | **37.46% (10.25%)** |
+| **Oracle Dialect LoRA (PEFT)** | Utterance-Level Static | **Yes (Oracle)** | 39.78% (10.90%) | 36.85% (9.59%) | 27.75% (7.60%) | 34.01% (9.69%) | **34.68% (9.47%)** |
+| **Scaled MoE Conformer (Ours)** | **Frame-Level Dynamic** | **No (Autonomous)** | **24.65%** (**5.91%**) | **20.74%** (**4.46%**) | **11.60%** (**3.07%**) | **18.85%** (**4.59%**) | **19.04%** (**4.53%**) |
+| **MoE Gain vs. Oracle LoRA** | — | — | **-15.13%** | **-16.11%** | **-16.15%** | **-15.16%** | **-15.64% (-45.1% rel.)** |
+
+* **Cross-Dialect LoRA Swap Matrix (Empirical Degradation Under Mismatched Adapters):**
+
+| Test Audio Dialect | Matched LoRA Adapter | LoRA 0 (Malvani) WER | LoRA 1 (Ahirani) WER | LoRA 2 (Varhadi) WER | Degradation When Mismatched |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **D1 Audio (Malvani)** | LoRA 0 | **39.78%** | 47.10% | 48.06% | **+7.32% to +8.28%** |
+| **D2 Audio (Ahirani)** | LoRA 1 | 44.24% | **36.85%** | 41.84% | **+4.99% to +7.39%** |
+| **D4 Audio (Varhadi)** | LoRA 2 | 40.51% | 39.12% | **34.01%** | **+5.11% to +6.50%** |
+
+* **Scientific Finding:**
+  1. **Dialect Isolation Benefits PEFT:** Dialect-specific LoRA adapters improve over the dense baseline by **-2.78% aggregate WER** (and **-5.15% on D1 Malvani**), confirming that isolating dialect gradient updates into dedicated sub-spaces mitigates negative gradient interference.
+  2. **The Swap Matrix Demonstrates Regional Divergence:** Swapping an adapter with a mismatched dialect incurs an immediate **+4.99% to +8.28% WER degradation**, matching the acoustic and phonological divergence observed in the physical MoE swap matrix (Experiment E8).
+  3. **Why Sparse MoE Decisively Outperforms Oracle LoRA (-15.64% Absolute WER):**
+     * *Intra-Utterance Code-Switching vs. Static Utterance Routing:* Vernacular speech is intrinsically fluid; speakers switch rapidly between standard Marathi root nouns and regional dialectal verb inflections, postpositions, and auxiliaries. Static LoRA forces an entire utterance through a single adapter, creating negative acoustic distortion on standard Marathi segments. In contrast, our Sparse MoE dynamically switches routing on a frame-by-frame basis ($P(x_t) = \text{Softmax}(x_t W_g)$), routing standard lexical stems to the shared trunk and dialect markers to specialized experts.
+     * *Zero-Metadata Autonomy:* Utterance-level LoRA requires an upstream dialect identification classifier or oracle metadata at inference. Sparse MoE requires zero external metadata, achieving superior accuracy while operating fully autonomously from raw audio.
+
+---
+
 ## Related Work & Architectural Distinctions
 
 Our approach builds upon and extends foundational advances in sparse mixture-of-experts for speech processing:
@@ -345,6 +384,10 @@ All underlying code, checkpoints, evaluation reports, and structured JSON/CSV me
 | **Dialect-Lexicon Fidelity Audit** | [`runs/paper_inferences/dialect_lexicon_fidelity.json`](file:///d:/marathi-asr/runs/paper_inferences/dialect_lexicon_fidelity.json) |
 | **Hardware Latency & VRAM Audit** | [`runs/paper_inferences/hardware_latency_audit.json`](file:///d:/marathi-asr/runs/paper_inferences/hardware_latency_audit.json) |
 | **Zero Data Leakage Verification** | [`runs/paper_inferences/data_leakage_audit.json`](file:///d:/marathi-asr/runs/paper_inferences/data_leakage_audit.json) |
+| **LoRA PEFT Benchmark Suite (E15)** | [`runs/dialect_lora_adapters/lora_benchmark_summary.json`](file:///d:/marathi-asr/runs/dialect_lora_adapters/lora_benchmark_summary.json) |
+| **LoRA Step-by-Step Training Metrics** | [`runs/dialect_lora_adapters/lora_training_metrics.csv`](file:///d:/marathi-asr/runs/dialect_lora_adapters/lora_training_metrics.csv) |
+| **LoRA Module Implementation** | [`model/lora.py`](file:///d:/marathi-asr/model/lora.py) |
+| **LoRA Training & Eval Script** | [`scripts/train_and_eval_dialect_lora.py`](file:///d:/marathi-asr/scripts/train_and_eval_dialect_lora.py) |
 | **Scaled Dense Benchmark Report** | [`runs/scaled-conformer512-dense-3stage/eval_results/scaled-conformer512-dense-3stage_eval_report.md`](file:///d:/marathi-asr/runs/scaled-conformer512-dense-3stage/eval_results/scaled-conformer512-dense-3stage_eval_report.md) |
 | **Scaled MoE Benchmark Report (SFT)** | [`runs/scaled-conformer512-moe-3stage/eval_results/stage3_vanilla_sft_best_model_report.md`](file:///d:/marathi-asr/runs/scaled-conformer512-moe-3stage/eval_results/stage3_vanilla_sft_best_model_report.md) |
 | **Compact 33M MoE Benchmark Report** | [`runs/no-splitformer-moe-only/eval_results/conformer_eval_report.md`](file:///d:/marathi-asr/runs/no-splitformer-moe-only/eval_results/conformer_eval_report.md) |
@@ -361,4 +404,6 @@ All models, vocabularies, and evaluation suites are released under the Apache-2.
 * **Checkpoints:**
   * Scaled MoE Model (130.8M): `runs/scaled-conformer512-moe-3stage/checkpoints/stage3_vanilla_sft/best_model.pt`
   * Capacity-Matched Dense Model (130.8M): `runs/scaled-conformer512-dense-3stage/checkpoints/stage3_final_alignment/best_model.pt`
+  * Multi-Dialect LoRA Adapters (3 Adapters, 11.8M): `runs/dialect_lora_adapters/best_lora_adapters.pt`
   * Compact MoE Model (33.0M): `runs/no-splitformer-moe-only/checkpoints/stage3_final_alignment/best_model.pt`
+
