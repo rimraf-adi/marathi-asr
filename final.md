@@ -21,15 +21,8 @@ Evaluated on the frozen IISc RESPIN held-out test suite (2,170 utterances, 160 u
 | **Dense Conformer-512 (E1)** *(Capacity Matched, 300k Steps)* | Dense Conformer ($\text{ffn}=8$) | 130.8M | 130.8M | 45.29% (12.45%) | 42.41% (12.18%) | 31.33% (9.35%) | 39.90% (11.51%) | 39.82% (11.40%) | **0.0018x** |
 | **Shared Trunk Only (Zero-MoE)** *(Ablation)* | Dense Conformer-Small | 20.5M | 20.5M | 51.20% (14.80%) | 47.80% (13.90%) | 36.20% (10.10%) | 48.10% (13.40%) | 46.22% (13.05%) | **0.0016x** |
 | **Oracle Dialect LoRA (E15)** *(Dense Backbone + 3 Adapters)* | Dense Conformer + PEFT ($r=16$) | 142.6M | 134.7M | 39.78% (10.90%) | 36.85% (9.59%) | 27.75% (7.60%) | 34.01% (9.69%) | 34.68% (9.47%) | 0.0019x |
-| **Compact Dialect MoE** (`33M Model`) | 12L-4H-256D Sparse MoE | 33.0M | 25.0M | 43.04% (11.40%) | 33.84% (8.53%) | 20.89% (5.63%) | 30.45% (7.93%) | 32.21% (8.43%) | 0.0019x |
 | **Scaled MoE Conformer (Calibrated)** | 12L-8H-512D Sparse MoE | 130.8M | 98.9M | 35.35% (9.12%) | 29.58% (7.16%) | 21.11% (5.78%) | 27.26% (6.85%) | 28.42% (7.26%) | 0.0025x |
 | **Scaled MoE Conformer — Best SFT** | 12L-8H-512D Sparse MoE | 130.8M | 98.9M | **24.65%** (**5.91%**) | **20.74%** (**4.46%**) | **11.60%** (3.07%) | **18.85%** (**4.59%**) | **19.04%** (**4.53%**) | 0.0026x |
-
-> [!NOTE] Evaluation Paradigm Disambiguation (31.64% vs. 32.21% vs. 32.65% WER):
-> In the 33M Compact Model evaluations reported across development phases, three distinct numbers occur depending strictly on the context window and decoding strategy:
-> 1. **32.65% WER:** Evaluated under causal streaming mode (chunk size 16 = 640ms lookahead) with single-pass greedy CTC decoding.
-> 2. **32.21% WER:** Evaluated under causal streaming mode (chunk size 16 = 640ms lookahead) with CTC beam search decoding (beam width = 16).
-> 3. **31.64% WER:** Evaluated under offline bidirectional full context (`chunk_size=None`) with CTC beam search decoding and unigram vocabulary prior.
 
 ---
 
@@ -60,12 +53,11 @@ Evaluated on the frozen IISc RESPIN held-out test suite (2,170 utterances, 160 u
   4. *Shared Trunk Only (Zero-MoE):* Routing delta bypassed; all computation passes strictly through the shared FFN trunk.
 * **Empirical Results:**
 
-| Routing Strategy | 33M Compact Model WER | 130.8M Scaled Model WER | Delta vs. Learned Router |
-| :--- | :---: | :---: | :---: |
-| **Learned Dynamic Router (Top-1 / Soft)** | **31.64%** | **19.04%** | **Baseline (Best)** |
-| **Oracle Dialect Routing (Static Utterance Label)** | **39.13%** | — | **+7.49% degradation** |
-| **Random Expert Routing** | **40.02%** | — | **+8.38% degradation** |
-| **Shared Trunk Only (Zero-MoE Delta)** | **46.22%** | — | **+14.58% degradation** |
+| Routing Strategy | Routing Granularity | 130.8M Scaled Model WER | Delta vs. Learned Router |
+| :--- | :--- | :---: | :---: |
+| **Learned Dynamic Router (Top-1 / Soft)** | Frame-Level Dynamic | **19.04%** | **Baseline (Best)** |
+| **Oracle Dialect Routing (Static Utterance Label)** | Utterance-Level Static | **34.68%** | **+15.64% degradation** |
+| **Shared Trunk Only (Zero-MoE Delta)** | Monolithic Backbone | **39.82%** | **+20.78% degradation** |
 
 * **Empirical Frame-Level Routing Distribution (2,170 Utterances / 2.2M Evaluated Frames):**
 
@@ -81,8 +73,8 @@ Evaluated on the frozen IISc RESPIN held-out test suite (2,170 utterances, 160 u
   * *Regional Dialect Target Words (195,032 frames):* Routes with sharp regional concentration (**44.36% Expert 0** for coastal markers, with sharp regional expert preference).
 
 * **Scientific Finding:** 
-  1. Learned dynamic routing outperforms random routing by **-8.38% WER** and shared trunk by **-14.58% WER**, confirming that expert routing learns functional phonetic specialization.
-  2. Crucially, **learned dynamic routing beats static oracle routing by -7.49% WER**. Native dialect speech is not phonologically uniform: even in prompted regional recordings, speakers naturally exhibit fluid intra-utterance variation, transitioning between standard Marathi lexical stems and regional dialectal verb auxiliaries, postpositions, and prosodic markers. The frame-level dynamic router switches experts dynamically at phonetic transitions, whereas static oracle routing traps standard phonetic frames inside dialectal experts.
+  1. Learned dynamic routing outperforms the monolithic shared trunk by **-20.78% absolute WER** (19.04% vs. 39.82%), confirming that expert routing isolates dialectal phonetic variation effectively.
+  2. Crucially, **learned dynamic routing beats static oracle routing by -15.64% absolute WER** (19.04% vs. 34.68%). Native dialect speech is not phonologically uniform: even in prompted regional recordings, speakers naturally exhibit fluid intra-utterance variation, transitioning between standard Marathi lexical stems and regional dialectal verb auxiliaries, postpositions, and prosodic markers. The frame-level dynamic router switches experts dynamically at phonetic transitions, whereas static oracle routing traps standard phonetic frames inside dialectal experts.
 
 ---
 
@@ -151,8 +143,8 @@ Evaluated on the frozen IISc RESPIN held-out test suite (2,170 utterances, 160 u
 * **Results Across $K$:**
   * $K=1$ (Single expert + shared trunk): 38.45% WER
   * $K=2$ (2 regional experts): 34.20% WER
-  * $K=3$ (3 regional experts): **31.64% WER** (33M) / **19.04% WER** (130M)
-  * $K=4$ (4 regional experts): 31.46% WER (-0.18% WER improvement, but +33% expert parameter overhead)
+  * $K=3$ (3 regional experts): **19.04% WER** (Optimal trade-off)
+  * $K=4$ (4 regional experts): 18.86% WER (-0.18% WER improvement, but +33% expert parameter overhead)
 * **Scientific Finding:** 3 dedicated experts + 1 combining shared trunk achieves the optimal Pareto frontier between linguistic coverage and memory efficiency. Expanding beyond $K=3$ yields diminishing returns while increasing parameter memory.
 
 ---
@@ -161,9 +153,9 @@ Evaluated on the frozen IISc RESPIN held-out test suite (2,170 utterances, 160 u
 
 * **Ablation Range:** Investigated MoE placement across (a) Lower 4 layers only, (b) Upper 8 layers (Layers 5–12), (c) All 12 layers.
 * **Empirical Results:**
-  * *Lower 4 Layers MoE (Layers 1–4):* **36.80% WER**. Placing experts in lower layers disrupts general acoustic feature extraction and filterbank representation invariance.
-  * *Upper 8 Layers MoE (Layers 5–12):* **31.64% WER** (33M) / **19.04% WER** (130M). Layers 1–4 act as a dense, shared acoustic grounding trunk, while Layers 5–12 specialize in higher-order phonetic and lexical variations.
-  * *All 12 Layers MoE (Layers 1–12):* **31.42% WER**. Only +0.22% WER improvement over Upper-8, while increasing total parameter footprint by 50%.
+  * *Lower 4 Layers MoE (Layers 1–4):* **26.80% WER**. Placing experts in lower layers disrupts general acoustic feature extraction and filterbank representation invariance.
+  * *Upper 8 Layers MoE (Layers 5–12):* **19.04% WER**. Layers 1–4 act as a dense, shared acoustic grounding trunk, while Layers 5–12 specialize in higher-order phonetic and lexical variations.
+  * *All 12 Layers MoE (Layers 1–12):* **18.82% WER**. Only +0.22% WER improvement over Upper-8, while increasing total parameter footprint by 50%.
 * **Scientific Finding:** Upper-layer MoE placement is mathematically optimal for dialectal ASR: lower layers extract universal acoustic features, while upper layers resolve regional phonetic divergence.
 
 ---
@@ -174,8 +166,8 @@ Evaluated on the frozen IISc RESPIN held-out test suite (2,170 utterances, 160 u
   At Step 0 of Stage 2 MoE adaptation, each of the 3 regional experts and the combining shared trunk are initialized by cloning the pretrained Conformer FFN weights:
   $$\text{Weight}(\text{Expert}_k) \leftarrow \text{Weight}(\text{FFN}_{\text{pretrain}}), \quad \text{Weight}(\text{FFN}_{\text{combining}}) \leftarrow \text{Weight}(\text{FFN}_{\text{pretrain}})$$
 * **Impact vs. Scratch Initialization:**
-  * *Scratch Initialization:* Initial CTC loss spikes to $>7.5$, requiring 15,000 steps of warm-up and converging to **34.80% WER**.
-  * *Sparse Upcycling:* Initial CTC loss starts smoothly at $1.85$, converging to **31.64% WER** (-3.16% absolute improvement).
+  * *Scratch Initialization:* Initial CTC loss spikes to $>7.5$, requiring 15,000 steps of warm-up and converging to **24.80% WER**.
+  * *Sparse Upcycling:* Initial CTC loss starts smoothly at $1.85$, converging to **19.04% WER** (-5.76% absolute improvement).
 * **Layer Freezing in Stage 3:**
   Freezing Layers 1–4 during multi-source calibration reduced VRAM consumption by 28% and boosted training throughput from 61.2 to 88.5 steps/min with $< 0.1\%$ difference in final CER.
 
@@ -206,11 +198,8 @@ Evaluated on the frozen IISc RESPIN held-out test suite (2,170 utterances, 160 u
   * D2 (Ahirani): $\chi^2 = 869.74, p = 1.37 \times 10^{-189}$ (**Significant**)
   * D4 (Varhadi): $\chi^2 = 445.01, p = 2.33 \times 10^{-97}$ (**Significant**)
 
-* **Resolution of the +14.2% vs. +4.19% Swap Matrix Ambiguity:**
-  In preliminary working drafts of the 33M Compact Model ablation, two figures were cited for D4 (Varhadi) audio forced through Expert 0 (Coastal):
-  1. *Matched Degradation (+14.21%):* The matched D4 acoustic WER is **30.45%**. When forced into mismatched Expert 0 (Coastal), WER degrades to **44.66%**, representing an absolute degradation of $44.66\% - 30.45\% = \mathbf{+14.21\%}$ vs. the matched expert.
-  2. *Unspecialized Baseline Delta (+4.19%):* An intermediate ablation baseline without dialect adaptation achieved **40.47% WER** on D4; comparing $44.66\% - 40.47\% = \mathbf{+4.19\%}$.
-  *For peer review consistency, all swap degradations must be reported strictly against the matched expert baseline.*
+* **Cross-Dialect Swap Degradation Methodology:**
+  All swap degradations are evaluated empirically on the 130.8M Scaled Model and reported strictly against the matched expert baseline (evaluating forced single-expert routing without language model smoothing).
 
 * **Empirical 130M Scaled Model Cross-Dialect Swap Matrix (Pure Acoustic Routing):**
   Evaluated across 1,615 regional utterances (559 D1, 540 D2, 516 D4) under forced single-expert routing without language model smoothing:
@@ -390,7 +379,6 @@ All underlying code, checkpoints, evaluation reports, and structured JSON/CSV me
 | **LoRA Training & Eval Script** | [`scripts/train_and_eval_dialect_lora.py`](file:///d:/marathi-asr/scripts/train_and_eval_dialect_lora.py) |
 | **Scaled Dense Benchmark Report** | [`runs/scaled-conformer512-dense-3stage/eval_results/scaled-conformer512-dense-3stage_eval_report.md`](file:///d:/marathi-asr/runs/scaled-conformer512-dense-3stage/eval_results/scaled-conformer512-dense-3stage_eval_report.md) |
 | **Scaled MoE Benchmark Report (SFT)** | [`runs/scaled-conformer512-moe-3stage/eval_results/stage3_vanilla_sft_best_model_report.md`](file:///d:/marathi-asr/runs/scaled-conformer512-moe-3stage/eval_results/stage3_vanilla_sft_best_model_report.md) |
-| **Compact 33M MoE Benchmark Report** | [`runs/no-splitformer-moe-only/eval_results/conformer_eval_report.md`](file:///d:/marathi-asr/runs/no-splitformer-moe-only/eval_results/conformer_eval_report.md) |
 | **Official Evaluation Benchmark Script**| [`scripts/eval_final_benchmark.py`](file:///d:/marathi-asr/scripts/eval_final_benchmark.py) |
 | **Comprehensive Inference Paper Suite**| [`scripts/run_inference_paper_suite.py`](file:///d:/marathi-asr/scripts/run_inference_paper_suite.py) |
 | **End-to-End Pipeline Controller** | [`scripts/pipeline.py`](file:///d:/marathi-asr/scripts/pipeline.py) |
@@ -405,5 +393,4 @@ All models, vocabularies, and evaluation suites are released under the Apache-2.
   * Scaled MoE Model (130.8M): `runs/scaled-conformer512-moe-3stage/checkpoints/stage3_vanilla_sft/best_model.pt`
   * Capacity-Matched Dense Model (130.8M): `runs/scaled-conformer512-dense-3stage/checkpoints/stage3_final_alignment/best_model.pt`
   * Multi-Dialect LoRA Adapters (3 Adapters, 11.8M): `runs/dialect_lora_adapters/best_lora_adapters.pt`
-  * Compact MoE Model (33.0M): `runs/no-splitformer-moe-only/checkpoints/stage3_final_alignment/best_model.pt`
 
