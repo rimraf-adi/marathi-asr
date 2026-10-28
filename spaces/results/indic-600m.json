@@ -1,0 +1,256 @@
+{
+  "model": "ai4bharat/indic-conformer-600m-multilingual",
+  "display": "IndicConformer-600M",
+  "url": "https://huggingface.co/ai4bharat/indic-conformer-600m-multilingual",
+  "type": "open",
+  "params_total_m": 600,
+  "params_active_m": 600,
+  "license": "see model card",
+  "checkpoint": {
+    "path": "hf://ai4bharat/indic-conformer-600m-multilingual",
+    "sha256": "2a77d305038dfc502fd9464e7d028b90381976cb"
+  },
+  "norm_version": "mr-norm-1",
+  "decoder": "model default",
+  "language_forced": true,
+  "eval_date": "2026-10-28",
+  "hardware": "NVIDIA RTX A5000 / Windows",
+  "rtfx": 7.8,
+  "trained_on": null,
+  "scores": {
+    "fleurs_mr": {
+      "wer": 18.58,
+      "cer": 5.62,
+      "n_utts": 1015,
+      "hours": 3.856,
+      "wer_ci95": [
+        17.75,
+        19.4
+      ],
+      "split": "test"
+    },
+    "indicvoices_mr": {
+      "wer": 15.96,
+      "cer": 5.43,
+      "n_utts": 3673,
+      "hours": 6.149,
+      "wer_ci95": [
+        15.37,
+        16.53
+      ],
+      "split": "valid"
+    },
+    "kathbath_mr": {
+      "wer": 13.52,
+      "cer": 2.88,
+      "n_utts": 2378,
+      "hours": 4.179,
+      "wer_ci95": [
+        12.98,
+        14.14
+      ],
+      "split": "valid"
+    },
+    "respin_mr": {
+      "wer": 23.94,
+      "cer": 4.95,
+      "n_utts": 2170,
+      "hours": 3.042,
+      "wer_ci95": [
+        22.99,
+        24.93
+      ],
+      "split": "test"
+    }
+  },
+  "slices": {
+    "fleurs_mr": {
+      "gender": {
+        "MALE": {
+          "wer": 20.23,
+          "n": 671
+        },
+        "FEMALE": {
+          "wer": 15.34,
+          "n": 344
+        }
+      }
+    },
+    "indicvoices_mr": {
+      "gender": {
+        "Female": {
+          "wer": 14.16,
+          "n": 1887
+        },
+        "Male": {
+          "wer": 17.96,
+          "n": 1784
+        },
+        "Other": {
+          "wer": 9.09,
+          "n": 2
+        }
+      },
+      "district": {
+        "Akola": {
+          "wer": 20.74,
+          "n": 206
+        },
+        "Pune": {
+          "wer": 9.9,
+          "n": 208
+        },
+        "Amravati": {
+          "wer": 24.57,
+          "n": 242
+        },
+        "Sangli": {
+          "wer": 20.09,
+          "n": 257
+        },
+        "Raigad": {
+          "wer": 14.07,
+          "n": 9
+        },
+        "Nagpur": {
+          "wer": 18.02,
+          "n": 154
+        },
+        "Yavatmal": {
+          "wer": 13.29,
+          "n": 174
+        },
+        "Ratnagiri": {
+          "wer": 15.95,
+          "n": 295
+        },
+        "Satara": {
+          "wer": 16.16,
+          "n": 221
+        },
+        "Thane": {
+          "wer": 13.1,
+          "n": 248
+        },
+        "Buldhana": {
+          "wer": 16.47,
+          "n": 179
+        },
+        "Sindhudurg": {
+          "wer": 18.96,
+          "n": 65
+        },
+        "Ahmednagar": {
+          "wer": 13.07,
+          "n": 116
+        },
+        "Gondia": {
+          "wer": 30.45,
+          "n": 27
+        },
+        "Washim": {
+          "wer": 16.44,
+          "n": 119
+        },
+        "Aurangabad": {
+          "wer": 11.14,
+          "n": 23
+        },
+        "Solapur": {
+          "wer": 22.41,
+          "n": 36
+        },
+        "Mumbai Suburban": {
+          "wer": 22.23,
+          "n": 70
+        },
+        "Wardha": {
+          "wer": 10.48,
+          "n": 124
+        },
+        "Mumbai City": {
+          "wer": 4.81,
+          "n": 6
+        },
+        "Bhandara": {
+          "wer": 13.14,
+          "n": 25
+        },
+        "Kolhapur": {
+          "wer": 12.5,
+          "n": 110
+        },
+        "Hingoli": {
+          "wer": 16.9,
+          "n": 75
+        },
+        "Nashik": {
+          "wer": 11.74,
+          "n": 157
+        },
+        "Gadchiroli": {
+          "wer": 27.08,
+          "n": 21
+        },
+        "Palghar": {
+          "wer": 20.21,
+          "n": 40
+        },
+        "Nanded": {
+          "wer": 18.2,
+          "n": 189
+        },
+        "Beed": {
+          "wer": 23.52,
+          "n": 64
+        },
+        "Jalna": {
+          "wer": 18.2,
+          "n": 60
+        },
+        "Osmanabad": {
+          "wer": 8.01,
+          "n": 153
+        }
+      }
+    },
+    "kathbath_mr": {
+      "gender": {
+        "Female": {
+          "wer": 10.16,
+          "n": 1255
+        },
+        "Male": {
+          "wer": 17.36,
+          "n": 1123
+        }
+      },
+      "district": {
+        "unknown": {
+          "wer": 13.52,
+          "n": 2378
+        }
+      }
+    },
+    "respin_mr": {
+      "dialect": {
+        "Standard (D3)": {
+          "wer": 11.57,
+          "n": 555
+        },
+        "Malvani (D1)": {
+          "wer": 34.59,
+          "n": 559
+        },
+        "Varhadi (D4)": {
+          "wer": 24.29,
+          "n": 516
+        },
+        "Ahirani (D2)": {
+          "wer": 24.64,
+          "n": 540
+        }
+      }
+    }
+  }
+}
