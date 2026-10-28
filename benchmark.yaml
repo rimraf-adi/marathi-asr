@@ -1,0 +1,110 @@
+version: "0.1.0"
+norm_version: "mr-norm-1"
+sample_rate: 16000
+
+datasets:
+  - id: "fleurs_mr"
+    label: "FLEURS"
+    path: "google/fleurs"
+    config: "mr_in"
+    split: "test"
+    audio_col: "audio"
+    text_col: "transcription"
+    tags:
+      style: "read"
+      noise: "clean"
+    default: true
+    gated: false
+    license: "CC BY 4.0"
+
+  - id: "kathbath_mr"
+    label: "Kathbath"
+    path: "ai4bharat/Kathbath"
+    config: "marathi"
+    split: "valid"  # repo ships only train/valid; no test split exists
+    audio_col: "audio"
+    text_col: "text"
+    tags:
+      style: "read"
+      noise: "clean"
+    default: true
+    gated: true
+    license: "CC0 1.0 Universal"
+
+  - id: "indicvoices_mr"
+    label: "IndicVoices"
+    path: "ai4bharat/indicvoices"
+    config: "mr"
+    split: "valid"  # repo ships only train/valid; no test split exists
+    audio_col: "audio"
+    text_col: "transcription"
+    tags:
+      style: "spontaneous"
+      noise: "in-the-wild"
+    default: true
+    gated: true
+    slice_cols:
+      district: "district"
+      gender: "gender"
+    license: "CC BY 4.0"
+
+  - id: "vaani_mr"
+    label: "Vaani"
+    path: "ARTPARK-IISc/Vaani"
+    config: "marathi"
+    split: "test"
+    audio_col: "audio"
+    text_col: "transcription"
+    tags:
+      style: "spontaneous"
+      noise: "field"
+    default: true
+    gated: true
+    slice_cols:
+      district: "district"
+      duration_bin: "duration_bin"
+    license: "Research Use"
+
+  - id: "respin_mr"
+    label: "RESPIN"
+    path: "rimrafadii/respin-iisc"
+    config: "marathi"
+    split: "test"
+    audio_col: "audio"
+    text_col: "transcription"
+    tags:
+      style: "read"
+      noise: "clean"
+    default: true
+    gated: false
+    slice_cols:
+      dialect: "dialect"
+    license: "CC BY-NC 4.0"
+
+  - id: "springinx_mr"
+    label: "SPRING-INX"
+    path: "SPRINGLab/IndicTTS_Marathi"
+    config: "eval"
+    split: "eval"
+    audio_col: "audio"
+    text_col: "transcription"
+    tags:
+      style: "conversational"
+      noise: "clean"
+    default: false
+    gated: false
+    license: "Research License"
+
+  - id: "vimarsha_mr"
+    label: "Vimarsha"
+    path: "ai4bharat/vimarsha"
+    config: "mr"
+    split: "test"
+    audio_col: "audio"
+    text_col: "transcription"
+    tags:
+      style: "in-the-wild"
+      noise: "noisy"
+    default: false
+    gated: true
+    license: "Research License"
