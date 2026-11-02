@@ -1,0 +1,26 @@
+{
+ "gpu": "NVIDIA RTX A5000",
+ "n_utts": 300,
+ "audio_secs": 1482.0,
+ "precision": "fp32",
+ "moe": {
+  "params_m": 130.8,
+  "batch1_latency_ms_p50": 72.1,
+  "batch1_latency_ms_p95": 82.5,
+  "batch1_rtf": 0.0148,
+  "batch16_rtf": 0.0017,
+  "batch16_rtfx": 604.4,
+  "peak_vram_mb_batch1": 725,
+  "peak_vram_mb_batch16": 2311
+ },
+ "dense": {
+  "params_m": 130.8,
+  "batch1_latency_ms_p50": 26.7,
+  "batch1_latency_ms_p95": 31.1,
+  "batch1_rtf": 0.0055,
+  "batch16_rtf": 0.0012,
+  "batch16_rtfx": 807.1,
+  "peak_vram_mb_batch1": 728,
+  "peak_vram_mb_batch16": 2314
+ }
+}

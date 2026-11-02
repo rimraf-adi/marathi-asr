@@ -56,7 +56,19 @@ def train_moe_stage4(run_dir: str = "run3",
     checkpoint_dir: Optional[str] = None,
     resume_path: Optional[str] = None,
     stage_name: str = "stage2_moe",
+    num_experts: int = 3,
+    moe_layers: Optional[List[int]] = None,
+    expert_init: str = "upcycle",
+    aux_weight: float = 0.01,
+    seed: Optional[int] = None,
 ):
+    if moe_layers is None:
+        moe_layers = [4, 5, 6, 7, 8, 9, 10, 11]  # Blocks 5 to 12 (0-indexed)
+    if seed is not None:
+        import random as _random
+        import numpy as _np
+        _random.seed(seed); _np.random.seed(seed); torch.manual_seed(seed); torch.cuda.manual_seed_all(seed)
+        print(f"[Seed] {seed}")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"\n[{stage_name}: 3-Dialect MoE] Initializing on device: {device} ({torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'})")
 
@@ -69,25 +81,37 @@ def train_moe_stage4(run_dir: str = "run3",
     # 1. Sparse Upcycling from Pretrained Checkpoint
     model = upcycle_conformer_to_moe(
         pretrained_checkpoint_path=pretrained_ckpt,
-        num_experts=3,
-        moe_layers=[4, 5, 6, 7, 8, 9, 10, 11],  # Blocks 5 to 12
+        num_experts=num_experts,
+        moe_layers=moe_layers,
         device=device,
     )
+    if expert_init == "scratch":
+        # Ablation: experts are randomly re-initialised instead of cloned from the pretrained FFN
+        for li in moe_layers:
+            for expert in model.encoder.layers[li].ffn2.experts:
+                for mod in expert.modules():
+                    if hasattr(mod, "reset_parameters"):
+                        mod.reset_parameters()
+        print(f"[Ablation] Experts in blocks {[i + 1 for i in moe_layers]} re-initialised from scratch (no upcycling)")
+    print(f"[Config] num_experts={num_experts} moe_blocks={[i + 1 for i in moe_layers]} expert_init={expert_init} aux_weight={aux_weight}")
 
     # 2. Differential LR: Lower LR for universal backbone (Layers 1-4), full LR for MoE + CTC
     print("[Stage 4] Setting up differential LR — backbone (Layers 1-4) at 1/10 LR, MoE + CTC at full LR...")
     backbone_params = []  # Layers 1-4 (lower LR)
     moe_params = []       # MoE experts, routers, CTC head (full LR)
 
-    # Layers 1-4: backbone (slow adaptation)
-    for layer_idx in range(4):
+    # Original recipe: blocks 1-4 at 1/10 LR, blocks 5-12 at full LR. MoE modules (experts, router, shared FFN)
+    # always train at full LR so that moving the experts does not change their learning rate.
+    moe_param_ids = set()
+    for li in moe_layers:
+        for param in model.encoder.layers[li].ffn2.parameters():
+            moe_param_ids.add(id(param))
+    for layer_idx in range(12):
         for param in model.encoder.layers[layer_idx].parameters():
-            backbone_params.append(param)
-
-    # Layers 5-12: MoE experts + routers + all layer params
-    for layer_idx in range(4, 12):
-        for param in model.encoder.layers[layer_idx].parameters():
-            moe_params.append(param)
+            if layer_idx >= 4 or id(param) in moe_param_ids:
+                moe_params.append(param)
+            else:
+                backbone_params.append(param)
 
     # CTC head (full LR — learning from scratch)
     for param in model.ctc_head.parameters():
@@ -182,12 +206,12 @@ def train_moe_stage4(run_dir: str = "run3",
                     # No aux loss during CTC warmup — pure CTC alignment
                     total_aux_loss = torch.tensor(0.0, device=device)
                     if not is_warmup:
-                        for layer_idx in [4, 5, 6, 7, 8, 9, 10, 11]:
+                        for layer_idx in moe_layers:
                             block = model.encoder.layers[layer_idx]
                             if isinstance(block.ffn2, SparseMoELayer) and hasattr(block.ffn2, "current_aux_loss"):
                                 total_aux_loss = total_aux_loss + block.ffn2.current_aux_loss
 
-                    total_loss = ctc_loss + 0.01 * total_aux_loss
+                    total_loss = ctc_loss + aux_weight * total_aux_loss
 
                 loss_scaled = total_loss / grad_accum_steps
                 scaler.scale(loss_scaled).backward()
@@ -267,7 +291,10 @@ def train_moe_stage4(run_dir: str = "run3",
                     metadata={
                         "ctc_loss": rolling_ctc_loss,
                         "aux_loss": aux_val,
-                        "num_experts": 3,
+                        "num_experts": num_experts,
+                        "moe_layers": list(moe_layers),
+                        "expert_init": expert_init,
+                        "aux_weight": aux_weight,
                         "model_config": {
                             "d_model": model.d_model,
                             "n_heads": model.encoder.layers[0].self_attn.n_heads,
@@ -304,6 +331,11 @@ if __name__ == "__main__":
     parser.add_argument("--checkpoint_dir", type=str, default=None, help="Checkpoints directory")
     parser.add_argument("--stage_name", type=str, default="stage2_moe", help="Stage name identifier")
     parser.add_argument("--resume", type=str, default=None, help="Resume checkpoint")
+    parser.add_argument("--num_experts", type=int, default=3, help="Experts per MoE block (ablation)")
+    parser.add_argument("--moe_layers", type=str, default="4,5,6,7,8,9,10,11", help="0-indexed blocks converted to MoE (ablation)")
+    parser.add_argument("--expert_init", type=str, default="upcycle", choices=["upcycle", "scratch"], help="Expert initialisation (ablation)")
+    parser.add_argument("--aux_weight", type=float, default=0.01, help="Load-balancing loss weight (0 disables it)")
+    parser.add_argument("--seed", type=int, default=None, help="Random seed (training order, dropout, router init)")
 
     args = parser.parse_args()
 
@@ -322,4 +354,9 @@ if __name__ == "__main__":
         checkpoint_dir=args.checkpoint_dir,
         resume_path=args.resume,
         stage_name=args.stage_name,
+        num_experts=args.num_experts,
+        moe_layers=[int(x) for x in args.moe_layers.split(",")],
+        expert_init=args.expert_init,
+        aux_weight=args.aux_weight,
+        seed=args.seed,
     )

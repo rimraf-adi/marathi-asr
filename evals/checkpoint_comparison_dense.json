@@ -1,0 +1,59 @@
+{
+ "runs/scaled-conformer512-dense-3stage/checkpoints/stage3_final_alignment/best_model.pt": {
+  "respin_mr": {
+   "wer": 36.13,
+   "cer": 9.56,
+   "ci": [
+    35.18,
+    37.18
+   ],
+   "n": 2170,
+   "dialect": {
+    "Standard (D3)": 24.88,
+    "Malvani (D1)": 43.99,
+    "Varhadi (D4)": 36.75,
+    "Ahirani (D2)": 38.27
+   }
+  },
+  "kathbath_mr": {
+   "wer": 50.69,
+   "cer": 14.52,
+   "ci": [
+    49.81,
+    51.63
+   ],
+   "n": 2378,
+   "dialect": null
+  }
+ },
+ "runs/scaled-conformer512-dense-3stage/checkpoints/stage2_dense/best_model.pt": {
+  "respin_mr": {
+   "wer": 49.16,
+   "cer": 14.41,
+   "ci": [
+    48.14,
+    50.22
+   ],
+   "n": 2170,
+   "dialect": {
+    "Standard (D3)": 37.57,
+    "Malvani (D1)": 56.32,
+    "Varhadi (D4)": 50.35,
+    "Ahirani (D2)": 51.78
+   }
+  },
+  "kathbath_mr": {
+   "wer": 81.15,
+   "cer": 28.33,
+   "ci": [
+    80.41,
+    81.92
+   ],
+   "n": 2378,
+   "dialect": null
+  }
+ },
+ "runs/scaled-conformer512-dense-3stage/checkpoints/stage1_pretrain/best_model.pt": {
+  "error": "RuntimeError: dense checkpoint left 4 encoder/ctc weights unloaded, e.g. ['ctc_head.norm.weight', 'ctc_head.norm.bias', 'ctc_head.proj.weight']"
+ }
+}

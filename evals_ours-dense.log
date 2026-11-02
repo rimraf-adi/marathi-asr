@@ -1,0 +1,46 @@
+hashing best_model.pt ...
+checkpoint: {'path': 'runs/scaled-conformer512-dense-3stage/checkpoints/stage3_final_alignment/best_model.pt', 'sha256': '7b384d9f011c2f163b78b46ab7592882ef252ce3d855da8718912844cae3fc3e', 'size_bytes': 1190802136, 'mtime': '2026-10-26T15:26:49'}
+[respin_mr]
+  loaded 2170 utterances
+  16/2170
+  336/2170
+  656/2170
+  976/2170
+  1296/2170
+  1616/2170
+  1936/2170
+[respin_mr] WER 36.13  CER 9.56  n=2170
+[kathbath_mr]
+  loaded 2378 utterances
+  16/2378
+  336/2378
+  656/2378
+  976/2378
+  1296/2378
+  1616/2378
+  1936/2378
+  2256/2378
+[kathbath_mr] WER 50.69  CER 14.52  n=2378
+[indicvoices_mr]
+  loaded 3679 utterances
+  16/3679
+  336/3679
+  656/3679
+  976/3679
+  1296/3679
+  1616/3679
+  1936/3679
+  2256/3679
+  2576/3679
+  2896/3679
+  3216/3679
+  3536/3679
+[indicvoices_mr] WER 77.19  CER 34.78  n=3673
+[fleurs_mr]
+  loaded 1015 utterances
+  16/1015
+  336/1015
+  656/1015
+  976/1015
+[fleurs_mr] WER 57.04  CER 19.49  n=1015
+wrote D:\marathi-asr\spaces\results\ours-dense.json

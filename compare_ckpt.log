@@ -1,0 +1,145 @@
+  loaded 2170 utterances
+  16/2170
+  336/2170
+  656/2170
+  976/2170
+  1296/2170
+  1616/2170
+  1936/2170
+  loaded 2378 utterances
+  16/2378
+  336/2378
+  656/2378
+  976/2378
+  1296/2378
+  1616/2378
+  1936/2378
+  2256/2378
+RESULT runs/scaled-conformer512-moe-3stage/checkpoints/stage2_moe/best_model.pt {"respin_mr": [28.0, 6.68], "kathbath_mr": [61.3, 18.3]}
+  loaded 2170 utterances
+  16/2170
+  336/2170
+  656/2170
+  976/2170
+  1296/2170
+  1616/2170
+  1936/2170
+  loaded 2378 utterances
+  16/2378
+  336/2378
+  656/2378
+  976/2378
+  1296/2378
+  1616/2378
+  1936/2378
+  2256/2378
+RESULT runs/scaled-conformer512-moe-3stage/checkpoints/stage3_vanilla_sft/best_model.pt {"respin_mr": [19.5, 4.29], "kathbath_mr": [29.41, 7.01]}
+  loaded 2170 utterances
+  16/2170
+  336/2170
+  656/2170
+  976/2170
+  1296/2170
+  1616/2170
+  1936/2170
+  loaded 2378 utterances
+  16/2378
+  336/2378
+  656/2378
+  976/2378
+  1296/2378
+  1616/2378
+  1936/2378
+  2256/2378
+RESULT runs/scaled-conformer512-moe-3stage/checkpoints/stage3_final_alignment/best_model.pt {"respin_mr": [25.5, 5.91], "kathbath_mr": [42.33, 11.01]}
+  loaded 2170 utterances
+  16/2170
+  336/2170
+  656/2170
+  976/2170
+  1296/2170
+  1616/2170
+  1936/2170
+  loaded 2378 utterances
+  16/2378
+  336/2378
+  656/2378
+  976/2378
+  1296/2378
+  1616/2378
+  1936/2378
+  2256/2378
+RESULT runs/moe_hard_routing/checkpoints/stage2_moe/best_model.pt {"respin_mr": [40.3, 9.96], "kathbath_mr": [71.87, 21.7]}
+  loaded 2170 utterances
+  16/2170
+  336/2170
+  656/2170
+  976/2170
+  1296/2170
+  1616/2170
+  1936/2170
+  loaded 2378 utterances
+  16/2378
+  336/2378
+  656/2378
+  976/2378
+  1296/2378
+  1616/2378
+  1936/2378
+  2256/2378
+RESULT runs/moe_grpo_kathbath/checkpoints/stage4b_moe_grpo/best_model.pt {"respin_mr": [38.36, 9.6], "kathbath_mr": [63.82, 18.8]}
+  loaded 2170 utterances
+  16/2170
+  336/2170
+  656/2170
+  976/2170
+  1296/2170
+  1616/2170
+  1936/2170
+  loaded 2378 utterances
+  16/2378
+  336/2378
+  656/2378
+  976/2378
+  1296/2378
+  1616/2378
+  1936/2378
+  2256/2378
+RESULT runs/stage5_openslr_polish/checkpoints/stage5_grpo_polish/best_model.pt {"respin_mr": [41.17, 10.6], "kathbath_mr": [65.91, 19.99]}
+  loaded 2170 utterances
+  16/2170
+  336/2170
+  656/2170
+  976/2170
+  1296/2170
+  1616/2170
+  1936/2170
+  loaded 2378 utterances
+  16/2378
+  336/2378
+  656/2378
+  976/2378
+  1296/2378
+  1616/2378
+  1936/2378
+  2256/2378
+RESULT runs/no-splitformer-moe-only/checkpoints/stage3_vanilla_sft/best_model.pt {"respin_mr": [22.78, 5.09], "kathbath_mr": [32.8, 7.86]}
+  loaded 2170 utterances
+  16/2170
+  336/2170
+  656/2170
+  976/2170
+  1296/2170
+  1616/2170
+  1936/2170
+  loaded 2378 utterances
+  16/2378
+  336/2378
+  656/2378
+  976/2378
+  1296/2378
+  1616/2378
+  1936/2378
+  2256/2378
+RESULT runs/no-splitformer-moe-only/checkpoints/stage3_final_alignment/best_model.pt {"respin_mr": [32.97, 8.09], "kathbath_mr": [64.45, 19.75]}
+done

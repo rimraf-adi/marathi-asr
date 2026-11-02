@@ -1,0 +1,52 @@
+checkpoint: {'path': 'hf://ai4bharat/indic-conformer-600m-multilingual', 'sha256': '2a77d305038dfc502fd9464e7d028b90381976cb'}
+[IndicConformer] Loading model 'ai4bharat/indic-conformer-600m-multilingual'...
+Please check FRAME_DURATION_MS. The timestamps can be inaccurate
+Please check FRAME_DURATION_MS. The timestamps can be inaccurate
+Fetching 404 files:   0%|          | 0/404 [00:00<?, ?it/s]Fetching 404 files:  44%|████▍     | 178/404 [00:00<00:00, 1729.53it/s]Fetching 404 files:  89%|████████▊ | 358/404 [00:00<00:00, 1764.17it/s]Fetching 404 files: 100%|██████████| 404/404 [00:00<00:00, 1795.90it/s]
+D:\marathi-asr\.venv311\Lib\site-packages\onnxruntime\capi\onnxruntime_inference_collection.py:197: UserWarning: Specified provider 'CUDAExecutionProvider' is not in available provider names.Available providers: 'AzureExecutionProvider, CPUExecutionProvider'
+  warnings.warn(
+Please check FRAME_DURATION_MS. The timestamps can be inaccurate
+[respin_mr]
+  loaded 2170 utterances
+  16/2170
+  336/2170
+  656/2170
+  976/2170
+  1296/2170
+  1616/2170
+  1936/2170
+[respin_mr] WER 23.94  CER 4.95  n=2170
+[kathbath_mr]
+  loaded 2378 utterances
+  16/2378
+  336/2378
+  656/2378
+  976/2378
+  1296/2378
+  1616/2378
+  1936/2378
+  2256/2378
+[kathbath_mr] WER 13.52  CER 2.88  n=2378
+[indicvoices_mr]
+  loaded 3679 utterances
+  16/3679
+  336/3679
+  656/3679
+  976/3679
+  1296/3679
+  1616/3679
+  1936/3679
+  2256/3679
+  2576/3679
+  2896/3679
+  3216/3679
+  3536/3679
+[indicvoices_mr] WER 15.96  CER 5.43  n=3673
+[fleurs_mr]
+  loaded 1015 utterances
+  16/1015
+  336/1015
+  656/1015
+  976/1015
+[fleurs_mr] WER 18.58  CER 5.62  n=1015
+wrote D:\marathi-asr\spaces\results\indic-600m.json

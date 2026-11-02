@@ -1,0 +1,51 @@
+checkpoint: {'path': 'hf://ARTPARK-IISc/SraVaani-1.0', 'sha256': 'f5dd5358325a5208775b91dad98918e079ea2b27'}
+[SraVaani] Loading model 'ARTPARK-IISc/SraVaani-1.0' onto cuda...
+Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 1242.27it/s]
+[respin_mr]
+  loaded 2170 utterances
+C:\Users\Machine Learning GPU\.cache\huggingface\modules\transformers_modules\ARTPARK_hyphen_IISc\SraVaani_hyphen_1_dot_0\f5dd5358325a5208775b91dad98918e079ea2b27\modeling_sravaani.py:143: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  pp = torch.load(os.path.join(d, "preproc.pt"), map_location="cpu")
+D:\marathi-asr\.venv311\Lib\site-packages\torch\nn\modules\module.py:1747: UserWarning: RNN module weights are not part of single contiguous chunk of memory. This means they need to be compacted at every call, possibly greatly increasing memory usage. To compact weights again call flatten_parameters(). (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\builder\windows\pytorch\aten\src\ATen\native\cudnn\RNN.cpp:1410.)
+  return forward_call(*args, **kwargs)
+  16/2170
+  336/2170
+  656/2170
+  976/2170
+  1296/2170
+  1616/2170
+  1936/2170
+[respin_mr] WER 15.77  CER 2.97  n=2170
+[kathbath_mr]
+  loaded 2378 utterances
+  16/2378
+  336/2378
+  656/2378
+  976/2378
+  1296/2378
+  1616/2378
+  1936/2378
+  2256/2378
+[kathbath_mr] WER 12.93  CER 2.72  n=2378
+[indicvoices_mr]
+  loaded 3679 utterances
+  16/3679
+  336/3679
+  656/3679
+  976/3679
+  1296/3679
+  1616/3679
+  1936/3679
+  2256/3679
+  2576/3679
+  2896/3679
+  3216/3679
+  3536/3679
+[indicvoices_mr] WER 15.21  CER 5.55  n=3673
+[fleurs_mr]
+  loaded 1015 utterances
+  16/1015
+  336/1015
+  656/1015
+  976/1015
+[fleurs_mr] WER 17.79  CER 5.61  n=1015
+wrote D:\marathi-asr\spaces\results\sravaani.json

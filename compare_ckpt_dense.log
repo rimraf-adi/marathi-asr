@@ -1,0 +1,45 @@
+  loaded 2170 utterances
+  16/2170
+  336/2170
+  656/2170
+  976/2170
+  1296/2170
+  1616/2170
+  1936/2170
+  loaded 2378 utterances
+  16/2378
+  336/2378
+  656/2378
+  976/2378
+  1296/2378
+  1616/2378
+  1936/2378
+  2256/2378
+RESULT runs/scaled-conformer512-dense-3stage/checkpoints/stage3_final_alignment/best_model.pt {"respin_mr": [36.13, 9.56], "kathbath_mr": [50.69, 14.52]}
+  loaded 2170 utterances
+  16/2170
+  336/2170
+  656/2170
+  976/2170
+  1296/2170
+  1616/2170
+  1936/2170
+  loaded 2378 utterances
+  16/2378
+  336/2378
+  656/2378
+  976/2378
+  1296/2378
+  1616/2378
+  1936/2378
+  2256/2378
+RESULT runs/scaled-conformer512-dense-3stage/checkpoints/stage2_dense/best_model.pt {"respin_mr": [49.16, 14.41], "kathbath_mr": [81.15, 28.33]}
+FAIL runs/scaled-conformer512-dense-3stage/checkpoints/stage1_pretrain/best_model.pt {'error': "RuntimeError: dense checkpoint left 4 encoder/ctc weights unloaded, e.g. ['ctc_head.norm.weight', 'ctc_head.norm.bias', 'ctc_head.proj.weight']"}
+Traceback (most recent call last):
+  File "D:\marathi-asr\scripts\compare_checkpoints.py", line 38, in <module>
+    ad = OurConformer(str(ROOT / c), c)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\marathi-asr\adapters\our_conformer.py", line 40, in __init__
+    raise RuntimeError(f"dense checkpoint left {len(lost)} encoder/ctc weights unloaded, e.g. {lost[:3]}")
+RuntimeError: dense checkpoint left 4 encoder/ctc weights unloaded, e.g. ['ctc_head.norm.weight', 'ctc_head.norm.bias', 'ctc_head.proj.weight']
+done

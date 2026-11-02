@@ -1,0 +1,22 @@
+{
+ "valid_utts": 2378,
+ "valid_speakers": 20,
+ "train_clean": {
+  "utts": 84070,
+  "speakers": 123,
+  "speaker_overlap": 20,
+  "speaker_overlap_pct_of_valid": 100.0,
+  "sentence_overlap": 6,
+  "sentence_overlap_pct_of_valid": 0.25
+ },
+ "train_noisy": {
+  "utts": 1631,
+  "speakers": 20,
+  "speaker_overlap": 0,
+  "speaker_overlap_pct_of_valid": 0.0,
+  "sentence_overlap": 0,
+  "sentence_overlap_pct_of_valid": 0.0
+ },
+ "any_train_speaker_overlap": 20,
+ "note": "speaker id of train files parsed from the second token of the wav filename (<utt>-<speaker>-<gender>); valid uses the speaker_id column"
+}

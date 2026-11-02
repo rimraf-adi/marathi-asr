@@ -1,396 +1,382 @@
-# Experimental Results Suite: E1 to E15
-## Dialect-Aware Sparse Mixture-of-Experts (MoE) Conformer for Marathi ASR
+# Results Reference for the Dialect-Aware Sparse MoE Conformer for Marathi ASR
 
-**Document Purpose:** Definitive Master Source of Truth for Journal Paper Synthesis  
-**Target Venue:** IEEE Access / IEEE/ACM Transactions on Audio, Speech, and Language Processing (TASLP)  
-**Date:** 2026-10-27  
+**Purpose:** single source of truth for writing the paper. Every number below was produced by the scripts listed in Section 11 on the two retained checkpoints, with one evaluation protocol, and is regenerated from `evals/*.json`. Statements that the data do not support are not made; where a result is unfavourable (SraVaani on RESPIN, out-of-domain accuracy, latency) it is reported as measured.  
 **Repository:** [github.com/rimraf-adi/marathi-asr](https://github.com/rimraf-adi/marathi-asr)  
-**Evaluation Benchmark:** IISc RESPIN Official Held-Out Test Set (`meta_test_mr.json`: 2,170 utterances, 3.041 hours across D1 Malvani, D2 Ahirani, D3 Standard, D4 Varhadi)  
-**Hardware:** NVIDIA RTX A5000 (24 GB VRAM) | Windows x86_64 | PyTorch 2.6 + CUDA 12.4
+**Hardware:** NVIDIA RTX A5000 (24 GB), Windows x86_64, PyTorch 2.6 + CUDA 12.4  
+**Date of measurements:** 2026-11-02
 
 ---
 
-## Master Benchmark Summary Table
+## 1. Claims the data support
 
-Evaluated on the frozen IISc RESPIN held-out test suite (2,170 utterances, 160 unseen speakers across 4 regional dialects):
+| # | Claim | Evidence (section) |
+| :--- | :--- | :--- |
+| C1 | At an identical 130.8M parameter budget, the dialect-routed MoE reaches **19.50% WER** on the RESPIN held-out test set versus **36.13%** for the dense Conformer: **16.63 points absolute (46.0% relative)**, paired speaker-clustered bootstrap CI [15.72, 17.56], p < 0.0001. | 4.1, 4.3 |
+| C2 | The gain holds in every dialect partition, including Standard Marathi (13.73 points) and is largest on the regional dialects (18.31 / 16.69 / 17.64 points for D1 / D2 / D4). | 4.1, 4.3 |
+| C3 | The experts carry the gain: removing all expert contributions raises WER from 19.50% to 29.05%; dropping a single expert hurts its own dialect most; learned routing beats oracle dialect routing (22.93%) and random routing (25.55%). | 5.1, 5.2 |
+| C4 | The MoE preserves dialect-specific word forms far better than a dense model of equal size and than IndicConformer-600M (dialect-skewed word recall 89.7/90.9/93.0% vs. 74.2/79.7/83.2% and 59.8/74.5/54.3% on D1/D2/D4). | 5.5 |
+| C5 | Autonomous frame-level routing outperforms dialect-specific LoRA adapters that are given the oracle dialect label (34.49% vs. 19.50%). | 5.4 |
+| C6 | On RESPIN the MoE (19.50%) is significantly better than IndicConformer-600M (23.94%) and significantly worse than SraVaani-1.0 (15.77%). | 4.1 |
+| C7 | By parameter count the MoE uses 97.2M of 130.8M parameters per frame (74.3%), but in the present implementation it is **slower** than the dense model (Section 7): the parameter saving is not a speed saving. | 7 |
+| C8 | Out of domain (IndicVoices, FLEURS) both of our models are far less accurate than the external baselines; Kathbath is not an out-of-domain test (all 20 validation speakers also occur in Kathbath train). | 4.2, 8 |
 
-| Model Identifier | Architecture | Total Params | Active Params | D1 (Malvani) WER (CER) | D2 (Ahirani) WER (CER) | D3 (Standard) WER (CER) | D4 (Varhadi) WER (CER) | **ALL Aggregate WER (CER)** | Real-Time Factor (RTF) |
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **IndicConformer-600M** (AI4Bharat Baseline) | Dense Conformer-XXL | 600.0M | 600.0M | 35.66% (10.82%) | 30.50% (8.94%) | **14.20%** (**2.27%**) | 29.10% (8.41%) | 24.16% (7.61%) | ~0.0450x |
-| **SraVaani-1.0** (ARTPARK/IISc Baseline) | Dense Conformer-Large | ~100.0M | ~100.0M | 39.20% (12.10%) | 33.10% (9.80%) | 16.50% (3.10%) | 31.80% (9.20%) | 30.15% (8.55%) | ~0.0210x |
-| **Dense Conformer-512 (E1)** *(Capacity Matched, 300k Steps)* | Dense Conformer ($\text{ffn}=8$) | 130.8M | 130.8M | 45.29% (12.45%) | 42.41% (12.18%) | 31.33% (9.35%) | 39.90% (11.51%) | 39.82% (11.40%) | **0.0018x** |
-| **Shared Trunk Only (Zero-MoE)** *(Ablation)* | Dense Conformer-Small | 20.5M | 20.5M | 51.20% (14.80%) | 47.80% (13.90%) | 36.20% (10.10%) | 48.10% (13.40%) | 46.22% (13.05%) | **0.0016x** |
-| **Oracle Dialect LoRA (E15)** *(Dense Backbone + 3 Adapters)* | Dense Conformer + PEFT ($r=16$) | 142.6M | 134.7M | 39.78% (10.90%) | 36.85% (9.59%) | 27.75% (7.60%) | 34.01% (9.69%) | 34.68% (9.47%) | 0.0019x |
-| **Scaled MoE Conformer (Calibrated)** | 12L-8H-512D Sparse MoE | 130.8M | 98.9M | 35.35% (9.12%) | 29.58% (7.16%) | 21.11% (5.78%) | 27.26% (6.85%) | 28.42% (7.26%) | 0.0025x |
-| **Scaled MoE Conformer — Best SFT** | 12L-8H-512D Sparse MoE | 130.8M | 98.9M | **24.65%** (**5.91%**) | **20.74%** (**4.46%**) | **11.60%** (3.07%) | **18.85%** (**4.59%**) | **19.04%** (**4.53%**) | 0.0026x |
+
+Training-ablation claims (seed variance, upcycling, number of experts, expert placement) are placeholders in Section 5.6 until the queued runs finish.
+---
+
+## 2. Data
+
+### 2.1 Training data by stage (both retained models)
+
+| Stage | Purpose | Data | Size / steps |
+| :--- | :--- | :--- | :--- |
+| 1. Self-supervised pretraining | Masked-reconstruction pretraining of the encoder | `ai4bharat/Shrutilipi` (All India Radio news audio) and `ARTPARK-IISc/Vaani` (image-prompted spontaneous speech), streamed; IndicVoices excluded (`--no_indicvoices`) | MoE run: 1,160,977 utterances (1,763.9 h) in one epoch, 18,141 steps. Dense run: 30,000 steps |
+| 2. Supervised CTC adaptation | Dense: plain CTC. MoE: upcycling of encoder blocks 5-12 into 3 dialect experts, with a CTC warm-up (steps 1-3,000), metadata-guided hard routing (3,001-18,000) and learned routing (18,001-80,000) | IISc RESPIN train partition (speaker-disjoint split in `moe/respin_split_cache.json`: 768,893 train + 41,041 calibration utterances) | 80,000 steps |
+| 3. Final fine-tuning | Multi-source CTC fine-tuning | RESPIN train pool (809,934 utterances), OpenSLR64 Marathi (1,569), Kathbath clean + noisy train (85,701), Mozilla Common Voice Marathi (1,205), and the Shrutilipi/Vaani stream | MoE: last saved step 342,000 (400,000 planned); dense: 300,000 steps; batch 32 x grad-accum 4, peak LR 3e-5 |
+| LoRA adapters (Sec. 5.4) | Three dialect adapters on the frozen dense backbone | RESPIN clean train, one pool per dialect (D1, D2, D4) | 6,000 steps |
+
+RESPIN: Kumar et al., NeurIPS 2025 Datasets & Benchmarks (read speech, agriculture and finance domains, multiple dialects per language).
+
+### 2.2 Evaluation data
+
+| Dataset | Split | Utterances / hours | Relation to our training data |
+| :--- | :--- | :---: | :--- |
+| IISc RESPIN | official test | 2,170 / 3.04 h, 160 speakers, 4 dialects | same corpus, **no speaker and no sentence shared with any training source** (Section 8) |
+| AI4Bharat Kathbath | valid | 2,378 / 4.18 h, 20 speakers | in-domain: all 20 speakers also appear in Kathbath train (84,070 clean utterances, 123 speakers); 9 sentences shared with training text |
+| AI4Bharat IndicVoices | valid | 3,673 / 6.15 h, 435 speakers | not used in training; no sentence overlap |
+| Google FLEURS (mr_in) | test | 1,015 / 3.86 h (349 distinct sentences) | not used in training; no sentence overlap |
+
+Common Voice Marathi is used only as training data; no Common Voice number is reported. The training corpora of SraVaani-1.0 and IndicConformer-600M are those documented on their model cards, not controlled by us.
 
 ---
 
-## Experiment E1: Dense Baselines (Capacity and Active Compute Controls)
+## 3. Models and protocol
 
-* **Preregistered Hypothesis:** A dialect-conditioned Sparse MoE Conformer outperforms a Dense Conformer matched strictly to equal total parameters (130.8M) across regional dialects (D1, D2, D4), despite operating with fewer active parameters per forward pass.
-* **Control Architecture:** Dense Conformer-512 ($d_{\text{model}}=512, N_{\text{layers}}=12, N_{\text{heads}}=8, \text{ffn\_expansion}=8$, conv kernel 31). Parameter count: **130,812,425 parameters** (100% matched to 130.8M MoE).
-* **Training Protocol:** Trained under the identical 3-stage curriculum: Stage 1 SSL pretraining (30,000 steps), Stage 2 Supervised CTC SFT (80,000 steps), Stage 3 Alignment (300,000 steps, batch size 32, grad accum 4 = 128 utts/step).
-* **Empirical Results (IISc RESPIN 2,170 Utterances):**
+### 3.1 Our models
 
-| Model | Total Params | Active Params / Forward Pass | D1 (Malvani) WER | D2 (Ahirani) WER | D3 (Standard) WER | D4 (Varhadi) WER | **ALL Aggregate WER** |
+| | Dense Conformer (baseline) | MoE Conformer (proposed) |
+| :--- | :---: | :---: |
+| Encoder | 12 blocks, d_model 512, 8 heads, conv kernel 31 | same |
+| FFN expansion | 8 | 4 (shared trunk) + 3 experts of expansion 4 in blocks 5-12 |
+| Router | - | linear 512 -> 3 per MoE block (12,312 parameters in total), top-1 per frame, additive to the always-active shared FFN |
+| Output | CTC head, 105-symbol character vocabulary | same |
+| Total parameters | 130.8M | 130.8M (8 MoE blocks x 3 experts x 2.10M) |
+| Parameters used per frame (top-1) | 130.8M | 97.2M (74.3%) |
+| Retained checkpoint | `runs/scaled-conformer512-dense-3stage/checkpoints/stage3_final_alignment/best_model.pt` | `runs/scaled-conformer512-moe-3stage/checkpoints/stage3_vanilla_sft/best_model.pt` |
+
+Experts 0/1/2 are initialised from the pretrained FFN and associated, during hard-routing training, with Malvani (D1), Ahirani (D2) and Varhadi (D4); Standard Marathi (D3) is served by the shared trunk. The design is reported as built; no claim is made that 3 experts or blocks 5-12 are optimal.
+
+### 3.2 External baselines
+
+| Model | Parameters | Architecture | Decoding in our harness | Source |
+| :--- | :---: | :--- | :--- | :--- |
+| SraVaani-1.0 | ~430M | FastConformer, hybrid TDT-CTC decoder; pretrained on ~31k h of Vaani, fine-tuned on ~31k h of transcribed speech in 65 Indian languages and dialects | model `transcribe()` with default settings | [model card](https://huggingface.co/ARTPARK-IISc/SraVaani-1.0) |
+| IndicConformer-600M | 600M | multilingual Conformer, hybrid CTC + RNNT | CTC mode, language `mr` | [model card](https://huggingface.co/ai4bharat/indic-conformer-600m-multilingual) |
+
+### 3.3 Evaluation protocol
+
+* Greedy CTC decoding unless stated (Section 5.3). Utterances are sorted by length for batching.
+* Text normalisation `mr-norm-1` (`normalizer.py`), applied identically to references and hypotheses of every model: Unicode NFC, removal of ZWNJ/ZWJ, nukta unification, anusvara/chandrabindu harmonisation, punctuation stripping.
+* WER/CER are corpus-level; "n" counts utterances with a non-empty normalised reference. Dataset-level CIs: 1,000 utterance-level bootstrap resamples. Paired CIs (Section 4.3): 10,000 speaker-clustered resamples over the 160 RESPIN test speakers.
+* One training run per model; no variance across training seeds was measured, so differences of a few tenths of a point between configurations of the same model should not be over-interpreted.
+* Checkpoints: the best of each family on RESPIN and Kathbath (Section 6).
+
+---
+
+## 4. Main results
+
+### 4.1 RESPIN held-out test (2,170 utterances, 160 unseen speakers)
+
+| Model | Params | D1 Malvani | D2 Ahirani | D3 Standard | D4 Varhadi | **ALL WER** [95% CI] | ALL CER |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Dense Conformer-512 Baseline** | 130.8M | 130.8M (100%) | 45.29% | 42.41% | 31.33% | 39.90% | **39.82%** |
-| **Scaled MoE Conformer (Ours)** | 130.8M | **98.9M (75.6%)** | **24.65%** | **20.74%** | **11.60%** | **18.85%** | **19.04%** |
-| **MoE Delta (Absolute Gain)** | — | **-31.9M (-24.4% FLOPs)** | **-20.64%** | **-21.67%** | **-19.73%** | **-21.05%** | **-20.78%** |
+| SraVaani-1.0 | ~430M | 21.71% | 17.80% | 8.97% | 14.17% | **15.77%** [15.07, 16.53] | 2.97% |
+| **MoE Conformer (ours)** | 130.8M | 25.68% | 21.58% | 11.15% | 19.11% | **19.50%** [18.75, 20.32] | 4.29% |
+| IndicConformer-600M | 600M | 34.59% | 24.64% | 11.57% | 24.29% | **23.94%** [22.99, 24.93] | 4.95% |
+| Dense Conformer (ours) | 130.8M | 43.99% | 38.27% | 24.88% | 36.75% | **36.13%** [35.18, 37.18] | 9.56% |
+| MoE, experts bypassed (Sec. 5.1) | 130.8M | 39.00% | 29.81% | 15.38% | 31.33% | 29.05% | - |
+| Dense + oracle dialect LoRA (Sec. 5.4) | 142.6M | 41.46% | 36.76% | 24.93% | 34.26% | 34.49% | - |
 
-* **Scientific Finding:** The hypothesis is **STRONGLY SUPPORTED**. Dense Conformer-512 suffers from severe cross-dialect negative gradient interference when forced to fit diverse regional phonology into a single dense weight space. The MoE model isolates dialect-specific gradient updates into sparse regional experts, achieving a **-20.78% absolute WER reduction** (>52% relative error reduction) while using **24.4% fewer active parameters** per forward pass.
+* MoE vs. dense (same 130.8M budget): 16.63 points absolute, 46.0% relative.
+* The MoE interval [18.75, 20.32] lies entirely below IndicConformer-600M [22.99, 24.93] and entirely above SraVaani-1.0 [15.07, 16.53]. SraVaani-1.0 has ~3.3x our parameter count and, per its model card, was fine-tuned on ~31k hours of transcribed speech; it is the most accurate system on RESPIN.
 
----
+### 4.2 All datasets
 
-## Experiment E2: Routing Mechanism Ablations & Frame-Level Analysis
+WER % (CER %) [95% CI], greedy CTC, same normaliser.
 
-* **Preregistered Hypothesis:** Autonomous learned frame-level routing outperforms random expert assignment and single shared trunk, and provides dynamic adaptability beyond static utterance-level oracle routing.
-* **Ablation Setup:** Evaluated on the 2,170 RESPIN test utterances across 4 routing conditions:
-  1. *Learned Dynamic Router:* Autonomous frame-level gating via learned router projection ($P(x) = \text{Softmax}(x W_g)$) with Top-1 selection.
-  2. *Oracle Routing:* Utterance-level static routing forced by ground-truth dialect metadata label (all frames of a D1 utterance forced to Expert 1, etc.).
-  3. *Random Routing:* Each frame assigned to an expert chosen uniformly at random.
-  4. *Shared Trunk Only (Zero-MoE):* Routing delta bypassed; all computation passes strictly through the shared FFN trunk.
-* **Empirical Results:**
-
-| Routing Strategy | Routing Granularity | 130.8M Scaled Model WER | Delta vs. Learned Router |
-| :--- | :--- | :---: | :---: |
-| **Learned Dynamic Router (Top-1 / Soft)** | Frame-Level Dynamic | **19.04%** | **Baseline (Best)** |
-| **Oracle Dialect Routing (Static Utterance Label)** | Utterance-Level Static | **34.68%** | **+15.64% degradation** |
-| **Shared Trunk Only (Zero-MoE Delta)** | Monolithic Backbone | **39.82%** | **+20.78% degradation** |
-
-* **Empirical Frame-Level Routing Distribution (2,170 Utterances / 2.2M Evaluated Frames):**
-
-| Audio Dialect Partition | Evaluated Frames | Expert 0 (Coastal/Malvani) | Expert 1 (Northern/Ahirani) | Expert 2 (Eastern/Varhadi) | Primary Gating Specialization |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **D1 Audio (Malvani)** | 615,448 | **47.72%** | 26.39% | 25.89% | Dominant Coastal Expert Concentration |
-| **D2 Audio (Ahirani)** | 509,296 | 35.08% | **34.00%** | 30.92% | Shared Northern/Coastal Dispersion |
-| **D3 Audio (Standard)** | 551,376 | 35.34% | 32.60% | 32.06% | Uniform Tri-Expert Load Distribution |
-| **D4 Audio (Varhadi)** | 524,664 | 33.93% | 29.22% | **36.84%** | Dominant Eastern Expert Concentration |
-
-* **Word-Class Routing Gating Behavior:**
-  * *Standard Functional Words (883,864 frames):* Routed with near-uniform balance across all experts (35.37% Exp 0, 31.49% Exp 1, 33.15% Exp 2), confirming that the standard syntactic backbone utilizes shared acoustic capacity evenly.
-  * *Regional Dialect Target Words (195,032 frames):* Routes with sharp regional concentration (**44.36% Expert 0** for coastal markers, with sharp regional expert preference).
-
-* **Scientific Finding:** 
-  1. Learned dynamic routing outperforms the monolithic shared trunk by **-20.78% absolute WER** (19.04% vs. 39.82%), confirming that expert routing isolates dialectal phonetic variation effectively.
-  2. Crucially, **learned dynamic routing beats static oracle routing by -15.64% absolute WER** (19.04% vs. 34.68%). Native dialect speech is not phonologically uniform: even in prompted regional recordings, speakers naturally exhibit fluid intra-utterance variation, transitioning between standard Marathi lexical stems and regional dialectal verb auxiliaries, postpositions, and prosodic markers. The frame-level dynamic router switches experts dynamically at phonetic transitions, whereas static oracle routing traps standard phonetic frames inside dialectal experts.
-
----
-
-## Experiment E3: Out-of-Domain Generalization & Devanagari Normalization
-
-* **Preregistered Hypothesis:** The MoE architecture's accuracy advantage persists outside the RESPIN recording domain, and apparent baseline discrepancies can be separated from orthographic normalization conventions.
-* **Test Datasets:** AI4Bharat Kathbath Hard (Noisy/Reverberant, 1,631 utterances / 3.05 hrs) and Mozilla Common Voice Marathi v13.
-* **Devanagari Normalization Pipeline (Applied Uniformly to All Models):**
-  To eliminate spurious orthographic penalties caused by crowdsourced typographical noise, transcripts undergo standardized Unicode normalization:
-  1. *Unicode Normalization Form C (NFC)* canonical decomposition followed by canonical composition.
-  2. *Control Character Stripping:* Complete removal of Zero-Width Non-Joiners (`\u200C`, ZWNJ) and Zero-Width Joiners (`\u200D`, ZWJ).
-  3. *Nukta Unification:* Standardizing retroflex and loan consonant graphemes (e.g., क़ $\to$ क, फ़ $\to$ फ, ज़ $\to$ ज).
-  4. *Diacritic Standardization:* Harmonizing anusvara (`\u0902`) and chandrabindu (`\u0901`) representations.
-* **Empirical Results:**
-  * **Common Voice Marathi v13:** 
-    * Raw Test WER: **71.18%**
-    * Standardized Devanagari Normalization: **38.45% WER** (-32.73% absolute reduction).
-  * **Kathbath Out-of-Domain Acoustic Transfer:**
-    * Clean Kathbath: **64.02% WER** (20.48% CER) without exposure to Vistaar read prompts.
-    * Kathbath Hard (Noisy/Reverberant Speech): **61.71% WER** (with soft LM) / **69.95% WER** (greedy CTC) without CTC blank collapse or acoustic divergence.
-* **Scientific Finding:** The MoE model generalizes cleanly to unseen acoustic channels; the high raw error rate on Common Voice was an artifact of crowdsourced Devanagari Unicode typographical inconsistencies rather than acoustic misrecognition.
-
----
-
-## Experiment E4: Statistical Rigor, Speaker-Level Cluster Bootstrap (B = 10,000) & Speaker Fairness
-
-* **Protocol:** To prevent anti-conservative significance claims from correlated frames/utterances within the same speaker, we execute a rigorous **Speaker-Level Clustered Paired Bootstrap** ($B = 10,000$ resamples clustered over all 160 unseen test speakers). For each bootstrap iteration, speakers are sampled with replacement, aggregating all their corresponding utterances to compute dialect-level and global WER/CER distributions, 95% percentile confidence intervals ($\alpha = 0.05$), paired error deltas ($\Delta_{\text{WER}} = \text{WER}_{\text{Dense}} - \text{WER}_{\text{MoE}}$), and empirical $p$-values.
-
-* **Speaker-Clustered Bootstrap Results (Scaled MoE vs. Capacity-Matched Dense Baseline):**
-
-| Dialect Test Partition | Scaled MoE 95% Bootstrap CI (WER) | Scaled MoE 95% Bootstrap CI (CER) | Capacity-Matched Dense 95% CI (WER) | Paired Reduction ($\Delta_{\text{WER}}$) [95% CI] | Empirical $p$-Value |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **D1 (Malvani / Konkan)** | **[22.98%, 26.74%]** | [5.21%, 6.49%] | [42.15%, 48.60%] | **-18.55%** [16.87%, 20.37%] | **$p < 0.0001$** |
-| **D2 (Ahirani / Khandesh)**| **[18.83%, 23.15%]** | [3.93%, 5.05%] | [39.10%, 45.80%] | **-17.43%** [15.46%, 19.49%] | **$p < 0.0001$** |
-| **D3 (Standard Marathi)** | **[9.87%, 13.42%]** | [2.51%, 3.74%] | [28.40%, 34.30%] | **-15.58%** [13.99%, 17.23%] | **$p < 0.0001$** |
-| **D4 (Varhadi / Vidarbha)**| **[17.33%, 20.45%]** | [4.08%, 5.08%] | [37.10%, 42.90%] | **-17.56%** [16.14%, 18.99%] | **$p < 0.0001$** |
-| **ALL (Aggregate Total)** | **[17.94%, 20.35%]** | [4.18%, 4.85%] | [38.10%, 41.60%] | **-17.29%** [16.44%, 18.18%] | **$p < 0.0001$** |
-
-* **Speaker-Level Error Distribution Across All 160 Unseen Test Speakers:**
-
-| Model Architecture | Mean WER | Std Dev ($\sigma$) | Min (Best Speaker) | 25th Percentile ($Q_1$) | Median ($Q_2$) | 75th Percentile ($Q_3$) | Max (Worst Speaker) | Interquartile Range (IQR) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Dense Baseline (130.8M)** | 36.61% | 10.71% | 10.26% | 29.17% | 36.51% | 43.65% | **63.33%** | 14.48% |
-| **Scaled MoE Conformer (Ours)**| **19.14%** | **7.91%** | **1.71%** | **14.09%** | **18.54%** | **24.86%** | **37.96%** | **10.77%** |
-| **MoE Gain / Reduction** | **-17.47%** | **-2.80%** | **-8.55%** | **-15.08%** | **-17.97%** | **-18.79%** | **-25.37%** | **-3.71%** |
-
-* **Key Finding on Speaker Fairness:** The worst-performing speaker on our Scaled MoE model (**37.96% WER**) is superior to the *median* speaker on the capacity-matched dense baseline (**36.51% WER**). By dynamically routing accented phonetic frames to specialized experts, the MoE eliminates catastrophic single-speaker collapse (capping maximum speaker error at 37.96% vs. 63.33% in the dense model).
-
-* **Paired Comparison vs. External Baselines (IndicConformer-600M & SraVaani-1.0):**
-  * *vs. IndicConformer-600M (600M Dense):* Scaled MoE achieves statistically significant gains on D1 ($-11.01\%$, $p = 0.0002$), D2 ($-9.76\%$, $p = 0.0001$), and D4 ($-10.25\%$, $p = 0.0003$). Confidence intervals on regional dialects D1, D2, and D4 are completely non-overlapping.
-  * *vs. SraVaani-1.0 (100M Dense):* Scaled MoE outperforms SraVaani across all 4 dialects ($-14.55\%$ on D1, $-12.36\%$ on D2, $-4.90\%$ on D3, $-12.95\%$ on D4; all $p < 0.0001$).
-
-* **Scientific Finding:** The MoE model's accuracy gain is not an artifact of outlier speakers. The speaker-clustered bootstrap confirms that the performance advantage holds uniformly across the entire speaker population with $p < 0.0001$.
-
----
-
-## Experiment E5: Number of Experts Ablation & Phonological Grounding
-
-* **Ablation Range:** Tested $K \in \{1, 2, 3, 4, 8\}$ experts alongside the always-active Combining Shared FFN trunk.
-* **Linguistic and Phonological Grounding for 3 Dedicated Experts:**
-  1. **Standard Marathi (D3)** serves as the syntactic and lexical backbone (Dhongde & Wali, 2009) and is anchored directly in the **always-active Combining Shared Trunk**, ensuring standard vocabulary, formal grammar, and common morphemes are never partitioned or forgotten.
-  2. The **3 Dedicated Regional Experts** align with the primary peripheral dialect regions exhibiting distinct geographic phonological drift documented in Indo-Aryan linguistics (Grierson, 1905; Dhongde & Wali, 2009):
-     * *Expert 0 (Coastal / Konkan):* Accommodates Malvani phonological patterns, including retroflex lateral [ɭ] (ळ) variation, vowel centralizations, and Konkani lexical borrowings (Dhongde & Wali, 2009).
-     * *Expert 1 (Northern / Khandesh):* Accommodates Ahirani aspirate lenition [h] (ह), intervocalic glide shifts, and Gujarati substrate diphthongs (Grierson, 1905).
-     * *Expert 2 (Eastern / Vidarbha):* Accommodates Varhadi dental-alveolar affricate realizations, postpositional contractions, and regional affirmative morphemes (*व्हय*) (Bapat & Joshi, 2018).
-* **Results Across $K$:**
-  * $K=1$ (Single expert + shared trunk): 38.45% WER
-  * $K=2$ (2 regional experts): 34.20% WER
-  * $K=3$ (3 regional experts): **19.04% WER** (Optimal trade-off)
-  * $K=4$ (4 regional experts): 18.86% WER (-0.18% WER improvement, but +33% expert parameter overhead)
-* **Scientific Finding:** 3 dedicated experts + 1 combining shared trunk achieves the optimal Pareto frontier between linguistic coverage and memory efficiency. Expanding beyond $K=3$ yields diminishing returns while increasing parameter memory.
-
----
-
-## Experiment E6: MoE Layer Placement and Gating
-
-* **Ablation Range:** Investigated MoE placement across (a) Lower 4 layers only, (b) Upper 8 layers (Layers 5–12), (c) All 12 layers.
-* **Empirical Results:**
-  * *Lower 4 Layers MoE (Layers 1–4):* **26.80% WER**. Placing experts in lower layers disrupts general acoustic feature extraction and filterbank representation invariance.
-  * *Upper 8 Layers MoE (Layers 5–12):* **19.04% WER**. Layers 1–4 act as a dense, shared acoustic grounding trunk, while Layers 5–12 specialize in higher-order phonetic and lexical variations.
-  * *All 12 Layers MoE (Layers 1–12):* **18.82% WER**. Only +0.22% WER improvement over Upper-8, while increasing total parameter footprint by 50%.
-* **Scientific Finding:** Upper-layer MoE placement is mathematically optimal for dialectal ASR: lower layers extract universal acoustic features, while upper layers resolve regional phonetic divergence.
-
----
-
-## Experiment E7: Freezing & Sparse Upcycling Strategy
-
-* **Upcycling Initialization Protocol:**
-  At Step 0 of Stage 2 MoE adaptation, each of the 3 regional experts and the combining shared trunk are initialized by cloning the pretrained Conformer FFN weights:
-  $$\text{Weight}(\text{Expert}_k) \leftarrow \text{Weight}(\text{FFN}_{\text{pretrain}}), \quad \text{Weight}(\text{FFN}_{\text{combining}}) \leftarrow \text{Weight}(\text{FFN}_{\text{pretrain}})$$
-* **Impact vs. Scratch Initialization:**
-  * *Scratch Initialization:* Initial CTC loss spikes to $>7.5$, requiring 15,000 steps of warm-up and converging to **24.80% WER**.
-  * *Sparse Upcycling:* Initial CTC loss starts smoothly at $1.85$, converging to **19.04% WER** (-5.76% absolute improvement).
-* **Layer Freezing in Stage 3:**
-  Freezing Layers 1–4 during multi-source calibration reduced VRAM consumption by 28% and boosted training throughput from 61.2 to 88.5 steps/min with $< 0.1\%$ difference in final CER.
-
----
-
-## Experiment E8: Load Balancing Dynamics & Auxiliary Loss
-
-* **Objective:** Verify whether auxiliary routing entropy loss ($\mathcal{L}_{\text{aux}} = \alpha K \sum_{k=1}^K f_k P_k$, $\alpha=0.01$) prevents expert collapse.
-* **Empirical Observations:**
-  * *Without Auxiliary Loss ($\alpha = 0$):* Expert collapse occurred within 3,000 steps. Expert 2 received $>87\%$ of all frame routing assignments; Expert 1 and 3 received vanishing gradients. Final WER degraded to **38.90%**.
-  * *With Auxiliary Loss ($\alpha = 0.01$):* Frame utilization stabilized across all three experts: Expert 1 ($31.4\%$), Expert 2 ($36.8\%$), Expert 3 ($31.8\%$). Specialization was maintained without representation starvation.
-
----
-
-## Experiment E9: Dataset Composition & Ablation
-
-* **Analysis of Training Corpora Contributions:**
-  * *Shrutilipi (~253.7 hrs):* Standard read/broadcast speech. Primarily anchors standard Marathi grammar (D3), Devanagari character spelling, and clean acoustic representations.
-  * *ARTPARK/IISc Vaani (~1,181.3 hrs):* Rural conversational field speech. Exposes the model to background acoustic reverberation, microphone distortions, and rural dialectal intonations during pretraining.
-  * *IISc RESPIN Clean Train (975.0 hrs):* Local speaker-disjoint multi-dialect corpus. Essential for supervised dialect specialization; removing RESPIN causes non-standard dialect WER to degrade to $>45\%$.
-
----
-
-## Experiment E10: Dialect Specialization & Cross-Dialect Swap Tests
-
-* **Statistical Goodness-of-Fit vs. Uniform Routing Distribution:**
-  * D1 (Malvani): $\chi^2 = 537.59, p = 1.84 \times 10^{-117}$ (**Significant**)
-  * D2 (Ahirani): $\chi^2 = 869.74, p = 1.37 \times 10^{-189}$ (**Significant**)
-  * D4 (Varhadi): $\chi^2 = 445.01, p = 2.33 \times 10^{-97}$ (**Significant**)
-
-* **Cross-Dialect Swap Degradation Methodology:**
-  All swap degradations are evaluated empirically on the 130.8M Scaled Model and reported strictly against the matched expert baseline (evaluating forced single-expert routing without language model smoothing).
-
-* **Empirical 130M Scaled Model Cross-Dialect Swap Matrix (Pure Acoustic Routing):**
-  Evaluated across 1,615 regional utterances (559 D1, 540 D2, 516 D4) under forced single-expert routing without language model smoothing:
-
-| Input Audio Dialect | Forced Expert 0 (Coastal/Malvani) | Forced Expert 1 (Northern/Ahirani) | Forced Expert 2 (Eastern/Varhadi) | Degradation vs. Matched Expert |
+| Model | RESPIN test n=2,170 | Kathbath valid (in-domain) n=2,378 | IndicVoices valid (OOD) n=3,673 | FLEURS test (OOD) n=1,015 |
 | :--- | :---: | :---: | :---: | :---: |
-| **D1 Audio (Malvani)** | **28.30% WER (Matched)** | 37.13% WER (+8.83%) | 37.93% WER (+9.63%) | **+8.83% to +9.63%** |
-| **D2 Audio (Ahirani)** | 28.18% WER (+4.83%) | **23.35% WER (Matched)** | 28.09% WER (+4.74%) | **+4.74% to +4.83%** |
-| **D4 Audio (Varhadi)** | 29.52% WER (+6.24%) | 28.24% WER (+4.96%) | **23.28% WER (Matched)** | **+4.96% to +6.24%** |
+| **MoE Conformer (ours)** | 19.50 (4.29) [18.75, 20.32] | 29.41 (7.01) [28.65, 30.23] | 59.20 (23.48) [58.24, 60.11] | 36.74 (11.02) [35.67, 37.92] |
+| Dense Conformer (ours) | 36.13 (9.56) [35.18, 37.18] | 50.69 (14.52) [49.81, 51.63] | 77.19 (34.78) [76.37, 77.91] | 57.04 (19.49) [55.86, 58.24] |
+| SraVaani-1.0 | 15.77 (2.97) [15.07, 16.53] | 12.93 (2.72) [12.37, 13.51] | 15.21 (5.55) [14.62, 15.78] | 17.79 (5.61) [16.94, 18.61] |
+| IndicConformer-600M | 23.94 (4.95) [22.99, 24.93] | 13.52 (2.88) [12.98, 14.14] | 15.96 (5.43) [15.37, 16.53] | 18.58 (5.62) [17.75, 19.40] |
 
-* **Scientific Finding:** Forcing regional speech through an expert from a geographically distant dialect causes severe acoustic mismatch (+6.24% to +9.63% absolute WER degradation), whereas routing through the matched regional expert minimizes error, demonstrating that the router autonomously aligns acoustic features with geographic phonetic topology.
+* In-domain (RESPIN, Kathbath) the MoE halves the dense model's error on Kathbath (50.69% to 29.41%).
+* Out of domain, the MoE improves on the dense model by 18.0 points (IndicVoices) and 20.3 points (FLEURS) but remains far from SraVaani-1.0 and IndicConformer-600M (59.2% and 36.7% vs. roughly 15-19%). The models are specialised to RESPIN-style read speech; they should not be presented as general Marathi ASR systems.
 
----
+### 4.3 Paired comparison MoE vs. dense (speaker-clustered bootstrap, B = 10,000, 160 speakers)
 
-## Experiment E11: Error Taxonomy & Dialect Preservation vs. Standardization
-
-* **Error Distribution:** 72.4% Substitutions (S), 18.2% Deletions (D), 9.4% Insertions (I).
-* **Mathematical Definition of Dialect-Lexicon Fidelity:**
-  $$\text{Fidelity}(W_{\text{dial}}) = \frac{\sum_{w \in W_{\text{dial}}} \mathbb{I}(w \in \hat{Y})}{\sum_{w \in W_{\text{dial}}} \mathbb{I}(w \in Y^*)} \times 100\%$$
-  where $Y^*$ denotes the ground-truth dialect transcript, $\hat{Y}$ is the model transcription, and $W_{\text{dial}}$ is the validated regional dialect lexicon (e.g., *माका*, *तुका*, *जावक*, *नाय*, *शे*, *व्हता*, *व्हय*).
-
-* **Forced Standardization Case Study in Monolithic Baselines:**
-  Monolithic models (IndicConformer-600M and SraVaani-1.0) systematically overwrite regional dialect words with standard prestige forms:
-  * Regional *हाय* (Ahirani/Varhadi "is") $\to$ force-normalized to standard *आहे* (19 occurrences in test set).
-  * Regional *नाय* (Malvani "not") $\to$ force-normalized to standard *नाही* (5 occurrences).
-  * Regional *माका* (Malvani "to me") $\to$ force-normalized to standard *मला* (4 occurrences).
-  * Regional *जावक* (Malvani "to go") $\to$ force-normalized to standard *जायाला* (3 occurrences).
-
-* **Empirical Fidelity Audit Across Test Corpus:**
-  * *Hand-Sampled Regional Markers (38 tokens):* **97.37% ~ 97.4% verbatim preservation** (37 of 38 regional tokens transcribed without prestige erasure).
-  * *Comprehensive Regional Lexicon Audit (173 tokens in test references):*
-    * **D2 (Ahirani):** 27 / 28 tokens preserved (**96.43% verbatim fidelity**, 0.0% standard substitutions).
-    * **D1 (Malvani):** 118 / 141 tokens preserved (**83.69% verbatim fidelity**, 0.0% standard substitutions).
-    * **ALL Regional Tokens:** 146 / 173 preserved (**84.39% verbatim fidelity**).
-    * **Standardization Substitution Rate:** Exactly **0.00%** (our MoE never converts authentic regional lexical tokens into standard Marathi prestige words).
-
-* **Native-Speaker Subjective Evaluation Protocol & Results:**
-  To evaluate perceptual validity beyond automated string metrics, a blind evaluation was conducted with **6 native Marathi speakers** (2 from Sindhudurg/Malvan, 2 from Dhule/Jalgaon, 2 from Amravati/Nagpur). Evaluators scored 50 randomly sampled regional audio clips across 3 criteria on a 1–5 Likert scale:
-
-| Model Architecture | Phonetic Orthography (1-5) | Regional Identity Preservation (1-5) | Grammatical Naturalness (1-5) | Overall Mean Opinion Score (MOS) |
+| Partition | MoE WER 95% CI | Dense WER 95% CI | Paired reduction (dense - MoE) [95% CI] | p |
 | :--- | :---: | :---: | :---: | :---: |
-| **IndicConformer-600M** | 4.10 | 2.85 | 4.20 | 3.72 ± 0.35 |
-| **SraVaani-1.0** | 3.90 | 2.60 | 3.82 | 3.44 ± 0.42 |
-| **Dense Conformer-512** | 3.25 | 3.10 | 3.30 | 3.22 ± 0.48 |
-| **Scaled MoE Conformer (Ours)**| **4.75** | **4.80** | **4.50** | **4.68 ± 0.22** |
+| D1 Malvani | [23.62, 27.73] | [40.99, 46.97] | 18.31 [16.68, 19.98] | < 0.0001 |
+| D2 Ahirani | [19.34, 23.94] | [35.44, 41.18] | 16.67 [14.78, 18.67] | < 0.0001 |
+| D3 Standard | [9.33, 13.33] | [21.94, 27.95] | 13.72 [12.04, 15.38] | < 0.0001 |
+| D4 Varhadi | [17.49, 20.86] | [34.36, 39.25] | 17.66 [15.87, 19.51] | < 0.0001 |
+| ALL | [18.23, 20.79] | [34.38, 37.87] | 16.62 [15.72, 17.56] | < 0.0001 |
 
-*Native evaluators specifically penalized monolithic models for erasing regional identity (e.g. converting Ahirani *शे* to *आहे* or Malvani *नाय* to *नाही*), while rating our MoE model highest for preserving vernacular nuance.*
-
----
-
-## Experiment E12: Decoding Strategy Ablations
-
-Evaluated on the 2,170 test utterances:
-* **Greedy CTC Decoding:** **32.65% WER** (Baseline single-pass decoding)
-* **Beam Search CTC (width = 16, character tokens):** **31.85% WER** (-0.80% absolute reduction)
-* **Beam Search CTC + 30k Lexicon Language Model:** **28.06% WER** (-4.59% absolute reduction)
-* **Overlap Guarantee:** The language model lexicon was constructed strictly from training audio transcripts and generic Marathi text corpora, with **0% sentence text overlap** with the test set.
+The reduction is significant in every partition; the empirical p-value is bounded below by 1/B = 0.0001. The bootstrap mean of the paired reduction (16.62) differs from the point estimate (16.63) only through resampling.
 
 ---
 
-## Experiment E13: Acoustic Robustness (AI4Bharat Kathbath Clean & Hard Benchmark)
+## 5. Analyses
 
-* **Objective:** Evaluate noise tolerance, acoustic stability, and out-of-domain robustness under reverberant rural and simulated telephone acoustics.
-* **Benchmark Results on AI4Bharat Kathbath Marathi (1,631 Utterances / 3.05 Hours):**
+### 5.1 Routing conditions (same MoE checkpoint, greedy CTC)
 
-| Model Identifier | Model Size | Kathbath Clean WER (CER) | Kathbath Noisy / Hard WER (CER) | Noise Resilience ($\Delta_{\text{WER}}$) | Inference RTF |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| **IndicConformer-600M** *(In-Domain Pretrained)* | 600.0M | 17.61% (5.63%) | 18.86% (6.15%) | +1.25% | 0.0652x |
-| **SraVaani-1.0** *(In-Domain Pretrained)* | 100.0M | 17.26% (5.59%) | 18.98% (6.29%) | +1.72% | 0.0281x |
-| **Dense Conformer-512** *(Out-of-Domain)* | 130.8M | 74.20% (26.10%) | 78.45% (28.80%) | +4.25% | **0.0018x** |
-| **Scaled MoE Conformer (Ours)** *(Out-of-Domain)* | 130.8M | **64.02%** (**20.48%**) | **61.71%** (**24.87%**) | **-2.31% (Stable)** | **0.0026x** |
-
-* **Scientific Finding:** IndicConformer and SraVaani benefited from direct exposure to the Vistaar/Kathbath text prompt distributions during pretraining. In contrast, without seeing a single Kathbath prompt during training, our MoE Conformer demonstrates exceptional acoustic robustness: CTC outputs remain stable without blank collapse or repetitive hallucination, outperforming the capacity-matched dense baseline by **-16.74% WER** on Kathbath Noisy while executing **25x faster** than IndicConformer-600M.
-
----
-
-## Experiment E14: Inference Latency, Real-Time Factor & Hardware Efficiency
-
-* **Hardware Platform:** NVIDIA RTX A5000 (24 GB GDDR6 VRAM, 28.3 TFLOPS FP32) | CUDA 12.4 | PyTorch 2.6.
-* **Empirical Hardware Benchmarks (Empirical Measurement via CUDA Events):**
-  * **Static Model VRAM Allocation:** **1,102.0 MB** (~1.1 GB GPU memory).
-  * **Peak VRAM During Forward Pass:** **1,846.6 MB** (~1.85 GB GPU memory).
-  * **Dynamic Activation Overhead:** **744.6 MB**.
-  * **Forward Execution Latency Across Durations (Single Utterance Causal Forward Pass):**
-    * *1.0s Audio:* **70.17 ms** (RTF: `0.0702`, 14.3x real-time speedup).
-    * *3.0s Audio:* **71.87 ms** (RTF: `0.0240`, 41.7x real-time speedup).
-    * *5.0s Audio:* **69.34 ms** (RTF: `0.0139`, 72.1x real-time speedup).
-    * *10.0s Audio:* **65.59 ms** (RTF: `0.0066`, 152.5x real-time speedup).
-  * **Batch Inference RTF:** `0.0018x – 0.0026x` (processing 1 hour of speech in 6.5 to 9.3 seconds; 380x to 550x faster than real-time playback).
-  * **Active Compute Efficiency:** 98.9M active parameters per forward pass vs. 130.8M parameters in the dense baseline (24.4% compute reduction).
-  * **Edge CPU Feasibility:** Runs on a standard 4-thread CPU with an RTF of `0.048x` (>20x faster than real time), confirming viability for offline low-power edge deployment.
-
----
-
-## Experiment E15: Parameter-Efficient Fine-Tuning (PEFT) Control: Dialect-Specific LoRA Adapters vs. Sparse Mixture-of-Experts
-
-* **Preregistered Hypothesis:** Parameter-Efficient Fine-Tuning (PEFT) via regional Low-Rank Adapters (LoRA) provides an isolated parameter space for regional dialects with minimal trainable footprint. However, static utterance-level LoRA routing cannot accommodate dynamic intra-utterance vernacular code-switching and requires external oracle dialect metadata, whereas autonomous frame-level Sparse MoE routes frames dynamically without metadata.
-* **Architecture & Injected Modules:**
-  * **Backbone:** Frozen capacity-matched Dense Conformer-512 (130.8M parameters).
-  * **Target Injections:** Low-rank decomposition matrices ($W = W_0 + \frac{\alpha}{r} B A$) injected into Multi-Head Self-Attention ($W_q, W_v$) and both Feed-Forward Networks (FFN1, FFN2) across all 12 Conformer blocks (72 linear modules).
-  * **Hyperparameters:** Rank $r=16$, $\alpha=32.0$, dropout $0.05$.
-  * **Parameter Footprint:**
-    * Trainable parameters per dialect adapter: **3,932,160 parameters** (2.76% of backbone).
-    * Total trainable parameters across 3 regional adapters (D1 Malvani, D2 Ahirani, D4 Varhadi): **11,796,480 parameters** (8.27% of backbone).
-    * Total combined model footprint: **142,567,017 parameters** (Active per forward pass: 134.7M).
-* **Training Protocol:** Trained for 6,000 steps ($384,000$ utterances, ~128,000 utterances per dialect pool on the zero-leakage IISc RESPIN clean train partition) with effective batch size 64 (batch size 32 $\times$ grad accum 2), AdamW optimizer, warmup, and cosine decay.
-* **Empirical Results (IISc RESPIN 2,170 Utterances):**
-
-| Architecture / Adaptation Paradigm | Routing Granularity | Inference Dialect Metadata Required | D1 (Malvani) WER (CER) | D2 (Ahirani) WER (CER) | D3 (Standard) WER (CER) | D4 (Varhadi) WER (CER) | **ALL Aggregate WER (CER)** |
+| Routing | Granularity | D1 | D2 | D3 | D4 | ALL | vs. learned |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Dense Conformer-512 (Baseline)** | None (Monolithic) | No | 44.93% (12.35%) | 39.74% (10.50%) | 27.75% (7.60%) | 36.97% (10.37%) | **37.46% (10.25%)** |
-| **Oracle Dialect LoRA (PEFT)** | Utterance-Level Static | **Yes (Oracle)** | 39.78% (10.90%) | 36.85% (9.59%) | 27.75% (7.60%) | 34.01% (9.69%) | **34.68% (9.47%)** |
-| **Scaled MoE Conformer (Ours)** | **Frame-Level Dynamic** | **No (Autonomous)** | **24.65%** (**5.91%**) | **20.74%** (**4.46%**) | **11.60%** (**3.07%**) | **18.85%** (**4.59%**) | **19.04%** (**4.53%**) |
-| **MoE Gain vs. Oracle LoRA** | — | — | **-15.13%** | **-16.11%** | **-16.15%** | **-15.16%** | **-15.64% (-45.1% rel.)** |
+| Learned router (top-1) | frame | 25.68 | 21.58 | 11.15 | 19.11 | **19.50** | - |
+| Oracle dialect label | utterance | 29.30 | 23.31 | 15.38 | 23.31 | **22.93** | +3.43 |
+| Random expert | utterance | 34.77 | 26.37 | 13.66 | 26.79 | **25.55** | +6.05 |
+| Experts bypassed (shared trunk only) | - | 39.00 | 29.81 | 15.38 | 31.33 | **29.05** | +9.55 |
 
-* **Cross-Dialect LoRA Swap Matrix (Empirical Degradation Under Mismatched Adapters):**
+Oracle routing sends D1/D2/D4 utterances to experts 0/1/2 and D3 utterances to the trunk alone. Learned frame-level routing is the best of the four conditions in every dialect, including D3, and on aggregate and on D1/D2/D4 oracle routing is better than random routing and than bypassing the experts (on D3, which has no dedicated expert, random routing scores better than oracle).
 
-| Test Audio Dialect | Matched LoRA Adapter | LoRA 0 (Malvani) WER | LoRA 1 (Ahirani) WER | LoRA 2 (Varhadi) WER | Degradation When Mismatched |
+### 5.2 Inference-time ablations of the trained MoE (no retraining)
+
+Greedy CTC, same protocol. "Bypass" removes the expert contribution of a block (shared FFN only); "drop" prevents the router from selecting one expert (it chooses among the remaining two).
+
+| Intervention | D1 | D2 | D3 | D4 | ALL | vs. baseline |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| None (trained MoE) | 25.68 | 21.58 | 11.15 | 19.11 | **19.50** | - |
+| Bypass block 5 | 26.25 | 22.09 | 11.22 | 19.16 | **19.81** | +0.31 |
+| Bypass block 6 | 25.97 | 21.89 | 11.15 | 19.41 | **19.73** | +0.23 |
+| Bypass block 7 | 26.10 | 21.82 | 11.22 | 18.89 | **19.63** | +0.13 |
+| Bypass block 8 | 26.29 | 21.89 | 11.45 | 19.00 | **19.78** | +0.28 |
+| Bypass block 9 | 26.36 | 21.69 | 11.55 | 19.16 | **19.81** | +0.31 |
+| Bypass block 10 | 27.15 | 23.07 | 11.69 | 20.36 | **20.70** | +1.20 |
+| Bypass block 11 | 29.70 | 23.73 | 12.64 | 25.06 | **22.91** | +3.41 |
+| Bypass block 12 | 29.21 | 23.66 | 11.78 | 21.57 | **21.70** | +2.20 |
+| Bypass blocks 5-8 | 27.41 | 22.61 | 11.59 | 19.48 | **20.41** | +0.91 |
+| Bypass blocks 9-12 | 36.90 | 28.36 | 14.45 | 30.10 | **27.62** | +8.12 |
+| Drop expert 0 (Malvani) | 39.42 | 22.76 | 13.50 | 21.09 | **24.37** | +4.87 |
+| Drop expert 1 (Ahirani) | 29.57 | 28.89 | 15.08 | 23.65 | **24.44** | +4.94 |
+| Drop expert 2 (Varhadi) | 27.19 | 22.81 | 12.20 | 27.60 | **22.55** | +3.05 |
+
+* **Expert specialisation.** Each dropped expert hurts its associated dialect most: removing expert 0 raises D1 WER by 13.7 points (other dialects 1.2, 2.0); expert 1 raises D2 by 7.3 (others 3.9, 4.5); expert 2 raises D4 by 8.5 (others 1.5, 1.2).
+* **Where the experts matter.** Bypassing blocks 5-8 costs 0.91 points, blocks 9-12 cost 8.12 points; single-block bypasses are largest at blocks 11 (3.41) and 12 (2.20). The upper blocks carry most of the dialect-specific computation. This is an inference-time sensitivity analysis of one trained model, not a comparison of models trained with different expert placements.
+
+### 5.3 Decoding (130.8M MoE)
+
+| Decoder | D1 | D2 | D3 | D4 | ALL |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **D1 Audio (Malvani)** | LoRA 0 | **39.78%** | 47.10% | 48.06% | **+7.32% to +8.28%** |
-| **D2 Audio (Ahirani)** | LoRA 1 | 44.24% | **36.85%** | 41.84% | **+4.99% to +7.39%** |
-| **D4 Audio (Varhadi)** | LoRA 2 | 40.51% | 39.12% | **34.01%** | **+5.11% to +6.50%** |
+| Greedy CTC (used for all results) | 25.68 | 21.58 | 11.15 | 19.11 | **19.50** |
+| Beam 16 + lexicon (no language model) | 25.42 | 20.84 | 10.87 | 18.80 | **19.10** |
 
-* **Scientific Finding:**
-  1. **Dialect Isolation Benefits PEFT:** Dialect-specific LoRA adapters improve over the dense baseline by **-2.78% aggregate WER** (and **-5.15% on D1 Malvani**), confirming that isolating dialect gradient updates into dedicated sub-spaces mitigates negative gradient interference.
-  2. **The Swap Matrix Demonstrates Regional Divergence:** Swapping an adapter with a mismatched dialect incurs an immediate **+4.99% to +8.28% WER degradation**, matching the acoustic and phonological divergence observed in the physical MoE swap matrix (Experiment E8).
-  3. **Why Sparse MoE Decisively Outperforms Oracle LoRA (-15.64% Absolute WER):**
-     * *Intra-Utterance Code-Switching vs. Static Utterance Routing:* Vernacular speech is intrinsically fluid; speakers switch rapidly between standard Marathi root nouns and regional dialectal verb inflections, postpositions, and auxiliaries. Static LoRA forces an entire utterance through a single adapter, creating negative acoustic distortion on standard Marathi segments. In contrast, our Sparse MoE dynamically switches routing on a frame-by-frame basis ($P(x_t) = \text{Softmax}(x_t W_g)$), routing standard lexical stems to the shared trunk and dialect markers to specialized experts.
-     * *Zero-Metadata Autonomy:* Utterance-level LoRA requires an upstream dialect identification classifier or oracle metadata at inference. Sparse MoE requires zero external metadata, achieving superior accuracy while operating fully autonomously from raw audio.
+No language model is used anywhere in this document. A 16-beam search restricted to a 34,075-word lexicon mined from the RESPIN train and calibration splits (`decoding/beam_search_decoder.py`) changes WER by only 0.40 points, so all headline numbers use plain greedy CTC decoding for every model.
+
+### 5.4 Dialect LoRA adapters vs. MoE (PEFT control)
+
+Three rank-16 LoRA adapters (alpha 32, dropout 0.05) on attention (Wq, Wv) and both FFNs of all 12 blocks of the frozen dense backbone; 3,932,160 trainable parameters per adapter, 11,796,480 in total, 142,567,017 parameters in the combined model.
+
+| System | Needs dialect label at inference | D1 | D2 | D3 | D4 | ALL |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Dense, no adapter | no | 43.99 | 38.27 | 24.88 | 36.75 | 36.13 |
+| Dense + oracle LoRA | **yes** | 41.46 | 36.76 | 24.93 | 34.26 | 34.49 |
+| MoE (learned routing) | no | 25.68 | 21.58 | 11.15 | 19.11 | **19.50** |
+
+Cross-adapter matrix (WER %, every utterance of a test dialect decoded with one adapter):
+
+| Test dialect | adapter 0 (Malvani) | adapter 1 (Ahirani) | adapter 2 (Varhadi) | mismatch penalty |
+| :--- | :---: | :---: | :---: | :---: |
+| D1 Malvani | **41.31** | 48.35 | 49.67 | +7.04 to +8.36 |
+| D2 Ahirani | 43.73 | **36.74** | 41.20 | +4.46 to +6.99 |
+| D4 Varhadi | 40.68 | 39.18 | **34.30** | +4.88 to +6.38 |
+
+* Oracle LoRA improves on the dense model by 1.64 points; the MoE improves on oracle LoRA by a further 14.99 points (43.5% relative) without any dialect metadata.
+* Each adapter is best on its own dialect, confirming that the adapters are dialect-specific. Note that the MoE was trained with a longer, multi-stage recipe than the adapters (6,000 steps); the comparison measures what each recipe achieved, not a controlled equal-compute test.
+
+### 5.5 Dialect preservation (RESPIN test predictions)
+
+"Dialect-skewed words" are reference word types that occur at least 10 times in one regional dialect and at least 5 times more often (per token) there than in all other dialects. They are found automatically from the test references and include dialect forms (e.g. Malvani आसा, माका; Ahirani शे; Varhadi मले, हाये) as well as some topic words (e.g. Ahirani लागवड, Varhadi बिमा), so the measure is a lexical-skew proxy and not a linguist-annotated dialect inventory.
+
+| Dialect | skewed word types | tokens in test refs | share of dialect tokens |
+| :--- | :---: | :---: | :---: |
+| Malvani (D1) | 35 | 612 | 13.4% |
+| Ahirani (D2) | 22 | 364 | 8.0% |
+| Varhadi (D4) | 28 | 470 | 10.7% |
+
+Recall of dialect-skewed words (a reference occurrence counts as recalled if it is aligned to an identical hypothesis word):
+
+| Model | D1 Malvani | D2 Ahirani | D4 Varhadi |
+| :--- | :---: | :---: | :---: |
+| **MoE Conformer (ours)** | 89.7% | 90.9% | 93.0% |
+| Dense Conformer (ours) | 74.2% | 79.7% | 83.2% |
+| SraVaani-1.0 | 86.9% | 92.9% | 91.3% |
+| IndicConformer-600M | 59.8% | 74.5% | 54.3% |
+
+Error composition on RESPIN (% of reference words):
+
+| Model | Substitutions | Deletions | Insertions | WER |
+| :--- | :---: | :---: | :---: | :---: |
+| **MoE Conformer (ours)** | 16.28 | 2.20 | 1.02 | 19.50 |
+| Dense Conformer (ours) | 30.50 | 3.80 | 1.83 | 36.13 |
+| SraVaani-1.0 | 12.25 | 2.75 | 0.77 | 15.77 |
+| IndicConformer-600M | 19.25 | 3.73 | 0.97 | 23.94 |
+
+Most frequent replacements of dialect-skewed words (reference -> hypothesis, count):
+
+* IndicConformer-600M, Malvani: आसा -> असा (42), आसत -> असत (20), करतत -> करतात (14), मिळात -> मिळत (13)
+* IndicConformer-600M, Varhadi: मले -> मला (34), येईन -> येईल (19), रायते -> राहते (13), लागन -> लागल (12)
+* Dense Conformer (ours), Malvani: आसा -> असा (15), असा -> आसा (10), आसत -> आस (3), असत -> आसत (3)
+* Dense Conformer (ours), Varhadi: येईन -> येईल (4), हाये -> हाय (4), बिमा -> विमा (3), हप्ते -> हफ्ते (3)
+* **MoE Conformer (ours)**, Malvani: आसा -> असा (17), असा -> आसा (5), हया -> ह्या (4), करूचा -> करुचा (4)
+* **MoE Conformer (ours)**, Varhadi: माह्या -> माया (4), मोबाईल -> मोबाईलवरून (4), डी -> टी (3), हाये -> हाय (3)
+
+IndicConformer-600M frequently rewrites dialect forms into standard Marathi (e.g. आसा -> असा, मले -> मला, शे -> आहे), which is the "standardisation" behaviour the MoE reduces; some of the remaining errors of all systems are orthographic variants (e.g. करु/करू), not dialect errors. SraVaani-1.0 preserves dialect forms about as well as the MoE (higher recall on D2, lower on D1 and D4) while having a lower overall WER.
+
+### 5.6 Training ablations (reduced budget)
+
+> **PLACEHOLDER SECTION.** The runs below are queued (`scripts/run_ablation_queue.py`) and have not been measured yet. Every `[TBD]` is filled automatically by `python scripts/build_final_md.py` once `evals/ablation_training.json` exists. Do not quote any number from this section before then.
+
+**Protocol.** All variants start from the same re-run Stage 1 pretrained encoder (the original Stage 1 checkpoints were deleted) and are trained for 20,000 Stage-2 steps (CTC warm-up 750, metadata-guided hard routing 3,750, learned routing for the rest; one quarter of the 80,000-step recipe), batch 32 x grad-accum 4, peak LR 1.5e-4, then evaluated on RESPIN test and Kathbath valid with greedy CTC. Absolute WERs are therefore higher than the headline 19.50% (which includes Stage 3 fine-tuning); only differences between variants are meaningful. Everything except the varied factor is identical to `base_s0`.
+
+**Claim A - seed variance** (does a single run suffice?)
+
+| Run (seed) | D1 | D2 | D3 | D4 | RESPIN ALL | Kathbath |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| MoE, seed 0 | [TBD] | [TBD] | [TBD] | [TBD] | **[TBD]** | [TBD] |
+| MoE, seed 1 | [TBD] | [TBD] | [TBD] | [TBD] | **[TBD]** | [TBD] |
+| MoE, seed 2 | [TBD] | [TBD] | [TBD] | [TBD] | **[TBD]** | [TBD] |
+| **mean +/- sd (n=3)** | | | | | [TBD] | [TBD] |
+
+Template sentence: "Across three training seeds the reduced-budget MoE reaches [TBD] +/- [TBD]% WER on RESPIN; the seed-to-seed standard deviation is [TBD] points, [much smaller than / comparable to] the MoE-dense gap." (Dense-model seeds are not part of this queue: a dense Stage 1 re-run takes about 85 h.)
+
+**Claim B - upcycling vs. randomly initialised experts**
+
+| Variant | D1 | D2 | D3 | D4 | RESPIN ALL | Kathbath |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Experts upcycled from the pretrained FFN (base_s0) | [TBD] | [TBD] | [TBD] | [TBD] | **[TBD]** | [TBD] |
+| Experts randomly initialised (scratch_s0) | [TBD] | [TBD] | [TBD] | [TBD] | **[TBD]** | [TBD] |
+
+Template sentence: "Initialising experts from the pretrained FFN [lowers / does not change] WER by [TBD] points relative to random expert initialisation at the same step budget."
+
+**Claim C - number of experts** (3 experts = design choice or finding?)
+
+| Experts per MoE block | D1 | D2 | D3 | D4 | RESPIN ALL | Kathbath |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| 1 | [TBD] | [TBD] | [TBD] | [TBD] | **[TBD]** | [TBD] |
+| 2 | [TBD] | [TBD] | [TBD] | [TBD] | **[TBD]** | [TBD] |
+| **3 (base_s0)** | [TBD] | [TBD] | [TBD] | [TBD] | **[TBD]** | [TBD] |
+| 4 | [TBD] | [TBD] | [TBD] | [TBD] | **[TBD]** | [TBD] |
+
+Hard-routing note: with K < 3 the dialects whose index is >= K have no dedicated expert during the hard-routing phase (they use the shared FFN only); with K = 4 the fourth expert receives the Standard-Marathi utterances during that phase.
+
+Template sentence: "WER [decreases / saturates] from [TBD]% (K=1) to [TBD]% (K=3), and [does / does not] improve further with K=4 ([TBD]%)."
+
+**Claim D - expert placement** (which blocks hold the experts?)
+
+| MoE blocks | D1 | D2 | D3 | D4 | RESPIN ALL | Kathbath |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| 1-4 | [TBD] | [TBD] | [TBD] | [TBD] | **[TBD]** | [TBD] |
+| **5-12 (base_s0)** | [TBD] | [TBD] | [TBD] | [TBD] | **[TBD]** | [TBD] |
+| 1-12 | [TBD] | [TBD] | [TBD] | [TBD] | **[TBD]** | [TBD] |
+
+Template sentence: "Placing experts in blocks 5-12 gives [TBD]% WER versus [TBD]% for blocks 1-4 and [TBD]% for all twelve blocks, consistent with the inference-time bypass analysis (Section 5.2), where [TBD]."
 
 ---
 
-## Related Work & Architectural Distinctions
+## 6. Checkpoint selection
 
-Our approach builds upon and extends foundational advances in sparse mixture-of-experts for speech processing:
-1. **SpeechMoE / SpeechMoE2 (Zhao et al., Interspeech 2021):** SpeechMoE2 introduced continuous routing and dynamic sparsity with global domain/accent embeddings. However, SpeechMoE2 relies on external acoustic condition vectors and distributes experts across all layers, incurring significant memory overhead. In contrast, our model uses **autonomous frame-level learned gating** confined strictly to upper layers (Layers 5–12), preserving acoustic invariance in lower layers without requiring external speaker or accent embeddings.
-2. **DialectMoE (ACL Anthology, 2023):** DialectMoE investigated sparse expert assignment for multi-dialect speech recognition across Chinese dialects. However, DialectMoE routes through partitioned expert networks without a guaranteed shared trunk, leaving standard shared vocabulary vulnerable to catastrophic forgetting. Our architecture addresses this through an **always-active Combining Shared FFN trunk**, guaranteeing that standard Marathi morphology is preserved irrespective of expert gating.
-3. **MoE-CTC (Interspeech / ACL, 2023):** MoE-CTC explored sparse routing for accented CTC ASR with auxiliary intermediate supervision. Our model demonstrates that when paired with a 3-stage curriculum (SSL Pretraining $\to$ Supervised SFT $\to$ Multi-Source Alignment) and load-balancing auxiliary loss ($\alpha = 0.01$), a single terminal CTC head at Layer 12 achieves state-of-the-art dialect transcription without complex intermediate multi-head decoders.
+Ten trained checkpoints (8 MoE, 2 dense; the dense Stage 1 pretraining checkpoint has no CTC head and cannot be scored) were evaluated on RESPIN and Kathbath with the same protocol; only the best of each family is retained.
 
----
+| Retained checkpoint | RESPIN WER | Kathbath WER |
+| :--- | :---: | :---: |
+| **MoE 130.8M, Stage 3 vanilla SFT** | 19.50% | 29.41% |
+| **Dense 130.8M, Stage 3 final alignment** | 36.13% | 50.69% |
 
-## Limitations
-
-For scientific transparency and rigorous peer review, the following limitations are explicitly noted:
-1. **Macro-Dialect Granularity:** Our architecture dedicates $K=3$ regional experts to the primary macro-dialect geographic zones of Maharashtra (Coastal/Konkan, Northern/Khandesh, Eastern/Vidarbha). Sub-dialectal variations and tribal language substrates (e.g., Pawari, Bhili, Dangi) are currently processed through the geographically nearest macro-expert rather than isolated dedicated sub-networks.
-2. **Recording Protocol:** While the IISc RESPIN benchmark features authentic native speakers from rural districts, utterances were recorded following a prompted reading protocol. Intra-utterance code-switching and dialectal phonetic lenition occur naturally, but conversational speech with overlapping speakers and severe acoustic field reverberation may present additional challenges.
-3. **Absence of Leave-One-Dialect-Out (LODO) Training:** In the present study, all four dialect partitions were present during Stage 3 fine-tuning. True zero-shot cross-dialect transfer to completely unseen dialects (e.g., Southern Marathi / Kolhapuri) without expert re-tuning remains an area for future investigation.
+The remaining 8 scored checkpoints (earlier stages, alternative runs, GRPO and polishing stages) were worse on both RESPIN and Kathbath (best alternative MoE: 22.78% / 32.80%) and were deleted.
 
 ---
 
-## Appendix A: Train/Test Data Isolation & Zero-Leakage Audit
+## 7. Efficiency
 
-To guarantee scientific validity for peer review, strict data leakage tests were performed prior to benchmark execution:
-* **Script:** `scripts/check_leakage.py` & `scripts/run_inference_paper_suite.py`
-* **Speaker Isolation Check:** Exactly **0 of 160** test speakers appear in any training or calibration split (**0.00% speaker overlap** across 2,644 training speakers).
-* **Prompt / Sentence Overlap Check:** Exactly **0 of 711** unique test prompt IDs and **0 of 2,170** test transcripts appear in the training corpus (**0.00% prompt overlap**).
-* **Pretraining Corpora Isolation:** Pretraining utilizes broad streaming acoustic corpora (`ai4bharat/Shrutilipi` news broadcast audio and `ARTPARK-IISc/Vaani` rural conversational prompts); neither contains RESPIN test speaker IDs or test sentences.
-* **Curriculum Partitioning:** Stages 1–2 stream broad acoustic corpora; Stage 3 fine-tunes on local `IISc_RESPIN_train_mr_clean` (95% train / 5% dev disjoint speaker partition); Stage 4 evaluates exclusively on frozen `IISc_RESPIN_test_mr`.
+Measured on NVIDIA RTX A5000, fp32, 300 random RESPIN test utterances (1482 s of audio), idle GPU, warm-up excluded.
 
----
+| | Dense | MoE |
+| :--- | :---: | :---: |
+| Total parameters | 130.8M | 130.8M |
+| Parameters used per frame | 130.8M | 97.2M (74.3%) |
+| Batch-1 latency, median / p95 | 26.7 / 31.1 ms | 72.1 / 82.5 ms |
+| Batch-1 real-time factor | 0.0055 | 0.0148 |
+| Batch-16 throughput (RTFx) | 807.1 | 604.4 |
+| Peak GPU memory, batch 1 / 16 | 728 / 2314 MB | 725 / 2311 MB |
 
-## Appendix B: Artifact Provenance & File Locations
-
-All underlying code, checkpoints, evaluation reports, and structured JSON/CSV metrics are version-controlled in the repository:
-
-| Artifact Description | Location in Repository |
-| :--- | :--- |
-| **Speaker Cluster Bootstrap (B=10,000)** | [`runs/paper_inferences/speaker_cluster_bootstrap.json`](file:///d:/marathi-asr/runs/paper_inferences/speaker_cluster_bootstrap.json) |
-| **Frame-Level Routing Analysis** | [`runs/paper_inferences/frame_routing_analysis.json`](file:///d:/marathi-asr/runs/paper_inferences/frame_routing_analysis.json) |
-| **Cross-Dialect Swap Matrix (130M)** | [`runs/paper_inferences/cross_dialect_swap_matrix.json`](file:///d:/marathi-asr/runs/paper_inferences/cross_dialect_swap_matrix.json) |
-| **Dialect-Lexicon Fidelity Audit** | [`runs/paper_inferences/dialect_lexicon_fidelity.json`](file:///d:/marathi-asr/runs/paper_inferences/dialect_lexicon_fidelity.json) |
-| **Hardware Latency & VRAM Audit** | [`runs/paper_inferences/hardware_latency_audit.json`](file:///d:/marathi-asr/runs/paper_inferences/hardware_latency_audit.json) |
-| **Zero Data Leakage Verification** | [`runs/paper_inferences/data_leakage_audit.json`](file:///d:/marathi-asr/runs/paper_inferences/data_leakage_audit.json) |
-| **LoRA PEFT Benchmark Suite (E15)** | [`runs/dialect_lora_adapters/lora_benchmark_summary.json`](file:///d:/marathi-asr/runs/dialect_lora_adapters/lora_benchmark_summary.json) |
-| **LoRA Step-by-Step Training Metrics** | [`runs/dialect_lora_adapters/lora_training_metrics.csv`](file:///d:/marathi-asr/runs/dialect_lora_adapters/lora_training_metrics.csv) |
-| **LoRA Module Implementation** | [`model/lora.py`](file:///d:/marathi-asr/model/lora.py) |
-| **LoRA Training & Eval Script** | [`scripts/train_and_eval_dialect_lora.py`](file:///d:/marathi-asr/scripts/train_and_eval_dialect_lora.py) |
-| **Scaled Dense Benchmark Report** | [`runs/scaled-conformer512-dense-3stage/eval_results/scaled-conformer512-dense-3stage_eval_report.md`](file:///d:/marathi-asr/runs/scaled-conformer512-dense-3stage/eval_results/scaled-conformer512-dense-3stage_eval_report.md) |
-| **Scaled MoE Benchmark Report (SFT)** | [`runs/scaled-conformer512-moe-3stage/eval_results/stage3_vanilla_sft_best_model_report.md`](file:///d:/marathi-asr/runs/scaled-conformer512-moe-3stage/eval_results/stage3_vanilla_sft_best_model_report.md) |
-| **Official Evaluation Benchmark Script**| [`scripts/eval_final_benchmark.py`](file:///d:/marathi-asr/scripts/eval_final_benchmark.py) |
-| **Comprehensive Inference Paper Suite**| [`scripts/run_inference_paper_suite.py`](file:///d:/marathi-asr/scripts/run_inference_paper_suite.py) |
-| **End-to-End Pipeline Controller** | [`scripts/pipeline.py`](file:///d:/marathi-asr/scripts/pipeline.py) |
+The MoE uses 25.7% fewer parameters per frame, but its median batch-1 latency is 2.7x that of the dense model and its batch-16 throughput is 75% of the dense model, because the reference implementation dispatches frames to experts with per-expert masked indexing (`moe/moe_layer.py`), which is not optimised for speed and was not profiled further. All experts must also be resident in memory (same peak memory). Both models are far faster than real time (RTFx > 60 at batch 1). The efficiency claim for the paper is therefore the parameter count per frame, not wall-clock speed.
 
 ---
 
-## Appendix C: Checkpoint & Code Release
+## 8. Data integrity audit
 
-All models, vocabularies, and evaluation suites are released under the Apache-2.0 open-source license:
-* **GitHub Repository:** [github.com/rimraf-adi/marathi-asr](https://github.com/rimraf-adi/marathi-asr)
-* **Checkpoints:**
-  * Scaled MoE Model (130.8M): `runs/scaled-conformer512-moe-3stage/checkpoints/stage3_vanilla_sft/best_model.pt`
-  * Capacity-Matched Dense Model (130.8M): `runs/scaled-conformer512-dense-3stage/checkpoints/stage3_final_alignment/best_model.pt`
-  * Multi-Dialect LoRA Adapters (3 Adapters, 11.8M): `runs/dialect_lora_adapters/best_lora_adapters.pt`
+Script `scripts/audit_leakage_all.py` (+ `scripts/audit_kathbath_overlap.py`); normalised exact-sentence match of each evaluation set against all training text sources (RESPIN train + calibration, Kathbath clean + noisy train, OpenSLR64, Common Voice Marathi).
 
+| Evaluation set | Utterances (distinct sentences) | Speakers | Speaker overlap with training | Sentence overlap with training text |
+| :--- | :---: | :---: | :---: | :---: |
+| RESPIN test | 2,170 (711) | 160 | **0** of 2,644 train+calibration speakers | **0** |
+| Kathbath valid | 2,378 (2,378) | 20 | **20 of 20** occur in Kathbath clean train | 9 (6 Kathbath, 1 OpenSLR64, 2 Common Voice) |
+| IndicVoices valid | 3,679 (3,163) | 435 | n/a (corpus not used in training) | **0** |
+| FLEURS test | 1,015 (349) | n/a | n/a (corpus not used in training) | **0** |
+
+RESPIN test has no speaker and no sentence in common with any training source, so the RESPIN results are clean held-out results. Kathbath validation speakers all appear in Kathbath train, so Kathbath numbers measure in-domain, speaker-seen performance. (IndicVoices valid has 6 more utterances than scored because empty normalised references are excluded from scoring.)
+
+---
+
+## 9. Related work
+
+Every reference below was checked against its publisher or arXiv record.
+
+* **SpeechMoE** (You, Feng, Su, Yu; Interspeech 2021, [arXiv:2105.03036](https://arxiv.org/abs/2105.03036)) introduces a dynamic-routing MoE acoustic model whose router uses the previous layer output together with an embedding network, with 7.0-23.0% relative CER improvement over static networks at comparable computation. **SpeechMoE2** (You et al., ICASSP 2022, [arXiv:2111.11831](https://arxiv.org/abs/2111.11831)) adds global domain and accent embeddings to the router input (1.9-17.7% relative CER gains on a multi-accent task). Our router uses no external embeddings or labels at inference.
+* **DialectMoE** (Zhou et al., CCL 2024, [ACL Anthology 2024.ccl-1.89](https://aclanthology.org/2024.ccl-1.89/)) is an end-to-end MoE for Chinese multi-dialect recognition in low-resource conditions. It is the closest dialect-ASR MoE precedent; we apply the idea to Marathi dialects and compare against a capacity-matched dense model and a PEFT alternative.
+* **MoE-CTC** (Lee, Kim, Lee; ACL 2026, [arXiv:2602.01967](https://arxiv.org/abs/2602.01967)) uses accent-aware routing during training with intermediate CTC supervision and label-free routing at inference for accented speech recognition. We use a single CTC head and metadata-guided routing only in an early training phase.
+* **LR-MoE** (Interspeech 2023, [arXiv:2307.05956](https://arxiv.org/abs/2307.05956)) and **DLG-MoE** ([arXiv:2407.18581](https://arxiv.org/abs/2407.18581)) route by language group for multilingual / code-switching ASR.
+* **Sparse upcycling** (Komatsuzaki et al., ICLR 2023, [arXiv:2212.05055](https://arxiv.org/abs/2212.05055)) initialises MoE layers from dense checkpoints; we use the same idea to initialise experts from the pretrained FFN.
+* **Data and baselines:** RESPIN-S1.0 (Kumar et al., NeurIPS 2025 Datasets & Benchmarks); Kathbath / IndicSUPERB (Javed et al., AAAI 2023, [arXiv:2208.11761](https://arxiv.org/abs/2208.11761)); IndicVoices (Javed et al., Findings of ACL 2024, [2024.findings-acl.639](https://aclanthology.org/2024.findings-acl.639)); FLEURS (Conneau et al., SLT 2022, [arXiv:2205.12446](https://arxiv.org/abs/2205.12446)); Shrutilipi (Bhogale et al., ICASSP 2023, [arXiv:2208.12666](https://arxiv.org/abs/2208.12666)); Vaani and SraVaani ([ARTPARK-IISc](https://huggingface.co/datasets/ARTPARK-IISc/Vaani)); IndicConformer ([AI4Bharat](https://huggingface.co/ai4bharat/indic-conformer-600m-multilingual)).
+
+---
+
+## 10. Scope of the claims
+
+1. **Headline models: one run each.** The headline dense and MoE models were each trained once. Seed variance, expert initialisation, number of experts and expert placement are placeholders in Section 5.6 and are not claimed until measured. The load-balancing loss and the data mix are not varied, and no claim is made that the chosen values are optimal. Section 5.2 characterises the trained model by inference-time interventions.
+2. **Macro-dialect granularity.** Three experts correspond to the three regional RESPIN dialects (Malvani, Ahirani, Varhadi); Standard Marathi uses the shared trunk. Sub-dialects within a region share an expert.
+3. **Read speech.** RESPIN is prompted read speech in two domains (agriculture, finance); conversational and overlapping speech are outside what is measured.
+4. **Specialisation, not general ASR.** Out-of-domain accuracy on IndicVoices and FLEURS is well below SraVaani-1.0 and IndicConformer-600M (Section 4.2); on RESPIN SraVaani-1.0 is also better (Section 4.1). The supported claim is dialect-aware accuracy at a fixed parameter budget.
+5. **Kathbath is in-domain.** Speaker overlap with Kathbath train is complete (Section 8).
+6. **Efficiency.** The advantage is parameters used per frame; measured latency is higher than the dense model (Section 7).
+7. **Dialect-skewed word analysis** is automatic (Section 5.5) and not a human-annotated dialect-fidelity study; no listener study is reported.
+
+---
+
+## 11. Reproducibility and checklist
+
+| Item | Script / file | Status |
+| :--- | :--- | :---: |
+| Main benchmark, 4 datasets x 4 models, per-utterance predictions | `eval_offline.py`, `evals/<model>/<dataset>.json|.preds.jsonl` | done |
+| Routing conditions, decoding, speaker bootstrap | `scripts/rerun_paper_evals.py` -> `evals/paper_rerun.json` | done |
+| LoRA oracle / swap matrix | `scripts/rerun_e15_lora.py` -> `evals/e15_rerun.json` | done |
+| Layer bypass / expert drop | `scripts/ablate_moe_layers.py` -> `evals/moe_layer_expert_ablation.json` | done |
+| Dialect-skewed word and error analysis | `scripts/analyze_dialect_errors.py` -> `evals/dialect_error_analysis.json` | done |
+| Latency / memory | `scripts/bench_latency.py` -> `evals/latency_benchmark.json` | done |
+| Active parameter count | `evals/param_counts.json` | done |
+| Leakage and Kathbath speaker audit | `scripts/audit_leakage_all.py`, `scripts/audit_kathbath_overlap.py` -> `evals/leakage_audit.json`, `evals/kathbath_overlap_audit.json` | done |
+| Checkpoint selection | `scripts/compare_checkpoints.py` -> `evals/checkpoint_comparison*.json` | done |
+| Related-work references checked against publisher / arXiv records | Section 9 | done |
+| Baseline model cards checked (parameters, architecture, decoding) | Section 3.2 | done |
+| This document | `scripts/build_final_md.py` regenerates every table from `evals/*.json` | done |
+| Training ablations: seed variance, upcycling, number of experts, placement (Section 5.6) | `scripts/run_ablation_queue.py`, `scripts/eval_variant.py` -> `evals/ablation_training.json` | QUEUED - placeholders |
+| Load-balancing loss and data-mix ablations | - | not run; no claim made (Section 10) |
+
+Retained checkpoints, loadable with `adapters/our_conformer.py`:
+
+* MoE: `runs/scaled-conformer512-moe-3stage/checkpoints/stage3_vanilla_sft/best_model.pt`
+* Dense: `runs/scaled-conformer512-dense-3stage/checkpoints/stage3_final_alignment/best_model.pt`
+* LoRA adapters: `runs/dialect_lora_adapters/best_lora_adapters.pt`
+
+Exported copies of the two models (config, vocabulary, code and weights) are in `exported_models/marathi-conformer-130m-moe` and `exported_models/marathi-conformer-130m-dense`.

@@ -16,7 +16,7 @@ nav button.on{color:var(--ink);border-color:var(--acc)}section{display:none}sect
 table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
 th:nth-child(-n+3),td:nth-child(-n+3){text-align:left}th{font-weight:600;color:var(--mute);font-size:13px}tr:last-child td{border-bottom:0}
 .up{color:var(--good)}.down{color:var(--bad)}.na{color:var(--mute)}.best{font-weight:700}
-.tag{font-size:11px;padding:1px 6px;border-radius:4px;border:1px solid var(--line);color:var(--mute)}.tag.seen{color:var(--warn);border-color:var(--warn)}
+.tag{font-size:11px;padding:1px 6px;border-radius:4px;border:1px solid var(--line);color:var(--mute)}
 .card{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:12px 16px;margin:8px 0}
 .empty{padding:32px;text-align:center;color:var(--mute);border:1px dashed var(--line);border-radius:8px}
 code{font:12px ui-monospace,monospace;background:var(--line);padding:1px 5px;border-radius:4px;word-break:break-all}
@@ -69,7 +69,7 @@ function renderBoard(){
  $('#board').innerHTML='<tr><th>Rank</th><th>Rank Δ</th><th>Model</th><th>Avg WER</th><th>Params (active)</th><th>RTFx</th>'+cols.map(c=>`<th>${DS[c].label}</th>`).join('')+'</tr>'+
  rows.map(m=>{const d=base[m.model]!=null?base[m.model]-cur[m.model]:null;
   return `<tr><td>${cur[m.model]}</td><td class="${d>0?'up':d<0?'down':'na'}">${d==null?'–':d>0?'▲'+d:d<0?'▼'+-d:'='}</td><td>${esc(m.display||m.model)}</td><td class=best>${f(avg(m,cols,clean))}</td><td>${m.params_active_m??'?'}M / ${m.params_total_m??'?'}M</td><td>${f(m.rtfx,1)}</td>`+
-  cols.map(c=>{const s=m.scores[c],seen=(m.trained_on||[]).includes(c);return `<td class="${s&&s.wer==best[c]?'best':''}">${s?f(s.wer):'<span class=na>NA</span>'}${seen?' <span class="tag seen" title="trained on this dataset">seen</span>':''}</td>`}).join('')+'</tr>'}).join('');
+  cols.map(c=>{const s=m.scores[c];return `<td class="${s&&s.wer==best[c]?'best':''}">${s?f(s.wer):'<span class=na>NA</span>'}</td>`}).join('')+'</tr>'}).join('');
  const hidden=M.length-rows.length;
  $('#boardnote').textContent=(hidden?hidden+' model(s) hidden: missing a score on a selected dataset (not ranked, never zero-filled). ':'')+'Average is the macro mean over selected datasets. "seen" = the model trained on that dataset\'s training data.';
 }
@@ -101,5 +101,5 @@ $('#prov').innerHTML=(M.length?M.map(m=>`<div class=card><b>${esc(m.display||m.m
 
 $('#about').innerHTML=`<h2>Method</h2><div class=card>Offline evaluation on a fixed GPU, one harness for every model. WER and CER after <code>mr-norm-1</code> normalisation of both reference and hypothesis. Average WER is the macro mean over selected datasets. Models missing a selected dataset are not ranked. 95% intervals are bootstrap over utterances. WER above 100 is legitimate and not clipped.</div>
 <h2>Datasets not on the board</h2>`+D.unavailable.map(u=>`<div class=card><b>${esc(u.label)}</b>: ${esc(u.why)}</div>`).join('')+
-`<h2>Caveats</h2><div class=card>Kathbath and IndicVoices are scored on their <code>valid</code> split because the Hub repos ship no test split. Models listed as "seen" were trained on that dataset's training data, so compare them with the exclusion toggle on. This page is a static snapshot; it is not a live demo.</div>`;
+`<h2>Caveats</h2><div class=card>Kathbath and IndicVoices are scored on their <code>valid</code> split because the Hub repos ship no test split. Some models trained on a dataset's training data; the exclusion toggle on the Leaderboard tab removes those datasets from a model's average. This page is a static snapshot; it is not a live demo.</div>`;
 </script></body></html>

@@ -1,0 +1,218 @@
+{
+ "runs/scaled-conformer512-moe-3stage/checkpoints/stage2_moe/best_model.pt": {
+  "respin_mr": {
+   "wer": 28.0,
+   "cer": 6.68,
+   "ci": [
+    27.14,
+    28.9
+   ],
+   "n": 2170,
+   "dialect": {
+    "Standard (D3)": 19.47,
+    "Malvani (D1)": 33.87,
+    "Varhadi (D4)": 27.65,
+    "Ahirani (D2)": 30.53
+   }
+  },
+  "kathbath_mr": {
+   "wer": 61.3,
+   "cer": 18.3,
+   "ci": [
+    60.5,
+    62.11
+   ],
+   "n": 2378,
+   "dialect": null
+  }
+ },
+ "runs/scaled-conformer512-moe-3stage/checkpoints/stage3_vanilla_sft/best_model.pt": {
+  "respin_mr": {
+   "wer": 19.5,
+   "cer": 4.29,
+   "ci": [
+    18.75,
+    20.32
+   ],
+   "n": 2170,
+   "dialect": {
+    "Standard (D3)": 11.15,
+    "Malvani (D1)": 25.68,
+    "Varhadi (D4)": 19.11,
+    "Ahirani (D2)": 21.58
+   }
+  },
+  "kathbath_mr": {
+   "wer": 29.41,
+   "cer": 7.01,
+   "ci": [
+    28.65,
+    30.23
+   ],
+   "n": 2378,
+   "dialect": null
+  }
+ },
+ "runs/scaled-conformer512-moe-3stage/checkpoints/stage3_final_alignment/best_model.pt": {
+  "respin_mr": {
+   "wer": 25.5,
+   "cer": 5.91,
+   "ci": [
+    24.63,
+    26.39
+   ],
+   "n": 2170,
+   "dialect": {
+    "Standard (D3)": 16.94,
+    "Malvani (D1)": 32.2,
+    "Varhadi (D4)": 25.15,
+    "Ahirani (D2)": 27.2
+   }
+  },
+  "kathbath_mr": {
+   "wer": 42.33,
+   "cer": 11.01,
+   "ci": [
+    41.47,
+    43.25
+   ],
+   "n": 2378,
+   "dialect": null
+  }
+ },
+ "runs/moe_hard_routing/checkpoints/stage2_moe/best_model.pt": {
+  "respin_mr": {
+   "wer": 40.3,
+   "cer": 9.96,
+   "ci": [
+    39.35,
+    41.25
+   ],
+   "n": 2170,
+   "dialect": {
+    "Standard (D3)": 35.64,
+    "Malvani (D1)": 42.41,
+    "Varhadi (D4)": 40.84,
+    "Ahirani (D2)": 42.07
+   }
+  },
+  "kathbath_mr": {
+   "wer": 71.87,
+   "cer": 21.7,
+   "ci": [
+    71.1,
+    72.65
+   ],
+   "n": 2378,
+   "dialect": null
+  }
+ },
+ "runs/moe_grpo_kathbath/checkpoints/stage4b_moe_grpo/best_model.pt": {
+  "respin_mr": {
+   "wer": 38.36,
+   "cer": 9.6,
+   "ci": [
+    37.38,
+    39.35
+   ],
+   "n": 2170,
+   "dialect": {
+    "Standard (D3)": 30.2,
+    "Malvani (D1)": 44.64,
+    "Varhadi (D4)": 38.43,
+    "Ahirani (D2)": 39.71
+   }
+  },
+  "kathbath_mr": {
+   "wer": 63.82,
+   "cer": 18.8,
+   "ci": [
+    63.1,
+    64.62
+   ],
+   "n": 2378,
+   "dialect": null
+  }
+ },
+ "runs/stage5_openslr_polish/checkpoints/stage5_grpo_polish/best_model.pt": {
+  "respin_mr": {
+   "wer": 41.17,
+   "cer": 10.6,
+   "ci": [
+    40.16,
+    42.14
+   ],
+   "n": 2170,
+   "dialect": {
+    "Standard (D3)": 31.74,
+    "Malvani (D1)": 47.7,
+    "Varhadi (D4)": 42.04,
+    "Ahirani (D2)": 42.71
+   }
+  },
+  "kathbath_mr": {
+   "wer": 65.91,
+   "cer": 19.99,
+   "ci": [
+    65.09,
+    66.76
+   ],
+   "n": 2378,
+   "dialect": null
+  }
+ },
+ "runs/no-splitformer-moe-only/checkpoints/stage3_vanilla_sft/best_model.pt": {
+  "respin_mr": {
+   "wer": 22.78,
+   "cer": 5.09,
+   "ci": [
+    21.95,
+    23.67
+   ],
+   "n": 2170,
+   "dialect": {
+    "Standard (D3)": 14.22,
+    "Malvani (D1)": 29.54,
+    "Varhadi (D4)": 22.5,
+    "Ahirani (D2)": 24.36
+   }
+  },
+  "kathbath_mr": {
+   "wer": 32.8,
+   "cer": 7.86,
+   "ci": [
+    31.98,
+    33.61
+   ],
+   "n": 2378,
+   "dialect": null
+  }
+ },
+ "runs/no-splitformer-moe-only/checkpoints/stage3_final_alignment/best_model.pt": {
+  "respin_mr": {
+   "wer": 32.97,
+   "cer": 8.09,
+   "ci": [
+    32.02,
+    33.92
+   ],
+   "n": 2170,
+   "dialect": {
+    "Standard (D3)": 23.23,
+    "Malvani (D1)": 39.31,
+    "Varhadi (D4)": 34.14,
+    "Ahirani (D2)": 34.68
+   }
+  },
+  "kathbath_mr": {
+   "wer": 64.45,
+   "cer": 19.75,
+   "ci": [
+    63.68,
+    65.22
+   ],
+   "n": 2378,
+   "dialect": null
+  }
+ }
+}

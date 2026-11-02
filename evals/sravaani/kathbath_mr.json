@@ -1,0 +1,1 @@
+{"checkpoint_sha256": "f5dd5358325a5208775b91dad98918e079ea2b27", "result": {"wer": 12.93, "cer": 2.72, "n_utts": 2378, "hours": 4.179, "wer_ci95": [12.37, 13.51], "audio_secs": 15044.2816875, "wall_secs": 212.37967210216448}, "slices": {"gender": {"Female": {"wer": 10.0, "n": 1255}, "Male": {"wer": 16.28, "n": 1123}}, "district": {"unknown": {"wer": 12.93, "n": 2378}}}}

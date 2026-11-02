@@ -1,0 +1,52 @@
+hashing best_model.pt ...
+checkpoint: {'path': 'runs/scaled-conformer512-moe-3stage/checkpoints/stage3_vanilla_sft/best_model.pt', 'sha256': 'd5621c61911140d19d3fd454835af80ec3939b5bc562f7036749c6682d50ce06', 'size_bytes': 1325947288, 'mtime': '2026-10-12T15:22:55'}
+[respin_mr]
+  loaded 2170 utterances
+  16/2170
+  336/2170
+  656/2170
+  976/2170
+  1296/2170
+  1616/2170
+  1936/2170
+[respin_mr] WER 19.5  CER 4.29  n=2170
+[kathbath_mr]
+  loaded 2378 utterances
+  16/2378
+  336/2378
+  656/2378
+  976/2378
+  1296/2378
+  1616/2378
+  1936/2378
+  2256/2378
+[kathbath_mr] WER 29.41  CER 7.01  n=2378
+[indicvoices_mr]
+D:\marathi-asr\.venv311\Lib\site-packages\huggingface_hub\file_download.py:150: UserWarning: `huggingface_hub` cache-system uses symlinks by default to efficiently store duplicated files but your machine does not support them in C:\Users\Machine Learning GPU\.cache\huggingface\hub. Caching files will still work but in a degraded version that might require more space on your disk. This warning can be disabled by setting the `HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
+To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In order to activate developer mode, see this article: https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+  warnings.warn(message)
+D:\marathi-asr\.venv311\Lib\site-packages\huggingface_hub\file_download.py:150: UserWarning: `huggingface_hub` cache-system uses symlinks by default to efficiently store duplicated files but your machine does not support them in C:\Users\Machine Learning GPU\.cache\huggingface\hub\datasets--ai4bharat--IndicVoices. Caching files will still work but in a degraded version that might require more space on your disk. This warning can be disabled by setting the `HF_HUB_DISABLE_SYMLINKS_WARNING` environment variable. For more details, see https://huggingface.co/docs/huggingface_hub/how-to-cache#limitations.
+To support symlinks on Windows, you either need to activate Developer Mode or to run Python as an administrator. In order to activate developer mode, see this article: https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development
+  warnings.warn(message)
+  loaded 3679 utterances
+  16/3679
+  336/3679
+  656/3679
+  976/3679
+  1296/3679
+  1616/3679
+  1936/3679
+  2256/3679
+  2576/3679
+  2896/3679
+  3216/3679
+  3536/3679
+[indicvoices_mr] WER 59.2  CER 23.48  n=3673
+[fleurs_mr]
+  loaded 1015 utterances
+  16/1015
+  336/1015
+  656/1015
+  976/1015
+[fleurs_mr] WER 36.74  CER 11.02  n=1015
+wrote D:\marathi-asr\spaces\results\ours-moe.json

@@ -1,0 +1,17 @@
+{
+  "model_type": "conformer_dense",
+  "architectures": [
+    "MarathiConformerDense"
+  ],
+  "d_model": 512,
+  "n_heads": 8,
+  "ffn_expansion": 8,
+  "num_layers": 12,
+  "conv_kernel_size": 31,
+  "vocab_size": 105,
+  "enable_moe": false,
+  "total_params": "130.8M",
+  "active_params": "130.8M",
+  "sample_rate": 16000,
+  "norm_version": "mr-norm-1"
+}

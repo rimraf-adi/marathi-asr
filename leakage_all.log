@@ -1,0 +1,87 @@
+{'training_text_sources': {'respin_train+calibration': {'utts': 809934, 'unique_sentences': 23069}, 'kathbath_train_clean': {'utts': 84070, 'unique_sentences': 83962}, 'kathbath_train_noisy': {'utts': 1631, 'unique_sentences': 1631}, 'openslr64': {'utts': 1569, 'unique_sentences': 1286}, 'commonvoice_mr': {'utts': 1205, 'unique_sentences': 1205}}}
+{
+ "training_text_sources": {
+  "respin_train+calibration": {
+   "utts": 809934,
+   "unique_sentences": 23069
+  },
+  "kathbath_train_clean": {
+   "utts": 84070,
+   "unique_sentences": 83962
+  },
+  "kathbath_train_noisy": {
+   "utts": 1631,
+   "unique_sentences": 1631
+  },
+  "openslr64": {
+   "utts": 1569,
+   "unique_sentences": 1286
+  },
+  "commonvoice_mr": {
+   "utts": 1205,
+   "unique_sentences": 1205
+  }
+ },
+ "eval_sets": {
+  "respin_test": {
+   "utts": 2170,
+   "unique_sentences": 711,
+   "sentence_overlap_with_any_training_text": 0,
+   "sentence_overlap_pct": 0.0,
+   "sentence_overlap_by_source": {
+    "respin_train+calibration": 0,
+    "kathbath_train_clean": 0,
+    "kathbath_train_noisy": 0,
+    "openslr64": 0,
+    "commonvoice_mr": 0
+   },
+   "speakers": 160,
+   "speaker_overlap_with_respin_train+calibration": 0,
+   "train_calibration_speakers": 2644
+  },
+  "kathbath_valid": {
+   "utts": 2378,
+   "unique_sentences": 2378,
+   "sentence_overlap_with_any_training_text": 9,
+   "sentence_overlap_pct": 0.38,
+   "sentence_overlap_by_source": {
+    "respin_train+calibration": 0,
+    "kathbath_train_clean": 6,
+    "kathbath_train_noisy": 0,
+    "openslr64": 1,
+    "commonvoice_mr": 2
+   },
+   "speakers": 20,
+   "speaker_overlap_with_kathbath_train_clean": 20,
+   "speaker_overlap_with_kathbath_train_noisy": 0,
+   "valid_speakers": 20
+  },
+  "indicvoices_valid": {
+   "utts": 3679,
+   "unique_sentences": 3163,
+   "sentence_overlap_with_any_training_text": 0,
+   "sentence_overlap_pct": 0.0,
+   "sentence_overlap_by_source": {
+    "respin_train+calibration": 0,
+    "kathbath_train_clean": 0,
+    "kathbath_train_noisy": 0,
+    "openslr64": 0,
+    "commonvoice_mr": 0
+   },
+   "speakers": 435
+  },
+  "fleurs_test": {
+   "utts": 1015,
+   "unique_sentences": 349,
+   "sentence_overlap_with_any_training_text": 0,
+   "sentence_overlap_pct": 0.0,
+   "sentence_overlap_by_source": {
+    "respin_train+calibration": 0,
+    "kathbath_train_clean": 0,
+    "kathbath_train_noisy": 0,
+    "openslr64": 0,
+    "commonvoice_mr": 0
+   }
+  }
+ }
+}

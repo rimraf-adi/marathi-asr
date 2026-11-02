@@ -1,0 +1,16 @@
+loaded 2170 utterances, 160 speakers
+E2 learned {'D1': 25.68, 'D2': 21.58, 'D3': 11.15, 'D4': 19.11, 'ALL': 19.5}
+E2 oracle {'D1': 29.3, 'D2': 23.31, 'D3': 15.38, 'D4': 23.31, 'ALL': 22.93}
+E2 random {'D1': 34.77, 'D2': 26.37, 'D3': 13.66, 'D4': 26.79, 'ALL': 25.55}
+E2 trunk_only {'D1': 39.0, 'D2': 29.81, 'D3': 15.38, 'D4': 31.33, 'ALL': 29.05}
+Found entries of length > 1 in alphabet. This is unusual unless style is BPE, but the alphabet was not recognized as BPE type. Is this correct?
+[BeamSearchDecoder] Initialized pyctcdecode BeamSearchDecoderCTC (vocab size: 105, unigrams: 34075)
+E12 lexicon_beam16 {'D1': 25.42, 'D2': 20.84, 'D3': 10.87, 'D4': 18.8, 'ALL': 19.1}
+Found entries of length > 1 in alphabet. This is unusual unless style is BPE, but the alphabet was not recognized as BPE type. Is this correct?
+[BeamSearchDecoder] Initialized pyctcdecode BeamSearchDecoderCTC (vocab size: 105, unigrams: 34075)
+E12 kenlm_default {'D1': 28.73, 'D2': 23.84, 'D3': 9.32, 'D4': 18.21, 'ALL': 20.19}
+Found entries of length > 1 in alphabet. This is unusual unless style is BPE, but the alphabet was not recognized as BPE type. Is this correct?
+[BeamSearchDecoder] Initialized pyctcdecode BeamSearchDecoderCTC (vocab size: 105, unigrams: 34075)
+E12 kenlm_soft {'D1': 26.29, 'D2': 22.76, 'D3': 9.69, 'D4': 17.39, 'ALL': 19.18}
+E4 {"moe_ci": [18.23, 20.79], "dense_ci": [34.38, 37.87], "delta_mean": -16.62, "delta_ci": [-17.56, -15.72], "p": 0.0001}
+wrote D:\marathi-asr\evals\paper_rerun.json

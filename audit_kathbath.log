@@ -1,0 +1,25 @@
+valid: 2378 utts, 20 speakers; example speaker_id/fname: 1106 844424931232684-1106-f.m4a
+train_clean {'utts': 84070, 'speakers': 84070, 'speaker_overlap': 0, 'speaker_overlap_pct_of_valid': 0.0, 'sentence_overlap': 6, 'sentence_overlap_pct_of_valid': 0.25}
+train_noisy {'utts': 1631, 'speakers': 1631, 'speaker_overlap': 0, 'speaker_overlap_pct_of_valid': 0.0, 'sentence_overlap': 0, 'sentence_overlap_pct_of_valid': 0.0}
+{
+ "valid_utts": 2378,
+ "valid_speakers": 20,
+ "train_clean": {
+  "utts": 84070,
+  "speakers": 84070,
+  "speaker_overlap": 0,
+  "speaker_overlap_pct_of_valid": 0.0,
+  "sentence_overlap": 6,
+  "sentence_overlap_pct_of_valid": 0.25
+ },
+ "train_noisy": {
+  "utts": 1631,
+  "speakers": 1631,
+  "speaker_overlap": 0,
+  "speaker_overlap_pct_of_valid": 0.0,
+  "sentence_overlap": 0,
+  "sentence_overlap_pct_of_valid": 0.0
+ },
+ "any_train_speaker_overlap": 0,
+ "note": "speaker id of train files parsed from the leading numeric token of the wav filename; valid uses the speaker_id column"
+}

@@ -1,0 +1,44 @@
+lora_config {'r': 16, 'lora_alpha': 32.0, 'num_dialects': 3, 'dialect_mapping': {'D1': 0, 'D2': 1, 'D4': 2}, 'target_layers': 'all'}
+
+[LoRA Injection] Target Layers: all (Layers 1 to 12)
+  Injected LoRA Linear Modules: 72
+  Total Model Parameters: 142,567,017
+  Total Trainable LoRA Parameters (3 dialects): 11,796,480 (8.27%)
+  Trainable Parameters per Dialect Adapter: 3,932,160 (2.76%)
+{
+ "no_adapter": {
+  "D1": 43.99,
+  "D2": 38.27,
+  "D3": 24.88,
+  "D4": 36.75,
+  "ALL": 36.13
+ },
+ "oracle_lora": {
+  "D1": 41.46,
+  "D2": 36.76,
+  "D3": 24.93,
+  "D4": 34.26,
+  "ALL": 34.49
+ },
+ "all_adapter_0": {
+  "D1": 41.31,
+  "D2": 43.73,
+  "D3": 29.97,
+  "D4": 40.68,
+  "ALL": 39.04
+ },
+ "all_adapter_1": {
+  "D1": 48.35,
+  "D2": 36.74,
+  "D3": 25.91,
+  "D4": 39.18,
+  "ALL": 37.69
+ },
+ "all_adapter_2": {
+  "D1": 49.67,
+  "D2": 41.2,
+  "D3": 28.69,
+  "D4": 34.3,
+  "ALL": 38.64
+ }
+}

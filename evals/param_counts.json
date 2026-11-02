@@ -1,0 +1,10 @@
+{
+ "total": 130819713,
+ "n_moe_layers": 8,
+ "n_experts": 3,
+ "params_per_expert": 2100736,
+ "all_expert_params": 50417664,
+ "router_params": 12312,
+ "active_top1": 97207937,
+ "active_pct": 74.3
+}

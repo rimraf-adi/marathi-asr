@@ -1,0 +1,16 @@
+{
+  "model_type": "conformer_sparse_moe",
+  "architectures": [
+    "MarathiConformerMoE"
+  ],
+  "d_model": 256,
+  "n_heads": 4,
+  "ffn_expansion": 4,
+  "num_layers": 12,
+  "vocab_size": 105,
+  "num_experts": 3,
+  "total_params": "33.8M",
+  "active_params": "25.2M",
+  "sample_rate": 16000,
+  "norm_version": "mr-norm-1"
+}
