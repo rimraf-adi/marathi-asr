@@ -19,6 +19,7 @@
 | C6 | On RESPIN the MoE (19.50%) is significantly better than IndicConformer-600M (23.94%) and significantly worse than SraVaani-1.0 (15.77%). | 4.1 |
 | C7 | By parameter count the MoE uses 97.2M of 130.8M parameters per frame (74.3%), but in the present implementation it is **slower** than the dense model (Section 7): the parameter saving is not a speed saving. | 7 |
 | C8 | Out of domain (IndicVoices, FLEURS) both of our models are far less accurate than the external baselines; Kathbath is not an out-of-domain test (all 20 validation speakers also occur in Kathbath train). | 4.2, 8 |
+| C9 | Routing is learned and per frame (expert persists for about 3-8 frames, no utterance uses one expert); only Malvani maps clearly to one expert (expert 0). | 5.7 |
 
 
 Training-ablation claims (seed variance, upcycling, number of experts, expert placement) are placeholders in Section 5.6 until the queued runs finish.
@@ -282,6 +283,28 @@ Template sentence: "WER [decreases / saturates] from [TBD]% (K=1) to [TBD]% (K=3
 
 Template sentence: "Placing experts in blocks 5-12 gives [TBD]% WER versus [TBD]% for blocks 1-4 and [TBD]% for all twelve blocks, consistent with the inference-time bypass analysis (Section 5.2), where [TBD]."
 
+### 5.7 Routing granularity
+
+Mechanism: in each MoE block a linear router scores every frame and the top-1 expert processes that frame (`moe/moe_layer.py`). The reported checkpoint's final fine-tuning stage passes no dialect label, so its routing is learned. Dialect labels steer routing only in Stage 2, steps 3,001-18,000 of 80,000 (hard routing).
+
+Behaviour, measured with batch size 1 on 240 RESPIN test utterances (60 per dialect, `scripts/measure_routing.py`). "Switch rate" is the share of adjacent frames that choose different experts; "chance" is the rate if frames chose independently with the block's overall expert frequencies; "top-expert share" is the mean share of an utterance's frames that go to its most-used expert.
+
+| MoE block | Switch rate | Chance | Mean run length (frames) | Top-expert share | Expert usage D1 / D2 / D3 / D4 (expert 0, 1, 2 in %) |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| 5 | 0.215 | 0.548 | 4.7 | 0.69 | D1: 10/31/58 ; D2: 10/22/68 ; D3: 19/26/55 ; D4: 17/20/63 |
+| 6 | 0.321 | 0.643 | 3.1 | 0.49 | D1: 34/18/48 ; D2: 40/23/37 ; D3: 32/24/44 ; D4: 43/20/36 |
+| 7 | 0.347 | 0.608 | 2.9 | 0.52 | D1: 59/23/18 ; D2: 49/30/21 ; D3: 52/28/21 ; D4: 50/30/20 |
+| 8 | 0.271 | 0.667 | 3.7 | 0.45 | D1: 38/36/26 ; D2: 33/30/37 ; D3: 30/37/34 ; D4: 33/28/39 |
+| 9 | 0.226 | 0.636 | 4.4 | 0.47 | D1: 53/29/18 ; D2: 43/32/25 ; D3: 47/30/23 ; D4: 43/30/27 |
+| 10 | 0.167 | 0.647 | 6.0 | 0.50 | D1: 61/23/16 ; D2: 40/31/28 ; D3: 38/30/32 ; D4: 36/31/33 |
+| 11 | 0.119 | 0.651 | 8.4 | 0.59 | D1: 63/30/8 ; D2: 27/46/28 ; D3: 24/46/30 ; D4: 21/46/33 |
+| 12 | 0.122 | 0.627 | 8.2 | 0.64 | D1: 71/19/10 ; D2: 34/51/16 ; D3: 44/39/17 ; D4: 34/31/36 |
+
+* Routing is per frame and learned, but it is not random: adjacent frames keep the same expert far more often than chance (switch rate 0.12-0.35 vs. 0.55-0.67), so an expert persists for roughly 3-8 frames. Deeper blocks switch least.
+* It is not utterance-level: in no block does a single expert take more than 70% of an utterance's frames on average (0.45-0.70).
+* Dialect labels are only partly recoverable from the routing. Malvani (D1) clearly prefers expert 0 in blocks 11-12 (63% and 71% of frames); Ahirani, Standard and Varhadi are spread across experts, and Standard Marathi is routed to experts like the others. This agrees with Section 5.2, where dropping expert 0 hurts Malvani most. Describe the experts as specialised for Malvani-like speech, not as one expert per dialect.
+* Sample: 60 utterances per dialect from one checkpoint; the percentages are descriptive, not tested.
+
 ---
 
 ## 6. Checkpoint selection
@@ -363,6 +386,7 @@ Every reference below was checked against its publisher or arXiv record.
 | LoRA oracle / swap matrix | `scripts/rerun_e15_lora.py` -> `evals/e15_rerun.json` | done |
 | Layer bypass / expert drop | `scripts/ablate_moe_layers.py` -> `evals/moe_layer_expert_ablation.json` | done |
 | Dialect-skewed word and error analysis | `scripts/analyze_dialect_errors.py` -> `evals/dialect_error_analysis.json` | done |
+| Routing granularity (switch rate, expert usage per dialect) | `scripts/measure_routing.py` -> `evals/routing_granularity.json` | done |
 | Latency / memory | `scripts/bench_latency.py` -> `evals/latency_benchmark.json` | done |
 | Active parameter count | `evals/param_counts.json` | done |
 | Leakage and Kathbath speaker audit | `scripts/audit_leakage_all.py`, `scripts/audit_kathbath_overlap.py` -> `evals/leakage_audit.json`, `evals/kathbath_overlap_audit.json` | done |
