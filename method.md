@@ -131,7 +131,7 @@ Training phases (80,000 steps):
 | 18,001 - 80,000 | Learned routing | The router decides per frame. No labels used. |
 
 Other settings:
-- Data: RESPIN train partition (speaker-disjoint split: 768,893 train and 41,041 calibration utterances), utterances between 1 and 16 s (the loader skips files that are not 16 kHz).
+- Data: RESPIN, 768,893 of its 809,934 training-side utterances (the other 41,041, from separate speakers, are held back for Stage 3), utterances between 1 and 16 s (the loader skips files that are not 16 kHz).
 - Augmentation: speed perturbation (0.9x or 1.1x, 50% of utterances), additive noise at 15-30 dB SNR (30% of utterances), and SpecAugment during training (2 frequency masks up to 27 bands, 5 time masks up to 40 frames).
 - Learning rate: peak 1.5e-4, AdamW (wd 1e-4, betas 0.9/0.98), 1,000 warm-up then cosine to 5%. Blocks 1-4 train at one tenth of the rate; the expert and shared feed-forward modules, blocks 5-12 and the CTC head train at the full rate.
 - Gradient accumulation 4, clipping 5.0, mixed precision.
@@ -154,13 +154,28 @@ Sources:
 
 | Source | Sampling weight | Size |
 | :--- | :---: | :---: |
-| IISc RESPIN (all of the train pool) | 0.35 | 809,934 utterances |
-| AI4Bharat Kathbath (clean + noisy train) | 0.30 | 85,701 |
+| IISc RESPIN (all training-side data, no split) | 0.35 | 809,934 utterances |
+| AI4Bharat Kathbath (train split 84,070 + noisy set 1,631; valid split is evaluation-only) | 0.30 | 85,701 |
 | Shrutilipi + Vaani stream | 0.15 | streamed |
-| OpenSLR64 Marathi | 0.10 | 1,569 |
-| Mozilla Common Voice Marathi | 0.10 | 1,205 |
+| OpenSLR64 Marathi (the whole corpus) | 0.10 | 1,569 |
+| Common Voice Marathi (the 1,205-utterance Vistaar subset, not the full corpus) | 0.10 | 1,205 |
 
 RESPIN **test** is never used. Kathbath train is used, which matters for Section 8.
+
+No percentage split is applied to any source in Stage 3; each is used in full.
+
+**Why sampling weights?** The corpora differ hugely in size. Sampling utterances in proportion to size would make about 90% of every batch RESPIN and nearly erase the two small corpora, so the loader picks a source first (with the weights above) and then a random utterance from it. The code does not state the reason for these exact values; the effect is to fix each corpus's share of every batch.
+
+Expected passes over each corpus (weights x steps x batch 32, not counted from logs):
+
+| Source | MoE (342,000 steps) | Dense (300,000 steps) |
+| :--- | :---: | :---: |
+| RESPIN | ~5 passes | ~4 passes |
+| Kathbath | ~38 passes | ~34 passes |
+| OpenSLR64 | ~698 passes | ~612 passes |
+| Common Voice subset | ~908 passes | ~797 passes |
+
+So the small corpora are repeated hundreds of times and Kathbath dozens of times. Memorisation was not measured. The Common Voice subset and the 1,631-utterance Kathbath noisy set come from the Vistaar benchmark folders and were used for training, so no Common Voice or Kathbath-noisy result is reported.
 
 ### 5.4 Checkpoint selection
 
@@ -305,6 +320,7 @@ Parameters used per frame: 97.2M of 130.8M (25.7% fewer). Measured speed: the Mo
 | Is it really frame-level routing? | Mechanism yes (each frame picks an expert). Behaviour is sticky: experts persist for roughly 3-8 frames and no utterance uses one expert. Only Malvani maps clearly to one expert. |
 | Did you use dialect labels? | In training only during Stage 2 hard routing (steps 3,001-18,000 of 80,000). Never in Stage 3 and never at inference. |
 | Why 3 experts and blocks 5-12? | Three regional dialects in the data; upper blocks carry dialect detail. These are design choices, not tuned: we show inference-time evidence (dropping experts, bypassing blocks) but did not retrain with other expert counts or placements. |
+| Why those sampling weights? | They fix each corpus's share of every batch so small corpora are not swamped by RESPIN. The code does not record why these exact values were chosen, and the side effect is heavy repetition of the small corpora (hundreds of passes) and of Kathbath (dozens). |
 | Single training run? | Yes for the headline models; seed variance was not measured for them. A reduced-budget seed and ablation study is queued (placeholder Section 5.6 in `final.md`). The 16.6-point gap is large compared with typical seed noise but that is not measured here. |
 | Is your gain just from more capacity? | No. The dense baseline has the same 130.8M total parameters. |
 | Is Kathbath leakage a problem? | Kathbath speakers overlap train, so those numbers are in-domain and we say so. The RESPIN headline has no speaker or prompt overlap. |
